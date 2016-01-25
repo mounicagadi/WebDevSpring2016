@@ -5,6 +5,7 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
     padding-top: 50px;
+    background-image:url("pink_rice.png");
 }
 
 
@@ -14,28 +15,32 @@ body {
 
 h1
 {
-    color: green;
+    color: black;
     font-family: "Copperplate Gothic Bold";
-    font-style: italic;
-    font-size: 65px;
+    font-style: normal;
+    font-size: 60px;
 }
 
-body
-{
-    background-color: whitesmoke;
-}
 
 p.font
 {
-    font-family: Calibri;
-    font-size: 25px;
     border-style: hidden;
     text-align: justify;
+    font-size: 20px;
 
+}
+p.list
+{
+    font-size: 16px;
+    font-weight: bold;
 }
 .sub-header {
     padding-bottom: 10px;
     border-bottom: 1px solid #eee;
+}
+.logo
+{
+    float: left;
 }
 
 /*
@@ -47,7 +52,25 @@ p.font
     border-style: double;
     background-color: black;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 17px;
+
+}
+
+
+
+.table {
+    border: 1.5px solid #000000;
+    color: black;
+}
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td
+{
+    border: 1.5px solid #000000;
+    text-align: left;
+    font-weight: bold;
+    font-size: 17px;
 }
 
 
@@ -70,8 +93,10 @@ p.font
         padding: 20px;
         overflow-x: hidden;
         overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-        background-color: #f5f5f5;
+        background-color: whitesmoke;
         border-right: 1px solid #eee;
+        color: black;
+        border: double;
     }
 }
 
@@ -84,6 +109,7 @@ p.font
 .nav-sidebar > li > a {
     padding-right: 20px;
     padding-left: 20px;
+    color: black;
 }
 .nav-sidebar > .active > a,
 .nav-sidebar > .active > a:hover,
