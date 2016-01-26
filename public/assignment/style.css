@@ -56,12 +56,21 @@ p.list
 
 }
 
+h2
+{
+    font-size: 45px;
+    font-family: "Copperplate Gothic Bold";
+    font-style: normal;
+
+}
 
 
-.table {
+.table
+{
     border: 1.5px solid #000000;
     color: black;
 }
+
 .table-bordered > thead > tr > th,
 .table-bordered > tbody > tr > th,
 .table-bordered > thead > tr > td,
@@ -73,6 +82,27 @@ p.list
     font-size: 17px;
 }
 
+.form-horizontal
+{
+    font-size: 18px;
+}
+
+@media (max-width: 768px) {
+    .btn,.btn-group {
+        width:100%;
+    }
+}
+
+
+.nav-tabs > li {
+    float: left;
+}
+.nav-tabs > li > a
+{
+    margin-right: 0;
+    margin-left: 2px;
+    font-weight: bold;
+}
 
 /*
  * Sidebar
