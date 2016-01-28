@@ -80,17 +80,12 @@ h2
     text-align: left;
     font-weight: bold;
     font-size: 17px;
+
 }
 
 .form-horizontal
 {
     font-size: 18px;
-}
-
-@media (max-width: 768px) {
-    .btn,.btn-group {
-        width:100%;
-    }
 }
 
 
