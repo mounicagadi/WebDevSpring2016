@@ -64,6 +64,14 @@ h2
 
 }
 
+.box
+{
+    background-color: red;
+    width: 800px;
+    height: 400px;
+    padding: 50px;
+
+}
 
 .table
 {
@@ -79,10 +87,15 @@ h2
     border: 1.5px solid #000000;
     text-align: left;
     font-weight: bold;
-    font-size: 17px;
+    font-size: 16px;
 
 }
 
+.table-bordered > thead > tr > th > a
+{
+    color: black;
+    white-space: nowrap;
+}
 .form-horizontal
 {
     font-size: 18px;
@@ -97,6 +110,9 @@ h2
     margin-right: 0;
     margin-left: 2px;
     font-weight: bold;
+    color: black;
+    font-size: 18px;
+
 }
 
 /*
@@ -123,6 +139,8 @@ h2
         color: black;
         border: double;
     }
+
+
 }
 
 /* Sidebar navigation */
@@ -179,4 +197,56 @@ h2
 .placeholder img {
     display: inline-block;
     border-radius: 50%;
+}
+
+.btn
+{
+    padding: 6px 7px;
+}
+
+@media screen and (max-width: 767px) {
+    .table-responsive > .table-bordered {
+        border: 1.5px solid #000000;
+        color: black;
+    }
+
+    .table>tbody>tr>td,
+    .table>tbody>tr>th,
+    .table>tfoot>tr>td,
+    .table>tfoot>tr>th,
+    .table>thead>tr>td,
+    .table>thead>tr>th {
+        padding: 4px;
+        font-size: 14px;
+    }
+
+    .nav-tabs > li > a
+    {
+       font-size: 14px;
+    }
+
+    .form-horizontal
+    {
+        font-size: 14px;
+    }
+
+    h1
+    {
+        font-size: 35px;
+    }
+
+    h2
+    {
+        font-size: 30px;
+    }
+
+    .btn
+    {
+       padding: 4px 4px;
+    }
+    .form-fields
+    {
+        float: left;
+        padding-left: 15px;
+    }
 }
