@@ -5,7 +5,7 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
     padding-top: 50px;
-    background-image:url("pink_rice.png");
+    background-image:url("../pink_rice.png");
 }
 
 
@@ -202,6 +202,11 @@ h2
 .btn
 {
     padding: 6px 7px;
+}
+
+.gender
+{
+    background-color: white;
 }
 
 @media screen and (max-width: 767px) {
