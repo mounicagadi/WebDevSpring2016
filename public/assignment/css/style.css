@@ -18,7 +18,7 @@ h1
     color: black;
     font-family: "Copperplate Gothic Bold";
     font-style: normal;
-    font-size: 60px;
+    font-size: 40px;
 }
 
 
@@ -52,26 +52,16 @@ p.list
     border-style: double;
     background-color: black;
     font-weight: bold;
-    font-size: 17px;
+    font-size: 16px;
 
 }
 
-h2
-{
-    font-size: 45px;
+h2 {
+    font-size: 35px;
     font-family: "Copperplate Gothic Bold";
     font-style: normal;
-
 }
 
-.box
-{
-    background-color: red;
-    width: 800px;
-    height: 400px;
-    padding: 50px;
-
-}
 
 .table
 {
@@ -87,20 +77,20 @@ h2
     border: 1.5px solid #000000;
     text-align: left;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 15px;
 
 }
 
-.table-bordered > thead > tr > th > a
+.table-bordered > thead > tr > th > a,
+.table-bordered > thead > tr > td
 {
     color: black;
     white-space: nowrap;
 }
 .form-horizontal
 {
-    font-size: 18px;
+    font-size: 16px;
 }
-
 
 .nav-tabs > li {
     float: left;
@@ -111,7 +101,6 @@ h2
     margin-left: 2px;
     font-weight: bold;
     color: black;
-    font-size: 18px;
 
 }
 
@@ -201,7 +190,7 @@ h2
 
 .btn
 {
-    padding: 6px 7px;
+    padding: 6px 6px;
 }
 
 .gender
@@ -222,17 +211,7 @@ h2
     .table>thead>tr>td,
     .table>thead>tr>th {
         padding: 4px;
-        font-size: 14px;
-    }
-
-    .nav-tabs > li > a
-    {
-       font-size: 14px;
-    }
-
-    .form-horizontal
-    {
-        font-size: 14px;
+        /*font-size: 14px;*/
     }
 
     h1

@@ -66,24 +66,7 @@ body {
     background-color: #428bca;
 }
 
-.table
-{
-    border-collapse: collapse !important;
-    border-spacing: 0px;
-    border: 1.5px solid #000000;
-    color: black;
-}
 
-.table-bordered > thead > tr > th,
-.table-bordered > tbody > tr > th,
-.table-bordered > thead > tr > td,
-.table-bordered > tbody > tr > td
-{
-    border: 1.5px solid #000000;
-    text-align: left;
-    font-weight: bold;
-    font-size: 17px;
-}
 /*
  * Main content
  */
