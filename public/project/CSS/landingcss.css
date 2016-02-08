@@ -16,9 +16,37 @@ body {
 /* Header Image Background - Change the URL below to your image path (example: ../images/background.jpg) */
 .box
 {
+    background-color: firebrick;
+    width: 550px;
+    height: 150px;
+    color: white;
+    margin-top: 300px;
+    margin-left: 320px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: white;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.navbar-fixed-top
+{
+    background-color: firebrick;
+    border: white;
+    border-style: solid;
+    font-weight: bold;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: white;
+    font-size: 16px;
 
 }
 
+.navbar-inverse .navbar-brand {
+    color: white;
+    font-size: 20px;
+}
 .panel-default {
     opacity: 0.9;
     margin-top:30px;
