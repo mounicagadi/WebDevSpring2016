@@ -38,14 +38,19 @@ body {
 }
 
 .navbar-inverse .navbar-nav>li>a {
-    color: white;
     font-size: 16px;
-
+    color: white;
+}
+.navbar-inverse .navbar-brand {
+    font-size: 20px;
+    color: white;
 }
 
-.navbar-inverse .navbar-brand {
-    color: white;
-    font-size: 20px;
+.navbar-inverse .navbar-nav>.active>a,
+.navbar-inverse .navbar-nav>.active>a:focus,
+.navbar-inverse .navbar-nav>.active>a:hover {
+    color: black;
+    background-color: gray;
 }
 .panel-default {
     opacity: 0.9;
