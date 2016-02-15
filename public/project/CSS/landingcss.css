@@ -16,7 +16,7 @@ body {
 /* Header Image Background - Change the URL below to your image path (example: ../images/background.jpg) */
 .box
 {
-    background-color: firebrick;
+    background-color: #cb202d;
     width: 550px;
     height: 150px;
     color: white;
@@ -31,7 +31,7 @@ body {
 
 .navbar-fixed-top
 {
-    background-color: firebrick;
+    background-color: #cb202d;
     border: white;
     border-style: solid;
     font-weight: bold;
