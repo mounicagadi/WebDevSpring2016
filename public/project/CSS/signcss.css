@@ -1,6 +1,7 @@
 body {
     margin-top: 50px; /* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-    background: url('../glasses.jpg') no-repeat center center fixed;
+    /*background: url('../light-wooden-background.jpg') no-repeat center center fixed;*/
+    background-color: whitesmoke;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -14,4 +15,28 @@ body {
 .centered-form .panel{
     background: rgba(255, 255, 255, 0.8);
     box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+}
+
+.navbar-fixed-top
+{
+    background-color: #cb202d;
+    font-weight: bold;
+    border: none;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    font-size: 16px;
+    color: white;
+}
+.navbar-inverse .navbar-brand {
+    font-size: 20px;
+    color: white;
+}
+
+section {
+    padding: 130px 0;
+}
+
+.bg-primary {
+    background-color: #cb202d;
 }
