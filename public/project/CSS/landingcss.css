@@ -4,7 +4,7 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-body {
+body{
     margin-top: 50px; /* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     background: url('../background-dim.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -14,21 +14,27 @@ body {
 }
 
 /* Header Image Background - Change the URL below to your image path (example: ../images/background.jpg) */
-.box
-{
-    background-color: #cb202d;
-    width: 550px;
-    height: 150px;
-    color: white;
-    margin-top: 300px;
-    margin-left: 320px;
-    border-width: 6px;
-    border-style: solid;
-    border-color: white;
-    text-align: left;
-    padding-left: 20px;
+
+.text-input {
+    height: 60px;
+    border-radius: 0;
+    box-shadow: none;
+    background: white;
 }
 
+.search-button {
+    height: 60px;
+    border: none;
+    border-radius: 1px;
+    background-color: #cb202d;
+    padding-top: 20px;
+    font-size: 18px;
+}
+
+.placing
+{
+    padding-top: 380px;
+}
 .navbar-fixed-top
 {
     background-color: #cb202d;
