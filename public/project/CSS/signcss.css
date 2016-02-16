@@ -12,6 +12,21 @@ body {
     margin-top: 60px;
 }
 
+.text-input {
+    height: 60px;
+    border-radius: 0;
+    box-shadow: none;
+    background: white;
+}
+
+.search-button {
+    height: 60px;
+    border: none;
+    border-radius: 1px;
+    background-color: #cb202d;
+    padding-top: 10px;
+    font-size: 18px;
+}
 .centered-form .panel{
     background: rgba(255, 255, 255, 0.8);
     box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
