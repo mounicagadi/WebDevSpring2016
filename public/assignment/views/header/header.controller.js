@@ -1,3 +1,11 @@
-/**
- * Created by mounica on 2/7/2016.
- */
+(function(){
+    "use strict";
+    angular.module("FormBuilderApp")
+        .config("HeaderController",HeaderController);
+
+    function HeaderController($scope , $location){
+
+        $scope.$location = $location;
+
+    }
+})();

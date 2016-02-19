@@ -1,3 +1,10 @@
-/**
- * Created by mounica on 2/7/2016.
- */
+(function(){
+    "use strict";
+    angular.module("FormBuilderApp")
+        .controller("SidebarController",SidebarController);
+
+    function SidebarController (){
+
+    }
+
+})();

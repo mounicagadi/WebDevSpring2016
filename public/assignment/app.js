@@ -1,3 +1,5 @@
-/**
- * Created by mounica on 2/15/2016.
- */
+(function() {
+    "use strict";
+    angular
+        .module("FormBuilderApp", ["ngRoute"]);
+})();

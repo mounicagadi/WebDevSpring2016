@@ -1,15 +1,22 @@
-<div class="container-fluid">
+<div class="container-fluid" ng-controller="SidebarController">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar responsive">
-                <li class="active"><a href="#" role="button"  class="btn btn-justify">
+                <li ng-class="{'active' : $location.url().indexOf('home') != -1}">
+                    <a href="#/home" role="button"  class="btn btn-justify">
                     <p class="list"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;Home
                         <span class="sr-only">(current)</span></p></a></li>
-                <li><a href="../users/profile.view.html" role="button" class="btn btn-justify">
+
+                <li ng-class="{'active' : $location.url().indexOf('profile') != -1}">
+                    <a href="#/profile" role="button" class="btn btn-justify">
                     <p class="list"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Profile</p></a></li>
-                <li><a href="../admin/admin.view.html" role="button" class="btn btn-justify">
+
+                <li ng-class="{'active' : $location.url().indexOf('admin') != -1}">
+                    <a href="#/admin" role="button" class="btn btn-justify">
                     <p class="list"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>&nbsp;&nbsp;Admin</p></a></li>
-                <li><a href="../forms/forms.view.html" role="button" class="btn btn-justify">
+
+                <li ng-class="{'active' : $location.url().indexOf('forms') != -1}">
+                    <a href="#/forms" role="button" class="btn btn-justify">
                     <p class="list"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;&nbsp;Forms</p></a></li>
             </ul>
         </div>
