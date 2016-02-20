@@ -1,7 +1,7 @@
 (function(){
     "use strict";
     angular.module("FormBuilderApp")
-        .config("HeaderController",HeaderController);
+        .controller("HeaderController",HeaderController);
 
     function HeaderController($scope , $location){
 
