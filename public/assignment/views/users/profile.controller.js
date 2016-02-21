@@ -1,32 +1,31 @@
 (function () {
-    "use strict";
     angular.module("FormBuilderApp")
         .controller("ProfileController",ProfileController);
 
-    function ProfileController($scope, $location,$rootScope, UserService) {
+    function ProfileController($scope,UserService) {
 
         $scope.update = update;
-        var currentuser = $rootScope;
+        var user = $rootScope;
 
-        $scope.username = currentuser.username;
-        $scope.password = currentuser.password;
-        $scope.firstName = currentuser.firstName;
-        $scope.lastName = currentuser.lastName;
+        $scope.username = user.username;
+        $scope.password = user.password;
+        $scope.firstName = user.firstName;
+        $scope.lastName = user.lastName;
 
-        function update(username,password,firstname,lastname,email) {
+        function update(password,firstName,lastName,email) {
 
             var updatedContent = {
-                "_id":currentuser._id,
-                "firstname": firstname,
-                "lastname": lastname,
-                "username": username,
+                "_id":user._id,
+                "firstName": firstName,
+                "lastName": lastName,
+                "username": user.username,
                 "password": password,
-                "roles": currentuser.roles
+                "roles": user.roles
 
             };
 
 
-            UserService.updateUser(currentuser._id,updatedContent,function(user){
+            UserService.updateUser(user._id,updatedContent,function(user){
                 $rootScope  = user;
 
             });

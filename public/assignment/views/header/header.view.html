@@ -13,15 +13,14 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right" >
-                <li ng-show = "nologin()" class="ng-hide"><a href="#/register">Register</a></li>
+                <li ng-show = "noLogin()" class="ng-hide"><a href="#/register">Register</a></li>
 
-                <li ng-show = "nologin()" class="ng-hide"><a href="#/login">Login</a></li>
+                <li ng-show = "noLogin()" class="ng-hide"><a href="#/login">Login</a></li>
 
-                <li ng-hide = "nologin()" class="ng-hide">
+                <li ng-hide="noLogin()" class="ng-hide"><a href="#/profile">{{username}}</a></li>
+
+                <li ng-hide = "noLogin()" class="ng-hide">
                     <a href="#/home" ng-click="logout()">Logout</a></li>
-
-                <li ng-hide="nologin()" class="ng-hide"><a href="#/profile">{{username}}</a></li>
-
 
                 <li ng-show="isAdmin()" class="ng-hide">
                     <a href="#/admin">Admin</a></li>

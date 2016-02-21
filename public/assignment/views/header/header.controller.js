@@ -1,19 +1,17 @@
 (function(){
-    "use strict";
     angular
         .module("FormBuilderApp")
         .controller("HeaderController",HeaderController);
 
-    function HeaderController($scope,$location,$rootScope){
+    function HeaderController($scope,$location){
 
-        var currentUser = null;
 
-        $rootScope = currentUser;
-        $scope.nologin = nologin;
+        $rootScope = null;
+        $scope.noLogin = noLogin;
         $scope.logout = logout;
         $scope.isAdmin = isAdmin;
 
-        function nologin() {
+        function noLogin() {
             if($rootScope != null){
                 $scope.username = $rootScope.username;
                 return false;
@@ -34,7 +32,7 @@
                 if(roles!=null){
                     for(var i in roles){
                         if(roles[i]=="admin"){
-                            $location.path('/admin');
+                            $location.path("/admin");
                         }
                     }
                 }

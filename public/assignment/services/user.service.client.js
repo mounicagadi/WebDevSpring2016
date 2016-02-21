@@ -29,7 +29,7 @@
 
         var api =
         {
-            findUserByUsernameAndPassword: findUserByUsernameAndPassword,
+            findUserByCredentials: findUserByCredentials,
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
@@ -38,7 +38,7 @@
         };
         return api;
 
-        function findUserByUsernameAndPassword(username, password, callback) {
+        function findUserByCredentials(username, password, callback) {
             var user = null;
             for (var value in users) {
                 var obj = users[value];
@@ -66,13 +66,22 @@
             new_user._id = (new Date).getTime();
             console.log(new_user);
             users.push(new_user);
-            console.log(users);
+            //console.log(users);
             callback(new_user);
 
         }
 
-        function deleteUserById() {
+        function deleteUserById(userId,callback) {
 
+            for(var index in users){
+                var obj = users[index];
+                if(obj._id==userId){
+                    users.splice(index,1);
+                    break;
+                }
+            }
+
+            callback(users);
         }
 
         function updateUser(userid, user, callback) {
@@ -82,6 +91,7 @@
                 id = obj._id;
                 if (id == userid) {
                     users[value] = user;
+                    console.log(user);
                     callback(user);
                     break;
                 }

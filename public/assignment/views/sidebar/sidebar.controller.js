@@ -1,17 +1,15 @@
 (function(){
-    "use strict";
     angular
         .module("FormBuilderApp")
         .controller("SidebarController",SidebarController);
 
-    function SidebarController ($scope,$rootScope) {
+    function SidebarController ($scope) {
 
-        var currentUser = null;
-        $rootScope = currentUser;
-        $scope.nologin = nologin;
+        $rootScope = null;
+        $scope.noLogin = noLogin;
         $scope.isAdmin = isAdmin;
 
-        function nologin() {
+        function noLogin() {
             if($rootScope != null){
                 return true;
             }

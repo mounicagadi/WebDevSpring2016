@@ -7,7 +7,7 @@
                     <p class="list"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;Home
                         <span class="sr-only">(current)</span></p></a></li>
 
-                <li ng-class="{'active' : $location.url().indexOf('profile') != -1}" ng-show="nologin()" class="ng-hide">
+                <li ng-class="{'active' : $location.url().indexOf('profile') != -1}" ng-show="noLogin()" class="ng-hide">
                     <a href="#/profile" role="button" class="btn btn-justify">
                     <p class="list"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Profile</p></a></li>
 
@@ -15,7 +15,7 @@
                     <a href="#/admin" role="button" class="btn btn-justify">
                     <p class="list"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>&nbsp;&nbsp;Admin</p></a></li>
 
-                <li ng-class="{'active' : $location.url().indexOf('forms') != -1}" ng-show="nologin()" class="ng-hide">
+                <li ng-class="{'active' : $location.url().indexOf('forms') != -1}" ng-show="noLogin()" class="ng-hide">
                     <a href="#/forms" role="button" class="btn btn-justify">
                     <p class="list"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;&nbsp;Forms</p></a></li>
             </ul>

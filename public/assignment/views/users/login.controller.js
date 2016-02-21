@@ -1,9 +1,8 @@
 (function () {
-    "use strict";
     angular.module("FormBuilderApp")
         .controller("LoginController",LoginController);
 
-    function LoginController($scope, $location, $rootScope, UserService) {
+    function LoginController($scope, $location,UserService) {
 
         $scope.login = login;
         function login(username,password)
@@ -13,11 +12,11 @@
 
             console.log(name+pwd);
 
-            UserService.findUserByUsernameAndPassword(name,pwd,function(user)
+            UserService.findUserByCredentials(name,pwd,function(user)
             {
                 if (user != null) {
                     $rootScope = user;
-                    console.log($rootScope);
+                    //console.log($rootScope);
                     $location.path("/profile");
                 }
 

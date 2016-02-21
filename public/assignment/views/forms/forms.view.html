@@ -14,10 +14,10 @@
                 <div id="forms" class="tab-pane fade in active">
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover" cellspacing="0">
-                            <thead>
+                            <tbody>
                             <tr>
                                 <th>
-                                    <a href="#" role="button"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true">
+                                    <a role="button"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true">
                             </span>&nbsp;Form Name</a>
                                 </th>
                                 <th>
@@ -31,28 +31,26 @@
                                 </td>
                                 <td class="second-column">
                                     <div class="btn-group" role="group">
-                                        <a ng-click = "addForm(formName)" href="#" role="button" class="btn btn-default" aria-label="Add">
+                                        <a ng-click = "addForm(formName)" role="button" class="btn btn-default" aria-label="Add">
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                             <span class="hidden-xs"></span>
                                         </a>
-                                        <a ng-click = "updateForm(formName)"href="#" role="button" class="btn btn-default">
+                                        <a ng-click = "updateForm(formName)" role="button" class="btn btn-default">
                                             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                                             <span class="hidden-xs"></span>
                                         </a>
                                     </div>
                                 </td>
                             </tr>
-                            </thead>
-                            <tbody>
                             <tr ng-repeat="form in data">
-                                <td>{{form.name}}</td>
+                                <td>{{form.formName}}</td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <a ng-click = "deleteForm($index)" role="button" class="btn btn-default" aria-label="Add">
+                                        <a  ng-click = "deleteForm($index)" role="button" class="btn btn-default" aria-label="Add">
                                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                             <span class="hidden-xs"></span>
                                         </a>
-                                        <a ng-click = "selectForm($index)" role="button" class="btn btn-default">
+                                        <a href="#/forms/{{$index}}" ng-click = "selectForm($index)" role="button" class="btn btn-default">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                             <span class="hidden-xs"></span>
                                         </a>
