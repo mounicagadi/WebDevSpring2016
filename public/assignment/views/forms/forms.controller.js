@@ -5,45 +5,50 @@
 
     function FormController($scope,$location,FormService) {
 
-        FormService.findAllFormsForUser($rootScope._id, function (response) {
-            $scope.data = response;
-        });
-
         $scope.addForm = addForm;
         $scope.updateForm = updateForm;
         $scope.deleteForm = deleteForm;
         $scope.selectForm = selectForm;
         var selectedIndex = null;
 
+        FormService.findAllFormsForUser($rootScope._id, renderUserForms);
 
+        function renderUserForms(response){
+            $scope.data = response;
+        }
 
-        function addForm(formName) {
-            if(formName!=null)
+        function addForm(name) {
+            if(name!=null)
             {
-                var newForm = {"title": formName};
+               var formName = {
+                   "title":name
+               };
+                console.log(formName);
             }
 
-            FormService.createFormForUser($rootScope._id, newForm, function (response) {
+            FormService.createFormForUser($rootScope._id, formName, function (response) {
                 $scope.data.push(response);
-                $scope.formName = null;
+                console.log("inform contlr"+response);
+                $scope.name = null;
             });
         }
 
 
-        function updateForm(formName) {
-            if (formName != null) {
+        function updateForm(name) {
+            if (name != null) {
                 var selectedForm = $scope.data[selectedIndex];
 
                 var updatedForm = {
                     "_id": selectedForm._id,
-                    "title": formName,
+                    "title": name,
                     "userId": $rootScope._id
                 };
             }
             FormService.updateFormById(selectedForm._id, updatedForm, function (response) {
 
                 $scope.data[selectedIndex] = response;
-                $scope.formName = null;
+                $scope.name = null;
+                $scope.selectedIndex = null;
             });
 
         }

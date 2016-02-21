@@ -12,8 +12,9 @@
         $scope.isAdmin = isAdmin;
 
         function noLogin() {
-            if($rootScope != null){
-                $scope.username = $rootScope.username;
+            if($rootScope!=null){
+
+                $scope.username=$rootScope.username;
                 return false;
             }
             else{
@@ -29,16 +30,17 @@
             if($rootScope!=null)
             {
                 var roles = $rootScope.roles;
-                if(roles!=null){
-                    for(var i in roles){
-                        if(roles[i]=="admin"){
+                if(roles!=null)
+                {
+                    for(var i in roles)
+                    {
+                        if(roles[i]=="admin")
+                        {
                             $location.path("/admin");
                         }
                     }
                 }
             }
-
-            return false;
         }
 
     }

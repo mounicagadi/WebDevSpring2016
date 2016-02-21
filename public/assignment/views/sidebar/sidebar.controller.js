@@ -10,7 +10,7 @@
         $scope.isAdmin = isAdmin;
 
         function noLogin() {
-            if($rootScope != null){
+            if($rootScope!=null){
                 return true;
             }
             else{
