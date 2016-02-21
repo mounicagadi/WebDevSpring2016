@@ -5,19 +5,21 @@
 
     function LoginController($scope, $location, $rootScope, UserService) {
 
-        $scope.login = function() {
+        $scope.login = login;
+        function login(username,password)
+        {
+            var name = $scope.username;
+            var pwd = $scope.password;
 
-            uname : $scope.username
-            pword : $scope.password
+            console.log(name+pwd);
 
-            console.log("credentials entered"+uname+"pwd:"+pword)
-
-            UserService.findUserByUsernameAndPassword(uname, pword,function(user)
+            UserService.findUserByUsernameAndPassword(name,pwd,function(user)
             {
-                if (user !== null) {
-                    $rootScope.user = user;
+                if (user != null) {
+                    $rootScope = user;
                     $location.path("/profile");
                 }
+
             });
 
 

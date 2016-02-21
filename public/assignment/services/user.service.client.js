@@ -39,32 +39,35 @@
         return api;
 
         function findUserByUsernameAndPassword(username, password, callback) {
-
+            var user = null;
             for (var value in users) {
                 var obj = users[value];
                 uname = obj.username;
                 passwd = obj.password;
                 if (uname == username && passwd == password) {
-                    callback(obj.username, obj.message);
-                }
-                else {
-                    callback(null);
+                    user = users[value];
+                    console.log("details matched");
+                    break;
                 }
             }
+
+            callback(user);
         }
 
         function findAllUsers(callback) {
 
-            return callback(users);
+            callback(users);
         }
 
 
-        function createUser(user,callback) {
+        function createUser(user, callback) {
 
-            user._id =  (new Date).getTime();
-            console.log(user._id);
-            user.add(users);
-            callback(user);
+            var new_user = user;
+            new_user._id = (new Date).getTime();
+            console.log(new_user);
+            users.push(new_user);
+            console.log(users);
+            callback(new_user);
 
         }
 
@@ -72,9 +75,19 @@
 
         }
 
-        function updateUser() {
+        function updateUser(userid, user, callback) {
+
+            for (var value in users) {
+                var obj = users[value];
+                id = obj._id;
+                if (id == userid) {
+                    users[value] = user;
+                    callback(user);
+                    break;
+                }
+
+            }
 
         }
-
     }
 })();

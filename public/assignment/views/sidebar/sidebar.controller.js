@@ -1,9 +1,40 @@
 (function(){
     "use strict";
-    angular.module("FormBuilderApp")
+    angular
+        .module("FormBuilderApp")
         .controller("SidebarController",SidebarController);
 
-    function SidebarController (){
+    function SidebarController ($scope) {
+
+
+        $scope.nologin = nologin;
+        $scope.isAdmin = isAdmin;
+
+        function nologin() {
+            if($rootScope==null) {
+                return true;
+
+            }
+            else{
+                return false;
+            }
+        }
+
+        function isAdmin(){
+            if($rootScope!=null)
+            {
+                var roles = $rootScope.roles;
+                if(roles!=null){
+                    for(var i in roles){
+                        if(roles[i]=="admin"){
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
 
     }
 

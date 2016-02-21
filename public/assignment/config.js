@@ -19,6 +19,11 @@
                 controller: "ProfileController"
             })
 
+            .when("/register", {
+                templateUrl: "views/users/register.view.html",
+                controller:"RegisterController"
+            })
+
             .when("/admin", {
                 templateUrl: "views/admin/admin.view.html"
             })
@@ -27,9 +32,8 @@
                 templateUrl: "views/forms/forms.view.html"
             })
 
-            .when("/register", {
-                templateUrl: "views/users/register.view.html",
-                controller:"RegisterController"
+            .when("/fields", {
+                templateUrl : "../assignment/views/forms/fields.view.html"
             })
 
             .otherwise({

@@ -12,11 +12,19 @@
                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;&nbsp;Form Maker</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li ng-class="{'active' : $location.url().indexOf('register') != -1}"><a href="#/register">Register</a></li>
-                <li ng-class="{'active' : $location.url().indexOf('login') != -1}"><a href="#/login">Login</a></li>
-                <li ng-class="{'active' : $location.url().indexOf('username') != -1}"><a href="#/username">Username</a></li>
-                <li ng-class="{'active' : $location.url().indexOf('logout') != -1}"><a href="#/logout">Logout</a></li>
+            <ul class="nav navbar-nav navbar-right" >
+                <li ng-show = "nologin()" class="ng-hide"><a href="#/register">Register</a></li>
+
+                <li ng-show = "nologin()" class="ng-hide"><a href="#/login">Login</a></li>
+
+                <li ng-hide = "nologin()" class="ng-hide">
+                    <a href="#/home" ng-click="logout()">Logout</a></li>
+
+                <li ng-hide="nologin()" class="ng-hide"><a href="#/profile">{{username}}</a></li>
+
+
+                <li ng-show="isAdmin()" class="ng-hide">
+                    <a href="#/admin">Admin</a></li>
             </ul>
         </div>
     </div>
