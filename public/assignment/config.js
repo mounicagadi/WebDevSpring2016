@@ -29,7 +29,8 @@
             })
 
             .when("/forms", {
-                templateUrl: "views/forms/forms.view.html"
+                templateUrl: "views/forms/forms.view.html",
+                controller:"FormController"
             })
 
             .when("/fields", {

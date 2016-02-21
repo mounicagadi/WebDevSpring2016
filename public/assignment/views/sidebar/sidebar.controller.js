@@ -4,16 +4,16 @@
         .module("FormBuilderApp")
         .controller("SidebarController",SidebarController);
 
-    function SidebarController ($scope) {
+    function SidebarController ($scope,$rootScope) {
 
-
+        var currentUser = null;
+        $rootScope = currentUser;
         $scope.nologin = nologin;
         $scope.isAdmin = isAdmin;
 
         function nologin() {
-            if($rootScope==null) {
+            if($rootScope != null){
                 return true;
-
             }
             else{
                 return false;

@@ -6,37 +6,31 @@
     function RegisterController($scope, $location, $rootScope , UserService)
     {
         $scope.register = register;
-        function register(user)
-        {
-            var newdata = {
-                username: $scope.user.username,
-                password: $scope.user.password,
-                verifypassword: $scope.user.verifypassword,
-                email: $scope.user.email
-            };
-
-            $scope.newdata = newdata;
-
-            if(user!==undefined)
-            {
-                if(user.username!==undefined && user.password!==undefined && user.verifypassword!==undefined && user.password==user.verifypassword && user.email!==undefined)
+        function register(username,password,verifypassword,email)
+        {  if(username!=null && password!=null && verifypassword!=null && password==verifypassword)
                 {
+                    var new_data={
+                        "_id":(new Date).getTime(),
+                        "firstName":null,
+                        "lastName": null,
+                        "username":username,
+                        "password":password,
+                        "roles": []
+                    };
 
-                    UserService.createUser(newdata,function(newUser){
+                    UserService.createUser(new_data,function(newUser){
 
-                        $rootScope.newUser = newUser;
+                        $rootScope = newUser;
                         console.log(newUser._id);
-                        $location.path("/profile/"+newUser._id);
+                        $location.path("/profile");
                     });
                     }
 
                 else {
                     alert("Enter proper user credentials");
-                }
+
             }
-            else {
-                alert("User is undefined");
-            }
+
 
 
         };

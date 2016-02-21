@@ -9,6 +9,7 @@
         var currentuser = $rootScope;
 
         $scope.username = currentuser.username;
+        $scope.password = currentuser.password;
         $scope.firstName = currentuser.firstName;
         $scope.lastName = currentuser.lastName;
 
@@ -16,17 +17,17 @@
 
             var updatedContent = {
                 "_id":currentuser._id,
-                "firstname": currentuser.firstname,
-                "lastname": currentuser.lastname,
-                "username": currentuser.username,
-                "password": currentuser.password,
+                "firstname": firstname,
+                "lastname": lastname,
+                "username": username,
+                "password": password,
                 "roles": currentuser.roles
 
             };
 
 
             UserService.updateUser(currentuser._id,updatedContent,function(user){
-                $rootScope.user= user;
+                $rootScope  = user;
 
             });
 

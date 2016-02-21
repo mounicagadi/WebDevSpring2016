@@ -17,6 +17,7 @@
             {
                 if (user != null) {
                     $rootScope = user;
+                    console.log($rootScope);
                     $location.path("/profile");
                 }
 

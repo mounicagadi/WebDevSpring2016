@@ -6,8 +6,9 @@
 
     function HeaderController($scope,$location,$rootScope){
 
-        $rootScope = null;
+        var currentUser = null;
 
+        $rootScope = currentUser;
         $scope.nologin = nologin;
         $scope.logout = logout;
         $scope.isAdmin = isAdmin;
