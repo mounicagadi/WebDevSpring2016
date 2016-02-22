@@ -33,7 +33,8 @@
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
-            updateUser: updateUser
+            updateUser: updateUser,
+            checkAdmin: checkAdmin
 
         };
         return api;
@@ -52,6 +53,20 @@
             }
 
             callback(user);
+        }
+
+        function checkAdmin(user){
+            var adminFlag = false;
+            console.log(user.roles);
+                   for(var i = 0 ; i < user.roles.length; i++){
+                       if(user.roles[i]== "admin"){
+                           adminFlag = true;
+                           break;
+                       }
+                   }
+
+
+            return adminFlag;
         }
 
         function findAllUsers(callback) {

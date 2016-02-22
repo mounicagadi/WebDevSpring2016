@@ -29,7 +29,7 @@
                             <tbody>
                             <tr>
                                 <td>
-                                    <input type="text" class="form-control input-md" placeholder="Name">
+                                    <input type="text" ng-model = "name" class="form-control input-md" placeholder="Name">
                                 </td>
                                 <td class="second-column">
                                     <div class="btn-group" role="group">
@@ -44,7 +44,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr ng-repeat="form in data">
+                            <tr ng-show ="data" ng-repeat="form in data">
                             <td>
                                 <a href="#/fields">{{form.title}}</a>
                             </td>

@@ -53,18 +53,19 @@
 
         }
 
-        function deleteForm(index) {
-            var form = $scope.data[index];
+        function deleteForm($index) {
+            console.log("Data" + $scope.data);
+            var form = $scope.data[$index];
 
-            FormService.deleteFormById(form._id, function (response) {
+            FormService.deleteFormById(form._id,$rootScope._id, function (response) {
 
                 $scope.data = response;
             });
         }
 
-        function selectForm(index) {
-            selectedIndex = index;
-            var form = $scope.data[index];
+        function selectForm($index) {
+            selectedIndex = $index;
+            var form = $scope.data[$index];
             $scope.name= form.title;
 
         }

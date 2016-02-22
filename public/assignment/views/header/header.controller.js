@@ -36,7 +36,8 @@
                     {
                         if(roles[i]=="admin")
                         {
-                            $location.path("/admin");
+                            //console.log($location);
+                            return true;
                         }
                     }
                 }

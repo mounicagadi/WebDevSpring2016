@@ -16,7 +16,16 @@
             {
                 if (user != null) {
                     $rootScope = user;
+                    console.log("user Check : " + UserService.checkAdmin(user));
+                    if(UserService.checkAdmin(user))
+                    {
+                        $location.path("/admin");
+                    }
                     //console.log($rootScope);
+                    //console.log($location);
+
+                    else
+
                     $location.path("/profile");
                 }
 
