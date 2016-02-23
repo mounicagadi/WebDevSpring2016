@@ -22,12 +22,8 @@
                     var adminuser = UserService.checkAdmin(user);
                     if(adminuser)
                     {
-                        $location.path("/admin");
-                        return true;
+                       $location.path("/admin");
                     }
-                    //console.log($rootScope);
-                    //console.log($location);
-
                     else
 
                     $location.path("/profile");
