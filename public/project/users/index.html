@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html class="full" lang="en">
 <!-- Make sure the <html> tag is set to the .full CSS class. Change the background image in the full.css file. -->
@@ -10,13 +11,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Full - Start Bootstrap Template</title>
+    <title>EatOut</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="CSS/signcss.css" rel="stylesheet">
+    <link href="../CSS/landingcss.css" rel="stylesheet">
 
 
 </head>
@@ -39,11 +40,11 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="index.html">Home</a>
-                </li>
                 <li class="active">
-                    <a href="#">Sign In</a>
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="signin.html">Sign In</a>
                 </li>
                 <li>
                     <a href="signup.html">Sign Up</a>
@@ -59,33 +60,24 @@
     <!-- /.container -->
 </nav>
 
-<div class="container">
-    <div class="row centered-form">
-        <div class="col-lg-6 col-md-6 col-sm-6">
-            <div class="center-block">
-                <div class="form-header">
-                    <h1>Sign In</h1>
-                    <hr>
-                </div>
-                <div class="container-fluid form-container">
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <label class="control-label" for="username">Username :</label>
-                            <input type="text" name="username" id="username" class="form-control text-input center-block" placeholder="First Name">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="password">Password :</label>
-                            <input type="password" name="password" id="password" class="form-control text-input center-block" placeholder="Password">
-                        </div>
-                        <div class="form-group">
-                            <button value="Sign In" class="btn btn-info btn-block search-button center-block">Sign In</button>
-                        </div>
-                    </form>
-                </div>
+<section id = "data">
+    <div class="container placing">
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label class="sr-only" for="search"></label>
+                        <input type="search" class="form-control text-input center-block" id="search" placeholder="Search for Restaurants">
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <label class="sr-only" for="location"></label>
+                <input type="text" class="form-control text-input center-block" id="location" placeholder="Location">
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2">
+            <a href="#" role="button"  class="btn btn-info search-button center-block">
+                <span class="glyphicon glyphicon-search" aria-hidden="true">Search</span></a>
             </div>
         </div>
     </div>
-</div>
+</section>
 
 <!-- Put your page content here! -->
 

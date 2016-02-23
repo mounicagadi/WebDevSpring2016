@@ -13,16 +13,16 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right" >
-                <li ng-show = "noLogin()" class="ng-hide"><a href="#/register">Register</a></li>
+                <li ng-class="{'active': $location.url() == '/register'}" ng-if = "user==null">
+                    <a href="#/register">Register</a></li>
+                <li ng-class="{'active': $location.url() == '/login'}" ng-if = "user==null">
+                    <a href="#/login">Login</a></li>
+                <li ng-class="{'active': $location.url() == '/profile'}" ng-if = "user!= null">
+                    <a href="#/profile">{{user.username}}</a></li>
+                <li ng-class="{'active': $location.url() == '/home'}" ng-if = "user!=null" ng-click="logout()">
+                    <a href="#/home">Logout</a></li>
 
-                <li ng-show = "noLogin()" class="ng-hide"><a href="#/login">Login</a></li>
-
-                <li ng-hide="noLogin()" class="ng-hide"><a href="#/profile">{{username}}</a></li>
-
-                <li ng-hide = "noLogin()" class="ng-hide">
-                    <a href="#/home" ng-click="logout()">Logout</a></li>
-
-                <li ng-show="isAdmin()" class="ng-hide">
+                <li ng-class="{'active': $location.url() == '/admin'}" ng-show="isAdmin()" class="ng-hide">
                     <a href="#/admin">Admin</a></li>
             </ul>
         </div>

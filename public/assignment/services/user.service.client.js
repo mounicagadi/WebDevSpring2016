@@ -1,4 +1,5 @@
 (function() {
+    "use strict";
     angular.module("FormBuilderApp")
         .factory("UserService", UserService);
 
@@ -43,8 +44,8 @@
             var user = null;
             for (var value in users) {
                 var obj = users[value];
-                uname = obj.username;
-                passwd = obj.password;
+                var uname = obj.username;
+                var passwd = obj.password;
                 if (uname == username && passwd == password) {
                     user = users[value];
                     console.log("details matched");
@@ -103,7 +104,7 @@
 
             for (var value in users) {
                 var obj = users[value];
-                id = obj._id;
+                var id = obj._id;
                 if (id == userid) {
                     users[value] = user;
                     console.log(user);

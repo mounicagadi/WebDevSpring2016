@@ -1,9 +1,10 @@
 (function () {
+    "use strict";
     angular
         .module("FormBuilderApp")
         .controller("FormController",FormController);
 
-    function FormController($scope,$location,FormService) {
+    function FormController($scope,$location,FormService,$rootScope) {
 
         $scope.addForm = addForm;
         $scope.updateForm = updateForm;
@@ -11,11 +12,10 @@
         $scope.selectForm = selectForm;
         var selectedIndex = null;
 
-        FormService.findAllFormsForUser($rootScope._id, renderUserForms);
-
-        function renderUserForms(response){
+        FormService.findAllFormsForUser($rootScope.user._id, function(response)
+       {
             $scope.data = response;
-        }
+        });
 
         function addForm(name) {
             if(name!=null)
@@ -26,7 +26,7 @@
                 console.log(formName);
             }
 
-            FormService.createFormForUser($rootScope._id, formName, function (response) {
+            FormService.createFormForUser($rootScope.user._id, formName, function (response) {
                 $scope.data.push(response);
                 console.log("inform contlr"+response);
                 $scope.name = null;
@@ -41,14 +41,14 @@
                 var updatedForm = {
                     "_id": selectedForm._id,
                     "title": name,
-                    "userId": $rootScope._id
+                    "userId": selectedForm.userId
                 };
             }
             FormService.updateFormById(selectedForm._id, updatedForm, function (response) {
 
                 $scope.data[selectedIndex] = response;
                 $scope.name = null;
-                $scope.selectedIndex = null;
+                selectedIndex = null;
             });
 
         }
@@ -57,7 +57,7 @@
             console.log("Data" + $scope.data);
             var form = $scope.data[$index];
 
-            FormService.deleteFormById(form._id,$rootScope._id, function (response) {
+            FormService.deleteFormById(form._id,function (response) {
 
                 $scope.data = response;
             });

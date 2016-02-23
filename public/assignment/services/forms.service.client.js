@@ -1,8 +1,9 @@
 (function() {
+    "use strict";
     angular.module("FormBuilderApp")
         .factory("FormService", FormService);
 
-    function FormService(){
+    function FormService($rootScope){
 
         var forms = [
             {"_id": "000", "title": "Contacts", "userId": 123},
@@ -36,20 +37,19 @@
             for(var i in forms){
                 if(forms[i].userId == userId){
                     userForms.push(forms[i]);
-                    break;
                 }
             }
             callback(userForms);
         }
 
-        function deleteFormById(formId, userId, callback){
+        function deleteFormById(formId, callback){
             for(var i in forms){
                 if(forms[i]._id == formId){
                     forms.splice(i, 1);
                     break;
                 }
             }
-            findAllFormsForUser(userId, callback);
+            findAllFormsForUser($rootScope.user._id, callback);
         }
 
         function updateFormById(formId, newForm, callback){

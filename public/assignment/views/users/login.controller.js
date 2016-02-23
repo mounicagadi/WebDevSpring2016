@@ -1,25 +1,29 @@
 (function () {
+    "use strict";
     angular.module("FormBuilderApp")
         .controller("LoginController",LoginController);
 
-    function LoginController($scope, $location,UserService) {
+    function LoginController($scope, $location,UserService,$rootScope) {
 
         $scope.login = login;
-        function login(username,password)
+        function login(user)
         {
-            var name = $scope.username;
-            var pwd = $scope.password;
+            var name = user.username;
+            var pwd = user.password;
 
             console.log(name+pwd);
 
             UserService.findUserByCredentials(name,pwd,function(user)
             {
                 if (user != null) {
-                    $rootScope = user;
-                    console.log("user Check : " + UserService.checkAdmin(user));
-                    if(UserService.checkAdmin(user))
+                    $rootScope.user = user;
+                    $scope.user.username = $rootScope.user.username;
+                    //console.log("user Check : " + UserService.checkAdmin(user));
+                    var adminuser = UserService.checkAdmin(user);
+                    if(adminuser)
                     {
                         $location.path("/admin");
+                        return true;
                     }
                     //console.log($rootScope);
                     //console.log($location);

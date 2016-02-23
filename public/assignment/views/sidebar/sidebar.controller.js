@@ -1,39 +1,31 @@
 (function(){
+    "use strict";
     angular
         .module("FormBuilderApp")
         .controller("SidebarController",SidebarController);
 
-    function SidebarController ($scope) {
+    function SidebarController ($scope,$location,$rootScope) {
 
-        $rootScope = null;
-        $scope.noLogin = noLogin;
-        $scope.isAdmin = isAdmin;
-
-        function noLogin() {
-            if($rootScope!=null){
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
+      $scope.$location = $location;
+      $scope.isAdmin = isAdmin;
 
         function isAdmin(){
-            if($rootScope!=null)
+            if($rootScope.user!=null)
             {
-                var roles = $rootScope.roles;
-                if(roles!=null){
-                    for(var i in roles){
-                        if(roles[i]=="admin"){
+                var roles = $rootScope.user.roles;
+                if(roles!=null)
+                {
+                    for(var i in roles)
+                    {
+                        if(roles[i]=="admin")
+                        {
+                            //console.log($location);
                             return true;
                         }
                     }
                 }
             }
-
-            return false;
         }
-
     }
 
 })();
