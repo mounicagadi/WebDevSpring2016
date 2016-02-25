@@ -1,9 +1,12 @@
 (function () {
-    "use strict";
+
+    'use strict';
+
     angular.module("FormBuilderApp")
         .controller("ProfileController",ProfileController);
 
-    function ProfileController($scope,UserService,$rootScope) {
+    //Function to update the usr information
+    function ProfileController($scope, UserService, $rootScope) {
 
         $scope.update = update;
 
@@ -19,7 +22,6 @@
                 "roles": $rootScope.user.roles
 
             };
-
 
             UserService.updateUser($rootScope.user._id,updatedContent,function(user){
                 $rootScope.user  = user;

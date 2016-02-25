@@ -1,10 +1,26 @@
-(function(){
-    "use strict";
-    angular.module("FormBuilderApp")
+(function() {
+    'use strict';
+
+    angular
+        .module("FormBuilderApp")
         .config(Configure);
 
-    function Configure($routeProvider) {
+    function Configure ($routeProvider) {
         $routeProvider
+
+            .when("/admin", {
+                templateUrl: "views/admin/admin.view.html"
+            })
+
+            .when("/forms", {
+                templateUrl: "views/forms/forms.view.html",
+                controller:"FormController"
+            })
+
+            .when("/fields", {
+                templateUrl : "../assignment/views/forms/fields.view.html"
+            })
+
             .when("/home", {
                 templateUrl: "views/home/home.view.html"
             })
@@ -23,19 +39,6 @@
             .when("/register", {
                 templateUrl: "views/users/register.view.html",
                 controller:"RegisterController"
-            })
-
-            .when("/admin", {
-                templateUrl: "views/admin/admin.view.html"
-            })
-
-            .when("/forms", {
-                templateUrl: "views/forms/forms.view.html",
-                controller:"FormController"
-            })
-
-            .when("/fields", {
-                templateUrl : "../assignment/views/forms/fields.view.html"
             })
 
             .otherwise({

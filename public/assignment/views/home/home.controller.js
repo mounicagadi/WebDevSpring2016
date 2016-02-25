@@ -1,8 +1,12 @@
-(function(){
-    "use strict";
-    angular.module("FormBuilderApp")
+(function() {
+
+    'use strict';
+
+    angular
+        .module("FormBuilderApp")
         .controller("HomeController",HomeController);
 
+    //Function to display the content on the homepage
     function HomeController($scope){
 
         $scope.homecontent =

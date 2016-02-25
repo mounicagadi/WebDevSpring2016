@@ -36,9 +36,16 @@ p.list
     font-size: 16px;
     font-weight: bold;
 }
+
+.page-header {
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid;
+}
+
 .sub-header {
     padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid;
 }
 .logo
 {
