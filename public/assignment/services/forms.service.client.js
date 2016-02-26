@@ -1,6 +1,9 @@
 (function() {
-    "use strict";
-    angular.module("FormBuilderApp")
+
+    'use strict';
+
+    angular
+        .module("FormBuilderApp")
         .factory("FormService", FormService);
 
     function FormService($rootScope){
@@ -27,12 +30,11 @@
                 "userId": userId
             };
             forms.push(newForm);
-            console.log(newForm);
+            //console.log(newForm);
             callback(newForm);
         }
 
         function findAllFormsForUser(userId, callback){
-            console.log("I am called");
             var userForms = [];
             for(var i in forms){
                 if(forms[i].userId == userId){

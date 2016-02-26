@@ -1,6 +1,9 @@
 (function() {
-    "use strict";
-    angular.module("FormBuilderApp")
+
+    'use strict';
+
+    angular
+        .module("FormBuilderApp")
         .factory("UserService", UserService);
 
     function UserService() {
@@ -48,7 +51,6 @@
                 var passwd = obj.password;
                 if (uname == username && passwd == password) {
                     user = users[value];
-                    console.log("details matched");
                     break;
                 }
             }
@@ -79,10 +81,7 @@
         function createUser(user, callback) {
 
             var new_user = user;
-            new_user._id = (new Date).getTime();
-            console.log(new_user);
             users.push(new_user);
-            //console.log(users);
             callback(new_user);
 
         }
@@ -107,7 +106,6 @@
                 var id = obj._id;
                 if (id == userid) {
                     users[value] = user;
-                    console.log(user);
                     callback(user);
                     break;
                 }

@@ -12,8 +12,10 @@
 
         function register (user) {
 
-            if (user.username!== null && user.password!== null && user.verifypassword!== null &&
-                user.password=== user.verifypassword && user.email!== null) {
+            if(user != null){
+
+                if (user.username != null && user.password != null && user.verifypassword != null &&
+                    user.password == user.verifypassword && user.email != null) {
 
                 var new_data =
                 {
@@ -28,17 +30,17 @@
                 UserService.createUser(new_data,function (newUser) {
 
                     $rootScope.user = newUser;
-                    console.log(newUser._id);
                     $location.path("/profile");
                 });
 
             } else {
 
-                alert ("Invalid Details");
+                alert ("Please fill the required fields");
             }
 
-
-
+        }else {
+                alert("Invalid entry");
+            }
         }
 
     }

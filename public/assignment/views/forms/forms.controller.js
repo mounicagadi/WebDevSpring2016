@@ -1,4 +1,5 @@
 (function () {
+
     'use strict';
 
     angular
@@ -29,7 +30,6 @@
             //Service to create the form for a given user
             FormService.createFormForUser($rootScope.user._id, formName, function (response) {
                 $scope.data.push(response);
-                console.log("inform contlr"+response);
                 $scope.name = null;
             });
         }

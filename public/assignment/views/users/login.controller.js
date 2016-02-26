@@ -13,33 +13,37 @@
 
         function login (user) {
 
-            var name = user.username;
-            var pwd = user.password;
-
             //Service to validate the user credentials
-            UserService.findUserByCredentials (name,pwd,function (user) {
-                if (user !== null) {
-
-                    $rootScope.user = user;
-                    $scope.user.username = $rootScope.user.username;
-
-                    var adminuser = UserService.checkAdmin(user);
-
-                    if(adminuser) {
-                       $location.path("/admin");
-                    } else {
-                        $location.path("/profile");
-                    }
-
-                } else {
-                    alert ("User not found");
+            if (user == null) {
+                alert("Please fill the required fields");
+                return;
                 }
 
-            });
+                    UserService.findUserByCredentials (user.username, user.password, function (user) {
+                        if( user != null) {
+
+                            $rootScope.user = user;
+                            $scope.user.username = $rootScope.user.username;
+
+                            var adminuser = UserService.checkAdmin(user);
+
+                            if (adminuser) {
+                                $location.path("/admin");
+                            } else {
+                                $location.path("/profile");
+                            }
+                        }
+
+                        else {
+                            alert("Invalid entry");
+                        }
+
+
+                });
+
+            }
 
 
         }
-
-    }
 
 })();
