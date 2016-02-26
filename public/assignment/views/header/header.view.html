@@ -19,10 +19,10 @@
                     <a href="#/login">Login</a></li>
                 <li ng-class="{'active': $location.url() == '/profile'}" ng-if = "user != null">
                     <a href="#/profile">{{user.username}}</a></li>
-                <li ng-class="{'active': $location.url() == '/home'}" ng-if = "user != null" ng-click="logout()">
-                    <a href="#/home">Logout</a></li>
                 <li ng-class="{'active': $location.url() == '/admin'}" ng-show="user.roles.indexOf('admin') >= 0">
                     <a href="#/admin">Admin</a></li>
+                <li ng-class="{'active': $location.url() == '/home'}" ng-if = "user != null" ng-click="logout()">
+                    <a href="#/home">Logout</a></li>
             </ul>
         </div>
     </div>
