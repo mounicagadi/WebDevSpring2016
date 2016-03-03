@@ -13,7 +13,7 @@ body {
 }
 
 .text-input {
-    height: 60px;
+    height: 50px;
     border-radius: 0;
     box-shadow: none;
     background: white;
@@ -54,4 +54,9 @@ section {
 
 .bg-primary {
     background-color: #cb202d;
+}
+
+.tab-pane{
+    height: 600px;
+    overflow: auto;
 }
