@@ -10,26 +10,30 @@
 
             .when("/home", {
                 templateUrl: "views/home/home.view.html",
-                css:"CSS/landingcss.css"
+                controller : "HomeController"
+            })
+
+            .when("/home/:name", {
+                templateUrl: "views/home/home.view.html",
+                controller : "HomeController"
             })
 
             .when("/login", {
                 templateUrl: "views/users/login.view.html",
-                controller : "LoginController",
-                css:"CSS/signcss.css"
+                controller : "LoginController"
+
             })
 
             .when("/profile", {
 
                 templateUrl: "views/users/profile.view.html",
-                controller: "ProfileController",
-                css:"CSS/signcss.css"
+                controller: "ProfileController"
+
             })
 
             .when("/register", {
                 templateUrl: "views/users/register.view.html",
-                controller:"RegisterController",
-                css:"CSS/signcss.css"
+                controller:"RegisterController"
             })
 
             .otherwise({
