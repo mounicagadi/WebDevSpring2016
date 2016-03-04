@@ -1,85 +1,39 @@
-
 <!DOCTYPE html>
-<html class="full" lang="en">
+<html ng-app="EatOutApp">
 <!-- Make sure the <html> tag is set to the .full CSS class. Change the background image in the full.css file. -->
 
 <head>
-
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>EatOut</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.min.js"></script>
 
     <!-- Bootstrap Core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="CSS/landingcss.css" rel="stylesheet">
+    <link href="CSS/signcss.css" rel="stylesheet">
+
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+    <script src="views/header/header.controller.js"></script>
+    <script src="views/home/home.controller.js"></script>
+    <script src="views/users/register.controller.js"></script>
+    <script src="views/users/profile.controller.js"></script>
+    <script src="views/users/login.controller.js"></script>
+    <script src="views/main/main.controller.js"></script>
+
+    <title>EatOut</title>
 
 
 </head>
 
-<body>
+<body ng-controller ="MainController">
 
-<!-- Navigation -->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">EatOut</a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="users/login.html">Login</a>
-                </li>
-                <li>
-                    <a href="users/register.html">Register</a>
-                </li>
-                <li>
-                    <a href="users/profile.html">Profile</a>
-                </li>
-                <li>
-                    <a target="_blank" href="https://docs.google.com/document/d/1l-twmlL1q9aTH4SVBmtyKUWa_jmxAxCapLXJJ2D554Q/edit?usp=sharing">
-                        Project Documentation</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+        <div ng-include="'views/header/header.view.html'"></div>
 
-<section id = "data">
-    <div class="container placing">
-        <div class="row">
-            <div class="col-sm-6 col-md-6 col-lg-6">
-                        <label class="sr-only" for="search"></label>
-                        <input type="search" class="form-control text-input center-block" id="search" placeholder="Search for Restaurants">
-            </div>
-            <div class="col-sm-3 col-md-3 col-lg-3">
-                <label class="sr-only" for="location"></label>
-                <input type="text" class="form-control text-input center-block" id="location" placeholder="Location">
-            </div>
-            <div class="col-sm-2 col-md-2 col-lg-2">
-            <a href="#" role="button"  class="btn btn-info search-button center-block">
-                <span class="glyphicon glyphicon-search" aria-hidden="true">Search</span></a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Put your page content here! -->
+        <div ng-view></div>
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
