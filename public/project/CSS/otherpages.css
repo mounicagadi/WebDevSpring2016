@@ -1,8 +1,7 @@
 body {
     margin-top: 50px; /* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     /*background: url('../light-wooden-background.jpg') no-repeat center center fixed;*/
-    /*background: url('../images/forks.jpg')no-repeat fixed;*/
-    background-color: whitesmoke;
+    background: url('../images/forks.jpg')no-repeat fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
