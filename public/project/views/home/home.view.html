@@ -4,14 +4,14 @@
         <div class="row">
             <div class="col-sm-6 col-md-6 col-lg-6">
                 <label class="sr-only" for="search"></label>
-                <input type="search" ng-model="name" class="form-control text-input-mainpage center-block" id="search" placeholder="Search for Restaurants">
+                <input type="search" ng-model="name" class="form-control text-input center-block" id="search" placeholder="Search for Restaurants">
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="sr-only" for="location"></label>
-                <input type="text" ng-model="place" class="form-control text-input-mainpage center-block" id="location" placeholder="Location">
+                <input type="text" ng-model="place" class="form-control text-input center-block" id="location" placeholder="Location">
             </div>
             <div class="col-sm-2 col-md-2 col-lg-2">
-                <button role="button" ng-click="search(name,place)"  class="btn btn-info search-button-mainpage center-block">
+                <button role="button" ng-click="search(name,place)"  class="btn btn-info search-button center-block">
                     <span class="glyphicon glyphicon-search" aria-hidden="true">Search</span></button>
             </div>
         </div>
@@ -25,7 +25,6 @@
         <thead>
         <tr>
             <th>Name</th>
-            <th>Picture</th>
             <th>Address</th>
             <th>Contact</th>
         </tr>
@@ -35,7 +34,7 @@
 
             <td>{{hotel.name}}</td>
 
-            <td>{{hotel.categories[0].icon.prefix + hotel.categories[0].icon.suffix}}</td>
+            <!--<td>{{hotel.categories[0].icon.prefix + hotel.categories[0].icon.suffix}}</td>-->
 
             <td>{{hotel.location.address}}</td>
 
