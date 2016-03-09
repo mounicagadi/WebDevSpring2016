@@ -21,16 +21,34 @@
 
         function search(name,place) {
 
-            if(name == null && place == null){
+            if (name == null && place == null) {
                 console.log("empty fields");
-                var name = "restaurants"
-                var place = "boston"
+                FoursquareService
+                    .findByNameLocation("restaurants", "boston", render, error);
             }
 
-            $location.url("/results/"+name);
-            console.log(name);
-            FoursquareService
-                .findByNameLocation(name, place, render, error);
+            else if (name == null && place !== null){
+
+                console.log("name null");
+                FoursquareService
+                    .findByNameLocation("restaurants", place, render, error);
+            }
+
+            else if (name !== null && place == null){
+
+                console.log("name null");
+                FoursquareService
+                    .findByNameLocation(name, "boston", render, error);
+            }
+
+            else {
+
+                console.log(name);
+                FoursquareService
+                    .findByNameLocation(name, place, render, error);
+            }
+
+            $location.url("/results/" + name);
         }
 
         function render(response){

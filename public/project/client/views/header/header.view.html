@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="HeaderController">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="HeaderController as model">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -13,16 +13,16 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li ng-class="{'active': $location.url() == '/home'}">
+                <li ng-class="{'active': model.$location.url() == '/home'}">
                     <a href="#/home">Home</a>
                 </li>
-                <li ng-class="{'active': $location.url() == '/login'}">
+                <li ng-class="{'active': model.$location.url() == '/login'}">
                     <a href="#/login">Login</a>
                 </li>
-                <li ng-class="{'active': $location.url() == '/register'}">
+                <li ng-class="{'active': model.$location.url() == '/register'}">
                     <a href="#/register">Register</a>
                 </li>
-                <li ng-class="{'active': $location.url() == '/profile'}">
+                <li ng-class="{'active': model.$location.url() == '/profile'}">
                     <a href="#/profile">Profile</a>
                 </li>
                 <li>

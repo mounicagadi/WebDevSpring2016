@@ -20,7 +20,8 @@
 
             .when("/login", {
                 templateUrl: "views/users/login.view.html",
-                controller : "LoginController"
+                controller : "LoginController",
+                controllerAs : "model"
 
             })
 

@@ -9,8 +9,15 @@
         .module("EatOutApp")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController($scope, $location) {
+    function HeaderController($location) {
 
-        $scope.$location = $location;
+        var vm = this;
+
+        function init(){
+            vm.$location = $location;
+        }
+
+        init();
+
     }
 })();
