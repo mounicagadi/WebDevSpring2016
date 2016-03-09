@@ -13,8 +13,8 @@
                 controller : "HomeController"
             })
 
-            .when("/home/:name", {
-                templateUrl: "views/home/home.view.html",
+            .when("/results/:name", {
+                templateUrl: "views/search/results.view.html",
                 controller : "HomeController"
             })
 

@@ -14,18 +14,21 @@
 
         var name = $routeParams.name;
 
-        if($scope.name && $scope.place) {
-            search($scope.name, $scope.place);
-        }
-
         $scope.search = search;
         $scope.render = render;
         $scope.error = error;
 
 
         function search(name,place) {
-            $location.url("/home/"+$scope.name);
-            console.log($scope.name);
+
+            if(name == null && place == null){
+                console.log("empty fields");
+                var name = "restaurants"
+                var place = "boston"
+            }
+
+            $location.url("/results/"+name);
+            console.log(name);
             FoursquareService
                 .findByNameLocation(name, place, render, error);
         }
