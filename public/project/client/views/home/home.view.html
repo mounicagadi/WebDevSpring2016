@@ -1,3 +1,5 @@
+
+<div ng-controller="HomeController">
 <section id = "data">
     <div class="container placing">
         <div class="row">
@@ -17,3 +19,35 @@
     </div>
 </section>
 
+
+    <div class="container" ng-show="info">
+        <h3 >Search Results</h3>
+        <div class="table-responsive" >
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Contact</th>
+                    <th>Categories</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr ng-repeat="hotel in info.response.venues">
+
+                    <td>
+                        <a href="#/details/{{hotel.id}}"> {{hotel.name}} </a></td>
+
+                    <td>{{hotel.location.address}}</td>
+
+                    <td>{{hotel.contact.phone}}</td>
+
+                    <td>{{hotel.categories[0].name}}</td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

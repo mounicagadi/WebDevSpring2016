@@ -13,16 +13,16 @@
                 controller : "HomeController"
             })
 
-            .when("/results/:name", {
-                templateUrl: "views/search/results.view.html",
-                controller : "HomeController"
-            })
-
             .when("/login", {
                 templateUrl: "views/users/login.view.html",
                 controller : "LoginController",
                 controllerAs : "model"
 
+            })
+
+            .when("/details/:id", {
+                templateUrl: "views/search/details.view.html",
+                controller: "DetailsController"
             })
 
             .when("/profile", {

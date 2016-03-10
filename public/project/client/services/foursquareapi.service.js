@@ -12,7 +12,7 @@
     function FoursquareService($http) {
         var api = {
             findByNameLocation: findByNameLocation,
-            findwhenemptyfields : findwhenemptyfields
+            findRestaurantByID: findRestaurantByID
         };
         return api;
 
@@ -44,23 +44,16 @@
         }
 
 
-
-        function findwhenemptyfields(callback,error) {
-
-            var name = "restaurants"
-            var place = "boston"
+        function findRestaurantByID(id,callback,error) {
 
             $http({
                 method: "JSONP",
                 params: {
-                    query: name,
-                    near : place,
-                    limit : 10,
                     client_id : '2TEEJCYF24ZQ0521PG3P1LULDWVGPFJWNGSTUQNI0OHQA2ID',
                     client_secret : '2HUMBZSV5A55CM4IVIHOSO5N3QGWCCL4GZ3I0BXVZGH0ROXA',
                     v : '20140806'
                 },
-                url: "https://api.foursquare.com/v2/venues/search?callback=JSON_CALLBACK",
+                url: "https://api.foursquare.com/v2/venues/"+id+"?callback=JSON_CALLBACK",
                 isArray: true
             }).success(function(data, status) {
                 //console.log(data.venues[0].name)
@@ -71,7 +64,9 @@
             });
 
 
+
         }
+
 
     }
 })();
