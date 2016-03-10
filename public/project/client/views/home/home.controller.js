@@ -20,10 +20,7 @@
         $scope.error = error;
 
 
-
         function search(name,place) {
-
-
 
             if (name == null && place == null) {
                 console.log("empty fields");
@@ -47,13 +44,11 @@
 
             else {
 
-                $scope.sample = "Hello world";
                 console.log(name);
                 FoursquareService
                     .findByNameLocation(name, place, render, error);
 
             }
-
         }
 
         function render(response){

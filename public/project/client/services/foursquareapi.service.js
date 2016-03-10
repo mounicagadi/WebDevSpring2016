@@ -5,6 +5,8 @@
 
     'use strict';
 
+    var details_url = "https://api.foursquare.com/v2/venues/ID?&client_id=2TEEJCYF24ZQ0521PG3P1LULDWVGPFJWNGSTUQNI0OHQA2ID&client_secret=2HUMBZSV5A55CM4IVIHOSO5N3QGWCCL4GZ3I0BXVZGH0ROXA&v=20140806";
+
     angular
         .module("EatOutApp")
         .factory("FoursquareService", FoursquareService);
@@ -43,28 +45,12 @@
 
         }
 
+        function findRestaurantByID(id,callback) {
 
-        function findRestaurantByID(id,callback,error) {
-
-            $http({
-                method: "JSONP",
-                params: {
-                    client_id : '2TEEJCYF24ZQ0521PG3P1LULDWVGPFJWNGSTUQNI0OHQA2ID',
-                    client_secret : '2HUMBZSV5A55CM4IVIHOSO5N3QGWCCL4GZ3I0BXVZGH0ROXA',
-                    v : '20140806'
-                },
-                url: "https://api.foursquare.com/v2/venues/"+id+"?callback=JSON_CALLBACK",
-                isArray: true
-            }).success(function(data, status) {
-                //console.log(data.venues[0].name)
-                callback(data);
-            }).error(function(data, status) {
-                console.log("Unable to fetch data");
-                error();
-            });
-
-
-
+                var url = details_url
+                    .replace("ID", id);
+                $http.get(url)
+                    .success(callback);
         }
 
 

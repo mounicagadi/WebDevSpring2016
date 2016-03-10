@@ -12,21 +12,17 @@
 
     function detailsController($scope, $routeParams, FoursquareService) {
         $scope.id = $routeParams.id;
-        $scope.render = render;
-        $scope.error = error;
 
-        FoursquareService.findRestaurantByID(
-            $scope.id,render,error)
 
-        function render(){
+        FoursquareService.findRestaurantByID($scope.id, function(response){
 
-            //console.log(response);
             $scope.info = response;
+            console.log("in details")
             console.log($scope.info)
+
         }
 
-        function error(){
-            console.log("error");
-        }
+        )
+
     }
 })();

@@ -1,6 +1,5 @@
 
-<div ng-controller="HomeController">
-<section id = "data">
+<section id = "data" ng-hide="info">
     <div class="container placing">
         <div class="row">
             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -19,6 +18,7 @@
     </div>
 </section>
 
+<div id="map"></div>
 
     <div class="container" ng-show="info">
         <h3 >Search Results</h3>
@@ -29,7 +29,7 @@
                     <th>Name</th>
                     <th>Address</th>
                     <th>Contact</th>
-                    <th>Categories</th>
+                    <th>Photo</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -43,11 +43,10 @@
 
                     <td>{{hotel.contact.phone}}</td>
 
-                    <td>{{hotel.categories[0].name}}</td>
+                    <td>{{hotel.categories[0].icon.prefix}}88{{hotel.categories[0].icon.suffix}}</td>
 
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
-</div>

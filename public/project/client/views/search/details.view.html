@@ -1,10 +1,43 @@
-<h2>{{hotel.name}}</h2>
+
+<h2>{{info.response.venue.name}}</h2>
 
 
 <p>
-    {{hotel.url}}
+    URL:
+    {{info.response.venue.url}}
+</p>
+
+
+<p>
+    Rating:
+    {{info.response.venue.rating}}
 </p>
 
 <h2>Categories</h2>
+<ul>
+    <li ng-repeat="i in info.response.venue.categories">
+        {{i.name}}
+    </li>
+</ul>
 
-{{hotel.categories[0].name}}
+<h4>Photo</h4>
+<!--{{info.response.venue.bestPhoto.id}}-->
+<p><img src="{{info.response.venue.bestPhoto.prefix}}300x500{{info.response.venue.bestPhoto.suffix}}"></p>
+
+<p>lat n long</p>
+{{info.response.venue.location.lat}}
+{{info.response.venue.location.lng}}
+
+
+<div id="map">
+
+    <!--<img src="http://maps.googleapis.com/maps/api/staticmap?center=-15.800513,-47.91378&zoom=11&size=200x200&sensor=false">-->
+    <!--<img src="http://maps.google.com/?q=42.3611,-71.185">-->
+
+
+
+</div>
+
+
+
+
