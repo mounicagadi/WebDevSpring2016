@@ -18,7 +18,7 @@
         };
         return api;
 
-        function findByNameLocation(name,place,callback,error) {
+        function findByNameLocation(name,place,callback) {
 
             $http({
                 method: "JSONP",
@@ -33,13 +33,8 @@
                 },
                 url: "https://api.foursquare.com/v2/venues/search?callback=JSON_CALLBACK",
                 isArray: true
-            }).success(function(data, status) {
-                //console.log(data.venues[0].name)
-                callback(data);
-            }).error(function(data, status) {
-                console.log("Unable to fetch data");
-                error();
-            });
+            }).success(callback);
+
 
 
 

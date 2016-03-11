@@ -13,7 +13,9 @@
         .controller("ResultsController", ResultsController);
 
     //Function to display the content on the homepage
-    function ResultsController($scope,$location) {
+    function ResultsController($scope, $location, $routeParams) {
+
+        $scope.info = $routeParams.info;
         console.log("in results controller");
         console.log($scope.info);
         $scope.$location = $location;

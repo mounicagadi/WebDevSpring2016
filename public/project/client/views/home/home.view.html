@@ -1,10 +1,9 @@
-
 <section id = "data" ng-hide="info">
     <div class="container placing">
         <div class="row">
             <div class="col-sm-6 col-md-6 col-lg-6">
                 <label class="sr-only" for="search"></label>
-                <input type="search" ng-model="name" class="form-control text-input center-block" id="search" placeholder="Search for Restaurants">
+                <input type="text" ng-model="name" class="form-control text-input center-block" id="search" placeholder="Search for Restaurants">
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="sr-only" for="location"></label>
@@ -19,34 +18,34 @@
 </section>
 
 
+<div class="container" ng-show="info">
+    <h3 >Search Results</h3>
+    <div class="table-responsive" >
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Contact</th>
+                <th>Photo</th>
+            </tr>
+            </thead>
+            <tbody>
 
-    <div class="container" ng-show="info">
-        <h3 >Search Results</h3>
-        <div class="table-responsive" >
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Contact</th>
-                    <th>Photo</th>
-                </tr>
-                </thead>
-                <tbody>
+            <tr ng-repeat="hotel in info.response.venues">
 
-                <tr ng-repeat="hotel in info.response.venues">
+                <td>
+                    <a href="#/details/{{hotel.id}}"> {{hotel.name}} </a></td>
 
-                    <td>
-                        <a href="#/details/{{hotel.id}}"> {{hotel.name}} </a></td>
+                <td>{{hotel.location.address}}</td>
 
-                    <td>{{hotel.location.address}}</td>
+                <td>{{hotel.contact.phone}}</td>
 
-                    <td>{{hotel.contact.phone}}</td>
+                <td><img src="{{hotel.categories[0].icon.prefix}}bg_88{{hotel.categories[0].icon.suffix}}"></td>
 
-                    <td><img src="{{hotel.categories[0].icon.prefix}}bg_88{{hotel.categories[0].icon.suffix}}"></td>
-
-                </tr>
-                </tbody>
-            </table>
-        </div>
+            </tr>
+            </tbody>
+        </table>
     </div>
+</div>
+
