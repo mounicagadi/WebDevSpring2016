@@ -14,11 +14,9 @@
 
         $scope.name = $routeParams.name;
 
-
         $scope.search = search;
         $scope.render = render;
         $scope.error = error;
-
 
         function search(name,place) {
 

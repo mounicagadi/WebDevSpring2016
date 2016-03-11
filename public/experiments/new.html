@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Synchronous Loading</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            height: 500px;
+            width:400px;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlG_SnkQHkr1R7jRVNznaDlDNTYR4kQXI"></script>
+<script>
+
+    var mapDisplay = document.getElementById('map');
+    var mapOptions = {
+        center: new google.maps.LatLng(42.3601, -71.0589),
+        zoom: 10,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    var map = new google.maps.Map(mapDisplay, mapOptions)
+
+
+
+</script>
+</body>
+</html>
