@@ -12,6 +12,7 @@
         .factory("FoursquareService", FoursquareService);
 
     function FoursquareService($http) {
+
         var api = {
             findByNameLocation: findByNameLocation,
             findRestaurantByID: findRestaurantByID
@@ -34,8 +35,6 @@
                 url: "https://api.foursquare.com/v2/venues/search?callback=JSON_CALLBACK",
                 isArray: true
             }).success(callback);
-
-
 
 
         }

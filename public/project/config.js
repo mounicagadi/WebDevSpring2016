@@ -13,9 +13,9 @@
                 controller : "HomeController"
             })
 
-            .when("/home/:name", {
-                templateUrl: "views/home/home.view.html",
-                controller : "HomeController"
+            .when("/search/:name", {
+                templateUrl: "views/search/results.view.html",
+                controller : "ResultsController"
             })
 
 

@@ -13,18 +13,20 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li ng-class="{'active': model.$location.url() == '/home'}">
+                <li ng-class="{'active': $location.url() == '/home'}">
                     <a href="#/home">Home</a>
                 </li>
-                <li ng-class="{'active': model.$location.url() == '/login'}">
+                <li ng-class="{'active': $location.url() == '/login'}" ng-if = "user == null">
                     <a href="#/login">Login</a>
                 </li>
-                <li ng-class="{'active': model.$location.url() == '/register'}">
+                <li ng-class="{'active': $location.url() == '/register'}" ng-if = "user == null">
                     <a href="#/register">Register</a>
                 </li>
-                <li ng-class="{'active': model.$location.url() == '/profile'}">
+                <li ng-class="{'active': $location.url() == '/profile'}" ng-if = "user != null">
                     <a href="#/profile">Profile</a>
                 </li>
+                <li ng-class="{'active': $location.url() == '/home'}" ng-if = "user != null" ng-click="logout()">
+                    <a href="#/home">Logout</a></li>
                 <li>
                     <a target="_blank" href="https://docs.google.com/document/d/1l-twmlL1q9aTH4SVBmtyKUWa_jmxAxCapLXJJ2D554Q/edit?usp=sharing">
                         Project Documentation</a>

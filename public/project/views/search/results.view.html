@@ -1,0 +1,31 @@
+<div class="container">
+    <h3 >Search Results</h3>
+    <div class="table-responsive" >
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Contact</th>
+                <th>Photo</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr ng-repeat="hotel in info.response.venues">
+
+                <td>
+                    <a href="#/details/{{hotel.id}}"> {{hotel.name}} </a></td>
+
+                <td>{{hotel.location.address}}</td>
+
+                <td>{{hotel.contact.phone}}</td>
+
+                <td><img src="{{hotel.categories[0].icon.prefix}}bg_88{{hotel.categories[0].icon.suffix}}"></td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

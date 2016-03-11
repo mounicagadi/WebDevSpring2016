@@ -10,7 +10,7 @@
         .controller("HomeController", HomeController);
 
     //Function to display the content on the homepage
-    function HomeController($scope, $location, $routeParams, FoursquareService) {
+    function HomeController($scope, $location, $rootScope, FoursquareService, $routeParams) {
 
         $scope.search = search;
         $scope.render = render;
@@ -22,7 +22,6 @@
         function search(name,place) {
 
             if (name == null && place == null) {
-                //$location.url("/home/"+name);
                 console.log("empty fields");
                 FoursquareService
                     .findByNameLocation("restaurants", "boston", render);
@@ -44,6 +43,7 @@
 
             else {
 
+                //$location.path("/home/"+name);
                 console.log(name);
                 FoursquareService
                     .findByNameLocation(name, place, render);
@@ -52,11 +52,10 @@
         }
 
         function render(response){
-            $scope.info = response;
-            console.log($scope.info)
-            //console.log($scope.info.response.venues[0].location);
-            console.log("name - "+$scope.info.response.venues[0].name);
-
+            console.log(response)
+            $rootScope.info = response;
+            console.log("name - "+$rootScope.info.response.venues[0].name);
+            $location.url("/search/"+$scope.name);
         }
 
     }
