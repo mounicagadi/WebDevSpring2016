@@ -14,13 +14,7 @@
 
         function init() {
 
-            var mapDisplay = document.getElementById('map_display');
-            var mapOptions = {
-                center: new google.maps.LatLng(42.3601, -71.0589),
-                zoom: 10,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            }
-            var map = new google.maps.Map(mapDisplay, mapOptions)
+
 
             console.log("inside init");
         }
@@ -35,6 +29,17 @@
             $scope.info = response;
             console.log("in details")
             console.log($scope.info)
+            console.log($scope.info.response.venue.name);
+
+
+                var myLatLng = {lat: 46.363, lng: -71.044};
+
+                // Create a map object and specify the DOM element for display.
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    center: myLatLng,
+                    zoom: 8
+                });
+
 
         }
 

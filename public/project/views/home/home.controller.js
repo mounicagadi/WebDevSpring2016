@@ -16,6 +16,7 @@
         $scope.render = render;
         $scope.name = $routeParams.name;
 
+
         var default_place = "boston";
         var default_name = "restaurants"
 
@@ -54,6 +55,7 @@
         function render(response){
             console.log(response)
             $rootScope.info = response;
+            $rootScope.name = $scope.name;
             console.log("name - "+$rootScope.info.response.venues[0].name);
             $location.url("/search/"+$scope.name);
         }

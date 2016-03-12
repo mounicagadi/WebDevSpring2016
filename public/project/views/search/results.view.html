@@ -1,31 +1,71 @@
-<div class="container">
-    <h3 >Search Results</h3>
-    <div class="table-responsive" >
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Contact</th>
-                <th>Photo</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            <tr ng-repeat="hotel in info.response.venues">
-
-                <td>
-                    <a href="#/details/{{hotel.id}}"> {{hotel.name}} </a></td>
-
-                <td>{{hotel.location.address}}</td>
-
-                <td>{{hotel.contact.phone}}</td>
-
-                <td><img src="{{hotel.categories[0].icon.prefix}}bg_88{{hotel.categories[0].icon.suffix}}"></td>
-
-            </tr>
-            </tbody>
-        </table>
+<div class="container-fluid">
+    <div class="container search-header">
+        <div class="row">
+            <div class="col-lg-8">
+                <h3 class="pull-left">Search Results:</h3>
+            </div>
+            <div class="col-lg-4">
+                <h3 class="pull-right"> Page numbers</h3>
+            </div>
+        </div>
     </div>
 </div>
+<div class="container-fluid">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6">
+        <div class="card elevation1 search-result" ng-repeat="hotel in info.response.venues">
+            <a href="#/details/{{hotel.id}}">
+                <div class="row container-fluid search-content">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <img class="img img-responsive image-thumbnail search-image" src="{{hotel.categories[0].icon.prefix}}bg_88{{hotel.categories[0].icon.suffix}}">
+                    </div>
+                    <div class="col-lg-7 col-md-7 col-sm-7">
+                        <h3>{{hotel.name}}</h3>
+                        <p>
+                            <i>
+                                {{hotel.categories[0].name}}
+                            </i>
+                        </p>
+                        <p>{{hotel.location.address}},{{hotel.location.city}},{{hotel.location.country}}</p>
+                    </div>
+
+                </div>
+            </a>
+            </div>
+    </div>
+</div>
+        <!--<div class="row">-->
+            <!--<div class="col-lg-8">-->
+
+        <!--<hr>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--<div class="table-responsive results" >-->
+        <!--<table class="table table-striped">-->
+            <!--<thead>-->
+            <!--<tr>-->
+                <!--<th>Photo</th>-->
+                <!--<th>Details</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+
+            <!--<tr ng-repeat="hotel in info.response.venues">-->
+
+                <!--<td><img src="{{hotel.categories[0].icon.prefix}}bg_88{{hotel.categories[0].icon.suffix}}"></td>-->
+
+                <!--<td>-->
+                    <!--<a href="#/details/{{hotel.id}}"> {{hotel.name}} </a>-->
+                    <!--<p>{{hotel.categories[0].name}}</p>-->
+                    <!--<p>{{hotel.location.address}},{{hotel.location.city}},{{hotel.location.country}}</p>-->
+                <!--</td>-->
+            <!--</tr>-->
+            <!--</tbody>-->
+        <!--</table>-->
+    <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
 

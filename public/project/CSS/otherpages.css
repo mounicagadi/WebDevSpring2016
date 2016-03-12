@@ -17,6 +17,67 @@ body {
     width: 500px;
     height: 400px;
 }
+
+.site-color-background {
+    background-color: #cb202d;
+}
+.elevation3 {
+    box-shadow: 0 5px 7px #999;
+}
+
+.search-header {
+    padding: 60px 0 20px 0;
+}
+
+.elevation1 {
+    box-shadow: 0 1px 3px #999;
+}
+.card {
+    background: white;
+    margin-top: 20px;
+    z-index: 1;
+}
+
+.card-padding{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.card a {
+    text-decoration: none;
+    color: #333;
+}
+.card a:hover {
+    text-decoration: none;
+    color: #c0392b;
+}
+
+.search-image {
+    width: 80%;
+    height: 80%;
+}
+
+.search-content {
+    padding: 15px;
+}
+.search-result a{
+    text-decoration: none;
+}
+.search-result:hover {
+    background-color: #cb202d;
+    color: #eee;
+}
+.search-result:hover a{
+    color: #eee;
+}
+.banner {
+    width: 100%;
+    height: auto;
+    min-height: 100px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
 .text-input {
     height: 50px;
     border-radius: 0;
