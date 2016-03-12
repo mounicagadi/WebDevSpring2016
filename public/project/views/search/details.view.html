@@ -1,39 +1,86 @@
-<p id="map">
-    Google Map:
-</p>
+<div class="container-fluid">
+    <div class="col-lg-8">
+    </div>
+    <div class="col-lg-4">
+    </div>
+</div>
+
+    <div class="row container-fluid">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <img class="img img-responsive image-thumbnail details-image" ng-src="{{info.response.venue.bestPhoto.prefix}}300x500{{info.response.venue.bestPhoto.suffix}}"/>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+
+            <h3>{{info.response.venue.name}}</h3>
+            <p>Address : {{info.response.venue.location.address}},{{info.response.venue.location.city}},{{info.response.venue.location.country}}. {{info.response.venue.contact.phone}}</p>
+            <p> Catgories:</p>
+            <ul ng-repeat="i in info.response.venue.categories">
+                <li>
+                    <i>
+                {{i.name}}
+                        </i>
+                </li>
+            </ul>
+            <p>{{info.response.venue.url}}</p>
 
 
-<h2>{{info.response.venue.name}}</h2>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <p>
+                <h2>{{info.response.venue.rating}}</h2>
+            </p>
+        </div>
+    </div>
+
+<div class="container-fluid">
+    <div class="col-lg-7">
+        <div class="card elevation1">
+            <div class="form-header">
+                <h3 class="container-fluid site-color">
+                        Write a Review!
+                </h3>
+                <div class="container-fluid review">
+                    <form class="form-horizontal">
+                        <textarea placeholder="Write a review!" class="form-control review-textarea" rows="8" cols="40"></textarea>
+                        <button class="btn btn-primary btn-block site-color-background form-control">Submit a Review</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 
-<p>
-    URL:
-    {{info.response.venue.url}}
-</p>
+<!--<p>-->
+    <!--URL:-->
+    <!--{{info.response.venue.url}}-->
+<!--</p>-->
 
 
-<p>
-    Rating:
-    {{info.response.venue.rating}}
-</p>
+<!--<p>-->
+    <!--Rating:-->
+    <!--{{info.response.venue.rating}}-->
+<!--</p>-->
 
-<h2>Categories</h2>
-<ul>
-    <li ng-repeat="i in info.response.venue.categories">
-        {{i.name}}
-    </li>
-</ul>
+<!--<h2>Categories</h2>-->
+<!--<ul>-->
+    <!--<li ng-repeat="i in info.response.venue.categories">-->
+        <!--{{i.name}}-->
+    <!--</li>-->
+<!--</ul>-->
 
-<h4>Photo</h4>
-<!--{{info.response.venue.bestPhoto.id}}-->
-<p><img src="{{info.response.venue.bestPhoto.prefix}}300x500{{info.response.venue.bestPhoto.suffix}}"></p>
+<!--<h4>Photo</h4>-->
+<!--&lt;!&ndash;{{info.response.venue.bestPhoto.id}}&ndash;&gt;-->
+<!--<p><img src="{{info.response.venue.bestPhoto.prefix}}300x500{{info.response.venue.bestPhoto.suffix}}"></p>-->
 
-<p>lat n long</p>
-{{info.response.venue.location.lat}}
-{{info.response.venue.location.lng}}
+<!--<p>lat n long</p>-->
+<!--{{info.response.venue.location.lat}}-->
+<!--{{info.response.venue.location.lng}}-->
 
 
 
+<!--</div>-->
 
 
 

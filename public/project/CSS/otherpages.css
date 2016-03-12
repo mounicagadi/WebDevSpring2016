@@ -21,6 +21,10 @@ body {
 .site-color-background {
     background-color: #cb202d;
 }
+
+.site-color {
+    color: #cb202d;
+}
 .elevation3 {
     box-shadow: 0 5px 7px #999;
 }
@@ -48,7 +52,39 @@ body {
 }
 .card a:hover {
     text-decoration: none;
-    color: #c0392b;
+    color:  #cb202d;
+}
+
+.review {
+    padding: 20px;
+}
+.review-textarea {
+    border: none;
+    border-radius: 1px;
+    max-width: 100%;
+    min-width: 100%;
+    margin-bottom: 20px;
+    background-color: #eee;
+}
+.review-textarea:focus {
+    color: #eee;
+    background-color:  #cb202d;
+}
+.edit-review-textarea {
+    border: none;
+    border-radius: 1px;
+    outline: none;
+    max-width: 100%;
+    min-width: 100%;
+    background-color: white;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    border-style: none;
+}
+.edit-review-textarea:focus {
+    color: #eee;
+    background-color:  #cb202d;
 }
 
 .search-image {
@@ -56,6 +92,14 @@ body {
     height: 80%;
 }
 
+.details-image {
+    width: 300px;
+    height: 350px;
+}
+
+.form-header {
+    padding: 10px 10px 10px 10px;
+}
 .search-content {
     padding: 15px;
 }
