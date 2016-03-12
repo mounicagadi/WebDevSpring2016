@@ -26,6 +26,10 @@ a {
     transition: all 0.35s;
     color: #f05f40;
 }
+
+.white-icon{
+    color: white;
+}
 a:hover,
 a:focus {
     color: #eb3812;
