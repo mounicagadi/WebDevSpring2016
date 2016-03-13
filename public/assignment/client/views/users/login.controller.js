@@ -7,9 +7,15 @@
         .controller("LoginController",LoginController);
 
     //Function to validate the login activity of the user
-    function LoginController ($scope, $location, UserService, $rootScope) {
+    function LoginController ($location, UserService, $rootScope) {
 
-        $scope.login = login;
+        var vm = this;
+
+        vm.login = login;
+
+        function init(){
+
+        }
 
         function login (user) {
 
@@ -19,27 +25,38 @@
                 return;
                 }
 
-                    UserService.findUserByCredentials (user.username, user.password, function (user) {
-                        if( user != null) {
-
-                            $rootScope.user = user;
-                            $scope.user.username = $rootScope.user.username;
-
-                            var adminuser = UserService.checkAdmin(user);
-
-                            if (adminuser) {
-                                $location.path("/admin");
-                            } else {
+                    UserService.findUserByCredentials (user.username, user.password)
+                        .then(function(user){
+                            console.log(user);
+                            if(user != null){
+                                $rootScope.user = user;
+                                vm.user.username = $rootScope.user.username;
                                 $location.path("/profile");
+                            } else {
+                                alert("Invalid entry");
                             }
-                        }
-
-                        else {
-                            alert("Invalid entry");
-                        }
-
-
-                });
+                    });
+            //function (user) {
+            //            if( user != null) {
+            //
+            //                $rootScope.user = user;
+            //                $scope.user.username = $rootScope.user.username;
+            //
+            //                var adminuser = UserService.checkAdmin(user);
+            //
+            //                if (adminuser) {
+            //                    $location.path("/admin");
+            //                } else {
+            //                    $location.path("/profile");
+            //                }
+            //            }
+            //
+            //            else {
+            //                alert("Invalid entry");
+            //            }
+            //
+            //
+            //    });
 
             }
 

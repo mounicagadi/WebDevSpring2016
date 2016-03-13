@@ -6,12 +6,17 @@
         .module("FormBuilderApp")
         .controller("HeaderController",HeaderController);
 
-    function HeaderController($scope, $location, $rootScope){
+    function HeaderController($location, $rootScope) {
 
-        $scope.$location = $location;
+        var vm = this;
 
+        vm.logout = logout;
 
-        $scope.logout = logout;
+        function init(){
+
+            vm.$location = $location;
+
+        }
 
         // Function to implement the logout activity and return to homepage
         function logout() {

@@ -8,6 +8,12 @@
     //Function to update the usr information
     function ProfileController($scope, UserService, $rootScope) {
 
+        var vm = this;
+
+        function init(){
+
+        }
+
         $scope.update = update;
 
         function update(user) {
