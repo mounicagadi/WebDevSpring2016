@@ -6,29 +6,24 @@
         .module("SampleApp")
         .controller("HomeController", HomeController);
 
-    function HomeController($scope, $location) {
+    function HomeController($scope) {
 
 
-        var geocoder =  new google.maps.Geocoder();
-        geocoder.geocode( { 'address': "Boston"}, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                $scope.map = { center: { latitude: results[0].geometry.location.lat(), longitude: results[0].geometry.location.lng() }, zoom: 8 };
-                $scope.marker = {
-                    id : 0,
-                    location: {
-                        latitude: results[0].geometry.location.lat(),
-                        longitude: results[0].geometry.location.lng()
-                    }
-                };
-            }
+        var myLatLng = {lat: 46.363, lng: -71.044};
 
-            else {
-                $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
-            }
+        // Create a map object and specify the DOM element for display.
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: myLatLng,
+            zoom: 8
         });
 
-        $scope.$location = $location;
-
+        // Create a marker and set its position.
+        var marker = new google.maps.Marker({
+            map: map,
+            position: myLatLng,
+            title: 'Hello World!'
+        });
     }
+
 
 })();
