@@ -11,6 +11,8 @@
         var api =
         {
             findUserByCredentials: findUserByCredentials,
+            findUserById: findUserById,
+            findUserByUsername: findUserByUsername,
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
@@ -19,26 +21,23 @@
         };
         return api;
 
+        function findUserById(userId){
+
+            $http.get("/api/assignment/user/"+userId);
+        }
+
+        function findUserByUsername(){
+
+            $http.get("/api/assignment/user/username=" + username);
+
+        }
+
         function findUserByCredentials(username, password) {
             console.log(username,password);
             $http.get("/api/assignment/user?username="+ username + "&password=" + password);
 
         }
 
-        //function checkAdmin(user){
-        //    var adminFlag = false;
-        //    console.log(user.roles);
-        //           for(var i = 0 ; i < user.roles.length; i++){
-        //               if(user.roles[i]== "admin"){
-        //                   adminFlag = true;
-        //                   break;
-        //               }
-        //           }
-        //
-        //
-        //    return adminFlag;
-        //}
-        //
         function findAllUsers() {
 
             $http.get("/api/assignment/user/");

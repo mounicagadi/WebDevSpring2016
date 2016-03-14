@@ -8,6 +8,8 @@ module.exports = function(app, model) {
     app.post("/api/assignment/user", createUser);
     app.get("/api/assignment/user", findAllUsers);
     app.delete("/api/assignment/user/:id", deleteUserById);
+    app.get("/api/assignment/user/:id", findUserById);
+    app.get("/api/assignment/user/username=:username", findUserByUsername);
 
 
     function findUserByCredentials(req, res) {
@@ -56,6 +58,26 @@ module.exports = function(app, model) {
             .deleteUserById(userId)
             .then(function(users){
                 res.json(users);
+            });
+    }
+
+    function findUserByUsername(req, res) {
+        console.log("Inside server side findUserByUsername");
+        var username = req.params.username;
+        model
+            .findUserByUsername(username)
+            .then(function(user){
+                res.json(user);
+            });
+    }
+
+    function findUserById(req, res){
+        console.log("Inside server side findUserById");
+        var userId = req.params._id;
+        model
+            .findUserById(userId)
+            .then(function(user){
+                res.json(user);
             });
     }
 
