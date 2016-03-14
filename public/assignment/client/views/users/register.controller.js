@@ -6,9 +6,22 @@
         .controller("RegisterController",RegisterController);
 
     //Function to register a new user
-    function RegisterController($scope, $location, UserService, $rootScope)
+    function RegisterController($location, UserService, $rootScope)
     {
-        $scope.register = register;
+        var vm = this;
+
+        vm.register = register;
+
+        function init(){
+
+            UserService
+                .findAllUsers()
+                .then(function(users) {
+                    vm.users = users;
+                });
+        }
+
+        init();
 
         function register (user) {
 
@@ -23,11 +36,11 @@
                     "firstName":null,
                     "lastName": null,
                     "username":user.username,
-                    "password":user.password,
-                    "roles": []
+                    "password":user.password
                 };
 
-                UserService.createUser(new_data,function (newUser) {
+                UserService.createUser(new_data)
+                    .then(function (newUser) {
 
                     $rootScope.user = newUser;
                     $location.path("/profile");
@@ -35,11 +48,11 @@
 
             } else {
 
-                alert ("Please fill the required fields");
+                alert ("Invalid entry");
             }
 
         }else {
-                alert("Invalid entry");
+                alert("Please fill the required fields");
             }
         }
 
