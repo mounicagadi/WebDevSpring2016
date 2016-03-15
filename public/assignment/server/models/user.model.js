@@ -3,6 +3,8 @@
  */
 
 var users = require("./user.mock.json");
+var q = require("q");
+
 module.exports = function() {
     var api = {
         findUserByCredentials: findUserByCredentials,
@@ -15,15 +17,32 @@ module.exports = function() {
     };
     return api;
 
-    function findUserById(){
+    function findUserById(userId){
 
+        var deferred = $q.defer();
+        for(var user in users) {
+            if(users[user]._id == userId){
+                deferred.resolve(users[user]);
+            }
+        }
+
+        return deferred.promise;
     }
 
-    function findUserByUsername(){
+    function findUserByUsername(username){
+
+        var deferred = $q.defer();
+
+        for(var user in users) {
+            if(users[user].username == username){
+            }
+        }
 
     }
 
     function findUserByCredentials(credentials) {
+
+        var deferred = $q.defer();
         for(var u in users) {
             if( users[u].username === credentials.username &&
                 users[u].password === credentials.password) {
@@ -35,6 +54,8 @@ module.exports = function() {
     }
 
     function updateUser(userid){
+
+        var deferred = $q.defer();
 
         var len = users.length;
         for (i = 0; i < len; i++) {
@@ -54,6 +75,7 @@ module.exports = function() {
 
 
     function createUser(user){
+        var deferred = $q.defer();
         var newUser = user;
         console.log(newUser);
         users.push(newUser);
@@ -61,9 +83,13 @@ module.exports = function() {
 
     function findAllUsers(){
 
+        var deferred = $q.defer();
+
     }
 
     function deleteUserById(userId){
+
+        var deferred = $q.defer();
 
         for(var user in users) {
             if(users[i].id == userId) {

@@ -1,6 +1,9 @@
 /**
  * Created by mounica on 3/13/2016.
  */
+
+var q = require("q");
+
 module.exports = function(app, model) {
 
     app.get("/api/assignment/user/username=:username&password=:password", findUserByCredentials);
