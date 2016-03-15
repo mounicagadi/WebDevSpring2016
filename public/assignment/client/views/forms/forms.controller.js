@@ -6,17 +6,31 @@
         .module("FormBuilderApp")
         .controller("FormController",FormController);
 
-    function FormController($scope, $location, FormService, $rootScope) {
+    function FormController($location, FormService, $rootScope) {
 
-        $scope.addForm = addForm;
-        $scope.updateForm = updateForm;
-        $scope.deleteForm = deleteForm;
-        $scope.selectForm = selectForm;
+        var vm = this;
+
+        vm.addForm = addForm;
+        vm.updateForm = updateForm;
+        vm.deleteForm = deleteForm;
+        vm.selectForm = selectForm;
         var selectedIndex = null;
 
-        FormService.findAllFormsForUser($rootScope.user._id, function(response) {
-            $scope.data = response;
-        });
+        function init() {
+            var user = $rootScope.user;
+            if (user == null) {
+                vm.data = [];
+            }
+
+            FormService
+                .findAllFormsForUser($rootScope.user._id)
+                .then(function(forms) {
+                    vm.data = forms;
+                });
+        }
+        init();
+
+
 
         //Function to add a form to the table for a particular user
         function addForm(name) {
@@ -29,8 +43,8 @@
 
             //Service to create the form for a given user
             FormService.createFormForUser($rootScope.user._id, formName, function (response) {
-                $scope.data.push(response);
-                $scope.name = null;
+                vm.data = response;
+                vm.title = null;
             });
         }
 
@@ -38,7 +52,7 @@
         function updateForm(name) {
             if (name != null) {
 
-                var selectedForm = $scope.data[selectedIndex];
+                var selectedForm = vm.data[selectedIndex];
                 var updatedForm = {
                     "_id": selectedForm._id,
                     "title": name,
@@ -47,8 +61,8 @@
             }
             FormService.updateFormById(selectedForm._id, updatedForm, function (response) {
 
-                $scope.data[selectedIndex] = response;
-                $scope.name = null;
+                vm.data[selectedIndex] = response;
+                vm.title = null;
                 selectedIndex = null;
             });
 
@@ -56,19 +70,19 @@
 
         //Function to delete a form for a particular user
         function deleteForm($index) {
-            var form = $scope.data[$index];
+            var form = vm.data[$index];
 
             FormService.deleteFormById(form._id,function (response) {
 
-                $scope.data = response;
+                vm.data = response;
             });
         }
 
         //Function to select a form for a particular user
         function selectForm($index) {
             selectedIndex = $index;
-            var form = $scope.data[$index];
-            $scope.name= form.title;
+            var form = vm.data[$index];
+            vm.title= form.title;
 
         }
 

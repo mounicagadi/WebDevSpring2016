@@ -17,7 +17,7 @@
                     <a href="#/register">Register</a></li>
                 <li ng-class="{'active': model.$location.url() == '/login'}" ng-if = "user == null">
                     <a href="#/login">Login</a></li>
-                <li ng-class="{'active': model.$location.url().indexOf('/profile')>=0}" ng-if = "user != null">
+                <li ng-class="{'active': model.$location.url() == '/profile}" ng-if = "user != null">
                     <a href="#/profile">{{user.username}}</a></li>
                 <!--<li ng-class="{'active': model.$location.url() == '/admin'}" ng-show="user.roles.indexOf('admin') >= 0">-->
                     <!--<a href="#/admin">Admin</a></li>-->
