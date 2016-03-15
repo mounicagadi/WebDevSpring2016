@@ -20,11 +20,10 @@
 
                 vm.user.username  = currUser.username;
                 vm.user.password  = currUser.password;
-                vm.user.firstName  = currUser.firstName;
-                vm.user.lastName  = currUser.lastName;
-                vm.user.email  = currUser.email;
-            }
-
+                vm.user.fname  = currUser.firstName;
+                vm.user.lname  = currUser.lastName;
+                vm.user.email = currUser.email;
+        }
         }
 
         init();
@@ -37,12 +36,13 @@
                 "firstName": $rootScope.user.firstName,
                 "lastName": $rootScope.user.lastName,
                 "username": $rootScope.user.username,
-                "password": $rootScope.user.password
-
+                "password": $rootScope.user.password,
+                email : $rootScope.user.email
             };
 
             UserService.updateUser($rootScope.user._id,updatedContent)
                 .then(  function(user){
+                    console.log(user);
                 $rootScope.user  = user;
 
             });

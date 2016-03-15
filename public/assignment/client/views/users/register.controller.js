@@ -18,6 +18,7 @@
                 .findAllUsers()
                 .then(function(users) {
                     vm.users = users;
+                    console.log(users);
                 });
         }
 
@@ -33,10 +34,11 @@
                 var new_data =
                 {
                     "_id":(new Date()).getTime(),
-                    "firstName":null,
-                    "lastName": null,
+                    "firstName":user.firstName,
+                    "lastName": user.lastName,
                     "username":user.username,
-                    "password":user.password
+                    "password":user.password,
+                    "email":user.email
                 };
 
                 UserService.createUser(new_data)

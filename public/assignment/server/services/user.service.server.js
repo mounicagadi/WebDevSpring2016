@@ -6,18 +6,23 @@ var q = require("q");
 
 module.exports = function(app, model) {
 
-    app.get("/api/assignment/user/username=:username&password=:password", findUserByCredentials);
+    //app.get("/api/assignment/user?username=:username&password=:password", findUserByCredentials);
     app.put("/api/assignment/user/:id", updateUser);
     app.post("/api/assignment/user", createUser);
     app.get("/api/assignment/user", findAllUsers);
     app.delete("/api/assignment/user/:id", deleteUserById);
     app.get("/api/assignment/user/:id", findUserById);
-    app.get("/api/assignment/user/username=:username", findUserByUsername);
+    //app.get("/api/assignment/user?username=:username", findUserByUsername);
 
 
     function findUserByCredentials(req, res) {
-        var credentials = req.body;
-        console.log(credentials);
+        console.log("Inside server side login part");
+        var username = req.params.username;
+        var password = req.params.password;
+        var credentials = {
+            username: username,
+            password: password
+        };
         var user = model.findUserByCredentials(credentials);
         res.json(user);
     }
@@ -44,13 +49,45 @@ module.exports = function(app, model) {
             });
     }
 
-    function findAllUsers(req, res){
-        console.log("Inside findAllUsers!");
-        model
-            .findAllUsers()
-            .then(function(users){
-                res.json(users);
-            });
+    function findAllUsers(req, res) {
+
+
+        var username = req.query.username;
+        var password = req.query.password;
+
+        console.log(username,password);
+
+        if (username != null && password != null) {
+
+            var credentials = {
+                username : username,
+                password : password
+            };
+
+            console.log("Going to call credentials function")
+            model
+                .findUserByCredentials(credentials)
+                .then(function(user) {
+                    res.json(user);
+                });
+
+        } else if (username != null) {
+
+            console.log("going to call username function");
+            model
+                .findUserByUsername(username)
+                .then(function (user) {
+                    res.json(user);
+                });
+        } else {
+
+            console.log("going to call all users function");
+            model
+                .findAllUsers()
+                .then(function (users) {
+                    res.json(users);
+                });
+        }
     }
 
     function deleteUserById(req, res){

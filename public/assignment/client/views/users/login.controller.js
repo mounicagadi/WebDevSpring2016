@@ -25,6 +25,8 @@
                 return;
                 }
 
+
+            console.log("username"+user.username);
                     UserService.findUserByCredentials (user.username, user.password)
                         .then(function(user){
                             console.log(user);
@@ -36,27 +38,6 @@
                                 alert("Invalid entry");
                             }
                     });
-            //function (user) {
-            //            if( user != null) {
-            //
-            //                $rootScope.user = user;
-            //                $scope.user.username = $rootScope.user.username;
-            //
-            //                var adminuser = UserService.checkAdmin(user);
-            //
-            //                if (adminuser) {
-            //                    $location.path("/admin");
-            //                } else {
-            //                    $location.path("/profile");
-            //                }
-            //            }
-            //
-            //            else {
-            //                alert("Invalid entry");
-            //            }
-            //
-            //
-            //    });
 
             }
 

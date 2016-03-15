@@ -31,10 +31,10 @@
             return deferred.promise;
         }
 
-        function findUserByUsername(){
+        function findUserByUsername(username){
 
             var deferred = $q.defer();
-            $http.get("/api/assignment/user/username=" + username).success(function(users){
+            $http.get("/api/assignment/user?username=" + username).success(function(users){
                 deferred.resolve(users);
             });
 
@@ -44,6 +44,7 @@
         function findUserByCredentials(username, password) {
             var deferred = $q.defer();
             console.log(username,password);
+            console.log("/api/assignment/user?username="+ username + "&password=" + password);
             $http.get("/api/assignment/user?username="+ username + "&password=" + password).success(function(users){
                 deferred.resolve(users);
             });
@@ -53,7 +54,7 @@
         function findAllUsers() {
 
             var deferred = $q.defer();
-            $http.get("/api/assignment/user/").success(function(users){
+            $http.get("/api/assignment/user").success(function(users){
                 deferred.resolve(users);
             });
             return deferred.promise;
@@ -80,9 +81,9 @@
         }
 
 
-        function updateUser(userid, newUser) {
+        function updateUser(userId, newUser) {
             var deferred = $q.defer();
-            $http.put("/api/assignment/user/"+userid, newUser).success(function(users){
+            $http.put("/api/assignment/user/"+userId, newUser).success(function(users){
                 deferred.resolve(users);
             });
             return deferred.promise;

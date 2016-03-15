@@ -19,7 +19,7 @@ module.exports = function() {
 
     function findUserById(userId){
 
-        var deferred = $q.defer();
+        var deferred = q.defer();
         for(var user in users) {
             if(users[user]._id == userId){
                 deferred.resolve(users[user]);
@@ -31,70 +31,82 @@ module.exports = function() {
 
     function findUserByUsername(username){
 
-        var deferred = $q.defer();
+        var deferred = q.defer();
 
         for(var user in users) {
             if(users[user].username == username){
+                deferred.resolve(users[user]);
             }
         }
+
+        return deferred.promise;
 
     }
 
     function findUserByCredentials(credentials) {
 
-        var deferred = $q.defer();
+        var deferred = q.defer();
         for(var u in users) {
-            if( users[u].username === credentials.username &&
-                users[u].password === credentials.password) {
-                return users[u];
+            var obj = users[u];
+            if( obj.username == credentials.username &&
+                obj.password == credentials.password) {
+                deferred.resolve(users[u]);
+                break;
             }
         }
-        return null;
+        return deferred.promise;
 
     }
 
-    function updateUser(userid){
+    function updateUser(userId, user){
 
-        var deferred = $q.defer();
+        var deferred = q.defer();
 
-        var len = users.length;
-        for (i = 0; i < len; i++) {
-            if (users[i].id == userid) {
-                var user = users[i];
-
-                // update found user with newUser's property values
-                user.firstName = newUser.firstName;
-                user.lastName = newUser.lastName;
-                user.username = newUser.username;
-                user.password = newUser.password;
-                user.email = newUser.email;
+        for (var value in users) {
+            var obj = users[value];
+            var id = obj._id;
+            if (id == userId) {
+               users[value] = user;
+                deferred.resolve(user);
             }
         }
+
+        return deferred.promise;
 
     }
 
 
     function createUser(user){
-        var deferred = $q.defer();
+        var deferred = q.defer();
         var newUser = user;
         console.log(newUser);
         users.push(newUser);
+        deferred.resolve(newUser);
+        return deferred.promise;
     }
 
     function findAllUsers(){
 
-        var deferred = $q.defer();
+        var deferred = q.defer();
+        deferred.resolve(users);
+        return deferred.promise;
 
     }
 
     function deleteUserById(userId){
 
-        var deferred = $q.defer();
+        var deferred = q.defer();
 
-        for(var user in users) {
-            if(users[i].id == userId) {
-                users.splice(user, 1);
+        for(var index in users) {
+            var obj = users[index]
+            if(obj._id == userId) {
+                users.splice(index, 1);
+                break;
+
             }
         }
+
+        deferred.resolve(users);
+        return deferred.promise;
     }
 }

@@ -11,7 +11,7 @@
                     <a href="#/profile" role="button" class="btn btn-justify">
                     <p class="list"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Profile</p></a></li>
 
-                <li ng-class="{'active' : $location.url().indexOf('admin') != -1}">
+                <li ng-class="{'active' : $location.url().indexOf('admin') != -1}" ng-if = "user != null">
                     <a href="#/admin" role="button" class="btn btn-justify">
                     <p class="list"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>&nbsp;&nbsp;Admin</p></a></li>
 
