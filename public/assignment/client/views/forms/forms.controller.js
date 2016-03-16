@@ -80,6 +80,10 @@
 
         //Function to select a form for a particular user
         function selectForm($index) {
+
+            if (vm.data == null ) {
+                return null;
+            }
             selectedIndex = $index;
             var form = vm.data[$index];
             vm.title= form.title;

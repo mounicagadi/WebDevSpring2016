@@ -14,7 +14,8 @@
             createFormForUser: createFormForUser,
             findAllFormsForUser: findAllFormsForUser,
             deleteFormById: deleteFormById,
-            updateFormById: updateFormById
+            updateFormById: updateFormById,
+            getFormById : getFormById
         }
         return api;
 
@@ -35,12 +36,10 @@
         function findAllFormsForUser(userId){
             var deferred = $q.defer();
 
-            var userForms = [];
-            for(var i in forms){
-                if(forms[i].userId == userId){
-                    userForms.push(forms[i]);
-                }
-            }
+            $http.get("/api/assignment/user/" + userId + "/form")
+                .success(function(response){
+                    deferred.resolve(response);
+                });
             return deferred.promise;
         }
 
@@ -48,25 +47,33 @@
 
             var deferred = $q.defer();
 
-            for(var i in forms){
-                if(forms[i]._id == formId){
-                    forms.splice(i, 1);
-                    break;
-                }
-            }
-            findAllFormsForUser($rootScope.user._id);
+            $http
+                .delete("/api/assignment/form/" + formId)
+                .success(function(response) {
+                    deferred.resolve(response);
+                })
+            return deferred.promise;
         }
 
         function updateFormById(formId, newForm){
 
             var deferred = $q.defer();
 
-            for(var i in forms){
-                if(forms[i]._id == formId){
-                    forms[i] = newForm;
-                    break;
-                }
-            }
+            $http.put("/api/assignment/form/" + formId, newForm)
+                .success(function(response){
+                    deferred.resolve(response);
+                });
+            return deferred.promise;
+        }
+
+        function getFormById(formId){
+
+            var deferred = $q.defer();
+            $http.get("/api/assignment/form/" + formId)
+                .success(function(form){
+                    deferred.resolve(form);
+                });
+
             return deferred.promise;
         }
 
