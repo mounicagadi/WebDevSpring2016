@@ -19,7 +19,9 @@
             })
 
             .when("/fields", {
-                templateUrl : "../assignment/views/forms/fields.view.html"
+                templateUrl : "../assignment/views/forms/fields.view.html",
+                controller:"FieldController",
+                controllerAs : "model"
             })
 
             .when("/home", {
