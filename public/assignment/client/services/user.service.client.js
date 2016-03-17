@@ -18,7 +18,8 @@
             deleteUserById: deleteUserById,
             updateUser: updateUser,
             setCurrentUser : setCurrentUser,
-            getCurrentUser:getCurrentUser
+            getCurrentUser:getCurrentUser,
+            checkAdmin:checkAdmin
 
 
         };
@@ -50,9 +51,21 @@
 
         }
 
-        //function checkAdmin(user){
-        //    return $http.get("/api/assignment/user", user);
-        //}
+        function checkAdmin(user){
+
+            console.log(user.roles);
+                var adminFlag = false;
+                //console.log("in model :"+user);
+                for (var i in user.roles) {
+                    if (user.roles[i] == "admin") {
+                        adminFlag = true;
+                        break;
+                    }
+                }
+
+                return adminFlag;
+            }
+
 
         function findAllUsers() {
 

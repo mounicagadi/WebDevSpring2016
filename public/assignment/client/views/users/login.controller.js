@@ -32,7 +32,15 @@
                                 $rootScope.user = user.data;
                                 console.log($rootScope.user.username);
                                 vm.user.username = $rootScope.user.username;
-                                $location.url("/profile");
+
+                                var adminuser = UserService.checkAdmin(user.data);
+
+                                if (adminuser) {
+                                    $location.path("/admin");
+                                } else {
+                                    $location.path("/profile");
+                                }
+
                             } else {
                                 alert("Invalid entry");
                             }

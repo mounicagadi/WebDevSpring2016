@@ -25,7 +25,9 @@
             FormService
                 .findAllFormsForUser($rootScope.user._id)
                 .then(function(forms) {
-                    vm.data = forms;
+                    console.log(forms.data);
+                    vm.data = forms.data;
+
                 });
         }
         init();
@@ -37,13 +39,16 @@
             if(name!=null) {
                var formName = {
                    "title":name
+
                };
                 //console.log(formName);
             }
 
             //Service to create the form for a given user
-            FormService.createFormForUser($rootScope.user._id, formName, function (response) {
-                vm.data = response;
+            FormService.createFormForUser($rootScope.user._id, formName)
+                .then(function (response) {
+                    console.log("create form response"+response.data);
+                vm.data = response.data;
                 vm.title = null;
             });
         }
@@ -59,11 +64,12 @@
                     "userId": selectedForm.userId
                 };
             }
-            FormService.updateFormById(selectedForm._id, updatedForm, function (response) {
+            FormService.updateFormById(selectedForm._id, updatedForm)
+                .then(function (response) {
 
-                vm.data[selectedIndex] = response;
+                vm.data[selectedIndex] = response.data;
                 vm.title = null;
-                selectedIndex = null;
+                vm.selectedIndex = null;
             });
 
         }
@@ -72,9 +78,10 @@
         function deleteForm($index) {
             var form = vm.data[$index];
 
-            FormService.deleteFormById(form._id,function (response) {
+            FormService.deleteFormById(form._id)
+                .then(function (response) {
 
-                vm.data = response;
+                vm.data = response.data;
             });
         }
 
@@ -84,7 +91,7 @@
             if (vm.data == null ) {
                 return null;
             }
-            selectedIndex = $index;
+            vm.selectedIndex = $index;
             var form = vm.data[$index];
             vm.title= form.title;
 

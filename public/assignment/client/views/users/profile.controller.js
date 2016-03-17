@@ -29,11 +29,11 @@
             var updatedContent = {
 
                 "_id":$rootScope.user._id,
-                "firstName": $rootScope.user.firstName,
-                "lastName": $rootScope.user.lastName,
-                "username": $rootScope.user.username,
-                "password": $rootScope.user.password,
-                email : $rootScope.user.email
+                "firstName": user.firstName,
+                "lastName": user.lastName,
+                "username": user.username,
+                "password": user.password,
+                email : user.email
             };
 
             UserService.updateUser($rootScope.user._id,updatedContent)

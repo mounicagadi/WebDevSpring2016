@@ -8,7 +8,7 @@ var forms = require("./form.mock.json");
 module.exports = function() {
     var api = {
 
-        createFormForUser: createForm,
+        createFormForUser: createFormForUser,
         findAllFormsForUser: findAllFormsForUser,
         deleteFormById: deleteFormById,
         updateFormById: updateFormById,
@@ -26,30 +26,23 @@ module.exports = function() {
     function updateFormById(formId, newForm) {
 
         // find the object in the collection with id formId
-        var len = forms.length;
-        for (i = 0; i < len; i++) {
-
-            if (forms[i]._id == formId) {
-                var form = forms[i];
-                // update found form with newForm's property values
-                form.id = newForm.id;
-                form.title = newForm.title;
-                form.userId = newForm.userId;
-                form.fields = newForm.fields;
+        for (var index in forms) {
+            if (forms[index]._id === formId) {
+                forms[index] = newForm;
+                return newForm;
             }
-        }
-
-        return newForm;
-
+            }
 
     }
 
-    function createForm(form){
+    function createFormForUser(form){
 
+        console.log("Inside model side createForm - forms");
         // add FormId
         var uuid = require('node-uuid');
         form._id = uuid.v1();
         // add to current collection
+        console.log(form);
         forms.push(form);
         return forms;
 
@@ -65,6 +58,7 @@ module.exports = function() {
             }
         }
 
+        console.log(userForms);
         return userForms;
 
     }

@@ -2,12 +2,11 @@
  * Created by mounica on 3/13/2016.
  */
 
-
 module.exports = function(app, model) {
 
     app.post("/api/assignment/user/:userId/form", createForm);
     app.get("/api/assignment/user/:userId/form", findAllFormsForUser);
-    app.delete("/api/assignment/form/:formId", deleteForm);
+    app.delete("/api/assignment/form/:formId", deleteFormById);
     app.put("/api/assignment/form/:formId", updateForm);
     app.get("/api/assignment/form/:formId", findFormById);
     app.get("/api/assignment/form", findAllForms);
@@ -28,8 +27,8 @@ module.exports = function(app, model) {
     }
 
     function createForm(req, res){
-
-        var response = model.createForm(req.body);
+        console.log("Inside server side createForm - forms");
+        var response = model.createFormForUser(req.body);
         res.json(response);
 
 
@@ -44,11 +43,11 @@ module.exports = function(app, model) {
     }
 
 
-    function deleteForm(req, res) {
+    function deleteFormById(req, res) {
         console.log("Inside server side deleteForm - forms");
         var formId = req.params.formId;
-        var forms = model.deleteForm(formId);
-        res.json(forms)
+        var forms = model.deleteFormById(formId);
+        res.json(forms);
 
     }
 
@@ -57,7 +56,12 @@ module.exports = function(app, model) {
         var formId = req.params.formId;
         var formObj = req.body;
         var form = model.updateForm(formId, formObj);
-        res.json(form);
+
+        if(form) {
+            res.json(form);
+            return;
+        }
+        res.send(null);
 
     }
 

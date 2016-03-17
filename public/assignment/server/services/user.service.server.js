@@ -10,12 +10,14 @@ module.exports = function(app, model) {
     app.get("/api/assignment/user", findAllUsers);
     app.delete("/api/assignment/user/:id", deleteUserById);
     app.get("/api/assignment/user/:id", findUserById);
+    app.get("/api/assignment/user/checkAdmin", checkAdmin);
 
 
     function checkAdmin(req, res){
         console.log("Inside server side checkAdmin");
         var user = req.body;
-        model.checkAdmin(user);
+        var reply = model.checkAdmin(user);
+        res.json(reply);
     }
 
     function findUserByCredentials(req, res) {
