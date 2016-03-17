@@ -2,7 +2,6 @@
  * Created by mounica on 3/13/2016.
  */
 
-var q = require("q");
 
 module.exports = function(app, model) {
 
@@ -14,6 +13,13 @@ module.exports = function(app, model) {
     app.get("/api/assignment/user/:id", findUserById);
     //app.get("/api/assignment/user?username=:username", findUserByUsername);
 
+
+    function checkAdmin(req, res){
+        console.log("Inside server side checkAdmin");
+        var user = req.body;
+        model
+            .checkAdmin(user);
+    }
 
     function findUserByCredentials(req, res) {
         console.log("Inside server side login part");
@@ -44,8 +50,8 @@ module.exports = function(app, model) {
         var user = req.body;
         model
             .createUser(user)
-            .then(function(users){
-                res.json(users);
+            .then(function(user){
+                res.json(user);
             });
     }
 
@@ -65,28 +71,21 @@ module.exports = function(app, model) {
             };
 
             console.log("Going to call credentials function")
-            model
-                .findUserByCredentials(credentials)
-                .then(function(user) {
-                    res.json(user);
-                });
+            var user = model.findUserByCredentials(credentials);
+            res.json(user);
+
 
         } else if (username != null) {
 
             console.log("going to call username function");
-            model
-                .findUserByUsername(username)
-                .then(function (user) {
-                    res.json(user);
-                });
+            var user = model.findUserByUsername(username);
+            res.json(user);
+
         } else {
 
             console.log("going to call all users function");
-            model
-                .findAllUsers()
-                .then(function (users) {
-                    res.json(users);
-                });
+            var user = model.findAllUsers();
+            res.json(users);
         }
     }
 
@@ -96,8 +95,8 @@ module.exports = function(app, model) {
         var userId = req.params._id;
         model
             .deleteUserById(userId)
-            .then(function(users){
-                res.json(users);
+            .then(function(user){
+                res.json(user);
             });
     }
 

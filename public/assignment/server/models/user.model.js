@@ -3,13 +3,15 @@
  */
 
 var users = require("./user.mock.json");
-var q = require("q");
+
 
 module.exports = function() {
+
     var api = {
         findUserByCredentials: findUserByCredentials,
         findAllUsers: findAllUsers,
         findUserById: findUserById,
+        checkAdmin:checkAdmin,
         findUserByUsername: findUserByUsername,
         deleteUserById: deleteUserById,
         updateUser: updateUser,
@@ -18,84 +20,87 @@ module.exports = function() {
     return api;
 
     function findUserById(userId){
-
-        var deferred = q.defer();
+        var u = null;
         for(var user in users) {
             if(users[user]._id == userId){
-                deferred.resolve(users[user]);
+                u = users[user];
+                break;
             }
         }
 
-        return deferred.promise;
+        return u;
+
     }
 
     function findUserByUsername(username){
-
-        var deferred = q.defer();
-
+        var u = null;
         for(var user in users) {
             if(users[user].username == username){
-                deferred.resolve(users[user]);
+                u = users[user];
+                break;
             }
         }
 
-        return deferred.promise;
+        return u;
 
     }
 
     function findUserByCredentials(credentials) {
-
-        var deferred = q.defer();
+        var user = null;
         for(var u in users) {
             var obj = users[u];
             if( obj.username == credentials.username &&
                 obj.password == credentials.password) {
-                deferred.resolve(users[u]);
+                user = users[u];
                 break;
             }
         }
-        return deferred.promise;
+
+        return user;
 
     }
 
-    function updateUser(userId, user){
+    function checkAdmin(user){
+        var adminFlag = false;
+        console.log("in model :"+user);
+        for(var i in user.roles){
+            if(user.roles[i]== "admin"){
+                adminFlag = true;
+                break;
+            }
+        }
 
-        var deferred = q.defer();
+
+        return adminFlag;
+    }
+
+    function updateUser(userId, user){
 
         for (var value in users) {
             var obj = users[value];
             var id = obj._id;
             if (id == userId) {
                users[value] = user;
-                deferred.resolve(user);
+                return users[value];
+                break;
             }
         }
-
-        return deferred.promise;
 
     }
 
 
     function createUser(user){
-        var deferred = q.defer();
         var newUser = user;
-        console.log(newUser);
         users.push(newUser);
-        deferred.resolve(newUser);
-        return deferred.promise;
+        return newUser;
     }
 
     function findAllUsers(){
 
-        var deferred = q.defer();
-        deferred.resolve(users);
-        return deferred.promise;
-
+        return users;
     }
 
     function deleteUserById(userId){
-
-        var deferred = q.defer();
 
         for(var index in users) {
             var obj = users[index]
@@ -106,7 +111,7 @@ module.exports = function() {
             }
         }
 
-        deferred.resolve(users);
-        return deferred.promise;
+        return users;
+
     }
 }

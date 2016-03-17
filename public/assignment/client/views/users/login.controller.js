@@ -33,6 +33,15 @@
                             if(user != null){
                                 $rootScope.user = user;
                                 vm.user.username = $rootScope.user.username;
+
+                                //var adminuser = UserService.checkAdmin(user);
+                                //
+                                //if (adminuser) {
+                                //    $location.path("/admin");
+                                //} else {
+                                //    $location.path("/profile");
+                                //}
+
                                 $location.path("/profile");
                             } else {
                                 alert("Invalid entry");
