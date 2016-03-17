@@ -80,9 +80,10 @@ module.exports = function() {
             var obj = users[value];
             var id = obj._id;
             if (id == userId) {
-               users[value] = user;
-                return users[value];
-                break;
+                users[value].username = user.username;
+                users[value].password = user.password;
+                users[value].firstName = user.firstName;
+                users[value].lastName = user.lastName;
             }
         }
 

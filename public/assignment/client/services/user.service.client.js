@@ -23,7 +23,6 @@
 
         function findUserById(userId){
 
-
             return $http.get("/api/assignment/user/"+userId);
         }
 

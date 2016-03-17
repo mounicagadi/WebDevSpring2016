@@ -3,7 +3,7 @@
  */
 
 var forms = require("./form.mock.json");
-var q = require("q");
+
 
 module.exports = function() {
     var api = {
@@ -19,7 +19,6 @@ module.exports = function() {
     return api;
 
     function updateFormById(formId, newForm) {
-        var deferred = q.defer();
 
         // find the object in the collection with id formId
         var len = forms.length;
@@ -35,61 +34,53 @@ module.exports = function() {
             }
         }
 
-        // return all objects
-        deferred.resolve(forms);
-        return deferred.promise;
+        return newForm;
+
+
     }
 
     function createForm(form){
 
-        var deferred = q.defer();
-
         // add FormId
         var uuid = require('node-uuid');
         form._id = uuid.v1();
-
-
         // add to current collection
         forms.push(form);
-
-        // return collection
-        deferred.resolve(forms);
-        return deferred.promise;
+        return forms;
 
     }
 
     function findAllFormsForUser(userId){
         console.log("inside form.model.js findAllFormsForUser");
-        var deferred = q.defer();
+
         var userForms = [] ;
         for(var form in forms) {
             if(forms[form].userId == userId) {
                 userForms.push(forms[form]);
             }
         }
-        deferred.resolve(userForms);
-        return deferred.promise;
+
+        return userForms;
+
     }
 
     function findFormById(formId) {
-        var deferred = q.defer();
-
+        var form = null;
         // find the object in the collection with id formId
         var len = forms.length;
         for (i = 0; i < len; i++) {
             if (forms[i]._id == formId) {
-                var form = forms[i];
+                form = forms[i];
+                break ;
                 // return the matching element, if found
-                deferred.resolve(form);
+
             }
         }
+        return form;
 
-        // return null otherwise
-        return deferred.promise;
     }
 
     function deleteFormById(formId) {
-        var deferred = q.defer();
 
         // find the object in the collection with id formId
         var len = forms.length;
@@ -97,32 +88,32 @@ module.exports = function() {
             if (forms[i]._id == formId) {
                 // remove the matching instance
                 forms.splice(i, 1);
+                break;
             }
         }
 
-        deferred.resolve(forms);
-        return deferred.promise;
+        findAllFormsForUser(formId);
+
     }
 
     function findFormByTitle(title) {
-        var deferred = q.defer();
 
+        var form = null;
         // find form in collection whose title is title
         var len = forms.length;
         for (i = 0; i < len; i++) {
             if (forms[i].title == title) {
+                form = forms[i];
                 // returns matching object, if found
-                deferred.resolve(forms[i]);
+
             }
         }
+    return form;
 
-        // otherwise returns null
-        return deferred.promise;
     }
 
     function findAllForms() {
-        var deferred = q.defer();
-        deferred.resolve(forms);
-        return deferred.promise;
+
+        return forms;
     }
 }

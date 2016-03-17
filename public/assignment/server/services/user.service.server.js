@@ -5,20 +5,17 @@
 
 module.exports = function(app, model) {
 
-    //app.get("/api/assignment/user?username=:username&password=:password", findUserByCredentials);
     app.put("/api/assignment/user/:id", updateUser);
     app.post("/api/assignment/user", createUser);
     app.get("/api/assignment/user", findAllUsers);
     app.delete("/api/assignment/user/:id", deleteUserById);
     app.get("/api/assignment/user/:id", findUserById);
-    //app.get("/api/assignment/user?username=:username", findUserByUsername);
 
 
     function checkAdmin(req, res){
         console.log("Inside server side checkAdmin");
         var user = req.body;
-        model
-            .checkAdmin(user);
+        model.checkAdmin(user);
     }
 
     function findUserByCredentials(req, res) {
@@ -38,21 +35,15 @@ module.exports = function(app, model) {
         console.log("Inside server side updateUser");
         var userId = req.params._id;
         var newUser = req.body;
-        model
-            .updateUser(userId, newUser)
-            .then(function(user){
-                res.json(user);
-            });
+        var user = model.updateUser(userId, newUser);
+        res.json(user);
     }
 
     function createUser(req, res){
         console.log("Inside server side createUser");
-        var user = req.body;
-        model
-            .createUser(user)
-            .then(function(user){
-                res.json(user);
-            });
+        var body = req.body;
+        var user = model.createUser(body);
+        res.json(user);
     }
 
     function findAllUsers(req, res) {
@@ -84,7 +75,7 @@ module.exports = function(app, model) {
         } else {
 
             console.log("going to call all users function");
-            var user = model.findAllUsers();
+            var users = model.findAllUsers();
             res.json(users);
         }
     }
@@ -93,31 +84,24 @@ module.exports = function(app, model) {
 
         console.log("Inside server side deleteUser");
         var userId = req.params._id;
-        model
-            .deleteUserById(userId)
-            .then(function(user){
-                res.json(user);
-            });
+        var user = model.deleteUserById(userId);
+        res.json(user);
+
     }
 
     function findUserByUsername(req, res) {
         console.log("Inside server side findUserByUsername");
         var username = req.params.username;
-        model
-            .findUserByUsername(username)
-            .then(function(user){
-                res.json(user);
-            });
+        var user = model.findUserByUsername(username);
+        res.json(user);
+
     }
 
     function findUserById(req, res){
         console.log("Inside server side findUserById");
         var userId = req.params._id;
-        model
-            .findUserById(userId)
-            .then(function(user){
-                res.json(user);
-            });
+        var user = model.findUserById(userId);
+        res.json(user);
     }
 
 }

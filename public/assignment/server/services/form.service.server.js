@@ -2,7 +2,6 @@
  * Created by mounica on 3/13/2016.
  */
 
-var q = require("q");
 
 module.exports = function(app, model) {
 
@@ -16,61 +15,50 @@ module.exports = function(app, model) {
     function findFormById(req, res){
         console.log("Inside server side findformById - forms");
         var formId = req.params.formId;
-        model
-            .findFormById(formId)
-            .then(function(response){
-                res.json(response);
-            });
+        var user = model.findFormById(formId);
+        res.json(user);
+
     }
 
     function findAllForms(req, res){
         console.log("Inside server side findAllForms - forms");
-        model
-            .findAllForms()
-            .then(function(user){
-                res.json(user);
-            });
+        var user = model.findAllForms();
+        res.json(user);
+
     }
 
     function createForm(req, res){
 
-        model.createForm(req.body)
-            .then(function(response){
-                res.json(response);
-            });
+        var response = model.createForm(req.body);
+        res.json(response);
+
 
     }
 
     function findAllFormsForUser(req, res){
         console.log("Inside server side findAllFormsForUser - forms");
         var userId = req.params.userId;
-        model
-            .findAllFormsForUser(userId)
-            .then(function(forms){
-                res.json(forms);
-            });
+        var forms = model.findAllFormsForUser(userId);
+        res.json(forms);
+
     }
 
 
     function deleteForm(req, res) {
         console.log("Inside server side deleteForm - forms");
         var formId = req.params.formId;
-        model
-            .deleteForm(formId)
-            .then(function(forms) {
-                res.json(forms)
-            });
+        var forms = model.deleteForm(formId);
+        res.json(forms)
+
     }
 
     function updateForm(req, res) {
         console.log("Inside server side updateForm - forms");
         var formId = req.params.formId;
         var formObj = req.body;
-        model
-            .updateForm(formId, formObj)
-            .then(function(form){
-                res.json(form);
-            });
+        var form = model.updateForm(formId, formObj);
+        res.json(form);
+
     }
 
 

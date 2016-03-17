@@ -6,7 +6,7 @@
         .module("FormBuilderApp")
         .factory("FormService", FormService);
 
-    function FormService($http, $q){
+    function FormService($http){
 
 
         var api=
@@ -21,60 +21,32 @@
 
         function createFormForUser(userId, form){
 
-            var deferred = $q.defer();
+            return $http.post("/api/assignment/user/" + userId + "/form", form);
 
-            $http
-                .post("/api/assignment/user/" + userId + "/form", form)
-                .success(function(response) {
-
-                    deferred.resolve(response);
-                })
-
-            return deferred.promise;
         }
 
         function findAllFormsForUser(userId){
-            var deferred = $q.defer();
 
-            $http.get("/api/assignment/user/" + userId + "/form")
-                .success(function(response){
-                    deferred.resolve(response);
-                });
-            return deferred.promise;
+            return $http.get("/api/assignment/user/" + userId + "/form");
+
         }
 
         function deleteFormById(formId){
 
-            var deferred = $q.defer();
+            return $http.delete("/api/assignment/form/" + formId);
 
-            $http
-                .delete("/api/assignment/form/" + formId)
-                .success(function(response) {
-                    deferred.resolve(response);
-                })
-            return deferred.promise;
         }
 
         function updateFormById(formId, newForm){
 
-            var deferred = $q.defer();
+            return $http.put("/api/assignment/form/" + formId, newForm);
 
-            $http.put("/api/assignment/form/" + formId, newForm)
-                .success(function(response){
-                    deferred.resolve(response);
-                });
-            return deferred.promise;
         }
 
         function getFormById(formId){
 
-            var deferred = $q.defer();
-            $http.get("/api/assignment/form/" + formId)
-                .success(function(form){
-                    deferred.resolve(form);
-                });
+            return $http.get("/api/assignment/form/" + formId);
 
-            return deferred.promise;
         }
 
     }
