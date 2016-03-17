@@ -76,6 +76,7 @@ module.exports = function(app, model) {
 
             console.log("going to call all users function");
             var users = model.findAllUsers();
+            console.log("in server side service"+users);
             res.json(users);
         }
     }

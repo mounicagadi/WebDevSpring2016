@@ -6,7 +6,7 @@
         .module("FormBuilderApp")
         .factory("UserService", UserService);
 
-    function UserService($http) {
+    function UserService($http, $rootScope) {
 
         var api =
         {
@@ -16,10 +16,21 @@
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
-            updateUser: updateUser
+            updateUser: updateUser,
+            setCurrentUser : setCurrentUser,
+            getCurrentUser:getCurrentUser
+
 
         };
         return api;
+
+        function setCurrentUser (user) {
+            $rootScope.currentUser = user;
+        }
+
+        function getCurrentUser () {
+            return $rootScope.currentUser;
+        }
 
         function findUserById(userId){
 
@@ -45,7 +56,7 @@
 
         function findAllUsers() {
 
-            $http.get("/api/assignment/user");
+            return $http.get("/api/assignment/user");
         }
 
         function createUser(user) {

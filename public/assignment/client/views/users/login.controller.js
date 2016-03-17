@@ -25,24 +25,14 @@
                 return;
                 }
 
-
-            console.log("username"+user.username);
                     UserService.findUserByCredentials (user.username, user.password)
                         .then(function(user){
-                            console.log(user);
+                            console.log(user.data);
                             if(user != null){
-                                $rootScope.user = user;
+                                $rootScope.user = user.data;
+                                console.log($rootScope.user.username);
                                 vm.user.username = $rootScope.user.username;
-
-                                //var adminuser = UserService.checkAdmin(user);
-                                //
-                                //if (adminuser) {
-                                //    $location.path("/admin");
-                                //} else {
-                                //    $location.path("/profile");
-                                //}
-
-                                $location.path("/profile");
+                                $location.url("/profile");
                             } else {
                                 alert("Invalid entry");
                             }

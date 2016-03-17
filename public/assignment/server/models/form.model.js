@@ -14,7 +14,12 @@ module.exports = function() {
         updateFormById: updateFormById,
         findFormByTitle : findFormByTitle,
         findAllForms: findAllForms,
-        findFormById : findFormById
+        findFormById : findFormById,
+        findFieldsByFormId : findFieldsByFormId,
+        findFieldById : findFieldById,
+        deleteFieldById : deleteFieldById,
+        createField : createField,
+        updateFieldById : updateFieldById
     };
     return api;
 
@@ -115,5 +120,63 @@ module.exports = function() {
     function findAllForms() {
 
         return forms;
+    }
+
+    function findFieldsByFormId(formId) {
+        for(var u in forms) {
+            if (forms[u]._id === formId) {
+                return forms[u].fields;
+                break;
+            }
+        }
+    }
+
+    function findFieldById(fieldId, formId) {
+        for(var u in forms) {
+            if (forms[u]._id === formId) {
+                for(var v in forms[u].fields) {
+                    if (v._id === fieldId) {
+                        return v;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    function deleteFieldById(fieldId, formId) {
+        for(var u in forms) {
+            if (forms[u]._id === formId) {
+                for(var v in forms[u].fields) {
+                    if (v._id === fieldId) {
+                        delete v;
+                    }
+                }
+            }
+        }
+    }
+
+    function createField(field, formId) {
+        for (var u in forms) {
+            if (forms[u]._id === formId) {
+                field._id = (new Date()).getTime();
+                forms[u].fields.push(field);
+            }
+        }
+    }
+
+    function updateFieldById(fieldId, field, formId) {
+
+        for (var u in forms) {
+            if (forms[u]._id === formId) {
+                for(var v in forms[u].fields) {
+                    if (v._id === fieldId) {
+                        v.label = field.label;
+                        v.type = field.type;
+                        v.placeholder = field.placeholder;
+                    }
+                }
+            }
+        }
     }
 }

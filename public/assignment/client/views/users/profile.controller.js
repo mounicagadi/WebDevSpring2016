@@ -12,17 +12,13 @@
 
         vm.update = update;
 
+
         function init(){
 
             var currUser = $rootScope.user;
+            console.log(currUser);
             if (currUser != null) {
                 vm.user = currUser;
-
-                vm.user.username  = currUser.username;
-                vm.user.password  = currUser.password;
-                vm.user.fname  = currUser.firstName;
-                vm.user.lname  = currUser.lastName;
-                vm.user.email = currUser.email;
         }
         }
 
@@ -42,8 +38,7 @@
 
             UserService.updateUser($rootScope.user._id,updatedContent)
                 .then(  function(user){
-                    console.log(user);
-                $rootScope.user  = user;
+                $rootScope.user  = user.config.data;
 
             });
 

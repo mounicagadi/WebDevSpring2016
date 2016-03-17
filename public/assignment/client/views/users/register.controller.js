@@ -14,11 +14,10 @@
 
         function init(){
 
-            UserService
-                .findAllUsers()
-                .then(function(users) {
-                    vm.users = users;
-                    console.log(users);
+            UserService.findAllUsers()
+                .then(function(user) {
+                    console.log(user);
+
                 });
         }
 
@@ -38,15 +37,22 @@
                     "lastName": user.lastName,
                     "username":user.username,
                     "password":user.password,
-                    "email":user.email
+                    "email":user.email,
+                    "roles":[]
                 };
 
                 UserService.createUser(new_data)
                     .then(function (newUser) {
-
-                    $rootScope.user = newUser;
+                    $rootScope.user = newUser.data;
                     $location.path("/profile");
                 });
+
+                    UserService.findAllUsers()
+                        .then(function(user) {
+                            console.log(user);
+
+                        });
+
 
             } else {
 

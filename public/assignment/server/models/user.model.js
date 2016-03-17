@@ -80,10 +80,11 @@ module.exports = function() {
             var obj = users[value];
             var id = obj._id;
             if (id == userId) {
-                users[value].username = user.username;
-                users[value].password = user.password;
-                users[value].firstName = user.firstName;
-                users[value].lastName = user.lastName;
+                users[value] = user;
+                console.log("in model"+user);
+                return users[value];
+            }else{
+                return null;
             }
         }
 
