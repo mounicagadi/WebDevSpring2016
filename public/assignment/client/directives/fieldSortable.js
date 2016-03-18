@@ -1,6 +1,9 @@
-(function () {
+/**
+ * Created by mounica on 3/18/2016.
+ */
+(function (){
 
-   "use strict";
+    "use strict";
 
     angular
         .module("fieldSortable", [])
@@ -10,7 +13,7 @@
 
         var start = null, end = null;
         function link(scope, element, attributes) {
-         var fieldAxis = attributes.fieldAxis;
+            var fieldAxis = attributes.fieldAxis;
 
             $(element).sortable( {
                 axis: fieldAxis,
