@@ -25,7 +25,7 @@
         vm.updateForm = updateForm;
         vm.deleteForm = deleteForm;
         vm.selectForm = selectForm;
-        var selectedIndex = -1;
+        var selectedIndex = null;
 
 
 
@@ -48,7 +48,7 @@
         //Function to update an existing form for a particular user
         function updateForm(form) {
             console.log("update stuff title"+form.userId);
-            if (form.title != null && selectedIndex != -1) {
+            if (form.title != null && selectedIndex != null) {
 
                 var position = vm.forms[selectedIndex];
                 var newForm = {
@@ -61,7 +61,7 @@
 
                     vm.forms[selectedIndex] = response;
                     vm.form.title = null;
-                    vm.selectedIndex = -1;
+                    vm.selectedIndex = null;
                 });
 
         }}
@@ -73,6 +73,7 @@
             FormService.deleteFormById(formId)
                 .then(function (response) {
                     vm.forms.splice($index,1);
+
                 });
         }
 

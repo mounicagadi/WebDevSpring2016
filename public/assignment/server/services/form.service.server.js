@@ -12,28 +12,25 @@ module.exports = function(app, formModel, uuid) {
 
     function findFormById(req, res){
         var formId = req.params.formId;
-
         res.json(formModel.findFormById(formId));
 
     }
 
     function findAllForms(req, res){
-        console.log("Inside server side findAllForms - forms");
+
         res.json(formModel.findAllForms());
 
     }
 
     function createForm(req, res){
-        console.log("Create form");
+
         var form = req.body;
         var userId = parseInt(req.params.userId);
-
         form.userId = userId;
         form._id = parseInt(uuid.v4(), 16);
 
         formModel.createFormForUser(form);
         res.json(formModel.findAllFormsForUser(userId));
-
 
     }
 
@@ -43,7 +40,6 @@ module.exports = function(app, formModel, uuid) {
         res.json(formModel.findAllFormsForUser(id));
 
     }
-
 
     function deleteFormById(req, res) {
         var formId = req.params.formId;

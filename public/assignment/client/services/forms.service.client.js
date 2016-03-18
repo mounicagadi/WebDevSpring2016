@@ -10,93 +10,70 @@
 
         var api = {
             createFormForUser: createFormForUser,
-
             findAllFormsForUser: findAllFormsForUser,
-
             deleteFormById: deleteFormById,
-
             updateFormById: updateFormById,
-
             findFormById: findFormById
         };
         return api;
 
         function createFormForUser(userID, form) {
-
             var deferred = $q.defer();
 
-            var url = "/api/assignment/user/:userId/form";
-            url = url.replace(":userId", userID);
+                var url = "/api/assignment/user/:userId/form";
+                url = url.replace(":userId", userID);
+                $http.post(url, form).success(function (response) {
 
-            $http.post(url, form).success(function (response) {
-
-                deferred.resolve(response);
-            });
-
+                    deferred.resolve(response);
+                });
             return deferred.promise;
         }
 
         function findAllFormsForUser(userID) {
-
             var deferred = $q.defer();
 
-            var url = "/api/assignment/user/:userId/form";
-            url = url.replace(":userId", userID);
+                var url = "/api/assignment/user/:userId/form";
+                url = url.replace(":userId", userID);
+                $http.get(url).success(function (response) {
 
-            $http.get(url).success(function (response) {
-
-                deferred.resolve(response);
-            });
-
+                    deferred.resolve(response);
+                });
             return deferred.promise;
         }
 
         function deleteFormById(formID) {
-
             var deferred = $q.defer();
 
-            var url = "/api/assignment/form/:formId";
-            url = url.replace(":formId", formID);
+                var url = "/api/assignment/form/:formId";
+                url = url.replace(":formId", formID);
+                $http.delete(url).success(function(response) {
 
-            $http.delete(url).success(function(response) {
-
-                deferred.resolve(response);
-            });
-
+                    deferred.resolve(response);
+                });
             return deferred.promise;
-
-
         }
 
         function updateFormById(formID, newForm) {
-
             var deferred = $q.defer();
 
-            var url = "/api/assignment/form/:formId";
-            url = url.replace(":formId", formID);
-            console.log("INside client service"+url);
-            console.log(newForm);
-            $http.put("/api/assignment/form/"+formID, newForm).success(function(response) {
+                var url = "/api/assignment/form/:formId";
+                url = url.replace(":formId", formID);
+                $http.put(url, newForm).success(function(response) {
 
-                deferred.resolve(response);
-            });
-
+                    deferred.resolve(response);
+                });
             return deferred.promise;
         }
         function findFormById(formID) {
-
             var deferred = $q.defer();
 
-            var url = "/api/assignment/form/:formId";
-            url = url.replace(":formId", formID);
+                var url = "/api/assignment/form/:formId";
+                url = url.replace(":formId", formID);
+                $http.get(url).success(function(response) {
 
-            $http.get(url).success(function(response) {
-
-                deferred.resolve(response);
-            });
-
+                    deferred.resolve(response);
+                });
             return deferred.promise;
-
         }
     }
 })();
