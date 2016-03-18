@@ -94,23 +94,32 @@ module.exports = function() {
         return forms;
     }
 
+    // field munction definitons
     function createFieldForForm(formId, field) {
-        console.log("in model part of create field");
+        console.log("in forms model for create field function");
+        console.log()
         for (var i in forms) {
+
             if (forms[i]._id == formId) {
+
                 if(!forms[i].fields) {
                     forms[i].fields = [];
                 }
+
                 forms[i].fields.push(field);
+                console.log(forms[i].fields);
+                console.log("end of create field function");
                 break;
             }
         }
-        return forms[i].fields;
     }
 
     function findAllFieldsForForm (formId) {
+
         for (var i in forms) {
+
             if (forms[i]._id == formId) {
+                console.log("forms fields");
                 console.log(forms[i].fields);
                 return forms[i].fields;
             }
@@ -120,9 +129,13 @@ module.exports = function() {
 
     function findFieldByFieldIdAndFormId(formId, fieldId) {
         for (var i in forms) {
-            if (forms[i]._id == formId) {
+
+            if (forms[i]._id === formId) {
+
                 for (var j in forms[i].fields) {
-                    if (forms[i].fields[j]._id == fieldId) {
+
+                    if (forms[i].fields[j]._id === fieldId) {
+
                         return forms[i].fields[j];
                     }
                 }
@@ -132,27 +145,47 @@ module.exports = function() {
     }
 
     function updateFieldByFieldIdAndFormId(formId, fieldId, field) {
+
         field._id = fieldId;
+
         for (var i in forms) {
-            if (forms[i]._id == formId) {
+
+            if (forms[i]._id === formId) {
+
                 for (var j in forms[i].fields) {
+
                     if (forms[i].fields[j]._id === fieldId) {
+
                         forms[i].fields[j] = field;
                     }
                 }
             }
         }
     }
+
     function deleteFieldByFieldIdAndFormId(formId, fieldId) {
+        console.log("delete field in model");
+        console.log(formId);
+        console.log(fieldId);
+
         for (var i in forms) {
-            if (forms[i]._id === formId) {
+            console.log("compare");
+            console.log("forms.id in loop:"+forms[i]._id);
+            console.log("form id:"+formId);
+            if (forms[i]._id == formId) {
+
                 for (var j in forms[i].fields) {
-                    if (forms[i].fields[j]._id === fieldId) {
+                    console.log("compare");
+                    console.log("field id in loop:"+forms[i].fields[j]._id);
+                    console.log("field id:"+fieldId);
+
+
+                    if (forms[i].fields[j]._id == fieldId) {
+
                         forms[i].fields.splice(j,1);
                     }
                 }
             }
         }
     }
-
 }

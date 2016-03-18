@@ -1,33 +1,42 @@
-//Fields controller
 "use strict";
-
-(function() {
+(function(){
     angular
         .module("FormBuilderApp")
-        .controller("FieldsController", FieldsController);
+        .controller("FieldsController", FieldController);
 
-    function FieldsController(FieldService, $routeParams, $location, $scope) {
 
+    function FieldController(FieldService, $routeParams, $scope, $location){
         var vm = this;
-
         vm.fields = [];
-        vm.field = {}
-
+        vm.field = {};
         vm.options = [];
 
         vm.removeField = removeField;
         vm.addField = addField;
+
+
 
         vm.oldIndex = -1;
 
         var formId = -1;
 
         function init() {
+
             if($routeParams.formId) {
+                console.log("in init of fields");
+                console.log("form id"+$routeParams.formId);
+
                 formId = $routeParams.formId;
+
                 FieldService.getFieldsForForm(formId).then(function (response) {
+
+                    console.log("response for get fields for form");
+                    console.log(response);
+
                     vm.fields = response;
                     $scope.fields = vm.fields;
+                    console.log("$scope.fields");
+                    console.log($scope.fields);
 
                 });
 
@@ -37,22 +46,35 @@
             }
 
             vm.options = [
-                {name: "Single Line Text Field", value: "sline-text"},
-                {name: "Multi Line Text Field", value: "mline-text"},
-                {name: "Date Field", value: "date"},
-                {name: "Dropdown Field", value: "dropdown"},
-                {name: "Checkboxes Field", value: "checkbox"},
-                {name: "Radio Buttons Field", value: "radio"}
+                {name: "Single Line Text", value: "single-line-text"},
+                {name: "Multi Line Text", value: "multiple-line-text"},
+                {name: "Date", value: "date"},
+                {name: "Dropdown", value: "dropdown"},
+                {name: "Checkboxes", value: "checkbox"},
+                {name: "Radio Buttons", value: "radio"}
             ];
         }
         init();
 
         function removeField($index) {
+            console.log("client side remove field called");
+
             var fieldId = vm.fields[$index]._id;
+            console.log("field ID"+fieldId);
+            console.log("form ID"+formId);
+
             FieldService.deleteFieldFromForm(formId, fieldId).then(function (response) {
-                if(response === "OK") {
-                    FieldService.getFieldsForForm(formId).then(function (response) {
-                        vm.fields = response;
+                console.log("remove filed response");
+                console.log(response);
+
+                if(response == "OK") {
+                    console.log(response);
+
+                    FieldService.getFieldsForForm(formId).then(function (response1) {
+                        console.log("response1");
+                        console.log(response1);
+
+                        vm.fields = response1;
                         $scope.fields = vm.fields;
 
                     });
@@ -61,15 +83,17 @@
         }
 
         function addField() {
+
             var fieldType = vm.fieldType.value;
-            console.log("field type is"+fieldType);
+            console.log(fieldType);
+
             switch (fieldType) {
 
-                case "sline-text":
+                case "single-line-text":
                     vm.field = createSingleLineField();
                     break;
 
-                case "mline-text":
+                case "multiple-line-text":
                     vm.field = createMultiLineField();
                     break;
 
@@ -91,12 +115,17 @@
 
             }
 
-            console.log("In controller");
+            console.log("vm and vm.field");
+            console.log(vm);
             console.log(vm.field);
-            FieldService.createFieldForForm(formId, vm.field).then(function (response) {
+            console.log("form id");
+            console.log(formId);
 
-                console.log("response for create form");
+            FieldService.createFieldForForm(formId, vm.field).then(function (response) {
+                console.log("response");
                 console.log(response);
+
+
                 vm.fields = response;
                 $scope.fields = vm.fields;
                 vm.field = {};
