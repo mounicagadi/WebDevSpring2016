@@ -1,7 +1,7 @@
 /**
  * Created by mounica on 3/13/2016.
  */
-module.exports = function(app, formModel, userModel) {
+module.exports = function(app, formModel, uuid) {
 
     app.get('/api/assignment/form/:formId/field', findFieldsByFormId);
     app.get('/api/assignment/form/:formId/field/:fieldId', findFieldById);
@@ -11,34 +11,43 @@ module.exports = function(app, formModel, userModel) {
 
 
     function findFieldsByFormId(req, res) {
-        var formId = req.params.formId;
-        var fields = formModel.findFieldsByFormId(formId);
-        res.json(fields);
+        var formId = parseInt(req.params.formId );
+
+        res.json(formModel.findAllFieldsForForm(formId));
     }
 
     function findFieldById(req, res) {
-        var formId = req.params.formId;
-        var fieldId = req.params.fieldId;
-        var field = formModel.findFieldById(fieldId, formId);
-        res.json(field);
+        var formId = parseInt(req.params.formId, 16);
+        var fieldId = parseInt(req.params.fieldId, 16   );
+
+        res.json(formModel.findFieldByFieldIdAndFormId(formId, fieldId));
     }
 
     function deleteFieldById(req, res) {
-        var formId = req.params.formId;
-        var fieldId = req.params.fieldId;
-        formModel.deleteFieldById(fieldId, formId);
+        var formId = parseInt(req.params.formId);
+        var fieldId = parseInt(req.params.fieldId);
+
+        formModel.deleteFieldByFieldIdAndFormId(formId, fieldId);
+
+        res.send(200);
     }
 
     function createField(req, res) {
-        var formId = req.params.formId;
         var field = req.body;
-        formModel.createField(field, formId);
+        var formId = parseInt(req.params.formId);
+
+        field._id = parseInt(uuid.v4(), 16);
+
+        formModel.createFieldForForm(formId, field);
+
+        res.json(formModel.findAllFieldsForForm(formId));
     }
 
     function updateFieldById(req, res) {
-        var formId = req.params.formId;
-        var fieldId = req.params.fieldId;
+        var formId = parseInt(req.params.formId, 16);
+        var fieldId = parseInt(req.params.fieldId, 16);
         var field = req.body;
-        formModel.updateFieldById(fieldId, field, formId);
+
+        res.send(200);
     }
 };

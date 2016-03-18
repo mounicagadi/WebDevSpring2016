@@ -1,45 +1,102 @@
-/**
- * Created by mounica on 3/13/2016.
- */
-(function() {
+"use strict";
 
-    'use strict';
+(function () {
 
     angular
         .module("FormBuilderApp")
-        .factory("FieldService", fieldService);
+        .factory("FieldService", FieldService);
 
-    function fieldService($http) {
+    function FieldService($http, $q) {
 
-        var service = {
-            createFieldForForm : createFieldForForm,
-            getFieldsForForm : getFieldsForForm,
-            getFieldForForm : getFieldForForm,
-            deleteFieldFromForm : deleteFieldFromForm,
-            updateField : updateField
+        var api = {
+
+            createFieldForForm: createFieldForForm,
+
+            getFieldsForForm: getFieldsForForm,
+
+            getFieldForForm: getFieldForForm,
+
+            deleteFieldFromForm: deleteFieldFromForm,
+
+            updateField: updateField
+
         };
-
-        return service;
+        return api;
 
         function createFieldForForm(formId, field) {
-            return $http.post('/api/assignment/form/' + formId + '/field', field);
+
+            var deferred = $q.defer();
+
+            var url = "/api/assignment/form/:formId/field";
+            url = url.replace(":formId", formId);
+
+            $http.post(url, field).success(function(response) {
+
+                deferred.resolve(response);
+            });
+
+            return deferred.promise;
         }
 
         function getFieldsForForm(formId) {
-            return $http.get('/api/assignment/form/' + formId + '/field');
+
+            var deferred = $q.defer();
+
+            var url = "/api/assignment/form/:formId/field";
+            url = url.replace(":formId", formId);
+
+            $http.get(url).success(function(response) {
+
+                deferred.resolve(response);
+            });
+
+            return deferred.promise;
         }
 
         function getFieldForForm(formId, fieldId) {
-            return $http.get('/api/assignment/form/' + formId + '/field/' + fieldId);
+
+            var deferred = $q.defer();
+
+            var url = "/api/assignment/form/:formId/field/:fieldId";
+            url = url.replace(":formId", formId);
+            url = url.replace(":fieldId", fieldId);
+
+            $http.get(url).success(function(response) {
+                deferred.resolve(response);
+            });
+
+            return deferred.promise;
         }
 
         function deleteFieldFromForm(formId, fieldId) {
-            return $http.delete('/api/assignment/form/' + formId + '/field/' + fieldId);
+
+            var deferred = $q.defer();
+
+            var url = "/api/assignment/form/:formId/field/:fieldId";
+            url = url.replace(":formId", formId);
+            url = url.replace(":fieldId", fieldId);
+
+            $http.delete(url).success(function(response) {
+                deferred.resolve(response);
+            });
+
+            return deferred.promise;
         }
 
         function updateField(formId, fieldId, field) {
-            return $http.put('/api/assignment/form/' + formId + '/field/' + fieldId, field);
-        }
-    }
 
+            var deferred = $q.defer();
+
+            var url = "/api/assignment/form/:formId/field/:fieldId";
+            url = url.replace(":formId", formId);
+            url = url.replace(":fieldId", fieldId);
+
+            $http.put(url, field).success(function(response) {
+                deferred.resolve(response);
+            });
+
+            return deferred.promise;
+        }
+
+    }
 })();

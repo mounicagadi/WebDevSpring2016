@@ -18,10 +18,10 @@
                 controllerAs : "model"
             })
 
-            .when("/fields", {
-                templateUrl : "../assignment/views/forms/fields.view.html",
-                controller:"FieldController",
-                controllerAs : "model"
+            .when("/form/:formId/fields", {
+                templateUrl: "views/forms/fields.view.html",
+                controller: "FieldsController",
+                controllerAs: "model"
             })
 
             .when("/home", {
