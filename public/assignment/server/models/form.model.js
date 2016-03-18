@@ -82,7 +82,7 @@ module.exports = function() {
     function findFormByTitle(title) {
 
         for (var f in forms) {
-            if (forms[f].title === title) {
+            if (forms[f].title == title) {
                 return forms[f];
             }
         }
@@ -120,9 +120,9 @@ module.exports = function() {
 
     function findFieldByFieldIdAndFormId(formId, fieldId) {
         for (var i in forms) {
-            if (forms[i]._id === formId) {
+            if (forms[i]._id == formId) {
                 for (var j in forms[i].fields) {
-                    if (forms[i].fields[j]._id === fieldId) {
+                    if (forms[i].fields[j]._id == fieldId) {
                         return forms[i].fields[j];
                     }
                 }
@@ -134,7 +134,7 @@ module.exports = function() {
     function updateFieldByFieldIdAndFormId(formId, fieldId, field) {
         field._id = fieldId;
         for (var i in forms) {
-            if (forms[i]._id === formId) {
+            if (forms[i]._id == formId) {
                 for (var j in forms[i].fields) {
                     if (forms[i].fields[j]._id === fieldId) {
                         forms[i].fields[j] = field;
