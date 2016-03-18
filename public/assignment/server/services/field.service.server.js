@@ -35,13 +35,13 @@ module.exports = function(app, formModel, uuid) {
     function createField(req, res) {
         var field = req.body;
         var formId = parseInt(req.params.formId);
-        console.log("IN server servicce");
+        console.log("IN server servicce creation");
         console.log(field);
         field._id = parseInt(uuid.v4(), 16);
 
         formModel.createFieldForForm(formId, field);
 
-        res.json(formModel.findAllFieldsForForm(formId));
+        res.json(formModel.createFieldForForm(formId, field));
     }
 
     function updateFieldById(req, res) {

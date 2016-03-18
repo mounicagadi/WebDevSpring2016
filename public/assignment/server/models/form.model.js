@@ -32,15 +32,15 @@ module.exports = function() {
         console.log(newForm);
         for (var index in forms) {
             if (forms[index]._id == formId) {
-                forms[index].title = newForm.title;
-                break;
+                forms[index] = newForm;
+                return newForm;
             }
             }
-        return forms;
     }
 
     function createFormForUser(form){
         forms.push(form);
+        return forms;
 
     }
 
@@ -72,11 +72,11 @@ module.exports = function() {
 
         for (var index in forms) {
             if (forms[index]._id == formId) {
-                forms.splice(index, 1);
-                break;
+                delete forms[index];
+                //forms.splice(index, 1);
+                //break;
             }
         }
-        return forms;
     }
 
     function findFormByTitle(title) {
@@ -95,8 +95,9 @@ module.exports = function() {
     }
 
     function createFieldForForm(formId, field) {
+        console.log("in model part of create field");
         for (var i in forms) {
-            if (forms[i]._id === formId) {
+            if (forms[i]._id == formId) {
                 if(!forms[i].fields) {
                     forms[i].fields = [];
                 }
@@ -110,7 +111,7 @@ module.exports = function() {
     function findAllFieldsForForm (formId) {
         for (var i in forms) {
             if (forms[i]._id == formId) {
-                console.log(forms[i].fields)
+                console.log(forms[i].fields);
                 return forms[i].fields;
             }
         }

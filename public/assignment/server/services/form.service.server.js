@@ -47,10 +47,8 @@ module.exports = function(app, formModel, uuid) {
 
     function deleteFormById(req, res) {
         var formId = req.params.formId;
-
-        formModel.deleteFormById(formId);
-
-        res.send(formModel.deleteFormById(formId));
+        var forms = formModel.deleteFormById(formId);
+        res.send(200);
 
     }
 
@@ -58,9 +56,8 @@ module.exports = function(app, formModel, uuid) {
         console.log("In server service");
         var formId = req.params.formId;
         var form = req.body;
-        console.log(form);
-        formModel.updateFormById(formId, form);
-        res.json(formModel.updateFormById(formId, form));
+        var forms = formModel.updateFormById(formId, form);
+        res.json(forms);
 
     }
 

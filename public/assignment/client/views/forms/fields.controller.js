@@ -61,10 +61,8 @@
         }
 
         function addField() {
-
-
             var fieldType = vm.fieldType.value;
-
+            console.log("field type is"+fieldType);
             switch (fieldType) {
 
                 case "sline-text":
@@ -97,6 +95,8 @@
             console.log(vm.field);
             FieldService.createFieldForForm(formId, vm.field).then(function (response) {
 
+                console.log("response for create form");
+                console.log(response);
                 vm.fields = response;
                 $scope.fields = vm.fields;
                 vm.field = {};

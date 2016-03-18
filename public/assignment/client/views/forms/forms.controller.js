@@ -16,7 +16,6 @@
                 .findAllFormsForUser($rootScope.user._id)
                 .then(function(response) {
                     vm.forms = response;
-                    vm.$location = $location;
 
                 });
         }
@@ -32,31 +31,40 @@
 
         //Function to add a form to the table for a particular user
         function addForm(form) {
+            console.log(form.title);
+            if (form.title != null){
             //Service to create the form for a given user
-            FormService.createFormForUser($rootScope.user._id, form)
-                .then(function (response) {
-                    console.log("create form response"+response);
-                    vm.forms = response;
+                FormService.createFormForUser($rootScope.user._id, form)
+                    .then(function (response) {
+                        console.log("create form response" + response);
+                        vm.forms = response;
 
-            });
+                    });
+        }
             vm.form = {};
 
         }
 
         //Function to update an existing form for a particular user
         function updateForm(form) {
-            console.log(form);
-            var index = vm.forms[selectedIndex];
-            FormService.updateFormById(form._id,form)
+            console.log("update stuff title"+form.userId);
+            if (form.title != null && selectedIndex != -1) {
+
+                var position = vm.forms[selectedIndex];
+                var newForm = {
+                    "_id": form._id,
+                    "title": form.title,
+                    "userId": form.userId
+                };
+            FormService.updateFormById(form._id,newForm)
                 .then(function (response) {
 
-                    vm.forms = response;
-                    vm.form = null;
-                    selectedIndex = -1;
+                    vm.forms[selectedIndex] = response;
+                    vm.form.title = null;
+                    vm.selectedIndex = -1;
                 });
 
-            vm.form={};
-        }
+        }}
 
         //Function to delete a form for a particular user
         function deleteForm($index) {
@@ -64,7 +72,7 @@
 
             FormService.deleteFormById(formId)
                 .then(function (response) {
-                    vm.forms = response;
+                    vm.forms.splice($index,1);
                 });
         }
 
