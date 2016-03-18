@@ -76,6 +76,7 @@ module.exports = function() {
 
     function updateUser(userId, user){
 
+        console.log("inside update model");
         for (var value in users) {
             var obj = users[value];
             var id = obj._id;

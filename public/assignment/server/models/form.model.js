@@ -27,6 +27,9 @@ module.exports = function() {
 
     function updateFormById(formId, newForm) {
         // find the object in the collection with id formId
+        console.log("In model update");
+        console.log(formId);
+        console.log(newForm);
         for (var index in forms) {
             if (forms[index]._id == formId) {
                 forms[index].title = newForm.title;
@@ -56,6 +59,7 @@ module.exports = function() {
     }
 
     function findFormById(formId) {
+        console.log("Model form");
         for (var f in forms) {
             if (forms[f]._id == formId) {
                 return forms[f];
@@ -100,11 +104,13 @@ module.exports = function() {
                 break;
             }
         }
+        return forms[i].fields;
     }
 
     function findAllFieldsForForm (formId) {
         for (var i in forms) {
-            if (forms[i]._id === formId) {
+            if (forms[i]._id == formId) {
+                console.log(forms[i].fields)
                 return forms[i].fields;
             }
         }

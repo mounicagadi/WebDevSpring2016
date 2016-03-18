@@ -1,6 +1,6 @@
-"use strict";
-
 (function () {
+
+    "use strict";
 
     angular
         .module("FormBuilderApp")
@@ -11,13 +11,9 @@
         var api = {
 
             createFieldForForm: createFieldForForm,
-
             getFieldsForForm: getFieldsForForm,
-
             getFieldForForm: getFieldForForm,
-
             deleteFieldFromForm: deleteFieldFromForm,
-
             updateField: updateField
 
         };
@@ -29,7 +25,8 @@
 
             var url = "/api/assignment/form/:formId/field";
             url = url.replace(":formId", formId);
-
+            console.log("In client servicce");
+            console.log(field);
             $http.post(url, field).success(function(response) {
 
                 deferred.resolve(response);
@@ -41,12 +38,12 @@
         function getFieldsForForm(formId) {
 
             var deferred = $q.defer();
-
+            console.log(formId);
             var url = "/api/assignment/form/:formId/field";
             url = url.replace(":formId", formId);
 
             $http.get(url).success(function(response) {
-
+                console.log(response);
                 deferred.resolve(response);
             });
 

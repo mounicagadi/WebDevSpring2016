@@ -35,10 +35,9 @@ module.exports = function(app, model) {
 
     function updateUser(req, res) {
         console.log("Inside server side updateUser");
-        var userId = req.params._id;
+        var id = req.params.userId;
         var newUser = req.body;
-        var user = model.updateUser(userId, newUser);
-        res.json(user);
+        res.json(model.updateUser(id, newUser));
     }
 
     function createUser(req, res){

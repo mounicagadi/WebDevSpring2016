@@ -33,11 +33,12 @@
                 "lastName": user.lastName,
                 "username": user.username,
                 "password": user.password,
-                email : user.email
+                "email" : user.email
             };
 
             UserService.updateUser($rootScope.user._id,updatedContent)
                 .then(  function(user){
+                    console.log(user.config.data);
                 $rootScope.user  = user.config.data;
 
             });

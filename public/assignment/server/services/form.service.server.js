@@ -3,7 +3,7 @@
  */
 
 module.exports = function(app, formModel, uuid) {
-
+    console.log("Service started");
     app.post("/api/assignment/user/:userId/form", createForm);
     app.get("/api/assignment/user/:userId/form", findAllFormsForUser);
     app.delete("/api/assignment/form/:formId", deleteFormById);
@@ -24,7 +24,7 @@ module.exports = function(app, formModel, uuid) {
     }
 
     function createForm(req, res){
-
+        console.log("Create form");
         var form = req.body;
         var userId = parseInt(req.params.userId);
 
@@ -50,17 +50,17 @@ module.exports = function(app, formModel, uuid) {
 
         formModel.deleteFormById(formId);
 
-        res.send(200);
+        res.send(formModel.deleteFormById(formId));
 
     }
 
     function updateForm(req, res) {
+        console.log("In server service");
         var formId = req.params.formId;
         var form = req.body;
-
+        console.log(form);
         formModel.updateFormById(formId, form);
-
-        res.send(200);
+        res.json(formModel.updateFormById(formId, form));
 
     }
 

@@ -73,8 +73,9 @@
 
             var url = "/api/assignment/form/:formId";
             url = url.replace(":formId", formID);
-
-            $http.put(url, newForm).success(function(response) {
+            console.log("INside client service"+url);
+            console.log(newForm);
+            $http.put("/api/assignment/form/"+formID, newForm).success(function(response) {
 
                 deferred.resolve(response);
             });

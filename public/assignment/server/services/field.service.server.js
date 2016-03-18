@@ -18,7 +18,7 @@ module.exports = function(app, formModel, uuid) {
 
     function findFieldById(req, res) {
         var formId = parseInt(req.params.formId, 16);
-        var fieldId = parseInt(req.params.fieldId, 16   );
+        var fieldId = parseInt(req.params.fieldId, 16);
 
         res.json(formModel.findFieldByFieldIdAndFormId(formId, fieldId));
     }
@@ -35,7 +35,8 @@ module.exports = function(app, formModel, uuid) {
     function createField(req, res) {
         var field = req.body;
         var formId = parseInt(req.params.formId);
-
+        console.log("IN server servicce");
+        console.log(field);
         field._id = parseInt(uuid.v4(), 16);
 
         formModel.createFieldForForm(formId, field);

@@ -45,18 +45,14 @@
 
         //Function to update an existing form for a particular user
         function updateForm(form) {
-
-            FormService.updateFormById(form._id)
+            console.log(form);
+            var index = vm.forms[selectedIndex];
+            FormService.updateFormById(form._id,form)
                 .then(function (response) {
 
-                    if (response === "OK") {
-
-                        FormService.findFormById(form._id)
-                            .then(function(updatedForm) {
-                                var formindex = vm.forms.indexOf(updatedForm);
-                            vm.forms[formindex] = updatedForm;
-                        });
-                    }
+                    vm.forms = response;
+                    vm.form = null;
+                    selectedIndex = -1;
                 });
 
             vm.form={};
@@ -68,9 +64,7 @@
 
             FormService.deleteFormById(formId)
                 .then(function (response) {
-                    if(response === "OK") {
-                        init();
-                    }
+                    vm.forms = response;
                 });
         }
 

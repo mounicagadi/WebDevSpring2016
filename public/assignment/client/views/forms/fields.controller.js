@@ -23,13 +23,9 @@
         var formId = -1;
 
         function init() {
-
             if($routeParams.formId) {
-
                 formId = $routeParams.formId;
-
                 FieldService.getFieldsForForm(formId).then(function (response) {
-
                     vm.fields = response;
                     $scope.fields = vm.fields;
 
@@ -52,15 +48,10 @@
         init();
 
         function removeField($index) {
-
             var fieldId = vm.fields[$index]._id;
-
             FieldService.deleteFieldFromForm(formId, fieldId).then(function (response) {
-
                 if(response === "OK") {
-
                     FieldService.getFieldsForForm(formId).then(function (response) {
-
                         vm.fields = response;
                         $scope.fields = vm.fields;
 
@@ -70,6 +61,7 @@
         }
 
         function addField() {
+
 
             var fieldType = vm.fieldType.value;
 
@@ -101,6 +93,8 @@
 
             }
 
+            console.log("In controller");
+            console.log(vm.field);
             FieldService.createFieldForForm(formId, vm.field).then(function (response) {
 
                 vm.fields = response;
