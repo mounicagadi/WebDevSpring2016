@@ -10,91 +10,84 @@
 
         var vm = this;
 
-        vm.addForm = addForm;
-        vm.updateForm = updateForm;
-        vm.deleteForm = deleteForm;
-        vm.selectForm = selectForm;
-        var selectedIndex = null;
-
         function init() {
-            var user = $rootScope.user;
-            if (user == null) {
-                vm.data = [];
-            }
 
             FormService
                 .findAllFormsForUser($rootScope.user._id)
-                .then(function(forms) {
-                    console.log(forms.data);
-                    vm.data = forms.data;
+                .then(function(response) {
+                    vm.forms = response;
+                    vm.$location = $location;
 
                 });
         }
         init();
 
+        vm.addForm = addForm;
+        vm.updateForm = updateForm;
+        vm.deleteForm = deleteForm;
+        vm.selectForm = selectForm;
+        var selectedIndex = -1;
+
 
 
         //Function to add a form to the table for a particular user
-        function addForm(name) {
-            if(name!=null) {
-               var formName = {
-                   "title":name
-
-               };
-                //console.log(formName);
-            }
-
+        function addForm(form) {
             //Service to create the form for a given user
-            FormService.createFormForUser($rootScope.user._id, formName)
+            FormService.createFormForUser($rootScope.user._id, form)
                 .then(function (response) {
-                    console.log("create form response"+response.data);
-                vm.data = response.data;
-                vm.title = null;
+                    console.log("create form response"+response);
+                    vm.forms = response;
+
             });
+            vm.form = {};
+
         }
 
         //Function to update an existing form for a particular user
-        function updateForm(name) {
-            if (name != null) {
+        function updateForm(form) {
 
-                var selectedForm = vm.data[selectedIndex];
-                var updatedForm = {
-                    "_id": selectedForm._id,
-                    "title": name,
-                    "userId": selectedForm.userId
-                };
-            }
-            FormService.updateFormById(selectedForm._id, updatedForm)
+            FormService.updateFormById(form._id)
                 .then(function (response) {
 
-                vm.data[selectedIndex] = response.data;
-                vm.title = null;
-                vm.selectedIndex = null;
-            });
+                    if (response === "OK") {
 
+                        FormService.findFormById(form._id)
+                            .then(function(updatedForm) {
+                                var formindex = vm.forms.indexOf(updatedForm);
+                            vm.forms[formindex] = updatedForm;
+                        });
+                    }
+                });
+
+            vm.form={};
         }
 
         //Function to delete a form for a particular user
         function deleteForm($index) {
-            var form = vm.data[$index];
+            var formId = vm.forms[$index]._id;
 
-            FormService.deleteFormById(form._id)
+            FormService.deleteFormById(formId)
                 .then(function (response) {
-
-                vm.data = response.data;
-            });
+                    if(response === "OK") {
+                        init();
+                    }
+                });
         }
 
         //Function to select a form for a particular user
         function selectForm($index) {
 
-            if (vm.data == null ) {
-                return null;
-            }
-            vm.selectedIndex = $index;
-            var form = vm.data[$index];
-            vm.title= form.title;
+            vm.form={};
 
+            var selectedForm = vm.forms[$index];
+
+            vm.form = {
+                _id: selectedForm._id,
+                title: selectedForm.title,
+                userId: selectedForm.userId
+            };
+
+            selectedIndex = $index;
         }
 
     }

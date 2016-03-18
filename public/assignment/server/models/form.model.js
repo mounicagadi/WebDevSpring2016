@@ -24,27 +24,18 @@ module.exports = function() {
     return api;
 
     function updateFormById(formId, newForm) {
-
         // find the object in the collection with id formId
         for (var index in forms) {
-            if (forms[index]._id === formId) {
-                forms[index] = newForm;
-                return newForm;
+            if (forms[index]._id == formId) {
+                forms[index].title = newForm.title;
+                break;
             }
             }
-
+        return forms;
     }
 
     function createFormForUser(form){
-
-        console.log("Inside model side createForm - forms");
-        // add FormId
-        var uuid = require('node-uuid');
-        form._id = uuid.v1();
-        // add to current collection
-        console.log(form);
         forms.push(form);
-        return forms;
 
     }
 
@@ -52,63 +43,44 @@ module.exports = function() {
         console.log("inside form.model.js findAllFormsForUser");
 
         var userForms = [] ;
-        for(var form in forms) {
-            if(forms[form].userId == userId) {
-                userForms.push(forms[form]);
+        for(var i in forms) {
+            if(forms[i].userId == userId) {
+                userForms.push(forms[i]);
             }
         }
 
-        console.log(userForms);
         return userForms;
 
     }
 
     function findFormById(formId) {
-        var form = null;
-        // find the object in the collection with id formId
-        var len = forms.length;
-        for (i = 0; i < len; i++) {
-            if (forms[i]._id == formId) {
-                form = forms[i];
-                break ;
-                // return the matching element, if found
-
+        for (var f in forms) {
+            if (forms[f]._id == formId) {
+                return forms[f];
             }
         }
-        return form;
-
+        return null;
     }
 
     function deleteFormById(formId) {
 
-        // find the object in the collection with id formId
-        var len = forms.length;
-        for (i = 0; i < len; i++) {
-            if (forms[i]._id == formId) {
-                // remove the matching instance
-                forms.splice(i, 1);
+        for (var index in forms) {
+            if (forms[index]._id == formId) {
+                forms.splice(index, 1);
                 break;
             }
         }
-
-        findAllFormsForUser(formId);
-
+        return forms;
     }
 
     function findFormByTitle(title) {
 
-        var form = null;
-        // find form in collection whose title is title
-        var len = forms.length;
-        for (i = 0; i < len; i++) {
-            if (forms[i].title == title) {
-                form = forms[i];
-                // returns matching object, if found
-
+        for (var f in forms) {
+            if (forms[f].title === title) {
+                return forms[f];
             }
         }
-    return form;
-
+        return null;
     }
 
     function findAllForms() {

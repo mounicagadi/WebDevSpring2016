@@ -5,7 +5,7 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <ul class="nav nav-tabs responsive">
-                <li class="active"><a href="#/forms">Forms</a></li>
+                <li ng-class="{'active': model.$location.url() == '/forms'}"><a href="#/forms">Forms</a></li>
                 <li><a href="#/fields">Fields</a></li>
             </ul>
         </div>
@@ -29,24 +29,24 @@
                             <tbody>
                             <tr>
                                 <td>
-                                    <input type="text" ng-model ="model.title" class="form-control input-md" placeholder="Title">
+                                    <input type="text" ng-model ="model.form.title" class="form-control input-md" placeholder="Title">
                                 </td>
                                 <td class="second-column">
                                     <div class="btn-group" role="group">
-                                        <a ng-click="model.addForm(model.title)" role="button" class="btn btn-default" aria-label="Add">
+                                        <a ng-click="model.addForm(model.form)" role="button" class="btn btn-default" aria-label="Add">
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                             <span class="hidden-xs"></span>
                                         </a>
-                                        <a ng-click="model.updateForm(model.title)" role="button" class="btn btn-default">
+                                        <a ng-click="model.updateForm(model.form)" role="button" class="btn btn-default">
                                             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                                             <span class="hidden-xs"></span>
                                         </a>
                                     </div>
                                 </td>
                             </tr>
-                            <tr ng-show ="model.data" ng-repeat="form in model.data">
+                            <tr ng-repeat="form in model.forms">
                             <td>
-                                <a href="#/fields/{{form.userId}}/form/{{form.id}}/fields">{{form.title}}</a>
+                                <a href="#/form/{{form._id}}/fields">{{form.title}}</a>
                             </td>
                             <td>
                                 <div class="btn-group" role="group">
