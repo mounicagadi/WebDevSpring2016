@@ -6,7 +6,7 @@
         .module("FormBuilderApp")
         .factory("UserService", UserService);
 
-    function UserService($http, $rootScope) {
+    function UserService($http) {
 
         var api =
         {
@@ -16,22 +16,13 @@
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
-            updateUser: updateUser,
-            setCurrentUser : setCurrentUser,
-            getCurrentUser:getCurrentUser,
-            checkAdmin:checkAdmin
+            updateUser: updateUser
 
 
         };
         return api;
 
-        function setCurrentUser (user) {
-            $rootScope.currentUser = user;
-        }
 
-        function getCurrentUser () {
-            return $rootScope.currentUser;
-        }
 
         function findUserById(userId){
 
@@ -50,22 +41,6 @@
             return $http.get("/api/assignment/user?username="+ username + "&password=" + password);
 
         }
-
-        function checkAdmin(user){
-
-            console.log(user.roles);
-                var adminFlag = false;
-                //console.log("in model :"+user);
-                for (var i in user.roles) {
-                    if (user.roles[i] == "admin") {
-                        adminFlag = true;
-                        break;
-                    }
-                }
-
-                return adminFlag;
-            }
-
 
         function findAllUsers() {
 

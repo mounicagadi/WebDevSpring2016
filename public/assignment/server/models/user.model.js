@@ -11,7 +11,6 @@ module.exports = function() {
         findUserByCredentials: findUserByCredentials,
         findAllUsers: findAllUsers,
         findUserById: findUserById,
-        checkAdmin:checkAdmin,
         findUserByUsername: findUserByUsername,
         deleteUserById: deleteUserById,
         updateUser: updateUser,
@@ -60,19 +59,6 @@ module.exports = function() {
 
     }
 
-    function checkAdmin(user){
-        var adminFlag = false;
-        console.log("in model :"+user);
-        for(var i in user.roles){
-            if(user.roles[i]== "admin"){
-                adminFlag = true;
-                break;
-            }
-        }
-
-
-        return adminFlag;
-    }
 
     function updateUser(userId, user){
 

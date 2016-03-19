@@ -1,4 +1,4 @@
-"use strict";
+
 (function(){
 
     'use strict';
@@ -7,7 +7,7 @@
         .module("FormBuilderApp")
         .controller("FieldsController", FieldController);
 
-    function FieldController(FieldService, $routeParams, $scope, $location){
+    function FieldController(FieldService, $routeParams, $location, $uibModal){
         var vm = this;
         vm.fields = [];
         vm.field = {};
@@ -15,6 +15,7 @@
 
         vm.deleteField = deleteField;
         vm.addField = addField;
+        vm.editField = editField;
 
         var formId = -1;
 
@@ -26,7 +27,6 @@
                 FieldService.getFieldsForForm(formId).then(function (response) {
 
                     vm.fields = response;
-                    $scope.fields = vm.fields;
 
 
                 });
@@ -46,6 +46,29 @@
             ];
         }
         init();
+
+        function editField($index){
+
+
+                vm.fieldToBeEdited = vm.fields[$index];
+
+                var modalInstance = $uibModal.open( {
+
+                    templateUrl: 'fieldEditModal.html',
+
+                    //controller: 'ModalInstanceCtrl',
+
+                    resolve: {
+                        field: function () {
+
+                            return vm.fieldToBeEdited;
+                        }
+                    }
+
+                });
+
+        }
+
 
         function addField() {
             var type = vm.fieldType.value;
@@ -99,7 +122,6 @@
             FieldService.createFieldForForm(formId, vm.field).then(function (response) {
 
                 vm.fields = response;
-                $scope.fields = vm.fields;
                 vm.field = {};
             });
 
@@ -113,7 +135,6 @@
 
                     FieldService.getFieldsForForm(formId).then(function (response1) {
                         vm.fields = response1;
-                        $scope.fields = vm.fields;
 
                     });
                 }

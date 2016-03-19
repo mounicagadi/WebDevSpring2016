@@ -17,13 +17,9 @@
         };
         return api;
 
-        function createFormForUser(userID, form) {
+        function createFormForUser(userId, form) {
             var deferred = $q.defer();
-
-                var url = "/api/assignment/user/:userId/form";
-                url = url.replace(":userId", userID);
-                $http.post(url, form).success(function (response) {
-
+                $http.post('/api/assignment/user/' + userId + '/form', form).success(function (response) {
                     deferred.resolve(response);
                 });
             return deferred.promise;
@@ -31,11 +27,7 @@
 
         function findAllFormsForUser(userID) {
             var deferred = $q.defer();
-
-                var url = "/api/assignment/user/:userId/form";
-                url = url.replace(":userId", userID);
-                $http.get(url).success(function (response) {
-
+                $http.get('/api/assignment/user/' + userID + '/form').success(function (response) {
                     deferred.resolve(response);
                 });
             return deferred.promise;
@@ -43,11 +35,7 @@
 
         function deleteFormById(formID) {
             var deferred = $q.defer();
-
-                var url = "/api/assignment/form/:formId";
-                url = url.replace(":formId", formID);
-                $http.delete(url).success(function(response) {
-
+                $http.delete('/api/assignment/form/' + formID).success(function(response) {
                     deferred.resolve(response);
                 });
             return deferred.promise;
@@ -55,15 +43,12 @@
 
         function updateFormById(formID, newForm) {
             var deferred = $q.defer();
-
-                var url = "/api/assignment/form/:formId";
-                url = url.replace(":formId", formID);
-                $http.put(url, newForm).success(function(response) {
-
+                $http.put('/api/assignment/form/' + formID, newForm).success(function(response) {
                     deferred.resolve(response);
                 });
             return deferred.promise;
         }
+
         function findFormById(formID) {
             var deferred = $q.defer();
 
