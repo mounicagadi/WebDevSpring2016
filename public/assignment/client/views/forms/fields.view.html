@@ -2,48 +2,36 @@
     <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-            <script type="text/ng-template" id="fieldEditModal.html">
-
+            <script type="text/ng-template" id="popup.html">
                 <div class="modal-header" ng-switch on="field.type">
-
                     <h3 class="modal-title" ng-switch-default>
                         Single Line Field
                     </h3>
-
                     <h3 class="modal-title" ng-switch-when="TEXTAREA">
                         Multiple Lines Field
                     </h3>
-
                     <h3 class="modal-title" ng-switch-when="DATE">
                         Date Field
                     </h3>
-
                     <h3 class="modal-title" ng-switch-when="OPTIONS">
                         Dropdown Field
                     </h3>
-
                     <h3 class="modal-title"  ng-switch-when="CHECKBOXES">
                         Checkbox Field
                     </h3>
-
                     <h3 class="modal-title" ng-switch-when="RADIOS">
                         Radio Button Field
                     </h3>
                 </div>
 
                 <form class="modal-body form" ng-switch on="field.type">
-
                     <div class="row" ng-switch-when="TEXT">
-
-                        <div class="form-group col-md-12">
-
-                            <label for="labelForField">Label</label>
-                            <input type="text" id="labelForField" class="form-control" ng-model="$parent.newLabel">
-
+                        <div class="form-group col-sm-12 col-md-12">
+                            <label for="fieldlabel">Label</label>
+                            <input type="text" id="fieldlabel" class="form-control" ng-model="$parent.newLabel">
                         </div>
 
-                        <div class="form-group col-md-12">
-
+                        <div class="form-group col-sm-12 col-md-12">
                             <label for="placeholderForField">Placeholder</label>
                             <input type="text" id="placeholderForField" class="form-control" ng-model="$parent.newPlaceholder">
 
@@ -52,27 +40,20 @@
                     </div>
 
                     <div class="row" ng-switch-when="DATE">
-
-                        <div class="form-group col-md-12">
-
-                            <label for="labelForField">Label</label>
-                            <input type="text" id="labelForField" class="form-control" ng-model="$parent.newLabel">
-
+                        <div class="form-group col-md-12 col-sm-12">
+                            <label for="fieldlabel">Label</label>
+                            <input type="text" id="fieldlabel" class="form-control" ng-model="$parent.newLabel">
                         </div>
 
                     </div>
 
                     <div class="row" ng-switch-when="TEXTAREA">
-
                         <div class="form-group col-md-12">
-
-                            <label for="labelForField">Label</label>
-                            <input type="text" id="labelForField" class="form-control" ng-model="$parent.newLabel">
-
+                            <label for="fieldlabel">Label</label>
+                            <input type="text" id="fieldlabel" class="form-control" ng-model="$parent.newLabel">
                         </div>
 
-                        <div class="form-group col-md-12">
-
+                        <div class="form-group col-sm-12 col-md-12">
                             <label for="placeholderForField">Placeholder</label>
                     <textarea type="text" id="placeholderForField" class="form-control"
                               ng-model="$parent.newPlaceholder" rows="3">
@@ -87,8 +68,8 @@
 
                         <div class="form-group col-md-12">
 
-                            <label for="labelForField">Label</label>
-                            <input type="text" id="labelForField" class="form-control" ng-model="$parent.newLabel">
+                            <label for="fieldlabel">Label</label>
+                            <input type="text" id="fieldlabel" class="form-control" ng-model="$parent.newLabel">
 
                         </div>
 
@@ -108,11 +89,8 @@
                 </form>
 
                 <div class="modal-footer">
-
-                    <button class="btn btn-primary" ng-click="ok()">OK</button>
-
-                    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-
+                    <button class="btn btn-success btn-block" ng-click="ok()">OK</button>
+                    <button class="btn btn-danger btn-block" ng-click="cancel()">Cancel</button>
                 </div>
             </script>
 
@@ -156,7 +134,7 @@
                                 <!--For Checkbox-->
                                 <div ng-switch-when="CHECKBOXES">
                                     <label for="{{field._id}}" class="col-sm-2 control-label ">{{field.label}}</label>
-                                    <div class="" ng-repeat = "option in field.options">
+                                    <div class="col-sm-2 col-md-2" ng-repeat = "option in field.options">
                                         <input type="checkbox" name="{{field.label}}" value="{{option.value}}">
                                         {{option.label}}
 
@@ -166,7 +144,7 @@
                                 <!--For radio buttons-->
                                 <div ng-switch-when="RADIOS">
                                     <label for="{{field._id}}" class="col-sm-2 control-label ">{{field.label}}</label>
-                                    <div class="col-sm-4 col-md-4" ng-repeat = "option in field.options">
+                                    <div class="col-sm-2 col-md-2" ng-repeat = "option in field.options">
                                         <input type="radio" name="{{field.label}}" value="{{option.value}}">
                                         {{option.label}}
                                         <br>
