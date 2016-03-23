@@ -10,9 +10,11 @@
         .controller("LoginController", LoginController);
 
     //Function to display the content on the homepage
-    function LoginController(UserService, $location, $scope, $rootScope) {
+    function LoginController(UserService, $location, $rootScope) {
 
-        $scope.login = login;
+        var vm = this;
+
+        vm.login = login;
 
         function login (user) {
 
@@ -22,11 +24,21 @@
                 return;
             }
 
-            UserService.findUserByCredentials (user.username, user.password, function (user) {
+            UserService.login
+            ({
+                username : user.username,
+                password : user.password}).
+
+            then(function (user) {
+
+                console.log(user);
                 if( user != null) {
 
                     $rootScope.user = user;
-                    $scope.user.username = $rootScope.user.username;
+
+                    console.log($rootScope.user.username);
+
+                    vm.user.username = $rootScope.user.username;
                     $location.path("/profile");
                 }
 

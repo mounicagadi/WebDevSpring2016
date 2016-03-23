@@ -4,9 +4,9 @@ body {
 }
 
 .image{
-    background-image: url('../images/background-dim.jpg');
-    /*-webkit-background-size: cover;*/
-    /*-moz-background-size: cover;*/
+    background: url('../images/background-dim.jpg')no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
 }

@@ -10,7 +10,7 @@
         .controller("ProfileController", ProfileController);
 
     //Function to display the content on the homepage
-    function ProfileController($scope, $location) {
+    function ProfileController(UserService, $rootScope) {
         $scope.$location = $location;
     }
 })();

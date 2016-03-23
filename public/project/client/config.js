@@ -34,13 +34,15 @@
             .when("/profile", {
 
                 templateUrl: "views/users/profile.view.html",
-                controller: "ProfileController"
+                controller: "ProfileController",
+                controllerAs : "model"
 
             })
 
             .when("/register", {
                 templateUrl: "views/users/register.view.html",
-                controller:"RegisterController"
+                controller:"RegisterController",
+                controllerAs : "model"
             })
 
             .otherwise({

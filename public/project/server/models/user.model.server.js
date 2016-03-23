@@ -3,6 +3,9 @@
  */
 
 var mock = require("./user.mock.json");
+
+var q = require("q");
+
 module.exports = function() {
     var api = {
         findUserByCredentials: findUserByCredentials
@@ -11,7 +14,16 @@ module.exports = function() {
 
     function findUserByCredentials(credentials) {
 
-        console.log(mock);
-        console.log(credentials);
+        var user = null;
+        for(var u in mock) {
+            var obj = mock[u];
+            if( obj.username == credentials.username &&
+                obj.password == credentials.password) {
+                user = mock[u];
+                break;
+            }
+        }
+
+        return user;
     }
 }
