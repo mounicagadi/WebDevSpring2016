@@ -4,6 +4,8 @@
 
 module.exports = function(app, userModel) {
     app.post("/api/project/login", login);
+    app.put("/api/project/profile/:id", updateUser);
+    app.post("/api/project/register", register);
 
     function login(req, res) {
         var credentials = req.body;
@@ -19,5 +21,19 @@ module.exports = function(app, userModel) {
                     res.status(400).send(err);
                 }
             )
+    }
+
+    function updateUser(req, res) {
+        console.log("Inside server side updateUser");
+        var id = req.params.userId;
+        var newUser = req.body;
+        res.json(userModel.updateUser(id, newUser));
+    }
+
+    function register(req, res){
+        console.log("Inside server side createUser");
+        var body = req.body;
+        var user = userModel.createUser(body);
+        res.json(user);
     }
 }

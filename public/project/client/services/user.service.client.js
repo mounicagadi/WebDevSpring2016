@@ -12,10 +12,9 @@
         {
             login: login,
             findAllUsers: findAllUsers,
-            createUser: createUser,
+            registerUser: registerUser,
             deleteUserById: deleteUserById,
-            updateUser: updateUser,
-            checkAdmin: checkAdmin
+            updateUser: updateUser
 
         };
         return api;
@@ -25,19 +24,6 @@
             return $http.post("/api/project/login", credentials);
         }
 
-        function checkAdmin(user){
-            var adminFlag = false;
-            console.log(user.roles);
-            for(var i = 0 ; i < user.roles.length; i++){
-                if(user.roles[i]== "admin"){
-                    adminFlag = true;
-                    break;
-                }
-            }
-
-
-            return adminFlag;
-        }
 
         function findAllUsers(callback) {
 
@@ -45,11 +31,9 @@
         }
 
 
-        function createUser(user, callback) {
+        function registerUser(user) {
 
-            var new_user = user;
-            users.push(new_user);
-            callback(new_user);
+            return $http.post("/api/project/register", user);
 
         }
 
@@ -66,18 +50,9 @@
             callback(users);
         }
 
-        function updateUser(userid, user, callback) {
+        function updateUser(userId, user) {
 
-            for (var value in users) {
-                var obj = users[value];
-                var id = obj._id;
-                if (id == userid) {
-                    users[value] = user;
-                    callback(user);
-                    break;
-                }
-
-            }
+            return $http.put("/api/project/profile/"+userId, newUser);
 
         }
     }

@@ -8,7 +8,9 @@ var q = require("q");
 
 module.exports = function() {
     var api = {
-        findUserByCredentials: findUserByCredentials
+        findUserByCredentials: findUserByCredentials,
+        updateUser: updateUser,
+        createUser : createUser
     };
     return api;
 
@@ -25,5 +27,28 @@ module.exports = function() {
         }
 
         return user;
+    }
+
+    function updateUser(userId, user){
+
+        console.log("inside update model");
+        for (var value in mock) {
+            var obj = mock[value];
+            var id = obj._id;
+            if (id == userId) {
+                mock[value] = user;
+                console.log("in model"+user);
+                return user;
+            }else{
+                return null;
+            }
+        }
+
+    }
+
+    function createUser(user){
+        var newUser = user;
+        mock.push(newUser);
+        return newUser;
     }
 }

@@ -1,5 +1,6 @@
 [
   {
+    "_id": 123,
     "username": "alice",
     "password": "alice",
     "firstName": "Alice",
@@ -7,6 +8,7 @@
     "email": "alice@alice.com"
   },
   {
+    "_id": 234,
     "username": "bob",
     "password": "bob",
     "firstName": "Bob",
@@ -14,6 +16,7 @@
     "email": "bob@marley.com"
   },
   {
+    "_id": 456,
     "username": "charlie",
     "password": "charlie",
     "firstName": "Charlie",
