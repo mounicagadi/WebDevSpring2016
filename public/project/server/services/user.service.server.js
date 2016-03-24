@@ -7,6 +7,7 @@ module.exports = function(app, userModel) {
     app.put("/api/project/profile/:id", updateUser);
     app.post("/api/project/register", register);
     app.get("/api/project/users", findAllUsers);
+    app.get("/api/project/reviews/:id",findAllReviewsForUser)
 
     function login(req, res) {
         var credentials = req.body;
@@ -34,5 +35,12 @@ module.exports = function(app, userModel) {
         var users = userModel.findAllUsers();
         console.log("in server side service"+users);
         res.json(users);
+    }
+
+    function findAllReviewsForUser(req, res){
+        var id = req.params.userId;
+        console.log("inside server"+id);
+        var reviews = userModel.findAllReviewsForUser(id);
+        res.json(reviews);
     }
 }

@@ -3,6 +3,7 @@
  */
 
 var mock = require("./user.mock.json");
+var review_mock = require("./review.mock.json");
 
 var q = require("q");
 
@@ -11,7 +12,8 @@ module.exports = function() {
         findUserByCredentials: findUserByCredentials,
         updateUser: updateUser,
         createUser : createUser,
-        findAllUsers :findAllUsers
+        findAllUsers :findAllUsers,
+        findAllReviewsForUser : findAllReviewsForUser
     };
     return api;
 
@@ -56,5 +58,24 @@ module.exports = function() {
     function findAllUsers(){
 
         return mock;
+    }
+
+    function findAllReviewsForUser(userId){
+        console.log("inside reviews part in model");
+        var rev = null;
+        for(var i in review_mock){
+            //console.log("checking mock for reviews"+review_mock);
+            console.log("paramter"+userId);
+            var obj = review_mock[i];
+            var id = obj._id;
+            console.log("review id"+id);
+            if(id == userId){
+                rev = review_mock[i];
+                console.log("reviews console"+review_mock[i]);
+                break;
+            }
+        }
+        return rev;
+
     }
 }

@@ -1,9 +1,7 @@
 /**
  * Created by mounica on 3/4/2016.
  */
-/**
- * Created by mounica on 3/3/2016.
- */
+
 (function() {
 
     'use strict';
@@ -13,10 +11,10 @@
         .controller("ResultsController", ResultsController);
 
     //Function to display the content on the homepage
-    function ResultsController($scope, $location, $rootScope) {
+    function ResultsController($scope, $location, $routeParams) {
 
         console.log("in results controller");
         $scope.$location = $location;
-        $scope.name = name;
+        $scope.name = $routeParams.name;
     }
 })();

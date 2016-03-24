@@ -14,7 +14,6 @@
 
         $scope.search = search;
         $scope.render = render;
-        $scope.name = $routeParams.name;
 
 
         var default_place = "boston";

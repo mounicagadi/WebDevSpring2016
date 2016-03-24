@@ -10,7 +10,7 @@
         .controller("ProfileController", ProfileController);
 
     //Function to display the content on the homepage
-    function ProfileController(UserService, $rootScope, $routeParams) {
+    function ProfileController(UserService, $rootScope, $routeParams, ReviewService) {
 
         var vm = this;
         vm.update = update;
@@ -23,6 +23,13 @@
             if (currUser != null) {
                 vm.user = currUser;
             }
+
+            console.log($rootScope.user._id);
+
+            ReviewService.findAllReviewsForUser($rootScope.user._id)
+                .then(function (response) {
+                    console.log(response);
+                });
         }
 
         init();
