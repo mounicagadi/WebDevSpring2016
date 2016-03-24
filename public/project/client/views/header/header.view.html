@@ -23,7 +23,7 @@
                     <a href="#/register">Register</a>
                 </li>
                 <li ng-class="{'active': $location.url() == '/profile'}" ng-if = "user != null">
-                    <a href="#/profile">Profile</a>
+                    <a href="#/profile">{{user.username}}</a>
                 </li>
                 <li ng-class="{'active': $location.url() == '/home'}" ng-if = "user != null" ng-click="logout()">
                     <a href="#/home">Logout</a></li>

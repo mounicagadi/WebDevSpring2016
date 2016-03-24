@@ -13,6 +13,7 @@
     function ProfileController(UserService, $rootScope, $routeParams) {
 
         var vm = this;
+        vm.update = update;
         var username = $routeParams.username;
 
         function init(){
@@ -28,6 +29,7 @@
 
         function update(user) {
 
+            console.log("inside update function in controller");
             var updatedContent = {
 
                 "_id":$rootScope.user._id,

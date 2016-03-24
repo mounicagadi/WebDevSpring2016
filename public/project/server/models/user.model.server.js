@@ -10,7 +10,8 @@ module.exports = function() {
     var api = {
         findUserByCredentials: findUserByCredentials,
         updateUser: updateUser,
-        createUser : createUser
+        createUser : createUser,
+        findAllUsers :findAllUsers
     };
     return api;
 
@@ -50,5 +51,10 @@ module.exports = function() {
         var newUser = user;
         mock.push(newUser);
         return newUser;
+    }
+
+    function findAllUsers(){
+
+        return mock;
     }
 }

@@ -6,21 +6,14 @@ module.exports = function(app, userModel) {
     app.post("/api/project/login", login);
     app.put("/api/project/profile/:id", updateUser);
     app.post("/api/project/register", register);
+    app.get("/api/project/users", findAllUsers);
 
     function login(req, res) {
         var credentials = req.body;
         console.log(credentials);
 
-        var user = userModel.findUserbyCredentials(credentials)
-            .then(function (doc) {
-                    //req.session.currentUser = doc;
-                    res.json(doc);
-                },
-                // send error if promise rejected
-                function ( err ) {
-                    res.status(400).send(err);
-                }
-            )
+        var user = userModel.findUserByCredentials(credentials);
+        res.json(user);
     }
 
     function updateUser(req, res) {
@@ -35,5 +28,11 @@ module.exports = function(app, userModel) {
         var body = req.body;
         var user = userModel.createUser(body);
         res.json(user);
+    }
+
+    function findAllUsers(req, res){
+        var users = userModel.findAllUsers();
+        console.log("in server side service"+users);
+        res.json(users);
     }
 }

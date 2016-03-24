@@ -25,9 +25,9 @@
         }
 
 
-        function findAllUsers(callback) {
+        function findAllUsers() {
 
-            callback(users);
+            return $http.get("/api/project/users");
         }
 
 
@@ -50,7 +50,7 @@
             callback(users);
         }
 
-        function updateUser(userId, user) {
+        function updateUser(userId, newUser) {
 
             return $http.put("/api/project/profile/"+userId, newUser);
 

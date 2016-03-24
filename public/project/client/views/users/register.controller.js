@@ -17,15 +17,18 @@
         function init() {
 
             UserService.findAllUsers()
-                .then(function (user) {
-                    console.log(user);
+                .then(function (response) {
+                    console.log(response.data);
 
                 });
+
         }
 
         init();
 
         function register(user) {
+
+            console.log(user);
 
             if (user != null) {
 
@@ -50,8 +53,8 @@
                         });
 
                     UserService.findAllUsers()
-                        .then(function (user) {
-                            console.log(user);
+                        .then(function (response) {
+                            console.log(response.data);
 
                         });
 
