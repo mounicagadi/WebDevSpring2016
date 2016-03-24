@@ -38,7 +38,7 @@ module.exports = function(app, userModel) {
     }
 
     function findAllReviewsForUser(req, res){
-        var id = req.params.userId;
+        var id = req.params.id
         console.log("inside server"+id);
         var reviews = userModel.findAllReviewsForUser(id);
         res.json(reviews);

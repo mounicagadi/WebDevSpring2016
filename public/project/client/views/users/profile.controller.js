@@ -28,7 +28,8 @@
 
             ReviewService.findAllReviewsForUser($rootScope.user._id)
                 .then(function (response) {
-                    console.log(response);
+                    console.log(response.data.reviews);
+                    vm.reviews = response.data.reviews;
                 });
         }
 

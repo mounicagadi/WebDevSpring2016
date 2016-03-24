@@ -44,6 +44,14 @@
                 <div class="form-header">
                     <h2>My Reviews</h2>
                     <hr>
+                    <div ng-repeat="i in model.reviews">
+
+                        <b>{{i.restaurantName}}</b>
+
+                    <i>{{i.myReviews}}</i>
+                     </div>
+
+
                 </div>
             </div>
         </div>
