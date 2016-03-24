@@ -11,10 +11,11 @@
         .controller("ResultsController", ResultsController);
 
     //Function to display the content on the homepage
-    function ResultsController($scope, $location, $routeParams) {
+    function ResultsController($location, $routeParams) {
 
         console.log("in results controller");
-        $scope.$location = $location;
-        $scope.name = $routeParams.name;
+        var vm = this;
+        vm.$location = $location;
+        vm.name = $routeParams.name;
     }
 })();

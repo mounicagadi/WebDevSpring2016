@@ -10,35 +10,38 @@
         .controller("HomeController", HomeController);
 
     //Function to display the content on the homepage
-    function HomeController($scope, $location, $rootScope, FoursquareService, $routeParams) {
+    function HomeController($location, $rootScope, FoursquareService) {
 
-        $scope.search = search;
-        $scope.render = render;
-
-
+        var vm  = this;
+        vm.search = search;
         var default_place = "boston";
         var default_name = "restaurants"
 
-        function search(name,place) {
+        function search(restaurant) {
+
+            var name = restaurant.name;
+            var place = restaurant.place;
+
+            console.log(name,place);
 
             if (name == null && place == null) {
                 console.log("empty fields");
                 FoursquareService
-                    .findByNameLocation("restaurants", "boston", render);
+                    .findByNameLocation("restaurants", "boston");
             }
 
             else if (name == null && place !== null){
 
                 console.log("name null");
                 FoursquareService
-                    .findByNameLocation("restaurants", place, render);
+                    .findByNameLocation("restaurants", place);
             }
 
             else if (name !== null && place == null){
 
                 console.log("place null");
                 FoursquareService
-                    .findByNameLocation(name, "boston", render);
+                    .findByNameLocation(name, "boston");
             }
 
             else {
@@ -46,17 +49,16 @@
                 //$location.path("/home/"+name);
                 console.log(name);
                 FoursquareService
-                    .findByNameLocation(name, place, render);
+                    .findByNameLocation(name, place)
+                    .then(function(response){
+                        console.log(response.data.response.venues);
+                        $rootScope.info = response.data;
+                        $rootScope.name = name;
+                        //console.log("name - "+$rootScope.info.response.venues[0].name);
+                        $location.url("/search/"+name);
+                    });
 
             }
-        }
-
-        function render(response){
-            console.log(response)
-            $rootScope.info = response;
-            $rootScope.name = $scope.name;
-            console.log("name - "+$rootScope.info.response.venues[0].name);
-            $location.url("/search/"+$scope.name);
         }
 
     }

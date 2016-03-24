@@ -10,7 +10,8 @@
 
             .when("/home", {
                 templateUrl: "views/home/home.view.html",
-                controller : "HomeController"
+                controller : "HomeController",
+                controllerAs : "model"
             })
 
             .when("/search/:name", {
@@ -28,7 +29,8 @@
 
             .when("/details/:id", {
                 templateUrl: "views/search/details.view.html",
-                controller: "DetailsController"
+                controller: "DetailsController",
+                controllerAs : "model"
             })
 
             .when("/profile", {

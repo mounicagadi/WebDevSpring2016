@@ -1,3 +1,4 @@
+<div class="container add-padding">
 <div class="container-fluid">
     <div class="col-lg-8">
     </div>
@@ -7,27 +8,27 @@
 
     <div class="row container-fluid">
         <div class="col-lg-4 col-md-4 col-sm-4">
-            <img class="img img-responsive image-thumbnail details-image" ng-src="{{info.response.venue.bestPhoto.prefix}}300x500{{info.response.venue.bestPhoto.suffix}}"/>
+            <img class="img img-responsive image-thumbnail details-image" ng-src="{{model.info.response.venue.bestPhoto.prefix}}300x500{{model.info.response.venue.bestPhoto.suffix}}"/>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6">
 
-            <h3>{{info.response.venue.name}}</h3>
-            <p>Address : {{info.response.venue.location.address}},{{info.response.venue.location.city}},{{info.response.venue.location.country}}. {{info.response.venue.contact.phone}}</p>
+            <h3>{{model.info.response.venue.name}}</h3>
+            <p>Address : {{model.info.response.venue.location.address}},{{model.info.response.venue.location.city}},{{model.info.response.venue.location.country}}. {{model.info.response.venue.contact.phone}}</p>
             <p> Catgories:</p>
-            <ul ng-repeat="i in info.response.venue.categories">
+            <ul ng-repeat="i in model.info.response.venue.categories">
                 <li>
                     <i>
                 {{i.name}}
                         </i>
                 </li>
             </ul>
-            <p>{{info.response.venue.url}}</p>
+            <p>{{model.info.response.venue.url}}</p>
 
             <p> <button><span class="glyphicon glyphicon-heart"></span> </button></p>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2">
             <p>
-                <h2>{{info.response.venue.rating}}</h2>
+                <h2>{{model.info.response.venue.rating}}</h2>
             </p>
         </div>
     </div>
@@ -49,40 +50,15 @@
         </div>
 
     </div>
+    <div class="col-lg-3">
+        <div id="map">
+
+        </div>
+    </div>
+</div>
 </div>
 
 
-
-
-<!--<p>-->
-    <!--URL:-->
-    <!--{{info.response.venue.url}}-->
-<!--</p>-->
-
-
-<!--<p>-->
-    <!--Rating:-->
-    <!--{{info.response.venue.rating}}-->
-<!--</p>-->
-
-<!--<h2>Categories</h2>-->
-<!--<ul>-->
-    <!--<li ng-repeat="i in info.response.venue.categories">-->
-        <!--{{i.name}}-->
-    <!--</li>-->
-<!--</ul>-->
-
-<!--<h4>Photo</h4>-->
-<!--&lt;!&ndash;{{info.response.venue.bestPhoto.id}}&ndash;&gt;-->
-<!--<p><img src="{{info.response.venue.bestPhoto.prefix}}300x500{{info.response.venue.bestPhoto.suffix}}"></p>-->
-
-<!--<p>lat n long</p>-->
-<!--{{info.response.venue.location.lat}}-->
-<!--{{info.response.venue.location.lng}}-->
-
-
-
-<!--</div>-->
 
 
 

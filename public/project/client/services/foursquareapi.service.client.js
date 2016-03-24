@@ -19,12 +19,12 @@
         };
         return api;
 
-        function findByNameLocation(name,place,callback) {
+        function findByNameLocation(name,place) {
 
-            $http({
+            return $http({
                 method: "JSONP",
                 params: {
-                    query: name,
+                  query: name,
                     near : place,
                     categoryId : "4d4b7105d754a06374d81259",
                     limit : 10,
@@ -34,7 +34,7 @@
                 },
                 url: "https://api.foursquare.com/v2/venues/search?callback=JSON_CALLBACK",
                 isArray: true
-            }).success(callback);
+            });
 
 
         }
@@ -43,8 +43,7 @@
 
                 var url = details_url
                     .replace("ID", id);
-                $http.get(url)
-                    .success(callback);
+                return $http.get(url);
         }
 
 
