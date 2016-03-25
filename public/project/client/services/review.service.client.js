@@ -35,8 +35,7 @@
         function findAllReviewsForUser(userId){
 
             console.log(userId);
-            return $http.get("/api/project/reviews/"+userId);
-            //return $http.get("/api/project/user/"+userId+"reviews");
+            return $http.get("/api/project/user/"+userId+"/reviews");
 
         }
 

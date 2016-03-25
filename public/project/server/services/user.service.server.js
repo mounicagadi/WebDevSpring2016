@@ -7,12 +7,11 @@ module.exports = function(app, userModel) {
     app.put("/api/project/profile/:id", updateUser);
     app.post("/api/project/register", register);
     app.get("/api/project/users", findAllUsers);
-    app.get("/api/project/reviews/:id",findAllReviewsForUser)
+    app.get("/api/project/user/:userId/favourites",getFavourites)
 
     function login(req, res) {
         var credentials = req.body;
         console.log(credentials);
-
         var user = userModel.findUserByCredentials(credentials);
         res.json(user);
     }
@@ -37,10 +36,11 @@ module.exports = function(app, userModel) {
         res.json(users);
     }
 
-    function findAllReviewsForUser(req, res){
-        var id = req.params.id
-        console.log("inside server"+id);
-        var reviews = userModel.findAllReviewsForUser(id);
-        res.json(reviews);
+    function getFavourites(req, res){
+        console.log("inside favourites in server");
+        var userId  = req.params.userId;
+        var favourites = userModel.getFavourites(userId);
+        console.log("response for favourites"+favourites);
+        res.json(favourites);
     }
 }

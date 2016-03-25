@@ -8,14 +8,6 @@
 
     function UserService($http) {
 
-        var userFavourites = [
-            {
-                "user_id":123,
-                "restaurantName": "The Maharaja",
-                "id" : '4d8417c37e8ef04dd2e104be'
-            }
-        ];
-
         var api =
         {
             login: login,
@@ -39,18 +31,11 @@
             userFavourites.push(favourite);
         }
 
-        function getFavourites(userID, callback){
-            console.log(userID);
-            var favourites = [];
-            for(var index in userFavourites){
-                if(userFavourites[index].user_id == userID){
-                    favourites.push(userFavourites[index]);
-                }
-            }
+        function getFavourites(userID){
 
-            console.log(favourites);
+            console.log("inside client favourites");
+            return $http.get("/api/project/user/"+userID+"/favourites");
 
-            callback(favourites);
         }
 
         function login(credentials) {

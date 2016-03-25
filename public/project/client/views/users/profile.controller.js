@@ -35,19 +35,20 @@
                     vm.reviews = response.data.reviews;
                 });
 
-            UserService.getFavourites($rootScope.user._id,render);
-
+            UserService.getFavourites($rootScope.user._id)
+                .then(function (response) {
+                    console.log(response.data);
+                    vm.forms = response.data;
+                    //console.log("checking favourites response"+response);
+                    currentForms = response.data;
+                });
 
         }
 
         init();
 
-        function render(response){
-            vm.forms = response;
-            console.log("checking favourites response"+response);
-            currentForms = response;
 
-        }
+
 
         function deleteForm(index){
 

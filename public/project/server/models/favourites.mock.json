@@ -1,0 +1,21 @@
+[
+  {
+    "user_id":123,
+    "restaurantName": "The Maharaja",
+    "id" : "4d8417c37e8ef04dd2e104be"
+  },
+
+  {
+    "user_id":234,
+    "restaurantName": "The Maharaja",
+    "id" : "4d8417c37e8ef04dd2e104be"
+  },
+
+  {
+    "user_id":456,
+    "restaurantName": "The Maharaja",
+    "id" : "4d8417c37e8ef04dd2e104be"
+  }
+
+
+]

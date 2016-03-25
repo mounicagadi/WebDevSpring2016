@@ -3,7 +3,7 @@
  */
 
 var mock = require("./user.mock.json");
-var review_mock = require("./review.mock.json");
+var favourite_mock = require("./favourites.mock.json")
 
 var q = require("q");
 
@@ -13,7 +13,7 @@ module.exports = function() {
         updateUser: updateUser,
         createUser : createUser,
         findAllUsers :findAllUsers,
-        findAllReviewsForUser : findAllReviewsForUser
+        getFavourites : getFavourites
     };
     return api;
 
@@ -60,22 +60,16 @@ module.exports = function() {
         return mock;
     }
 
-    function findAllReviewsForUser(userId){
-        console.log("inside reviews part in model");
-        var rev = null;
-        for(var i in review_mock){
-            //console.log("checking mock for reviews"+review_mock);
-            console.log("paramter"+userId);
-            var obj = review_mock[i];
-            var id = obj._id;
-            console.log("review id"+id);
-            if(id == userId){
-                rev = review_mock[i];
-                console.log("reviews console"+review_mock[i]);
-                break;
+    function getFavourites(userId){
+
+        var favourites = [];
+        for(var index in favourite_mock){
+            if(favourite_mock[index].user_id == userId){
+                favourites.push(favourite_mock[index]);
             }
         }
-        return rev;
+
+        return favourites;
 
     }
 }
