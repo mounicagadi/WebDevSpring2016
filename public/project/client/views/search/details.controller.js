@@ -10,7 +10,7 @@
         .module("EatOutApp")
         .controller("DetailsController", detailsController);
 
-    function detailsController($routeParams, FoursquareService) {
+    function detailsController($routeParams, FoursquareService, $rootScope, UserService) {
 
         function init() {
 
@@ -19,8 +19,18 @@
         init();
 
         var vm = this;
+        vm.favourite = favourite;
 
         vm.id = $routeParams.id;
+
+        function favourite(name,id){
+            if($rootScope.user){
+
+                UserService.addFavourite(name,id,$rootScope.user._id);
+
+            }
+
+        }
 
 
         FoursquareService.findRestaurantByID(vm.id)

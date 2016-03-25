@@ -10,10 +10,13 @@
         .controller("ProfileController", ProfileController);
 
     //Function to display the content on the homepage
-    function ProfileController(UserService, $rootScope, $routeParams, ReviewService) {
+    function ProfileController(UserService, $rootScope, $routeParams, ReviewService, FormService) {
 
         var vm = this;
         vm.update = update;
+        vm.deleteForm =deleteForm;
+        var selectedIndex = null;
+        var currentForms = [];
         var username = $routeParams.username;
 
         function init(){
@@ -31,9 +34,30 @@
                     console.log(response.data.reviews);
                     vm.reviews = response.data.reviews;
                 });
+
+            UserService.getFavourites($rootScope.user._id,render);
+
+
         }
 
         init();
+
+        function render(response){
+            vm.forms = response;
+            console.log("checking favourites response"+response);
+            currentForms = response;
+
+        }
+
+        function deleteForm(index){
+
+            selectedIndex = index;
+            FormService.deleteFormById(currentForms[index].id,currentForms,renderFormAfterAction);
+        }
+
+        function renderFormAfterAction(response){
+            render(response);
+        }
 
         function update(user) {
 

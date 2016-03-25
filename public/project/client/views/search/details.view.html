@@ -24,7 +24,8 @@
             </ul>
             <p>{{model.info.response.venue.url}}</p>
 
-            <p> <button><span class="glyphicon glyphicon-heart"></span> </button></p>
+            <p> <button ng-click="model.favourite(model.info.response.venue.name,model.info.response.venue.id)">
+                <span class="glyphicon glyphicon-heart"></span> </button></p>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2">
             <p>

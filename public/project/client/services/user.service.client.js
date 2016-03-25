@@ -8,16 +8,50 @@
 
     function UserService($http) {
 
+        var userFavourites = [
+            {
+                "user_id":123,
+                "restaurantName": "The Maharaja",
+                "id" : '4d8417c37e8ef04dd2e104be'
+            }
+        ];
+
         var api =
         {
             login: login,
             findAllUsers: findAllUsers,
             registerUser: registerUser,
             deleteUserById: deleteUserById,
-            updateUser: updateUser
+            updateUser: updateUser,
+            addFavourite : addFavourite,
+            getFavourites :getFavourites
 
         };
         return api;
+
+        function addFavourite(name, id, userId){
+            var favourite = {
+                "user_id":userId,
+                "restaurantName": name,
+                "id" : id
+            };
+
+            userFavourites.push(favourite);
+        }
+
+        function getFavourites(userID, callback){
+            console.log(userID);
+            var favourites = [];
+            for(var index in userFavourites){
+                if(userFavourites[index].user_id == userID){
+                    favourites.push(userFavourites[index]);
+                }
+            }
+
+            console.log(favourites);
+
+            callback(favourites);
+        }
 
         function login(credentials) {
 

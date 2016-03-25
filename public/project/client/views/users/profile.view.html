@@ -53,6 +53,43 @@
 
 
                 </div>
+
+                <div class="form-header">
+                    <h2>My Favourites</h2>
+                    <hr>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>
+                                    <a role="button"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true">
+                            </span>&nbsp;Restaurants</a>
+                                </th>
+                                <th>
+                                    <a role="button"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true">
+                            </span>&nbsp;Action</a>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="hotel in model.forms">
+                                <td>
+                                    <a href="#/details/{{hotel.id}}">{{hotel.restaurantName}}</a>
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a  ng-click = "model.deleteForm($index)" role="button" class="btn btn-default" aria-label="Add">
+                                            <span  class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            <span class="hidden-xs"></span>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
