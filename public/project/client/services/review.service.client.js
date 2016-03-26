@@ -14,9 +14,10 @@
 
         var api = {
 
+            addReview : addReview,
             findAllReviews: findAllReviews,
             findAllReviewsForUser: findAllReviewsForUser,
-            deleteReviewById: deleteReviewById,
+            deleteReview: deleteReview,
             updateReviewById: updateReviewById
         };
 
@@ -26,10 +27,10 @@
             callback(reviewList);
         }
 
-        function createReview(review, callback){
-            review._id=(new Date).getTime();
-            reviewList.push(review);
-            callback(reviewList);
+        function addReview(userId, review){
+
+            return $http.post("/api/project/user/"+userId+"/addReview",review);
+
         }
 
         function findAllReviewsForUser(userId){
@@ -39,14 +40,8 @@
 
         }
 
-        function deleteReviewById(reviewId,callback){
-            for(var i=0;i<reviewList.length;i++) {
-                if(reviewList[i]._id == reviewId)
-                {
-                    reviewList.splice(i,1);
-                }
-            }
-            callback(reviewList);
+        function deleteReview(userId, id){
+            return $http.delete("/api/project/user/"+userId+"/deleteReview/"+ id);
         }
 
         function updateReviewById(ratingId,rat,callback){

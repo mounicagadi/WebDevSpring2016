@@ -1,36 +1,23 @@
 [
-  {"_id": "123", "reviews":
-    [
-      {"_reviewId":"1", "restaurantName":"Bhop" ,"myReviews" : "Awesome Place"},
-      {"_reviewId":"2", "restaurantName":"Uhop" ,"myReviews" : "Great Food!!"},
-      {"_reviewId":"3", "restaurantName":"Thop" ,"myReviews" : "Bad Ambience"}
-    ]
+  {
+    "user_id": "123",
+    "restaurantName": "The Maharaja",
+    "id" : "4d8417c37e8ef04dd2e104be",
+    "reviews":"Awesome Place"
+
   },
-  {"_id": "234", "reviews":
-    [
-      {"_reviewId":"1", "restaurantName":"Bhop" ,"myReviews" : "Awesome Place"},
-      {"_reviewId":"2", "restaurantName":"Uhop" ,"myReviews" : "Great Food!!"},
-      {"_reviewId":"3", "restaurantName":"Thop" ,"myReviews" : "Bad Ambience"}
-    ]
+
+  {
+    "user_id": "234",
+    "restaurantName": "The Maharaja",
+    "id" : "4d8417c37e8ef04dd2e104be",
+    "reviews":"Awesome Place"
+
   },
   {
-    "_id": "456",
-    "reviews": [
-      {
-        "_reviewId": "1",
-        "restaurantName": "Bhop",
-        "myReviews": "Awesome Place"
-      },
-      {
-        "_reviewId": "2",
-        "restaurantName": "Uhop",
-        "myReviews": "Great Food!!"
-      },
-      {
-        "_reviewId": "3",
-        "restaurantName": "Thop",
-        "myReviews": "Bad Ambience"
-      }
-    ]
+    "user_id": "456",
+    "restaurantName": "The Maharaja",
+    "id" : "4d8417c37e8ef04dd2e104be",
+    "reviews":"Awesome Place"
   }
 ]

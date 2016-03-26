@@ -43,8 +43,8 @@
                             Write a Review!
                         </h3>
                         <form class="form-horizontal">
-                            <textarea placeholder="Write a review!" class="form-control review-textarea" rows="8" cols="40"></textarea>
-                            <button class="btn btn-primary site-color-background form-control">Submit a Review</button>
+                            <textarea placeholder="Write a review!" ng-model ="model.review" class="form-control review-textarea" rows="8" cols="40"></textarea>
+                            <button ng-click ="model.addReview(model.info.response.venue.name,model.info.response.venue.id,model.review)" class="btn btn-primary site-color-background form-control">Submit a Review</button>
                         </form>
                     </div>
                 </div>

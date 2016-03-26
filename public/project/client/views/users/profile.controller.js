@@ -15,6 +15,7 @@
         var vm = this;
         vm.update = update;
         vm.deleteForm =deleteForm;
+        vm.deleteReview = deleteReview;
         var selectedIndex = null;
         var currentForms = [];
         var username = $routeParams.username;
@@ -31,8 +32,8 @@
 
             ReviewService.findAllReviewsForUser($rootScope.user._id)
                 .then(function (response) {
-                    console.log(response.data.reviews);
-                    vm.reviews = response.data.reviews;
+                    console.log(response.data);
+                    vm.reviews = response.data;
                 });
 
             UserService.getFavourites($rootScope.user._id)
@@ -45,7 +46,15 @@
 
         init();
 
-        function displayForms(){
+        function displayReviews(){
+            ReviewService.findAllReviewsForUser($rootScope.user._id)
+                .then(function (response) {
+                    console.log(response.data);
+                    vm.reviews = response.data;
+                });
+        }
+
+        function displayFavourites(){
 
             UserService.getFavourites($rootScope.user._id)
                 .then(function (response) {
@@ -60,10 +69,20 @@
                 .then(function(response){
                     console.log(response);
                     if(response.data == "OK"){
-                        displayForms();
+                        displayFavourites();
                     }
                 });
 
+        }
+
+        function deleteReview(id){
+            ReviewService.deleteReview($rootScope.user._id, id)
+                .then(function(response){
+                    console.log(response);
+                    if(response.data == "OK"){
+                        displayReviews();
+                    }
+                });
         }
 
         function update(user) {

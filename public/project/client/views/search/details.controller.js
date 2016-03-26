@@ -10,7 +10,7 @@
         .module("EatOutApp")
         .controller("DetailsController", detailsController);
 
-    function detailsController($routeParams, FoursquareService, $rootScope, UserService, $location) {
+    function detailsController($routeParams, FoursquareService, $rootScope, UserService, $location, ReviewService) {
 
         function init() {
 
@@ -20,6 +20,7 @@
 
         var vm = this;
         vm.addFavourite = addFavourite;
+        vm.addReview = addReview;
 
         vm.id = $routeParams.id;
 
@@ -38,6 +39,24 @@
                 $location.url("/login");
             }
 
+        }
+
+        function addReview(name,id,review){
+            if($rootScope.user) {
+
+                var newReview =
+                {
+                    "user_id" : $rootScope.user._id,
+                    "restaurantName": name,
+                    "id": id,
+                    "reviews": review
+
+                };
+                ReviewService.addReview($rootScope.user._id,newReview);
+            }else{
+                alert("Please login to write a review");
+                $location.url("/login");
+            }
         }
 
 
