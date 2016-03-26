@@ -39,25 +39,31 @@
                 .then(function (response) {
                     console.log(response.data);
                     vm.forms = response.data;
-                    //console.log("checking favourites response"+response);
-                    currentForms = response.data;
                 });
 
         }
 
         init();
 
+        function displayForms(){
 
-
-
-        function deleteForm(index){
-
-            selectedIndex = index;
-            FormService.deleteFormById(currentForms[index].id,currentForms,renderFormAfterAction);
+            UserService.getFavourites($rootScope.user._id)
+                .then(function (response) {
+                    console.log(response.data);
+                    vm.forms = response.data;
+                });
         }
 
-        function renderFormAfterAction(response){
-            render(response);
+
+        function deleteForm(id){
+            UserService.deleteFavourites($rootScope.user._id, id)
+                .then(function(response){
+                    console.log(response);
+                    if(response.data == "OK"){
+                        displayForms();
+                    }
+                });
+
         }
 
         function update(user) {

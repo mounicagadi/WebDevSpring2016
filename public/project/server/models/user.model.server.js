@@ -12,8 +12,11 @@ module.exports = function() {
         findUserByCredentials: findUserByCredentials,
         updateUser: updateUser,
         createUser : createUser,
+        deleteUserById: deleteUserById,
         findAllUsers :findAllUsers,
-        getFavourites : getFavourites
+        getFavourites : getFavourites,
+        addFavourites : addFavourites,
+        deleteFavourites : deleteFavourites
     };
     return api;
 
@@ -60,6 +63,17 @@ module.exports = function() {
         return mock;
     }
 
+    function deleteUserById(userId){
+
+        for (var index in mock) {
+            if (mock[index]._id == userId) {
+                delete mock[index];
+
+            }
+        }
+    }
+
+
     function getFavourites(userId){
 
         var favourites = [];
@@ -72,4 +86,24 @@ module.exports = function() {
         return favourites;
 
     }
+
+    function addFavourites(userId, newFavourite) {
+
+        favourite_mock.push(newFavourite);
+    }
+
+    function deleteFavourites(userID, id){
+        var removed = -1;
+        for(var index in favourite_mock){
+            if(favourite_mock[index].user_id == userID && favourite_mock[index].id == id){
+                removed = index;
+                break;
+            }
+        }
+
+        if(removed>=0){
+            favourite_mock.splice(removed,1);
+        }
+    }
+
 }

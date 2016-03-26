@@ -10,7 +10,7 @@
         .module("EatOutApp")
         .controller("DetailsController", detailsController);
 
-    function detailsController($routeParams, FoursquareService, $rootScope, UserService) {
+    function detailsController($routeParams, FoursquareService, $rootScope, UserService, $location) {
 
         function init() {
 
@@ -19,15 +19,23 @@
         init();
 
         var vm = this;
-        vm.favourite = favourite;
+        vm.addFavourite = addFavourite;
 
         vm.id = $routeParams.id;
 
-        function favourite(name,id){
+        function addFavourite(name,id){
             if($rootScope.user){
 
-                UserService.addFavourite(name,id,$rootScope.user._id);
+                var favourites = {
+                    "user_id":$rootScope.user._id,
+                    "restaurantName": name,
+                    "id" : id
+                }
+                UserService.addFavourite($rootScope.user._id,favourites);
 
+            }else {
+                alert("Please login to add favourites");
+                $location.url("/login");
             }
 
         }

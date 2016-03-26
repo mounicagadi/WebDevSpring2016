@@ -16,19 +16,16 @@
             deleteUserById: deleteUserById,
             updateUser: updateUser,
             addFavourite : addFavourite,
-            getFavourites :getFavourites
+            getFavourites :getFavourites,
+            deleteFavourites : deleteFavourites
 
         };
         return api;
 
-        function addFavourite(name, id, userId){
-            var favourite = {
-                "user_id":userId,
-                "restaurantName": name,
-                "id" : id
-            };
+        function addFavourite(userId,favourite){
 
-            userFavourites.push(favourite);
+            console.log(favourite);
+            return $http.post("/api/project/user/"+userId+"/favourites",favourite);
         }
 
         function getFavourites(userID){
@@ -36,6 +33,11 @@
             console.log("inside client favourites");
             return $http.get("/api/project/user/"+userID+"/favourites");
 
+        }
+
+        function deleteFavourites(userId,id){
+
+            return $http.delete("/api/project/user/"+userId+"/deletefavourite/"+ id);
         }
 
         function login(credentials) {
@@ -56,17 +58,9 @@
 
         }
 
-        function deleteUserById(userId,callback) {
+        function deleteUserById(userId) {
 
-            for(var index in users){
-                var obj = users[index];
-                if(obj._id==userId){
-                    users.splice(index,1);
-                    break;
-                }
-            }
-
-            callback(users);
+            return $http.delete("/api/project/user/" + userId);
         }
 
         function updateUser(userId, newUser) {
