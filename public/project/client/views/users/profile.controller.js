@@ -16,6 +16,7 @@
         vm.update = update;
         vm.deleteForm =deleteForm;
         vm.deleteReview = deleteReview;
+        vm.selectReview = selectReview;
         var selectedIndex = null;
         var currentForms = [];
         var username = $routeParams.username;
@@ -83,6 +84,15 @@
                         displayReviews();
                     }
                 });
+        }
+
+        function selectReview($index){
+            vm.i={};
+
+            var selectedIndex = vm.reviews[$index];
+
+            vm.title = selectedIndex.title;
+
         }
 
         function update(user) {

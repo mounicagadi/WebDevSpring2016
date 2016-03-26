@@ -53,6 +53,7 @@
 
                 };
                 ReviewService.addReview($rootScope.user._id,newReview);
+                vm.review = null;
             }else{
                 alert("Please login to write a review");
                 $location.url("/login");
