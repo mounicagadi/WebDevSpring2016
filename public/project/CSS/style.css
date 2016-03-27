@@ -17,6 +17,12 @@ body {
     padding-top: 50px;
 }
 
+.form-text-input {
+    border-radius: 1px;
+    height: 50px;
+    background: #eee;
+}
+
 .image{
     background: url('../images/background-dim.jpg')no-repeat center center fixed;
     -webkit-background-size: cover;

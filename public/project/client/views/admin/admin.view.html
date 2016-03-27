@@ -1,10 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="container-fluid">
+<div class="row">
+    <h3>Admin Page</h3>
+    <hr>
+    <div class="container-fluid col-lg-12 card elevation1">
+        <h2>User data</h2>
+        <hr>
+        <div class="container-fluid table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <input class="form-control form-text-input" type="text" id="firstName" ng-model="model.user.firstName" placeholder="First Name">
+                    </td>
+                    <td>
+                        <input class="form-control form-text-input" type="text" id="LastName" ng-model="model.user.LastName" placeholder="First Name">
+                    </td>
+                    <td>
+                        <input class="form-control form-text-input" type="text" id="username" ng-model="model.user.username" placeholder="First Name">
+                    </td>
+                    <td>
+                        <input class="form-control form-text-input" type="password" id="password" ng-model="model.user.password" placeholder="First Name">
+                    </td>
+                    <td>
+                        <input class="form-control form-text-input" type="email" id="email" ng-model="model.user.email" placeholder="First Name">
+                    </td>
+                    <td class="second-column">
+                        <div class="container-fluid">
+                            <button ng-click="model.addUser(model.user)" type="button" class="btn btn-success" aria-label="Add">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                <span class="hidden-xs"></span>
+                            </button>
+                            <button ng-click="model.updateUser(model.user)" type="button" class="btn btn-info">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                <span class="hidden-xs"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
-</body>
-</html>
+    </div>
+</div>
+</div>

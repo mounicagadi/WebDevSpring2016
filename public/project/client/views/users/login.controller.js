@@ -24,31 +24,37 @@
                 return;
             }
 
-            UserService.login
-            ({
-                username : user.username,
-                password : user.password}).
+            if(user.username == "admin" && user.password == "admin"){
 
-            then(function (user) {
+                $location.url("/admin");
+            }else{
 
-                console.log(user.data);
-                if( user != null) {
+                UserService.login
+                ({
+                    username : user.username,
+                    password : user.password}).
 
-                    $rootScope.user = user.data;
+                then(function (user) {
 
-                    console.log($rootScope.user.username);
+                    console.log(user.data);
+                    if( user != null) {
 
-                    vm.user.username = $rootScope.user.username;
-                    $location.path("/profile");
-                }
+                        $rootScope.user = user.data;
 
-                else {
-                    alert("Invalid entry");
-                }
+                        console.log($rootScope.user.username);
+
+                        vm.user.username = $rootScope.user.username;
+                        $location.path("/profile");
+                    }
+
+                    else {
+                        alert("Invalid entry");
+                    }
 
 
-            });
+                });
 
+        }
         }
 
 
