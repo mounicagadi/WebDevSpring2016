@@ -10,15 +10,9 @@ module.exports = function(app, model) {
     app.get("/api/assignment/user", findAllUsers);
     app.delete("/api/assignment/user/:id", deleteUserById);
     app.get("/api/assignment/user/:id", findUserById);
-    app.get("/api/assignment/user/checkAdmin", checkAdmin);
+    app.get("/api/assignment/user/loggedin", loggedin);
+    app.post("/api/assignment/user/logout", logout);
 
-
-    function checkAdmin(req, res){
-        console.log("Inside server side checkAdmin");
-        var user = req.body;
-        var reply = model.checkAdmin(user);
-        res.json(reply);
-    }
 
     function findUserByCredentials(req, res) {
         console.log("Inside server side login part");
@@ -29,7 +23,18 @@ module.exports = function(app, model) {
             password: password
         };
         var user = model.findUserByCredentials(credentials);
+        req.session.user = user;
         res.json(user);
+    }
+
+    function logout(req, res) {
+        req.session.destroy();
+        res.send(200);
+    }
+
+    function loggedin(req, res) {
+        console.log("inside loggedin func of server");
+        res.json(req.session.user);
     }
 
 
@@ -44,6 +49,7 @@ module.exports = function(app, model) {
         console.log("Inside server side createUser");
         var body = req.body;
         var user = model.createUser(body);
+        req.session.user = user;
         res.json(user);
     }
 
@@ -101,7 +107,7 @@ module.exports = function(app, model) {
 
     function findUserById(req, res){
         console.log("Inside server side findUserById");
-        var userId = req.params._id;
+        var userId = req.params.id;
         var user = model.findUserById(userId);
         res.json(user);
     }

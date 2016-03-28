@@ -8,6 +8,8 @@
 
             <h3>{{model.info.response.venue.name}}</h3>
             <p>Address : {{model.info.response.venue.location.address}},{{model.info.response.venue.location.city}},{{model.info.response.venue.location.country}}. {{model.info.response.venue.contact.phone}}</p>
+
+            <p>{{model.info.response.venue.url}}</p>
             <p> Catgories:</p>
             <ul ng-repeat="i in model.info.response.venue.categories">
                 <li>
@@ -16,7 +18,9 @@
                         </i>
                 </li>
             </ul>
-            <p>{{model.info.response.venue.url}}</p>
+
+
+            <p><i>"{{model.info.response.venue.tips.groups[0].items[1].text}}"</i></p>
 
             <p> <button ng-click="model.addFavourite(model.info.response.venue.name,model.info.response.venue.id)">
                 <span class="glyphicon glyphicon-heart"></span> </button></p>

@@ -45,6 +45,7 @@ module.exports = function() {
     }
 
     function findUserByCredentials(credentials) {
+        console.log("inside credentials part in model");
         var user = null;
         for(var u in users) {
             var obj = users[u];

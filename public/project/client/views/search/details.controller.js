@@ -65,7 +65,10 @@
             .then(function(response) {
 
                 console.log(response.data);
+
                 vm.info = response.data;
+
+                console.log("trying tips"+vm.info.response.venue.tips.groups[0].items[1].text);
 
                 var address = vm.info.response.venue.location.address + vm.info.response.venue.location.city + vm.info.response.venue.location.country;
 
