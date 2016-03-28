@@ -14,7 +14,17 @@ body {
 
 .add-padding{
 
-    padding-top: 50px;
+    padding-top: 53px;
+}
+
+.homepage-items{
+
+    height: 60px;
+}
+
+.try{
+    max-width: 20px;
+    max-height: 20px;
 }
 
 .form-text-input {
@@ -73,11 +83,6 @@ body {
     background-color: #cb202d;
     padding-top: 15px;
     font-size: 18px;
-}
-
-.map_display{
-    width: 500px;
-    height: 400px;
 }
 
 .site-color-background {
@@ -220,7 +225,16 @@ body {
     color: white;
 }
 
-section {
+.form-heading{
+    font-size: 22px;
+}
+
+.text-left{
+    text-align: left;
+}
+
+.inverted-color {
+    color: #eee;
 }
 
 .bg-primary {
@@ -230,4 +244,11 @@ section {
 .tab-pane{
     height: 600px;
     overflow: auto;
+}
+
+.footer {
+    background: #cb202d;
+    min-height: 50px;
+    padding: 75px 100px 50px 100px;
+    z-index: -999;
 }
