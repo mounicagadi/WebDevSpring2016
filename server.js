@@ -5,6 +5,9 @@ var multer = require('multer');
 var uuid = require('node-uuid');
 var cookieParser  = require('cookie-parser');
 var session       = require('express-session');
+var mongoose = require("mongoose");
+
+
 
 
 app.use(express.static(__dirname + '/public'));
@@ -12,13 +15,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());//for parsing multipart/form-data
 
+
+app.use(cookieParser())
 app.use(session({
     resave: true,
     saveUninitialized: true,
     secret: 'my project'
 }));
-
-app.use(cookieParser())
 
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';

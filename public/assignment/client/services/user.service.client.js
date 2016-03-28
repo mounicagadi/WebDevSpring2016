@@ -18,7 +18,8 @@
             deleteUserById: deleteUserById,
             updateUser: updateUser,
             setCurrentUser: setCurrentUser,
-            getCurrentUser: getCurrentUser
+            getCurrentUser: getCurrentUser,
+            logout : logout
 
 
         };
@@ -27,7 +28,7 @@
 
         function getCurrentUser() {
             console.log("calling loggedin function");
-            return $http.get("/api/assignment/user/loggedin");
+            return $http.get("/api/assignment/users/loggedin");
         }
 
         function setCurrentUser(user) {
@@ -35,7 +36,13 @@
         }
 
         function logout() {
-            return $http.post("/api/assignment/user/logout");
+            return $http.post("/api/assignment/user/logout")
+                .success(function () {
+                    // $rootScope.user = null;
+                    console.log('Returning null');
+                    $rootScope.user = null;
+                    // return null;
+                });
         }
 
         function findUserById(userId){

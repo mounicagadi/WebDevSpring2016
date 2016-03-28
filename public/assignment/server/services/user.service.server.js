@@ -10,30 +10,34 @@ module.exports = function(app, model) {
     app.get("/api/assignment/user", findAllUsers);
     app.delete("/api/assignment/user/:id", deleteUserById);
     app.get("/api/assignment/user/:id", findUserById);
-    app.get("/api/assignment/user/loggedin", loggedin);
+    app.get("/api/assignment/users/loggedin", loggedin);
     app.post("/api/assignment/user/logout", logout);
 
 
-    function findUserByCredentials(req, res) {
+    function setSession(req,user) {
         console.log("Inside server side login part");
-        var username = req.params.username;
-        var password = req.params.password;
-        var credentials = {
-            username: username,
-            password: password
-        };
-        var user = model.findUserByCredentials(credentials);
+        //var username = req.params.username;
+        //var password = req.params.password;
+        //var credentials = {
+        //    username: username,
+        //    password: password
+        //};
+        //var user = model.findUserByCredentials(credentials);
         req.session.user = user;
-        res.json(user);
+        console.log('User session: ', req.session.user);
+        //res.json(user);
     }
 
     function logout(req, res) {
+        console.log("inside logout");
         req.session.destroy();
-        res.send(200);
+        //res.send(200);
+        res.status(200).send(null);
     }
 
     function loggedin(req, res) {
         console.log("inside loggedin func of server");
+        console.log(req.session.user);
         res.json(req.session.user);
     }
 
@@ -70,6 +74,7 @@ module.exports = function(app, model) {
 
             console.log("Going to call credentials function")
             var user = model.findUserByCredentials(credentials);
+            setSession(req,user);
             res.json(user);
 
 

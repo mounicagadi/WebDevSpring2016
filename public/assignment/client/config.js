@@ -67,7 +67,7 @@
             });
     }
 
-    function getLoggedIn(UserService, $q, $rootScope) {
+    function getLoggedIn(UserService, $q) {
         var deferred = $q.defer();
 
         console.log("inside getloggedin")
@@ -75,7 +75,7 @@
             .getCurrentUser()
             .then(function(response){
                 var currentUser = response.data;
-                console.log(response);
+                console.log(response.data);
                 UserService.setCurrentUser(currentUser);
                 deferred.resolve();
             });
@@ -83,7 +83,7 @@
         return deferred.promise;
     }
 
-    function checkLoggedIn(UserService, $q, $location, $rootScope) {
+    function checkLoggedIn(UserService, $q, $location) {
 
         var deferred = $q.defer();
 
