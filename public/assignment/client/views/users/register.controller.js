@@ -14,11 +14,11 @@
 
         function init(){
 
-            //UserService.findAllUsers()
-            //    .then(function(user) {
-            //        console.log(user);
-            //
-            //    });
+            UserService.findAllUsers()
+                .then(function(user) {
+                    console.log(user);
+
+                });
         }
 
         init();
@@ -46,11 +46,7 @@
                     $location.path("/profile");
                 });
 
-                    //UserService.findAllUsers()
-                    //    .then(function(user) {
-                    //        console.log(user);
-                    //
-                    //    });
+                    init();
 
 
             } else {

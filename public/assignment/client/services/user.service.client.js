@@ -57,8 +57,7 @@
         }
 
         function findUserByCredentials(username, password) {
-            console.log(username,password);
-            console.log("/api/assignment/user?username="+ username + "&password=" + password);
+
             return $http.get("/api/assignment/user?username="+ username + "&password=" + password);
 
         }
@@ -70,18 +69,7 @@
 
         function createUser(user) {
 
-            console.log("inside client create user");
-            console.log(user);
             return $http.post("/api/assignment/user", user);
-            //
-            //var deferred = $q.defer();
-            //
-            //$http.post("/api/assignment/user", user)
-            //    .success(function(response) {
-            //        deferred.resolve(response);
-            //    });
-            //// sends user to the web service endpoint
-            //return deferred.promise;
 
         }
 

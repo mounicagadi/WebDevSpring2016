@@ -40,7 +40,16 @@ module.exports = function(app, model) {
         console.log("Inside server side updateUser");
         var id = req.params.userId;
         var newUser = req.body;
-        res.json(model.updateUser(id, newUser));
+        var user = model.updateUser(id, newUser)
+            .then(
+                function(doc){
+                    res.json(doc);
+                },
+
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function createUser(req, res){

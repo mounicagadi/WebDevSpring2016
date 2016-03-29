@@ -81,19 +81,23 @@ module.exports = function(db, mongoose) {
     function updateUser(userId, user){
 
         console.log("inside update model");
-        for (var value in users) {
-            var obj = users[value];
-            var id = obj._id;
-            if (id == userId) {
-                users[value] = user;
-                console.log("in model"+user);
-                return users[value];
-            }else{
-                return null;
-            }
-        }
+        var deferred = q.defer();
 
+        UserModel.update(
+            { _id : userId },
+            {$set: user},
+            function (err, stats) {
+                if (!err) {
+                    deferred.resolve(stats);
+                } else {
+                    deferred.reject(err);
+                }
+            }
+        );
+        return deferred.promise;
     }
+
+
 
 
     function createUser(user){
