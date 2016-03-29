@@ -81,12 +81,14 @@ module.exports = function(db, mongoose) {
     function updateUser(userId, user){
 
         console.log("inside update model");
+        console.log(user);
         var deferred = q.defer();
 
         UserModel.update(
             { _id : userId },
             {$set: user},
             function (err, stats) {
+                console.log("stats"+stats);
                 if (!err) {
                     deferred.resolve(stats);
                 } else {

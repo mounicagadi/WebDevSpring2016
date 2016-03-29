@@ -38,7 +38,7 @@ module.exports = function(app, model) {
 
     function updateUser(req, res) {
         console.log("Inside server side updateUser");
-        var id = req.params.userId;
+        var id = req.params.id;
         var newUser = req.body;
         var user = model.updateUser(id, newUser)
             .then(
@@ -135,17 +135,13 @@ module.exports = function(app, model) {
     }
 
     function findUserById(req, res){
-        var userId = req.params.userId;
+        var userId = req.params.id;
 
         // use model to find user by id
         var user = model.findUserById(userId)
             .then(
                 // return user if promise resolved
                 function (doc) {
-                    //we'll work on movie model a bit later
-                    //var movieImdbIDs = user.likes;
-                    //var movies = movieModel.findMoviesByImdbIDs(movieImdbIDs);
-                    //user.likesMovies = movies;
                     res.json(doc);
                 },
                 // send error if promise rejected

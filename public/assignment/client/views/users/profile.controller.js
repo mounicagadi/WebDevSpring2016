@@ -15,10 +15,12 @@
 
         function init(){
 
-            var currUser = $rootScope.user;
-            if (currUser != null) {
-                vm.user = currUser;
-        }
+            UserService.findUserById($rootScope.user._id)
+                .then(function(response){
+                    $rootScope.user = response.data;
+                    vm.user = $rootScope.user;
+                });
+
         }
 
         init();
