@@ -14,6 +14,6 @@ module.exports = function(mongoose) {
         phones: [String]
         // collection property sets
         // collection name to 'user'
-    }, {collection: 'user'});
+    }, {collection: 'assignment.user'});
     return UserSchema;
 };

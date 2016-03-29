@@ -5,6 +5,7 @@
 
 module.exports = function(app, model) {
 
+
     app.put("/api/assignment/user/:id", updateUser);
     app.post("/api/assignment/user", createUser);
     app.get("/api/assignment/user", findAllUsers);
@@ -16,16 +17,9 @@ module.exports = function(app, model) {
 
     function setSession(req,user) {
         console.log("Inside server side login part");
-        //var username = req.params.username;
-        //var password = req.params.password;
-        //var credentials = {
-        //    username: username,
-        //    password: password
-        //};
-        //var user = model.findUserByCredentials(credentials);
         req.session.user = user;
         console.log('User session: ', req.session.user);
-        //res.json(user);
+
     }
 
     function logout(req, res) {
@@ -50,11 +44,24 @@ module.exports = function(app, model) {
     }
 
     function createUser(req, res){
-        console.log("Inside server side createUser");
-        var body = req.body;
-        var user = model.createUser(body);
-        req.session.user = user;
-        res.json(user);
+        console.log("inside create user server service");
+        var user = req.body;
+
+        console.log(user);
+
+        user = model.createUser(user)
+            // handle model promise
+            .then(
+                // login user if promise resolved
+                function ( doc ) {
+                    req.session.user = doc;
+                    res.json(user);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function findAllUsers(req, res) {
@@ -73,9 +80,17 @@ module.exports = function(app, model) {
             };
 
             console.log("Going to call credentials function")
-            var user = model.findUserByCredentials(credentials);
-            setSession(req,user);
-            res.json(user);
+            var user = model.findUserByCredentials(credentials)
+                .then(
+                    function (doc) {
+                        setSession(req, doc);
+                        res.json(doc);
+                    },
+                    // send error if promise rejected
+                    function ( err ) {
+                        res.status(400).send(err);
+                    }
+                )
 
 
         } else if (username != null) {
@@ -111,10 +126,24 @@ module.exports = function(app, model) {
     }
 
     function findUserById(req, res){
-        console.log("Inside server side findUserById");
-        var userId = req.params.id;
-        var user = model.findUserById(userId);
-        res.json(user);
+        var userId = req.params.userId;
+
+        // use model to find user by id
+        var user = model.findUserById(userId)
+            .then(
+                // return user if promise resolved
+                function (doc) {
+                    //we'll work on movie model a bit later
+                    //var movieImdbIDs = user.likes;
+                    //var movies = movieModel.findMoviesByImdbIDs(movieImdbIDs);
+                    //user.likesMovies = movies;
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
 }

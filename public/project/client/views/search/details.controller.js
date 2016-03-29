@@ -12,18 +12,23 @@
 
     function detailsController($routeParams, FoursquareService, $rootScope, UserService, $location, ReviewService) {
 
-        function init() {
-
-        }
-
-        init();
-
         var vm = this;
         vm.addFavourite = addFavourite;
         vm.addReview = addReview;
 
         vm.id = $routeParams.id;
+        var hotelId = $routeParams.id;
 
+        function init() {
+
+            ReviewService.findAllUserReviews(hotelId)
+                .then(function(response){
+                        vm.displayReviews = response.data;
+                });
+
+        }
+
+        init();
         function addFavourite(name,id){
             if($rootScope.user){
 

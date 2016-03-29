@@ -6,7 +6,7 @@
         .module("FormBuilderApp")
         .factory("UserService", UserService);
 
-    function UserService($http, $rootScope) {
+    function UserService($http, $rootScope, $q) {
 
         var api =
         {
@@ -70,7 +70,18 @@
 
         function createUser(user) {
 
+            console.log("inside client create user");
+            console.log(user);
             return $http.post("/api/assignment/user", user);
+            //
+            //var deferred = $q.defer();
+            //
+            //$http.post("/api/assignment/user", user)
+            //    .success(function(response) {
+            //        deferred.resolve(response);
+            //    });
+            //// sends user to the web service endpoint
+            //return deferred.promise;
 
         }
 

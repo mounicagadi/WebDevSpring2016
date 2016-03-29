@@ -6,12 +6,13 @@
 
 module.exports = function(app, reviewModel) {
 
-    app.get("/api/project/user/:id/reviews",findAllReviewsForUser)
+    app.get("/api/project/user/:id/reviews",findAllReviewsForUser);
     app.post("/api/project/user/:userId/addReview",addReview);
     app.delete("/api/project/user/:userId/deleteReview/:id", deleteReview);
+    app.get("/api/project/restaurant/:id/user", findAllUserReviews);
 
     function findAllReviewsForUser(req, res){
-        var id = req.params.id
+        var id = req.params.id;
         console.log("inside server"+id);
         var reviews = reviewModel.findAllReviewsForUser(id);
         res.json(reviews);
@@ -30,5 +31,10 @@ module.exports = function(app, reviewModel) {
         var ID = req.params.id;
         reviewModel.deleteReview(userID,ID);
         res.send(200);
-    };
+    }
+
+    function findAllUserReviews(req, res){
+        var id = req.params.id;
+
+    }
 }

@@ -4,8 +4,13 @@
 
 var users = require("./user.mock.json");
 
+var q = require("q");
 
-module.exports = function() {
+module.exports = function(db, mongoose) {
+
+    var UserSchema = require("./user.schema.server.js")(mongoose);
+
+    var UserModel = mongoose.model('User', UserSchema);
 
     var api = {
         findUserByCredentials: findUserByCredentials,
@@ -19,15 +24,15 @@ module.exports = function() {
     return api;
 
     function findUserById(userId){
-        var u = null;
-        for(var user in users) {
-            if(users[user]._id == userId){
-                u = users[user];
-                break;
+        var deferred = q.defer();
+        UserModel.findById(userId, function (err, doc) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
             }
-        }
-
-        return u;
+        });
+        return deferred.promise;
 
     }
 
@@ -46,17 +51,29 @@ module.exports = function() {
 
     function findUserByCredentials(credentials) {
         console.log("inside credentials part in model");
-        var user = null;
-        for(var u in users) {
-            var obj = users[u];
-            if( obj.username == credentials.username &&
-                obj.password == credentials.password) {
-                user = users[u];
-                break;
-            }
-        }
+        var deferred = q.defer();
 
-        return user;
+        // find one retrieves one document
+        UserModel.findOne(
+
+            // first argument is predicate
+            { username: credentials.username,
+                password: credentials.password },
+
+            // doc is unique instance matches predicate
+            function(err, doc) {
+
+                if (err) {
+                    // reject promise if error
+                    deferred.reject(err);
+                } else {
+                    // resolve promise
+                    deferred.resolve(doc);
+                }
+
+            });
+
+        return deferred.promise;
 
     }
 
@@ -80,9 +97,26 @@ module.exports = function() {
 
 
     function createUser(user){
-        var newUser = user;
-        users.push(newUser);
-        return newUser;
+
+        // use q to defer the response
+        var deferred = q.defer();
+
+        // insert new user with mongoose user model's create()
+        UserModel.create(user, function (err, doc) {
+
+            if (err) {
+                // reject promise if error
+                deferred.reject(err);
+            } else {
+                // resolve promise
+                console.log(doc);
+                deferred.resolve(doc);
+            }
+
+        });
+
+        // return a promise
+        return deferred.promise;
     }
 
     function findAllUsers(){

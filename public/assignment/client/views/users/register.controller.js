@@ -14,11 +14,11 @@
 
         function init(){
 
-            UserService.findAllUsers()
-                .then(function(user) {
-                    console.log(user);
-
-                });
+            //UserService.findAllUsers()
+            //    .then(function(user) {
+            //        console.log(user);
+            //
+            //    });
         }
 
         init();
@@ -32,26 +32,25 @@
 
                 var new_data =
                 {
-                    "_id":(new Date()).getTime(),
-                    "firstName":user.firstName,
-                    "lastName": user.lastName,
                     "username":user.username,
                     "password":user.password,
+                    "firstName":null,
+                    "lastName": null,
                     "email":user.email,
-                    "roles":[]
+                    "phones":[]
                 };
 
-                UserService.createUser(new_data)
+                UserService.createUser(user)
                     .then(function (newUser) {
                     $rootScope.user = newUser.data;
                     $location.path("/profile");
                 });
 
-                    UserService.findAllUsers()
-                        .then(function(user) {
-                            console.log(user);
-
-                        });
+                    //UserService.findAllUsers()
+                    //    .then(function(user) {
+                    //        console.log(user);
+                    //
+                    //    });
 
 
             } else {

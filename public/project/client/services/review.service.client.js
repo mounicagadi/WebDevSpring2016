@@ -18,7 +18,8 @@
             findAllReviews: findAllReviews,
             findAllReviewsForUser: findAllReviewsForUser,
             deleteReview: deleteReview,
-            updateReviewById: updateReviewById
+            updateReviewById: updateReviewById,
+            findAllUserReviews : findAllUserReviews
         };
 
         return api;
@@ -42,6 +43,10 @@
 
         function deleteReview(userId, id){
             return $http.delete("/api/project/user/"+userId+"/deleteReview/"+ id);
+        }
+
+        function findAllUserReviews(id){
+            return $http.get("/api/project/restaurant/"+id+"/user");
         }
 
         function updateReviewById(ratingId,rat,callback){

@@ -6,7 +6,7 @@ var uuid = require('node-uuid');
 var cookieParser  = require('cookie-parser');
 var session       = require('express-session');
 var mongoose = require("mongoose");
-
+var db = mongoose.connect('mongodb://127.0.0.1:27017/assignment');
 
 
 
@@ -27,7 +27,7 @@ app.use(session({
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
-require("./public/assignment/server/app.js")(app, uuid);
+require("./public/assignment/server/app.js")(app, uuid, db, mongoose);
 require("./public/project/server/app.js")(app);
 
 app.listen(port, ipaddress);
