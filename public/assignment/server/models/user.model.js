@@ -53,14 +53,10 @@ module.exports = function(db, mongoose) {
         console.log("inside credentials part in model");
         var deferred = q.defer();
 
-        // find one retrieves one document
         UserModel.findOne(
-
-            // first argument is predicate
             { username: credentials.username,
                 password: credentials.password },
 
-            // doc is unique instance matches predicate
             function(err, doc) {
 
                 if (err) {
@@ -127,21 +123,33 @@ module.exports = function(db, mongoose) {
 
     function findAllUsers(){
 
-        return users;
+        var deferred = q.defer ();
+        UserModel.find (
+            function (err, users) {
+                if (!err) {
+                    deferred.resolve (users);
+                } else {
+                    deferred.reject (err);
+                }
+            }
+        );
+        return deferred.promise;
     }
 
     function deleteUserById(userId){
 
-        for(var index in users) {
-            var obj = users[index]
-            if(obj._id == userId) {
-                users.splice(index, 1);
-                break;
-
-            }
-        }
-
-        return users;
-
+        var deferred = q.defer();
+        UserModel
+            .remove (
+                {_id: userId},
+                function (err, stats) {
+                    if (!err) {
+                        deferred.resolve(stats);
+                    } else {
+                        deferred.reject(err);
+                    }
+                }
+            );
+        return deferred.promise;
     }
 }

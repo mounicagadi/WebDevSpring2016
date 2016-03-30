@@ -30,23 +30,12 @@
                 if (user.username != null && user.password != null && user.verifypassword != null &&
                     user.password == user.verifypassword && user.email != null) {
 
-                var new_data =
-                {
-                    "username":user.username,
-                    "password":user.password,
-                    "firstName":null,
-                    "lastName": null,
-                    "email":user.email,
-                    "phones":[]
-                };
-
                 UserService.createUser(user)
                     .then(function (newUser) {
                     $rootScope.user = newUser.data;
                     $location.path("/profile");
                 });
 
-                    init();
 
 
             } else {

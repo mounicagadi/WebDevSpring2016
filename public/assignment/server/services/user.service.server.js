@@ -111,20 +111,32 @@ module.exports = function(app, model) {
         } else {
 
             console.log("going to call all users function");
-            var users = model.findAllUsers();
-            console.log("in server side service"+users);
-            res.json(users);
+            var users = model.findAllUsers()
+                .then (
+                function (users) {
+                    res.json (users);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
         }
     }
 
     function deleteUserById(req, res){
 
         console.log("Inside server side deleteUser");
-        var userId = req.params._id;
-        var user = model.deleteUserById(userId);
-        res.json(user);
-
-    }
+        var userId = req.params.id;
+        var user = model.deleteUserById(userId)
+            .then (
+                function (stats) {
+                    res.send(200);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+        }
 
     function findUserByUsername(req, res) {
         console.log("Inside server side findUserByUsername");
