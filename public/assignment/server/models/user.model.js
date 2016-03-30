@@ -2,8 +2,6 @@
  * Created by mounica on 3/13/2016.
  */
 
-var users = require("./user.mock.json");
-
 var q = require("q");
 
 module.exports = function(db, mongoose) {
