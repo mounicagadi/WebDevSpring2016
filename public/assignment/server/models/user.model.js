@@ -37,15 +37,17 @@ module.exports = function(db, mongoose) {
     }
 
     function findUserByUsername(username){
-        var u = null;
-        for(var user in users) {
-            if(users[user].username == username){
-                u = users[user];
-                break;
-            }
-        }
 
-        return u;
+        var deferred = q.defer();
+        UserModel.findOne(
+            {_id : userId}, function (err, doc) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
+        });
+        return deferred.promise;
 
     }
 

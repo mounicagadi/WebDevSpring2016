@@ -3,7 +3,7 @@
  */
 
 module.exports = function(app, formModel, uuid) {
-    console.log("Service started");
+
     app.post("/api/assignment/user/:userId/form", createForm);
     app.get("/api/assignment/user/:userId/form", findAllFormsForUser);
     app.delete("/api/assignment/form/:formId", deleteFormById);
@@ -12,39 +12,82 @@ module.exports = function(app, formModel, uuid) {
 
     function findFormById(req, res){
         var formId = req.params.formId;
-        res.json(formModel.findFormById(formId));
+        // use model to find form by id
+        var form = formModel.findFormById(formId)
+            .then(
+                // return user if promise resolved
+                function (doc) {
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
 
     }
 
     function findAllForms(req, res){
 
-        res.json(formModel.findAllForms());
+        var forms = formModel.findAllForms()
+            .then (
+                function (forms) {
+                    res.json (forms);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
 
     }
 
     function createForm(req, res){
 
         var form = req.body;
-        var userId = parseInt(req.params.userId);
-        form.userId = userId;
-        form._id = parseInt(uuid.v4(), 16);
+        var userId = req.params.userId;
 
-        formModel.createFormForUser(form);
-        res.json(formModel.findAllFormsForUser(userId));
+        var results = formModel.createFormForUser(form)
+            .then(
+                // login user if promise resolved
+                function ( doc ) {
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
 
     }
 
     function findAllFormsForUser(req, res){
         console.log("Inside server side findAllFormsForUser - forms");
-        var id = parseInt(req.params.userId);
-        res.json(formModel.findAllFormsForUser(id));
-
+        var id = req.params.userId;
+        var results = formModel.findAllFormsForUser(id)
+            .then(
+            // login user if promise resolved
+            function ( doc ) {
+                res.json(doc);
+            },
+            // send error if promise rejected
+            function ( err ) {
+                res.status(400).send(err);
+            }
+        );
     }
 
     function deleteFormById(req, res) {
         var formId = req.params.formId;
-        var forms = formModel.deleteFormById(formId);
-        res.send(200);
+
+        var forms = formModel.deleteFormById(formId)
+            .then (
+                function (stats) {
+                    res.send(200);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
 
     }
 
@@ -52,8 +95,15 @@ module.exports = function(app, formModel, uuid) {
         console.log("In server service");
         var formId = req.params.formId;
         var form = req.body;
-        var forms = formModel.updateFormById(formId, form);
-        res.json(forms);
+        var forms = formModel.updateFormById(formId, form)
+            .then(
+            function(doc){
+                res.json(doc);
+            },
+            function(err){
+                res.status(400).send(err);
+            }
+        );
 
     }
 

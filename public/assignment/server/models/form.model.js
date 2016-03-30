@@ -5,7 +5,12 @@
 var forms = require("./form.mock.json");
 
 
-module.exports = function() {
+module.exports = function(db, mongoose) {
+
+    var FormSchema = require("./form.schema.server.js")(mongoose);
+
+    var FormModel = mongoose.model('Form', FormSchema);
+
     var api = {
 
         createFormForUser: createFormForUser,
@@ -27,56 +32,91 @@ module.exports = function() {
 
     function updateFormById(formId, newForm) {
         // find the object in the collection with id formId
-        console.log("In model update");
-        console.log(formId);
-        console.log(newForm);
-        for (var index in forms) {
-            if (forms[index]._id == formId) {
-                forms[index] = newForm;
-                return newForm;
+        var deferred = q.defer();
+
+        FormModel.update(
+            { _id : formId },
+            {$set: newForm},
+            function (err, stats) {
+                console.log("stats"+stats);
+                if (!err) {
+                    deferred.resolve(stats);
+                } else {
+                    deferred.reject(err);
+                }
             }
-            }
+        );
+        return deferred.promise;
     }
 
     function createFormForUser(form){
-        forms.push(form);
-        return forms;
+        var deferred = q.defer();
+
+        // insert new user with mongoose user model's create()
+        FormModel.create(form, function (err, doc) {
+
+            if (err) {
+                // reject promise if error
+                deferred.reject(err);
+            } else {
+                // resolve promise
+                console.log(doc);
+                deferred.resolve(doc);
+            }
+
+        });
+
+        // return a promise
+        return deferred.promise;
 
     }
 
     function findAllFormsForUser(userId){
         console.log("inside form.model.js findAllFormsForUser");
 
-        var userForms = [] ;
-        for(var i in forms) {
-            if(forms[i].userId == userId) {
-                userForms.push(forms[i]);
+        var deferred = q.defer ();
+        FormModel.find (
+            {userId : userId},
+            function (err, users) {
+                if (!err) {
+                    deferred.resolve (users);
+                } else {
+                    deferred.reject (err);
+                }
             }
-        }
-
-        return userForms;
+        );
+        return deferred.promise;
 
     }
 
     function findFormById(formId) {
         console.log("Model form");
-        for (var f in forms) {
-            if (forms[f]._id == formId) {
-                return forms[f];
+        var deferred = q.defer();
+        FormModel.findById(formId, function (err, doc) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
             }
-        }
-        return null;
+        });
+        return deferred.promise;
     }
 
     function deleteFormById(formId) {
 
-        for (var index in forms) {
-            if (forms[index]._id == formId) {
-                delete forms[index];
-                //forms.splice(index, 1);
-                //break;
-            }
-        }
+        var deferred = q.defer();
+        FormModel
+            .remove (
+                {_id: formId},
+                function (err, stats) {
+                    if (!err) {
+                        deferred.resolve(stats);
+                    } else {
+                        deferred.reject(err);
+                    }
+                }
+            );
+        return deferred.promise;
     }
 
     function findFormByTitle(title) {
@@ -91,7 +131,17 @@ module.exports = function() {
 
     function findAllForms() {
 
-        return forms;
+        var deferred = q.defer ();
+        FormModel.find (
+            function (err, users) {
+                if (!err) {
+                    deferred.resolve (users);
+                } else {
+                    deferred.reject (err);
+                }
+            }
+        );
+        return deferred.promise;
     }
 
     // field munction definitons

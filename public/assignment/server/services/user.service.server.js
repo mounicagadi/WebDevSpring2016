@@ -141,8 +141,17 @@ module.exports = function(app, model) {
     function findUserByUsername(req, res) {
         console.log("Inside server side findUserByUsername");
         var username = req.params.username;
-        var user = model.findUserByUsername(username);
-        res.json(user);
+        var user = model.findUserByUsername(username)
+            .then(
+                // return user if promise resolved
+                function (doc) {
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
 
     }
 
