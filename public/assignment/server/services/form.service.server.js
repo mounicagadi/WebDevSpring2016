@@ -46,7 +46,7 @@ module.exports = function(app, formModel, uuid) {
         var form = req.body;
         var userId = req.params.userId;
 
-        var results = formModel.createFormForUser(form)
+        formModel.createFormForUser(userId, form)
             .then(
                 // login user if promise resolved
                 function ( doc ) {

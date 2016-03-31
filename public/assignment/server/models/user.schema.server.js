@@ -11,7 +11,7 @@ module.exports = function(mongoose) {
         firstName: String,
         lastName: String,
         email: [String],
-        phones: [String]
+        roles: [String]
         // collection property sets
         // collection name to 'user'
     }, {collection: 'assignment.user'});

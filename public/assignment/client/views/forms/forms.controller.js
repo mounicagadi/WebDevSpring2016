@@ -37,11 +37,13 @@
                 FormService.createFormForUser($rootScope.user._id, form)
                     .then(function (response) {
                         console.log("create form response" + response);
-                        vm.forms = response;
+                        vm.forms.push(response);
 
                     });
+
+                vm.form = {};
         }
-            vm.form = {};
+
 
         }
 
@@ -50,7 +52,6 @@
             console.log("update stuff title"+form.userId);
             if (form.title != null && selectedIndex != null) {
 
-                var position = vm.forms[selectedIndex];
                 var newForm = {
                     "_id": form._id,
                     "title": form.title,
@@ -59,9 +60,15 @@
             FormService.updateFormById(form._id,newForm)
                 .then(function (response) {
 
-                    vm.forms[selectedIndex] = response;
+                    console.log(response.nModified);
+                if(response.nModified == 1) {
+                    vm.forms[selectedIndex].title = form.title;
                     vm.form.title = null;
                     vm.selectedIndex = null;
+                }else{
+                    vm.form.title = null;
+                    vm.selectedIndex = null;
+                }
                 });
 
         }}

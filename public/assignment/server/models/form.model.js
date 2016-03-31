@@ -20,14 +20,7 @@ module.exports = function(db, mongoose) {
         updateFormById: updateFormById,
         findFormByTitle : findFormByTitle,
         findAllForms: findAllForms,
-        findFormById : findFormById,
-
-        //fields
-        createFieldForForm: createFieldForForm,
-        findAllFieldsForForm: findAllFieldsForForm,
-        findFieldByFieldIdAndFormId: findFieldByFieldIdAndFormId,
-        updateFieldByFieldIdAndFormId: updateFieldByFieldIdAndFormId,
-        deleteFieldByFieldIdAndFormId: deleteFieldByFieldIdAndFormId
+        findFormById : findFormById
     };
     return api;
 
@@ -38,10 +31,10 @@ module.exports = function(db, mongoose) {
         FormModel.update(
             { _id : formId },
             {$set: newForm},
-            function (err, stats) {
-                console.log("stats"+stats);
+            function (err, doc) {
+                console.log("stats"+doc);
                 if (!err) {
-                    deferred.resolve(stats);
+                    deferred.resolve(doc);
                 } else {
                     deferred.reject(err);
                 }
@@ -50,11 +43,14 @@ module.exports = function(db, mongoose) {
         return deferred.promise;
     }
 
-    function createFormForUser(form){
+    function createFormForUser(userId, form){
         var deferred = q.defer();
 
         // insert new user with mongoose user model's create()
-        FormModel.create(form, function (err, doc) {
+        FormModel.create({
+            userId : userId,
+            title : form.title,
+            created : Date.now()}, function (err, doc) {
 
             if (err) {
                 // reject promise if error
@@ -145,69 +141,4 @@ module.exports = function(db, mongoose) {
         return deferred.promise;
     }
 
-    // field munction definitons
-    function createFieldForForm(formId, field) {
-        for (var i in forms) {
-
-            if (forms[i]._id == formId) {
-
-                if(!forms[i].fields) {
-                    forms[i].fields = [];
-                }
-
-                forms[i].fields.push(field);
-                break;
-            }
-        }
-    }
-
-    function findAllFieldsForForm (formId) {
-
-        for (var i in forms) {
-
-            if (forms[i]._id == formId) {
-                return forms[i].fields;
-            }
-        }
-        return null;
-    }
-
-    function findFieldByFieldIdAndFormId(formId, fieldId) {
-        for (var i in forms) {
-            if (forms[i]._id === formId) {
-                for (var j in forms[i].fields) {
-                    if (forms[i].fields[j]._id === fieldId) {
-                        return forms[i].fields[j];
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
-    function updateFieldByFieldIdAndFormId(formId, fieldId, field) {
-
-        for (var i in forms) {
-            if (forms[i]._id === formId) {
-                for (var j in forms[i].fields) {
-                    if (forms[i].fields[j]._id === fieldId) {
-                        forms[i].fields[j] = field;
-                        return field;
-                    }
-                }
-            }
-        }
-    }
-
-    function deleteFieldByFieldIdAndFormId(formId, fieldId) {
-        for (var i in forms) {
-            if (forms[i]._id == formId) {
-                for (var j in forms[i].fields) {
-                    if (forms[i].fields[j]._id == fieldId) {
-                        forms[i].fields.splice(j,1);
-                    }
-                }
-            }
-        }
-    }
 }
