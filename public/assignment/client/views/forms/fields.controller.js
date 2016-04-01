@@ -24,8 +24,10 @@
             if ($routeParams.formId) {
 
                 formId = $routeParams.formId;
-                FieldService.getFieldsForForm(formId).then(function (response) {
+                FieldService.getFieldsForForm(formId)
+                    .then(function (response) {
 
+                        console.log(response);
                     vm.fields = response;
 
 
@@ -67,7 +69,7 @@
 
                 case "date":
                     vm.field = {
-                        label: "New Date Field", type: "DATE", placeholder: "New Field"
+                        label: "New Date Field", type: "DATE"
                     };
                     break;
 
@@ -106,7 +108,8 @@
             FieldService.createFieldForForm(formId, vm.field)
                 .then(function (response) {
 
-                vm.fields.push(response);
+                    console.log(response.fields);
+                vm.fields = response.fields;
                 vm.field = {};
             });
 

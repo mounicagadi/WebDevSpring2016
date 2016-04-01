@@ -20,9 +20,14 @@ module.exports = function(db, mongoose) {
         updateFormById: updateFormById,
         findFormByTitle : findFormByTitle,
         findAllForms: findAllForms,
-        findFormById : findFormById
+        findFormById : findFormById,
+        getMongooseModel: getMongooseModel
     };
     return api;
+
+    function getMongooseModel() {
+        return FormModel
+    }
 
     function updateFormById(formId, newForm) {
         // find the object in the collection with id formId

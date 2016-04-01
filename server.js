@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());//for parsing multipart/form-data
 
 
-app.use(cookieParser())
+app.use(cookieParser());
 app.use(session({
     resave: true,
     saveUninitialized: true,

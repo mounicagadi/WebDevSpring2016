@@ -4,11 +4,10 @@
 
 var q = require("q");
 
-module.exports = function(db, mongoose) {
 
-    var FieldSchema = require("./field.schema.server.js")(mongoose);
+module.exports = function(db, mongoose, formModel) {
 
-    var fieldModel = mongoose.model('Form', FieldSchema);
+    var FormModel = formModel.getMongooseModel();
 
     var api = {
 
@@ -25,41 +24,51 @@ module.exports = function(db, mongoose) {
     // field munction definitons
     function createFieldForForm(formId, field) {
 
-        var deferred = q.defer();
-        fieldModel.create({
-            label : field.label,
-            type : field.type,
-            placeholder : field.placeholder,
-            options : field.options
-        })
+        //var deferred = q.defer();
+
+        return FormModel.findById(formId)
             .then(
-                function(doc, err){
-                    if(!err){
-                        deferred.resolve(doc);
-                    }else{
-                        deferred.reject(err);
-                    }
+                function(form) {
+                    form.fields.push(field);
+                    return form.save();
                 }
             );
+        //fieldModel.create({
+        //    label : field.label,
+        //    type : field.type,
+        //    placeholder : field.placeholder,
+        //    options : field.options
+        //})
+        //    .then(
+        //        function(doc, err){
+        //            if(!err){
+        //                deferred.resolve(doc);
+        //            }else{
+        //                deferred.reject(err);
+        //            }
+        //        }
+        //    );
 
-        return deferred.promise;
+        //return deferred.promise;
     }
 
     function findAllFieldsForForm (formId) {
 
-        var deferred = q.defer();
-        fieldModel.findById(formId)
-            .then(
-                function(doc,err){
-                        if (!err) {
-                        deferred.resolve(doc);
-                    } else {
-                        deferred.reject(err);
-                    }
-                }
+        return FormModel.findById(formId).select("fields");
 
-                    );
-                    return deferred.promise;
+        //var deferred = q.defer();
+        //formModel.findById(formId)
+        //    .then(
+        //        function(doc,err){
+        //                if (!err) {
+        //                deferred.resolve(doc);
+        //            } else {
+        //                deferred.reject(err);
+        //            }
+        //        }
+        //
+        //            );
+        //            return deferred.promise;
     }
 
     function findFieldByFieldIdAndFormId(formId, fieldId) {
