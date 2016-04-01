@@ -163,14 +163,9 @@
                     FieldService.updateField(formId, field._id, field)
                         .then(function (response1) {
                             console.log(response1);
-                            if (response1.ok == 1) {
-                                FieldService.getFieldsForForm(formId)
-                                    .then(function (response2) {
-                                        console.log(response2);
-                                        vm.fields = response2;
+                            if (response1.nModified == 1) {
+                                init();
 
-
-                                    });
                             }
                         });
                 });

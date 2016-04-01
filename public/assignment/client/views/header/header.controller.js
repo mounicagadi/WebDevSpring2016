@@ -24,8 +24,7 @@
             UserService
                 .logout()
                 .then(function(user){
-                    // UserService.setCurrentUser(user);
-                    console.log("user after logout: ", $rootScope.user, null, 2);
+                    UserService.setCurrentUser(null);
                     $location.url("/home");
                 });
         }

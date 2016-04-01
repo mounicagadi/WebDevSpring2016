@@ -36,13 +36,13 @@
         }
 
         function logout() {
-            return $http.post("/api/assignment/user/logout")
-                .success(function () {
-                    // $rootScope.user = null;
-                    console.log('Returning null');
-                    $rootScope.user = null;
-                    // return null;
-                });
+            return $http.post("/api/assignment/user/logout");
+                //.success(function () {
+                //    // $rootScope.user = null;
+                //    console.log('Returning null');
+                //    $rootScope.user = null;
+                //    // return null;
+                //});
         }
 
         function findUserById(userId){

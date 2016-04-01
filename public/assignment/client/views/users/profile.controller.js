@@ -27,15 +27,6 @@
 
         function update(user) {
 
-            var updatedContent = {
-
-                "username": user.username,
-                "password": user.password,
-                "firstName": user.firstName,
-                "lastName": user.lastName,
-                "email" : user.email
-            };
-
             UserService.updateUser($rootScope.user._id,user)
                 .then(  function(user){
                     console.log(user);

@@ -25,8 +25,7 @@ module.exports = function(app, model) {
     function logout(req, res) {
         console.log("inside logout");
         req.session.destroy();
-        //res.send(200);
-        res.status(200).send(null);
+        res.status(200);
     }
 
     function loggedin(req, res) {
@@ -105,8 +104,15 @@ module.exports = function(app, model) {
         } else if (username != null) {
 
             console.log("going to call username function");
-            var user = model.findUserByUsername(username);
-            res.json(user);
+            var user = model.findUserByUsername(username).then(
+                function (doc) {
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            )
 
         } else {
 

@@ -38,7 +38,7 @@ module.exports = function(db, mongoose) {
 
         var deferred = q.defer();
         UserModel.findOne(
-            {_id : userId}, function (err, doc) {
+            {username : username}, function (err, doc) {
             if (err) {
                 deferred.reject(err);
             } else {
