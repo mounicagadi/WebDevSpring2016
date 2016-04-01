@@ -42,16 +42,8 @@ module.exports = function(db, mongoose, formModel) {
     }
 
     function findFieldByFieldIdAndFormId(formId, fieldId) {
-        for (var i in forms) {
-            if (forms[i]._id === formId) {
-                for (var j in forms[i].fields) {
-                    if (forms[i].fields[j]._id === fieldId) {
-                        return forms[i].fields[j];
-                    }
-                }
-            }
-        }
-        return null;
+
+        return FormModel.findById(formId).select("fields").findById(fieldId);
     }
 
     function updateFieldByFieldIdAndFormId(formId, fieldId, field) {
