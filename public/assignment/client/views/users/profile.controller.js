@@ -32,13 +32,11 @@
             return value.join(',');
         }
 
-        function setEmails(emails){
-            return emails.trim().split(',');
-        }
+
 
         function update(user) {
 
-            user.email = setEmails(user.email);
+            user.email = user.email.trim().split(',');
             user.phones = user.phones.trim().split(',');
             UserService.updateUser($rootScope.user._id,user)
                 .then(  function(user){
