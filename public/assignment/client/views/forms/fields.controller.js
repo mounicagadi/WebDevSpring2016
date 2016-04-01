@@ -41,6 +41,8 @@
             vm.options = [
                 {name: "Single Line Text", value: "single-line-text"},
                 {name: "Multi Line Text", value: "multiple-line-text"},
+                {name: "Email", value: "email"},
+                {name: "Password", value: "password"},
                 {name: "Date", value: "date"},
                 {name: "Dropdown", value: "dropdown"},
                 {name: "Checkboxes", value: "checkbox"},
@@ -58,6 +60,18 @@
                 case "single-line-text":
                     vm.field = {
                         label: "New Text Field", type: "TEXT", placeholder: "New Field"
+                    };
+                    break;
+
+                case "email":
+                    vm.field = {
+                        label: "New Email Field", type: "EMAIL", placeholder: "New Field"
+                    };
+                    break;
+
+                case "password":
+                    vm.field = {
+                        label: "New Password Field", type: "PASSWORD", placeholder: "New Field"
                     };
                     break;
 
@@ -175,7 +189,8 @@
 
             if($scope.field.type != "DATE") {
                 if($scope.newPlaceholder) {
-                    if($scope.field.type === "TEXT" || $scope.field.type === "TEXTAREA") {
+                    if($scope.field.type === "TEXT" || $scope.field.type === "TEXTAREA"
+                        ||$scope.field.type === "EMAIL" || $scope.field.type === "PASSWORD") {
                         $scope.field.placeholder = $scope.newPlaceholder;
                     } else {
                         OtherFields();

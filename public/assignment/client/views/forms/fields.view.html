@@ -13,6 +13,12 @@
                     <h3 class="modal-title" ng-switch-when="DATE">
                         Date Field
                     </h3>
+                    <h3 class="modal-title" ng-switch-when="EMAIL">
+                        Email Field
+                    </h3>
+                    <h3 class="modal-title" ng-switch-when="PASSWORD">
+                        Password Field
+                    </h3>
                     <h3 class="modal-title" ng-switch-when="OPTIONS">
                         Dropdown Field
                     </h3>
@@ -34,6 +40,34 @@
                         <div class="form-group col-sm-12 col-md-12">
                             <label for="placeholderForField">Placeholder</label>
                             <input type="text" id="placeholderForField" class="form-control" ng-model="$parent.newPlaceholder">
+
+                        </div>
+
+                    </div>
+
+                    <div class="row" ng-switch-when="EMAIL">
+                        <div class="form-group col-sm-12 col-md-12">
+                            <label for="email">Label</label>
+                            <input type="text" id="email" class="form-control" ng-model="$parent.newLabel">
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-12">
+                            <label for="placeholderemail">Placeholder</label>
+                            <input type="text" id="placeholderemail" class="form-control" ng-model="$parent.newPlaceholder">
+
+                        </div>
+
+                    </div>
+
+                    <div class="row" ng-switch-when="PASSWORD">
+                        <div class="form-group col-sm-12 col-md-12">
+                            <label for="password">Label</label>
+                            <input type="text" id="password" class="form-control" ng-model="$parent.newLabel">
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-12">
+                            <label for="placeholderForpwd">Placeholder</label>
+                            <input type="text" id="placeholderForpwd" class="form-control" ng-model="$parent.newPlaceholder">
 
                         </div>
 
