@@ -8,7 +8,7 @@ module.exports = function(db, mongoose) {
 
     var FieldSchema = require("./field.schema.server.js")(mongoose);
 
-    var FieldModel = mongoose.model('Fields', FieldSchema);
+    var fieldModel = mongoose.model('Form', FieldSchema);
 
     var api = {
 
@@ -24,29 +24,42 @@ module.exports = function(db, mongoose) {
 
     // field munction definitons
     function createFieldForForm(formId, field) {
-        for (var i in forms) {
 
-            if (forms[i]._id == formId) {
-
-                if(!forms[i].fields) {
-                    forms[i].fields = [];
+        var deferred = q.defer();
+        fieldModel.create({
+            label : field.label,
+            type : field.type,
+            placeholder : field.placeholder,
+            options : field.options
+        })
+            .then(
+                function(doc, err){
+                    if(!err){
+                        deferred.resolve(doc);
+                    }else{
+                        deferred.reject(err);
+                    }
                 }
+            );
 
-                forms[i].fields.push(field);
-                break;
-            }
-        }
+        return deferred.promise;
     }
 
     function findAllFieldsForForm (formId) {
 
-        for (var i in forms) {
+        var deferred = q.defer();
+        fieldModel.findById(formId)
+            .then(
+                function(doc,err){
+                        if (!err) {
+                        deferred.resolve(doc);
+                    } else {
+                        deferred.reject(err);
+                    }
+                }
 
-            if (forms[i]._id == formId) {
-                return forms[i].fields;
-            }
-        }
-        return null;
+                    );
+                    return deferred.promise;
     }
 
     function findFieldByFieldIdAndFormId(formId, fieldId) {

@@ -9,6 +9,8 @@ module.exports = function(app, uuid, db, mongoose){
 
     var formModel = require("./models/form.model.js")(db, mongoose);
     var formService = require("./services/form.service.server.js")(app, formModel, uuid);
-    var fieldService = require("./services/field.service.server.js")(app, formModel, uuid);
+
+    //var fieldModel = require("./models/field.model.js")(db, mongoose);
+    //var fieldService = require("./services/field.service.server.js")(app,uuid, fieldModel);
 
 }
