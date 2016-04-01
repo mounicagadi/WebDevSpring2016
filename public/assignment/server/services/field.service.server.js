@@ -65,6 +65,7 @@ module.exports = function (app, fieldModel) {
         fieldModel.updateFieldByFieldIdAndFormId(formId, fieldId, field)
             .then(
             function(doc) {
+                console.log(doc);
                 res.json(doc);
             },
 
@@ -78,7 +79,8 @@ module.exports = function (app, fieldModel) {
 
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        fieldModel.deleteFieldByFieldIdAndFormId(formId, fieldId).then (
+        fieldModel.deleteFieldByFieldIdAndFormId(formId, fieldId)
+            .then (
             function (stats) {
                 res.send(200);
             },

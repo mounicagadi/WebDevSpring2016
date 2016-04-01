@@ -33,42 +33,12 @@ module.exports = function(db, mongoose, formModel) {
                     return form.save();
                 }
             );
-        //fieldModel.create({
-        //    label : field.label,
-        //    type : field.type,
-        //    placeholder : field.placeholder,
-        //    options : field.options
-        //})
-        //    .then(
-        //        function(doc, err){
-        //            if(!err){
-        //                deferred.resolve(doc);
-        //            }else{
-        //                deferred.reject(err);
-        //            }
-        //        }
-        //    );
-
-        //return deferred.promise;
     }
 
     function findAllFieldsForForm (formId) {
 
         return FormModel.findById(formId).select("fields");
 
-        //var deferred = q.defer();
-        //formModel.findById(formId)
-        //    .then(
-        //        function(doc,err){
-        //                if (!err) {
-        //                deferred.resolve(doc);
-        //            } else {
-        //                deferred.reject(err);
-        //            }
-        //        }
-        //
-        //            );
-        //            return deferred.promise;
     }
 
     function findFieldByFieldIdAndFormId(formId, fieldId) {
@@ -86,28 +56,19 @@ module.exports = function(db, mongoose, formModel) {
 
     function updateFieldByFieldIdAndFormId(formId, fieldId, field) {
 
-        for (var i in forms) {
-            if (forms[i]._id === formId) {
-                for (var j in forms[i].fields) {
-                    if (forms[i].fields[j]._id === fieldId) {
-                        forms[i].fields[j] = field;
-                        return field;
-                    }
-                }
+        return FormModel.update(
+            { _id: formId ,
+             "fields._id" :fieldId} ,
+            {$set : {"fields.$" : field}
             }
-        }
+        );
     }
 
     function deleteFieldByFieldIdAndFormId(formId, fieldId) {
-        for (var i in forms) {
-            if (forms[i]._id == formId) {
-                for (var j in forms[i].fields) {
-                    if (forms[i].fields[j]._id == fieldId) {
-                        forms[i].fields.splice(j,1);
-                    }
-                }
-            }
-        }
+        return FormModel.update(
+            { _id: formId },
+            { $pull: { 'fields': { _id : fieldId } } }
+        );
     }
 
 }

@@ -28,10 +28,10 @@
                     .then(function (response) {
 
                         console.log(response);
-                    vm.fields = response;
+                        vm.fields = response;
 
 
-                });
+                    });
 
             } else {
 
@@ -109,23 +109,21 @@
                 .then(function (response) {
 
                     console.log(response.fields);
-                vm.fields = response.fields;
-                vm.field = {};
-            });
+                    vm.fields = response.fields;
+                    vm.field = {};
+                });
 
         }
 
         function deleteField($index) {
             var fieldId = vm.fields[$index]._id;
-            FieldService.deleteFieldFromForm(formId, fieldId).then(function (response) {
-                if (response == "OK") {
+            FieldService.deleteFieldFromForm(formId, fieldId)
+                .then(function (response) {
+                    if (response == "OK") {
+                        vm.fields.splice($index, 1)
 
-                    FieldService.getFieldsForForm(formId).then(function (response1) {
-                        vm.fields = response1;
-
-                    });
-                }
-            });
+                    }
+                });
         }
 
 
@@ -148,19 +146,19 @@
             modalInstance.result
                 .then(function (field) {
                     console.log(field);
-                    return FieldService.updateField(formId, field._id, field);
-
-                })
-                .then(function (response) {
-                    if (response === "OK") {
-                        return FieldService.getFieldsForForm(formId);
-
-                    }
-                })
-                .then(function (response) {
-                    vm.fields = response;
+                    FieldService.updateField(formId, field._id, field)
+                        .then(function (response1) {
+                            console.log(response1);
+                            if (response1.ok == 1) {
+                                FieldService.getFieldsForForm(formId)
+                                    .then(function (response2) {
+                                        console.log(response2);
+                                        vm.fields = response2;
 
 
+                                    });
+                            }
+                        });
                 });
         }
     }
