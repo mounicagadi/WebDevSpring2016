@@ -6,7 +6,9 @@ var uuid = require('node-uuid');
 var cookieParser  = require('cookie-parser');
 var session       = require('express-session');
 var mongoose = require("mongoose");
-var db = mongoose.connect('mongodb://127.0.0.1:27017/assignment');
+
+//var db = mongoose.connect('mongodb://127.0.0.1:27017/assignment');
+var connectionString = 'mongodb://127.0.0.1:27017/assignment';
 
 
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
@@ -16,6 +18,8 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
         process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
         process.env.OPENSHIFT_APP_NAME;
 }
+
+var db = mongoose.connect(connectionString);
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
