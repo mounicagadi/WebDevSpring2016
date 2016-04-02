@@ -23,9 +23,9 @@
 
                 stop: function (event, ui) {
                     end = ui.item.index();
-                    var temp = scope.model.fields[start];
-                    scope.model.fields[start] = scope.model.fields[end];
-                    scope.model.fields[end] = temp;
+                    var temp = scope.fields[start];
+                    scope.fields[start] = scope.fields[end];
+                    scope.fields[end] = temp;
                     scope.$apply();
                 }
             });
