@@ -34,19 +34,30 @@ body {
 }
 
 .image{
-    background: url('../images/new-dim.jpg')no-repeat center center fixed;
+
+    background: url('../images/final.jpg')no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+
+}
+
+
+
+.users-image{
+    background: url('../images/linen-background-spoon-19599345.jpg')no-repeat center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
 }
 
-.users-image{
-    background: url('../images/forks.jpg')no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
+.elevation2 {
+    box-shadow: 0 2px 5px #999;
+}
+.register-card {
+    margin-top: 100px;
 }
 
 .placing
@@ -62,7 +73,7 @@ body {
     }
 }
 .centered-form{
-    margin-top: 60px;
+    margin-top: 100px;
 }
 
 .text-input-mainpage {
@@ -105,7 +116,7 @@ body {
 }
 .card {
     background: white;
-    margin-top: 20px;
+    margin-top: 50px;
     z-index: 1;
 }
 
@@ -167,6 +178,16 @@ body {
 .form-header {
     padding: 10px 10px 10px 10px;
 }
+
+.form-container {
+    padding: 40px 40px 20px 40px;
+}
+
+.h2, h2 {
+    font-size: 30px;
+    color: white;
+}
+
 .search-content {
     padding: 15px;
 }
