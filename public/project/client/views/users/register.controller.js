@@ -35,29 +35,14 @@
                 if (user.username != null && user.password != null && user.verifypassword != null &&
                     user.password == user.verifypassword && user.email != null) {
 
-                    var new_data =
-                    {
-                        "_id": (new Date()).getTime(),
-                        "username": user.username,
-                        "password": user.password,
-                        "firstName": user.firstName,
-                        "lastName": user.lastName,
-                        "email": user.email
-                    };
-
-                    UserService.registerUser(new_data)
+                    UserService.registerUser(user)
                         .then(function (response) {
                             console.log(response);
                             $rootScope.user = response.data;
                             $location.path("/profile");
                         });
 
-                    UserService.findAllUsers()
-                        .then(function (response) {
-                            console.log(response.data);
-
-                        });
-
+                    init();
 
                 } else {
 

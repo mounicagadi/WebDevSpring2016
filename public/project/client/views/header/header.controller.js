@@ -9,24 +9,28 @@
         .module("EatOutApp")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController($location, $scope, $rootScope) {
+    function HeaderController($location, UserService) {
 
         var vm = this;
 
+        vm.logout = logout;
+
         function init(){
-            $scope.$location = $location;
+
+            vm.$location = $location;
+
         }
-
-        init();
-
-        $scope.logout = logout;
 
         // Function to implement the logout activity and return to homepage
         function logout() {
 
-            $rootScope.user = null;
-            $location.path("/home");
-        }
+            UserService
+                .logout()
+                .then(function(user) {
+                    UserService.setCurrentUser(null);
+                    $location.url("/home");
+                });
 
+    }
     }
 })();

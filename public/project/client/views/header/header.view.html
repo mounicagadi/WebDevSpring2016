@@ -16,16 +16,16 @@
                 <li ng-class="{'active': $location.url() == '/home'}">
                     <a href="#/home">Home</a>
                 </li>
-                <li ng-class="{'active': $location.url() == '/login'}" ng-if = "user == null">
+                <li ng-class="{'active': $location.url() == '/login'}" ng-if = "!user">
                     <a href="#/login">Login</a>
                 </li>
-                <li ng-class="{'active': $location.url() == '/register'}" ng-if = "user == null">
+                <li ng-class="{'active': $location.url() == '/register'}" ng-if = "!user">
                     <a href="#/register">Register</a>
                 </li>
-                <li ng-class="{'active': $location.url() == '/profile'}" ng-if = "user != null">
+                <li ng-class="{'active': $location.url() == '/profile'}" ng-if = "user">
                     <a href="#/profile">{{user.username}}</a>
                 </li>
-                <li ng-class="{'active': $location.url() == '/home'}" ng-if = "user != null" ng-click="logout()">
+                <li ng-class="{'active': $location.url() == '/home'}" ng-if = "user" ng-click="model.logout()">
                     <a href="#/home">Logout</a></li>
                 <li>
                     <a target="_blank" href="https://docs.google.com/document/d/1l-twmlL1q9aTH4SVBmtyKUWa_jmxAxCapLXJJ2D554Q/edit?usp=sharing">

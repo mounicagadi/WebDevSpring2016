@@ -6,7 +6,7 @@
         .module("FormBuilderApp")
         .controller("HeaderController",HeaderController);
 
-    function HeaderController($location, $rootScope, UserService) {
+    function HeaderController($location, UserService) {
 
         var vm = this;
 

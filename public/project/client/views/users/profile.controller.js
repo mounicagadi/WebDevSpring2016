@@ -98,17 +98,8 @@
         function update(user) {
 
             console.log("inside update function in controller");
-            var updatedContent = {
 
-                "_id":$rootScope.user._id,
-                "username": user.username,
-                "password": user.password,
-                "firstName": user.firstName,
-                "lastName": user.lastName,
-                "email" : user.email
-            };
-
-            UserService.updateUser($rootScope.user._id,updatedContent)
+            UserService.updateUser($rootScope.user._id,user)
                 .then(  function(response){
                     console.log(response);
                     console.log(response.config.data);

@@ -113,9 +113,15 @@ module.exports = function(app, userModel) {
     function getFavourites(req, res){
         console.log("inside getfavourites in server");
         var userId  = req.params.userId;
-        var favourites = userModel.getFavourites(userId);
-        console.log("response for favourites"+favourites);
-        res.json(favourites);
+        var favourites = userModel.getFavourites(userId)
+            .then (
+            function (favourites) {
+                res.json (favourites);
+            },
+            function (err) {
+                res.status(400).send(err);
+            }
+        );
 
     }
 
@@ -123,14 +129,28 @@ module.exports = function(app, userModel) {
         console.log("inside addfavourites in server");
         var userId  = req.params.userId;
         var newdata = req.body;
-        var favourites = userModel.addFavourites(userId, newdata);
-        res.json(favourites);
+        var favourites = userModel.addFavourites(userId, newdata)
+            .then (
+            function (favourites) {
+                res.json (favourites);
+            },
+            function (err) {
+                res.status(400).send(err);
+            }
+        );
     }
 
-    function deleteFavourite(req,res){
-        var userID  = req.params.userId;
+    function deleteFavourite(req,res) {
+        var userID = req.params.userId;
         var ID = req.params.id;
-        userModel.deleteFavourites(userID,ID);
-        res.send(200);
-    };
+        userModel.deleteFavourites(userID, ID)
+            .then(
+                function (stats) {
+                    res.send(200);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
 }

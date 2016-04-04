@@ -6,7 +6,7 @@
         .module("EatOutApp")
         .factory("UserService", UserService);
 
-    function UserService($http) {
+    function UserService($http, $rootScope) {
 
         var api =
         {
@@ -17,10 +17,27 @@
             updateUser: updateUser,
             addFavourite : addFavourite,
             getFavourites :getFavourites,
-            deleteFavourites : deleteFavourites
+            deleteFavourites : deleteFavourites,
+            setCurrentUser: setCurrentUser,
+            getCurrentUser: getCurrentUser,
+            logout : logout
 
         };
         return api;
+
+        function getCurrentUser() {
+            console.log("calling loggedin function");
+            return $http.get("/api/assignment/users/loggedin");
+        }
+
+        function setCurrentUser(user) {
+            $rootScope.user = user;
+        }
+
+        function logout() {
+            return $http.post("/api/assignment/user/logout");
+
+        }
 
         function addFavourite(userId,favourite){
 
