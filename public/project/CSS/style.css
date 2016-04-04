@@ -33,6 +33,20 @@ body {
     background: #eee;
 }
 
+.img-thumbnail {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+    padding: 4px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
 .image{
 
     background: url('../images/final.jpg')no-repeat center center fixed;
@@ -99,6 +113,10 @@ body {
 .site-color-background {
     background-color: #cb202d;
 }
+.site-color-background1 {
+    background-color: whitesmoke;
+    border-color: #e7e7e7;
+}
 
 .site-color {
     color: #cb202d;
@@ -117,6 +135,14 @@ body {
 .card {
     background: white;
     margin-top: 50px;
+    z-index: 1;
+}
+
+.card-mainpage {
+    background: white;
+    opacity: 0.8;
+    padding-top: 20px;
+    padding-right: 10px;
     z-index: 1;
 }
 
@@ -200,6 +226,16 @@ body {
 }
 .search-result:hover a{
     color: #eee;
+}
+
+.transparent{
+    opacity: 0.8;
+}
+
+.image-border{
+    border-radius: 5px;
+    border-style: solid;
+    border-color: red;
 }
 .banner {
     width: 100%;

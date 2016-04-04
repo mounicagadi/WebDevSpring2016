@@ -31,18 +31,11 @@
 
                 UserService.login
                 ({
-                    username : user.username,
-                    password : user.password}).
-
+                    username : user.username, password : user.password}).
                 then(function (user) {
-
                     console.log(user.data);
                     if( user != null) {
-
                         $rootScope.user = user.data;
-
-                        console.log($rootScope.user.username);
-
                         vm.user.username = $rootScope.user.username;
                         $location.path("/profile");
                     }
