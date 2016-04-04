@@ -49,7 +49,7 @@ body {
 
 .image{
 
-    background: url('../images/final.jpg')no-repeat center center fixed;
+    background: url('../images/background-dim.jpg')no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -98,16 +98,44 @@ body {
     border-color: #cb202d;
     box-shadow:none;
     background: white;
+    font-weight: bold;
 }
 
 
 .search-button-mainpage {
     height: 60px;
-    border: none;
-    border-radius: 1px;
-    background-color: #cb202d;
-    padding-top: 15px;
-    font-size: 18px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: #cb202d;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+}
+
+.btn-group, .btn-group-vertical {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    border: 3px;
+    border-radius: 3px;
+    border-style: solid;
+    border-color: #cb202d;
+}
+
+.btn-group .btn+.btn, .btn-group .btn+.btn-group, .btn-group .btn-group+.btn, .btn-group .btn-group+.btn-group {
+    margin-left: -1px;
+    border: 3px;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: #cb202d;
+}
+
+.btn-group>.btn:first-child {
+    margin-left: 0;
+    border: 3px;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: #cb202d;
 }
 
 .site-color-background {
@@ -139,10 +167,10 @@ body {
 }
 
 .card-mainpage {
-    background: white;
-    opacity: 0.8;
-    padding-top: 20px;
-    padding-right: 10px;
+    background: #cb202d;
+    opacity: 0.9;
+    /*padding-top: 20px;*/
+    /*padding-right: 10px;*/
     z-index: 1;
 }
 
