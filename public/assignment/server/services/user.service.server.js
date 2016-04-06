@@ -2,7 +2,8 @@
  * Created by mounica on 3/13/2016.
  */
 
-
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 module.exports = function(app, model) {
 
 

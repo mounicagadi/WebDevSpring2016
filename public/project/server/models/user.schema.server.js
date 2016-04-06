@@ -9,10 +9,16 @@ module.exports = function(mongoose) {
         password: String,
         firstName: String,
         lastName: String,
-        favourites : [String],
+        favourites : [
+            {
+                restaurantId : String,
+                restaurantName : String
+            }
+        ],
         email: String,
-        phones: String
-        // collection property sets
+        phones : String,
+        roles: [String]
+
         // collection name to 'user'
     }, {collection: 'project.user'});
     return UserSchema;

@@ -129,11 +129,11 @@
                             <tbody>
                             <tr ng-repeat="hotel in model.forms">
                                 <td>
-                                    <a href="#/details/{{hotel.id}}">{{hotel.restaurantName}}</a>
+                                    <a href="#/details/{{hotel.restaurantId}}">{{hotel.restaurantName}}</a>
                                 </td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <a  ng-click = "model.deleteForm(hotel.id)" role="button" class="btn btn-default" aria-label="Add">
+                                        <a  ng-click = "model.deleteFavourite(hotel)" role="button" class="btn btn-default" aria-label="Add">
                                             <span  class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                             <span class="hidden-xs"></span>
                                         </a>

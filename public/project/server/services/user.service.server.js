@@ -115,8 +115,8 @@ module.exports = function(app, userModel) {
         var userId  = req.params.userId;
         var favourites = userModel.getFavourites(userId)
             .then (
-            function (favourites) {
-                res.json (favourites);
+            function (response) {
+                res.json (response.favourites);
             },
             function (err) {
                 res.status(400).send(err);
@@ -142,8 +142,8 @@ module.exports = function(app, userModel) {
 
     function deleteFavourite(req,res) {
         var userID = req.params.userId;
-        var ID = req.params.id;
-        userModel.deleteFavourites(userID, ID)
+        var favourite = req.body;
+        userModel.deleteFavourites(userID, favourite)
             .then(
                 function (stats) {
                     res.send(200);

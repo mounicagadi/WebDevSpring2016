@@ -14,7 +14,7 @@
 
         var vm = this;
         vm.update = update;
-        vm.deleteForm =deleteForm;
+        vm.deleteFavourite =deleteFavourite;
         vm.deleteReview = deleteReview;
         vm.selectReview = selectReview;
         var selectedIndex = null;
@@ -65,12 +65,12 @@
         }
 
 
-        function deleteForm(id){
-            UserService.deleteFavourites($rootScope.user._id, id)
+        function deleteFavourite(hotel){
+            UserService.deleteFavourites($rootScope.user._id, hotel)
                 .then(function(response){
                     console.log(response);
                     if(response.data == "OK"){
-                        displayFavourites();
+                        console.log("deleted");
                     }
                 });
 

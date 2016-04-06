@@ -128,34 +128,27 @@ module.exports = function(db, mongoose) {
 
     function getFavourites(userId){
 
-        var favourites = [];
-        for(var index in favourite_mock){
-            if(favourite_mock[index].user_id == userId){
-                favourites.push(favourite_mock[index]);
-            }
-        }
-
-        return favourites;
+       return UserModel.findById(userId).select("favourites");
 
     }
 
     function addFavourites(userId, newFavourite) {
 
-        favourite_mock.push(newFavourite);
+        return UserModel.findById(userId)
+            .then(
+                function(user) {
+                    user.favourites.push(newFavourite);
+                    return user.save();
+                }
+            );
     }
 
-    function deleteFavourites(userID, id){
-        var removed = -1;
-        for(var index in favourite_mock){
-            if(favourite_mock[index].user_id == userID && favourite_mock[index].id == id){
-                removed = index;
-                break;
-            }
-        }
+    function deleteFavourites(userID, data){
 
-        if(removed>=0){
-            favourite_mock.splice(removed,1);
-        }
+        return UserModel.update(
+            { _id: userID },
+            { $pull: { 'favourites': { restaurantId : data.restaurantId , restaurantName :data.restaurantName} } }
+        );
     }
 
 }

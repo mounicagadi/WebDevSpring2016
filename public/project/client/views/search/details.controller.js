@@ -33,9 +33,9 @@
             if($rootScope.user){
 
                 var favourites = {
-                    "user_id":$rootScope.user._id,
-                    "restaurantName": name,
-                    "id" : id
+
+                    "restaurantId" : id,
+                    "restaurantName": name
                 }
                 UserService.addFavourite($rootScope.user._id,favourites);
 

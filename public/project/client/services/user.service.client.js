@@ -52,9 +52,9 @@
 
         }
 
-        function deleteFavourites(userId,id){
+        function deleteFavourites(userId,favourite){
 
-            return $http.delete("/api/project/user/"+userId+"/deletefavourite/"+ id);
+            return $http.delete("/api/project/user/"+userId+"/deletefavourite/"+ favourite);
         }
 
         function login(credentials) {
