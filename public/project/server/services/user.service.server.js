@@ -10,7 +10,6 @@ module.exports = function(app, userModel) {
     app.get("/api/project/users", findAllUsers);
     app.get("/api/project/user/:userId",findUserById)
     app.get("/api/project/user/:userId/favourites",getFavourites)
-    app.get("api/project/user/:userId/favourites/:id",findFavouriteById);
     app.post("/api/project/user/:userId/favourites",addFavourites)
     app.delete("/api/project/user/:userId/deletefavourite/:id", deleteFavourite);
     app.get("/api/project/users/loggedin", loggedin);

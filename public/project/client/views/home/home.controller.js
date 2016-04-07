@@ -67,7 +67,7 @@
 
         function getDrinks(){
 
-            var option = "drinks";
+            var option = "bar";
             FoursquareService
                 .findRestaurantByOption(option)
                 .then(function(response){

@@ -351,3 +351,19 @@ body {
     padding: 75px 100px 50px 100px;
     z-index: -999;
 }
+
+#map {
+height: 1020px;
+width: 100%;
+}
+
+.glyphicon-heart-empty:before {
+    content: "\e143";
+    font-size: 40px;
+}
+
+.glyphicon-heart:before {
+    content: "\e005";
+    color: #cb202d;
+    font-size: 40px;
+}

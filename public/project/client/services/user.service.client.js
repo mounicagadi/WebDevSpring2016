@@ -19,7 +19,6 @@
             addFavourite : addFavourite,
             getFavourites :getFavourites,
             deleteFavourites : deleteFavourites,
-            findFavouriteById : findFavouriteById,
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
             logout : logout

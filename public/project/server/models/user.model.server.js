@@ -22,8 +22,7 @@ module.exports = function(db, mongoose) {
         findAllUsers :findAllUsers,
         getFavourites : getFavourites,
         addFavourites : addFavourites,
-        deleteFavourites : deleteFavourites,
-        findFavouriteById : findFavouriteById
+        deleteFavourites : deleteFavourites
     };
     return api;
 

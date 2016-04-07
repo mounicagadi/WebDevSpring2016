@@ -15,6 +15,7 @@
         var vm = this;
         vm.addFavourite = addFavourite;
         vm.addReview = addReview;
+        vm.isVenueInFavourites= isVenueInFavourites;
 
         vm.id = $routeParams.id;
         var hotelId = $routeParams.id;
@@ -36,6 +37,16 @@
         }
 
         init();
+
+        function isVenueInFavourites(favourites, venue) {
+            for(var i in favourites) {
+                if(favourites[i].restaurantId === venue.id)
+                    return true;
+            }
+            return false;
+//            user.favourites.indexOf(model.info.response.venue.id) > -1
+        }
+
         function addFavourite(name,id){
             if($rootScope.user){
 
