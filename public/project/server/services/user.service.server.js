@@ -8,7 +8,9 @@ module.exports = function(app, userModel) {
     app.post("/api/project/register", register);
     app.delete("/api/project/user/:userId", deleteUser);
     app.get("/api/project/users", findAllUsers);
+    app.get("/api/project/user/:userId",findUserById)
     app.get("/api/project/user/:userId/favourites",getFavourites)
+    app.get("api/project/user/:userId/favourites/:id",findFavouriteById);
     app.post("/api/project/user/:userId/favourites",addFavourites)
     app.delete("/api/project/user/:userId/deletefavourite/:id", deleteFavourite);
     app.get("/api/project/users/loggedin", loggedin);
@@ -110,6 +112,23 @@ module.exports = function(app, userModel) {
             );
     }
 
+    function findUserById(req, res){
+        var userId = req.params.userId;
+
+        // use model to find user by id
+        var user = userModel.findUserById(userId)
+            .then(
+                // return user if promise resolved
+                function (doc) {
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
     function getFavourites(req, res){
         console.log("inside getfavourites in server");
         var userId  = req.params.userId;
@@ -124,6 +143,7 @@ module.exports = function(app, userModel) {
         );
 
     }
+
 
     function addFavourites(req, res){
         console.log("inside addfavourites in server");

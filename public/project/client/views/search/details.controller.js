@@ -26,11 +26,27 @@
                         vm.displayReviews = response.data;
                 });
 
+
+            UserService.findUserById($rootScope.user._id)
+                .then(function(response){
+                    console.log(response.data);
+                    $rootScope.user = response.data;
+                })
+
         }
 
         init();
         function addFavourite(name,id){
             if($rootScope.user){
+
+                var userFav = $rootScope.user.favourites;
+                console.log($rootScope.user);
+                for(var index in userFav){
+                    if(userFav[index].restaurantId === id){
+                        alert("Already added to favourites")
+                        return;
+                    }
+                }
 
                 var favourites = {
 
@@ -38,6 +54,7 @@
                     "restaurantName": name
                 }
                 UserService.addFavourite($rootScope.user._id,favourites);
+                init();
 
             }else {
                 alert("Please login to add favourites");

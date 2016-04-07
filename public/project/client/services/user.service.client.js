@@ -15,9 +15,11 @@
             registerUser: registerUser,
             deleteUserById: deleteUserById,
             updateUser: updateUser,
+            findUserById : findUserById,
             addFavourite : addFavourite,
             getFavourites :getFavourites,
             deleteFavourites : deleteFavourites,
+            findFavouriteById : findFavouriteById,
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
             logout : logout
@@ -57,9 +59,15 @@
             return $http.delete("/api/project/user/"+userId+"/deletefavourite/"+ favId);
         }
 
+
         function login(credentials) {
 
             return $http.post("/api/project/login", credentials);
+        }
+
+        function findUserById(userId){
+
+            return $http.get("/api/project/user/"+userId);
         }
 
 

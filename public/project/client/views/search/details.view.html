@@ -23,7 +23,10 @@
             <p><i>"{{model.info.response.venue.tips.groups[0].items[1].text}}"</i></p>
 
             <p> <button ng-click="model.addFavourite(model.info.response.venue.name,model.info.response.venue.id)">
-                <span class="glyphicon glyphicon-heart"></span> </button></p>
+                <span ng-show="user.favourites.indexOf(model.info.response.venue.id) > -1"
+                      class="glyphicon glyphicon-heart"></span>
+    <span class="glyphicon glyphicon-heart-empty"></span>
+            </button></p>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2">
             <p>

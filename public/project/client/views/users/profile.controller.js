@@ -55,22 +55,12 @@
                 });
         }
 
-        function displayFavourites(){
-
-            UserService.getFavourites($rootScope.user._id)
-                .then(function (response) {
-                    console.log(response.data);
-                    vm.forms = response.data;
-                });
-        }
-
 
         function deleteFavourite($index){
 
             selectedIndex = vm.forms[$index]._id;
             UserService.deleteFavourites($rootScope.user._id, selectedIndex)
                 .then(function(response){
-                    console.log(response);
                     if(response.data == "OK"){
                         vm.forms.splice($index,1);
                     }

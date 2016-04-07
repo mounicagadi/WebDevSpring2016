@@ -20,7 +20,10 @@
             .when("/search/:name", {
                 templateUrl: "views/search/results.view.html",
                 controller : "ResultsController",
-                controllerAs : "model"
+                controllerAs : "model",
+                resolve:{
+                    getLoggedIn: getLoggedIn
+                }
             })
 
 
@@ -34,7 +37,10 @@
             .when("/details/:id", {
                 templateUrl: "views/search/details.view.html",
                 controller: "DetailsController",
-                controllerAs : "model"
+                controllerAs : "model",
+                resolve:{
+                    getLoggedIn: getLoggedIn
+                }
             })
 
             .when("/profile", {

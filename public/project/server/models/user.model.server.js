@@ -18,10 +18,12 @@ module.exports = function(db, mongoose) {
         updateUser: updateUser,
         createUser : createUser,
         deleteUserById: deleteUserById,
+        findUserById: findUserById,
         findAllUsers :findAllUsers,
         getFavourites : getFavourites,
         addFavourites : addFavourites,
-        deleteFavourites : deleteFavourites
+        deleteFavourites : deleteFavourites,
+        findFavouriteById : findFavouriteById
     };
     return api;
 
@@ -125,6 +127,12 @@ module.exports = function(db, mongoose) {
 
     }
 
+    function findUserById(userId){
+
+        return UserModel.findById(userId);
+
+    }
+
 
     function getFavourites(userId){
 
@@ -150,5 +158,6 @@ module.exports = function(db, mongoose) {
             { $pull: { 'favourites': { _id : favId} } }
         );
     }
+
 
 }
