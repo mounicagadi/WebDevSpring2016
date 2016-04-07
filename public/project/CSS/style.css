@@ -146,6 +146,20 @@ body {
     border-color: #e7e7e7;
 }
 
+.new-background{
+    background-color: white;
+}
+.profile-header {
+    padding: 100px 0 50px 0;
+}
+
+.profile-details {
+    padding-top: 25px;
+}
+.inverted-color {
+    color: #eee;
+}
+
 .site-color {
     color: #cb202d;
 }
@@ -237,9 +251,9 @@ body {
     padding: 40px 40px 20px 40px;
 }
 
-.h2, h2 {
-    font-size: 30px;
-    color: white;
+
+.specific{
+    color : white;
 }
 
 .search-content {
