@@ -71,7 +71,6 @@
     function getLoggedIn(UserService, $q) {
         var deferred = $q.defer();
 
-        console.log("inside getloggedin")
         UserService
             .getCurrentUser()
             .then(function(response){
@@ -88,7 +87,6 @@
 
         var deferred = $q.defer();
 
-        console.log("checking logged in");
         UserService
             .getCurrentUser()
             .then(function(response) {

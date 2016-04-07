@@ -65,12 +65,14 @@
         }
 
 
-        function deleteFavourite(hotel){
-            UserService.deleteFavourites($rootScope.user._id, hotel)
+        function deleteFavourite($index){
+
+            selectedIndex = vm.forms[$index]._id;
+            UserService.deleteFavourites($rootScope.user._id, selectedIndex)
                 .then(function(response){
                     console.log(response);
                     if(response.data == "OK"){
-                        console.log("deleted");
+                        vm.forms.splice($index,1);
                     }
                 });
 
@@ -102,7 +104,6 @@
             UserService.updateUser($rootScope.user._id,user)
                 .then(  function(response){
                     console.log(response);
-                    console.log(response.config.data);
                     $rootScope.user  = response.config.data;
 
                 });

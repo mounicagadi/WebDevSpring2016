@@ -143,11 +143,11 @@ module.exports = function(db, mongoose) {
             );
     }
 
-    function deleteFavourites(userID, data){
+    function deleteFavourites(userID, favId){
 
         return UserModel.update(
             { _id: userID },
-            { $pull: { 'favourites': { restaurantId : data.restaurantId , restaurantName :data.restaurantName} } }
+            { $pull: { 'favourites': { _id : favId} } }
         );
     }
 

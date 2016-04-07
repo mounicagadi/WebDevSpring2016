@@ -52,9 +52,9 @@ module.exports = function(app, userModel) {
 
     function updateUser(req, res) {
         console.log("Inside server side updateUser");
-        var id = req.params.userId;
+        var userId = req.params.id;
         var newUser = req.body;
-        var user = userModel.updateUser(id, newUser)
+        userModel.updateUser(userId, newUser)
             .then(
                 function(doc){
                     res.json(doc);
@@ -142,7 +142,7 @@ module.exports = function(app, userModel) {
 
     function deleteFavourite(req,res) {
         var userID = req.params.userId;
-        var favourite = req.body;
+        var favourite = req.params.id;
         userModel.deleteFavourites(userID, favourite)
             .then(
                 function (stats) {
