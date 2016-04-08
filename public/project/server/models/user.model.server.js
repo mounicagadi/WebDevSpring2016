@@ -20,6 +20,7 @@ module.exports = function(db, mongoose) {
         deleteUserById: deleteUserById,
         findUserById: findUserById,
         findAllUsers :findAllUsers,
+        findUserByUsername: findUserByUsername,
         getFavourites : getFavourites,
         addFavourites : addFavourites,
         deleteFavourites : deleteFavourites
@@ -54,75 +55,22 @@ module.exports = function(db, mongoose) {
 
         console.log("inside update model");
         console.log(user);
-        var deferred = q.defer();
-
-        UserModel.update(
-            { _id : userId },
-            {$set: user},
-            function (err, stats) {
-                console.log("stats"+stats);
-                if (!err) {
-                    deferred.resolve(stats);
-                } else {
-                    deferred.reject(err);
-                }
-            }
-        );
-        return deferred.promise;
+        return UserModel.update({_id: userId}, {$set: user});
 
     }
 
     function createUser(user){
-        var deferred = q.defer();
-
-        // insert new user with mongoose user model's create()
-        UserModel.create(user, function (err, doc) {
-
-            if (err) {
-                // reject promise if error
-                deferred.reject(err);
-            } else {
-                // resolve promise
-                console.log(doc);
-                deferred.resolve(doc);
-            }
-
-        });
-
-        // return a promise
-        return deferred.promise;
+        return UserModel.create(user);
     }
 
     function findAllUsers(){
 
-        var deferred = q.defer ();
-        UserModel.find (
-            function (err, users) {
-                if (!err) {
-                    deferred.resolve (users);
-                } else {
-                    deferred.reject (err);
-                }
-            }
-        );
-        return deferred.promise;
+        return UserModel.find();
     }
 
     function deleteUserById(userId){
 
-        var deferred = q.defer();
-        UserModel
-            .remove (
-                {_id: userId},
-                function (err, stats) {
-                    if (!err) {
-                        deferred.resolve(stats);
-                    } else {
-                        deferred.reject(err);
-                    }
-                }
-            );
-        return deferred.promise;
+        return UserModel.remove({_id: userId});
 
     }
 
@@ -130,6 +78,10 @@ module.exports = function(db, mongoose) {
 
         return UserModel.findById(userId);
 
+    }
+
+    function findUserByUsername(username) {
+        return UserModel.findOne({username: username});
     }
 
 

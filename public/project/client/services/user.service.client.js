@@ -13,6 +13,7 @@
             login: login,
             findAllUsers: findAllUsers,
             registerUser: registerUser,
+            createUser: createUser,
             deleteUserById: deleteUserById,
             updateUser: updateUser,
             findUserById : findUserById,
@@ -28,7 +29,7 @@
 
         function getCurrentUser() {
             console.log("calling loggedin function");
-            return $http.get("/api/assignment/users/loggedin");
+            return $http.get("/api/project/users/loggedin");
         }
 
         function setCurrentUser(user) {
@@ -36,7 +37,7 @@
         }
 
         function logout() {
-            return $http.post("/api/assignment/user/logout");
+            return $http.post("/api/project/user/logout");
 
         }
 
@@ -80,6 +81,11 @@
 
             return $http.post("/api/project/register", user);
 
+        }
+
+        function createUser(user){
+
+            return $http.post("/api/project/user",user);
         }
 
         function deleteUserById(userId) {

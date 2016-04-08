@@ -65,7 +65,7 @@
                 controller:"AdminController",
                 controllerAs : "model",
                 resolve: {
-                    checkLoggedIn: checkLoggedIn
+                    loggedin: checkAdmin
                 }
             })
 
@@ -73,6 +73,24 @@
                 redirectTo: "/home"
             });
     }
+
+    var checkAdmin = function($q, $timeout, $http, $location, $rootScope)
+    {
+        var deferred = $q.defer();
+
+        $http.get('/api/project/users/loggedin').success(function(user)
+        {
+            //$rootScope.errorMessage = null;
+            // User is Authenticated
+            if (user !== '0' && user.roles.indexOf('admin') != -1)
+            {
+                $rootScope.user = user;
+                deferred.resolve();
+            }
+        });
+
+        return deferred.promise;
+    };
 
     function getLoggedIn(UserService, $q) {
         var deferred = $q.defer();
@@ -103,7 +121,7 @@
                     deferred.resolve();
                 } else {
                     deferred.reject();
-                    $location.url("/home");
+                    $location.url("/login");
                 }
             });
 
