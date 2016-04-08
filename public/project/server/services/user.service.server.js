@@ -188,11 +188,13 @@ module.exports = function(app, userModel) {
     }
 
     function findAllUsers(req, res){
+        console.log("find all users server")
         if(isAdmin(req.user)) {
             userModel
                 .findAllUsers()
                 .then(
                     function (users) {
+                        console.log(users);
                         res.json(users);
                     },
                     function () {
@@ -247,7 +249,9 @@ module.exports = function(app, userModel) {
     }
 
     function isAdmin(user) {
-        if(user.roles.indexOf("admin") > 0) {
+        console.log(user)
+        if(user.roles.indexOf("admin") > -1) {
+
             return true
         }
         return false;
@@ -262,7 +266,6 @@ module.exports = function(app, userModel) {
     };
 
     function getFavourites(req, res){
-        console.log("inside getfavourites in server");
         var userId  = req.params.userId;
         var favourites = userModel.getFavourites(userId)
             .then (

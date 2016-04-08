@@ -53,6 +53,7 @@
         }
 
         function handleSuccess(response) {
+            console.log(response.data);
             vm.users = response.data;
         }
 

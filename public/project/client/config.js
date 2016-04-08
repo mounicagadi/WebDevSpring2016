@@ -92,38 +92,46 @@
         return deferred.promise;
     };
 
-    function getLoggedIn(UserService, $q) {
+    function getLoggedIn($q, $http, $rootScope, $timeout) {
+
         var deferred = $q.defer();
 
-        UserService
-            .getCurrentUser()
-            .then(function(response){
-                var currentUser = response.data;
-                console.log(response.data);
-                UserService.setCurrentUser(currentUser);
-                deferred.resolve();
-            });
+        $http.get('/api/project/users/loggedin').success(function(user)
+        {
+            $rootScope.errorMessage = null;
+            // User is Authenticated
+            if (user !== '0')
+            {
+                $rootScope.user = user;
+            }
+            deferred.resolve();
+        });
 
         return deferred.promise;
+
     }
 
-    function checkLoggedIn(UserService, $q, $location) {
+    function checkLoggedIn($q, $location, $http, $rootScope, $timeout) {
 
         var deferred = $q.defer();
 
-        UserService
-            .getCurrentUser()
-            .then(function(response) {
-                var currentUser = response.data;
-                console.log(currentUser);
-                if(currentUser) {
-                    UserService.setCurrentUser(currentUser);
-                    deferred.resolve();
-                } else {
-                    deferred.reject();
-                    $location.url("/login");
-                }
-            });
+        $http.get('/api/project/users/loggedin').success(function(user)
+        {
+            $rootScope.errorMessage = null;
+            // User is Authenticated
+            if (user !== '0')
+            {
+                $rootScope.user = user;
+                deferred.resolve();
+            }
+            // User is Not Authenticated
+            else
+            {
+                $rootScope.errorMessage = 'You need to log in.';
+                deferred.reject();
+                $location.url('/login');
+            }
+        });
 
         return deferred.promise;
     }

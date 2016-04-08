@@ -24,23 +24,24 @@
 
             ReviewService.findAllReviewsforHotel(hotelId)
                 .then(function(response){
+                    console.log(response.data);
                         vm.allReviews = response.data;
                 });
 
 
-            UserService.findUserById($rootScope.user._id)
-                .then(function(response){
-                    console.log(response.data);
-                    $rootScope.user = response.data;
-                })
+            //UserService.findUserById($rootScope.user._id)
+            //    .then(function(response){
+            //        console.log(response.data);
+            //        $rootScope.user = response.data;
+            //    })
 
         }
 
         init();
 
-        function isVenueInFavourites(favourites, venue) {
+        function isVenueInFavourites(favourites, id) {
             for(var i in favourites) {
-                if(favourites[i].restaurantId === venue.id)
+                if(favourites[i].restaurantId === id)
                     return true;
             }
             return false;
@@ -50,7 +51,6 @@
             if($rootScope.user){
 
                 var userFav = $rootScope.user.favourites;
-                console.log($rootScope.user);
                 for(var index in userFav){
                     if(userFav[index].restaurantId === id){
                         alert("Already added to favourites")

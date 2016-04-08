@@ -10,7 +10,7 @@
         .controller("ProfileController", ProfileController);
 
     //Function to display the content on the homepage
-    function ProfileController(UserService, $rootScope, $routeParams, ReviewService, FormService) {
+    function ProfileController(UserService, $rootScope, $routeParams, ReviewService) {
 
         var vm = this;
         vm.update = update;

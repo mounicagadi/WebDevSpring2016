@@ -24,7 +24,7 @@
             <p><i>"{{model.info.response.venue.tips.groups[0].items[1].text}}"</i></p>
 
             <p>
-                <span ng-class="{'glyphicon-heart': model.isVenueInFavourites(user.favourites, model.info.response.venue),
+                <span ng-class="{'glyphicon-heart': model.isVenueInFavourites(user.favourites, model.info.response.venue.id),
                 'glyphicon-heart-empty': ! model.isVenueInFavourites(user.favourites, model.info.response.venue)}"
                       ng-click="model.addFavourite(model.info.response.venue.name,model.info.response.venue.id)"
                       class="glyphicon"></span>
@@ -54,9 +54,10 @@
             <div class="col-lg-3">
                 <h3>Reviews</h3>
                 <hr>
-                <p ng-repeat="i in model.allReviews ">
-                    {{i.review}}
-                </p>
+                <ul ng-repeat="i in model.allReviews ">
+                    <li>{{i.reviews}}
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

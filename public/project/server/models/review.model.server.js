@@ -27,25 +27,16 @@ module.exports = function(db, mongoose) {
 
     function findAllReviewsforHotel(hotelId){
 
-        ReviewModel.find({restaurantId : hotelId});
+        return ReviewModel.find({restaurantId : hotelId});
     }
 
-    function addReview(review){
+    function addReview(userId,review){
 
         return ReviewModel.create(review);
     }
 
     function deleteReview(userId, id){
-        var removed = -1;
-        for(var index in review_mock){
-            if(review_mock[index].user_id == userId && review_mock[index].id == id){
-                removed = index;
-                break;
-            }
-        }
 
-        if(removed>=0){
-            review_mock.splice(removed,1);
-        }
+
     }
 }
