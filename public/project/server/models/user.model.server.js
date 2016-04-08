@@ -3,7 +3,7 @@
  */
 
 
-var favourite_mock = require("./favourites.mock.json")
+
 
 var q = require("q");
 

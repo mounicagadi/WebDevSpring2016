@@ -25,6 +25,9 @@
                 <li ng-class="{'active': $location.url() == '/profile'}" ng-if = "user">
                     <a href="#/profile">{{user.username}}</a>
                 </li>
+                <li ng-class="{'active': $location.url() == '/admin'}" ng-show="user.roles.indexOf('admin') >= 0">
+                    <a href="#/admin">Admin Page</a>
+                </li>
                 <li ng-class="{'active': $location.url() == '/home'}" ng-if = "user" ng-click="model.logout()">
                     <a href="#/home">Logout</a></li>
                 <li>

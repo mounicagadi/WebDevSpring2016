@@ -9,21 +9,35 @@ module.exports = function(app, reviewModel) {
     app.get("/api/project/user/:id/reviews",findAllReviewsForUser);
     app.post("/api/project/user/:userId/addReview",addReview);
     app.delete("/api/project/user/:userId/deleteReview/:id", deleteReview);
-    app.get("/api/project/restaurant/:id/user", findAllUserReviews);
+    app.get("/api/project/restaurant/:id/reviews", findAllReviewsforHotel);
 
     function findAllReviewsForUser(req, res){
         var id = req.params.id;
         console.log("inside server"+id);
-        var reviews = reviewModel.findAllReviewsForUser(id);
-        res.json(reviews);
+        reviewModel.findAllReviewsForUser(id)
+            .then(
+                function (reviews) {
+                    res.json(reviews);
+                },
+                function () {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function addReview(req, res){
         var id = req.params.userId;
         var review = req.body;
-        console.log("inside server"+id);
-        var reviews = reviewModel.addReview(id, review);
-        res.json(reviews);
+        reviewModel.addReview(id, review)
+            .then(
+            function ( reviews ) {
+                res.json(reviews);
+            },
+            // send error if promise rejected
+            function ( err ) {
+                res.status(400).send(err);
+            }
+        );
     }
 
     function deleteReview(req,res){
@@ -33,8 +47,18 @@ module.exports = function(app, reviewModel) {
         res.send(200);
     }
 
-    function findAllUserReviews(req, res){
+    function findAllReviewsforHotel(req, res){
         var id = req.params.id;
+        reviewModel.findAllReviewsforHotel(id)
+            .then(
+                function ( reviews ) {
+                    res.json(reviews);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
 
     }
 }

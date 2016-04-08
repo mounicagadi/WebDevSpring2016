@@ -22,9 +22,9 @@
 
         function init() {
 
-            ReviewService.findAllUserReviews(hotelId)
+            ReviewService.findAllReviewsforHotel(hotelId)
                 .then(function(response){
-                        vm.displayReviews = response.data;
+                        vm.allReviews = response.data;
                 });
 
 
@@ -44,7 +44,6 @@
                     return true;
             }
             return false;
-//            user.favourites.indexOf(model.info.response.venue.id) > -1
         }
 
         function addFavourite(name,id){
@@ -74,19 +73,19 @@
 
         }
 
-        function addReview(name,id,review){
+        function addReview(venue,review){
             if($rootScope.user) {
 
                 var newReview =
                 {
-                    "user_id" : $rootScope.user._id,
-                    "restaurantName": name,
-                    "id": id,
+                    "userId" : $rootScope.user._id,
+                    "restaurantId": venue.id,
                     "reviews": review
 
                 };
                 ReviewService.addReview($rootScope.user._id,newReview);
                 vm.review = null;
+                init();
             }else{
                 alert("Please login to write a review");
                 $location.url("/login");
