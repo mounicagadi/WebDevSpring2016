@@ -188,7 +188,6 @@ module.exports = function(app, userModel) {
     }
 
     function findAllUsers(req, res){
-        console.log("find all users server")
         if(isAdmin(req.user)) {
             userModel
                 .findAllUsers()
@@ -249,7 +248,6 @@ module.exports = function(app, userModel) {
     }
 
     function isAdmin(user) {
-        console.log(user)
         if(user.roles.indexOf("admin") > -1) {
 
             return true

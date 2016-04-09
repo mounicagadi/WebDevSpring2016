@@ -64,19 +64,8 @@ module.exports = function(db, mongoose) {
     }
 
     function findAllUsers(){
-        console.log("In Model")
-        var deferred = q.defer ();
-        UserModel.find (
-            function (err, users) {
-                console.log(users)
-                if (!err) {
-                    deferred.resolve (users);
-                } else {
-                    deferred.reject (err);
-                }
-            }
-        );
-        return deferred.promise;
+
+        return UserModel.find();
     }
 
     function deleteUserById(userId){
