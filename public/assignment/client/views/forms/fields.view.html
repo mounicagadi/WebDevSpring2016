@@ -137,8 +137,8 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <div class="tab-content">
                 <div id="fields" class="tab-pane fade in active">
-                    <form class="form-horizontal" role="form" action="" id="my-form" field-sortable field-axis="y">
-
+                    <form class="form-horizontal" role="form" id="my-form" >
+                        <div field-sortable field-sortable-callback="model.sortFields(start, end)" field-axis="y">
                         <div class="form-group" ng-repeat="field in model.fields" >
                             <div ng-switch on="field.type">
 
@@ -193,7 +193,7 @@
                                 </a>
                             </div>
                         </div>
-
+                        </div>
                         <div class="form-group">
                             <label for="new-field" class="col-sm-2 control-label">Add New Field:</label>
                             <div class="dropdown col-sm-4 col-md-4 ">

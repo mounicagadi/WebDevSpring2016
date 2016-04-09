@@ -16,6 +16,7 @@
         vm.deleteField = deleteField;
         vm.addField = addField;
         vm.editField = editField;
+        vm.sortFields = sortFields;
 
         var formId = -1;
 
@@ -169,6 +170,18 @@
                             }
                         });
                 });
+        }
+
+        function sortFields(start, end) {
+            FieldService.sortFields(formId, start, end)
+                .then(
+                    function (response) {
+                    },
+                    function (err) {
+                        vm.error = err;
+                    }
+                );
+
         }
     }
 
