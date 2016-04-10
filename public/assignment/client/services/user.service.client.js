@@ -19,12 +19,19 @@
             updateUser: updateUser,
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
-            logout : logout
+            logout : logout,
+            login :login,
+            register : register
 
 
         };
         return api;
 
+
+        function logout() {
+            return $http.post("/api/assignment/user/logout");
+
+        }
 
         function getCurrentUser() {
             console.log("calling loggedin function");
@@ -33,22 +40,6 @@
 
         function setCurrentUser(user) {
             $rootScope.user = user;
-        }
-
-        function logout() {
-            return $http.post("/api/assignment/user/logout");
-
-        }
-
-        function findUserById(userId){
-
-            return $http.get("/api/assignment/user/"+userId);
-        }
-
-        function findUserByUsername(username){
-
-            return $http.get("/api/assignment/user?username=" + username);
-
         }
 
         function findUserByCredentials(username, password) {
@@ -62,10 +53,25 @@
             return $http.get("/api/assignment/user");
         }
 
+        function findUserByUsername(username){
+
+            return $http.get("/api/assignment/user?username=" + username);
+
+        }
+
+        function register(user){
+
+            return $http.post("/api/assignment/register",user);
+        }
+
         function createUser(user) {
 
             return $http.post("/api/assignment/user", user);
 
+        }
+
+        function login(user) {
+            return $http.post("/api/assignment/login", user);
         }
 
         function deleteUserById(userId) {
@@ -73,11 +79,28 @@
             return $http.delete("/api/assignment/user/" + userId);
         }
 
-
         function updateUser(userId, newUser) {
 
             return $http.put("/api/assignment/user/"+userId, newUser);
 
         }
+
+        function findUserById(userId){
+
+            return $http.get("/api/assignment/user/"+userId);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 })();

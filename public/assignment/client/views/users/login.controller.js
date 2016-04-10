@@ -25,7 +25,7 @@
                 return;
                 }
 
-                    UserService.findUserByCredentials (user.username, user.password)
+                    UserService.login (user)
                         .then(function(user){
                             console.log(user.data);
                             if(user != null){

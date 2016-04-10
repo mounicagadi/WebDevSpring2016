@@ -31,11 +31,11 @@
             if(user != null){
 
                 if (user.username != null && user.password != null && user.verifypassword != null &&
-                    user.password == user.verifypassword && user.email != null) {
+                    user.password === user.verifypassword && user.email != null) {
 
 
                     user.email = setEmails(user.email);
-                UserService.createUser(user)
+                UserService.register(user)
                     .then(function (newUser) {
                     $rootScope.user = newUser.data;
                     $location.path("/profile");
