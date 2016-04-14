@@ -9,7 +9,7 @@ module.exports = function(app, userModel) {
 
     var auth = authorized;
 
-    app.post("/api/project/login", passport.authenticate('local'),login);
+    app.post("/api/project/login", passport.authenticate('project'),login);
     app.post("/api/project/register", register);
     app.post("/api/project/user", auth, createUser);
     app.put("/api/project/profile/:id", auth, updateUser);
@@ -22,7 +22,7 @@ module.exports = function(app, userModel) {
     app.get("/api/project/users/loggedin", loggedin);
     app.post("/api/project/user/logout", logout);
 
-    passport.use(new LocalStrategy(localStrategy));
+    passport.use('project',new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 

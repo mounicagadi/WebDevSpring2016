@@ -11,17 +11,17 @@ module.exports = function(app, model) {
 
     var auth = authorized;
 
-    app.post  ('/api/assignment/login', passport.authenticate('local'), login);
+    app.post  ('/api/assignment/login', passport.authenticate('assignment'), login);
+    app.post("/api/assignment/register", register);
     app.put("/api/assignment/user/:id", updateUser);
     app.post("/api/assignment/user", auth,createUser);
-    app.post("/api/assignment/register", register);
     app.get("/api/assignment/user", auth,findAllUsers);
     app.delete("/api/assignment/user/:id", auth,deleteUserById);
     app.get("/api/assignment/user/:id", findUserById);
     app.get("/api/assignment/users/loggedin", loggedin);
     app.post("/api/assignment/user/logout", logout);
 
-    passport.use(new LocalStrategy(localStrategy));
+    passport.use('assignment',new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
@@ -31,7 +31,7 @@ module.exports = function(app, model) {
     }
 
     function localStrategy(username, password, done) {
-        UserModel
+        model
             .findUserByUsername(username)
             .then(
                 function(user) {
@@ -198,12 +198,14 @@ module.exports = function(app, model) {
 
         } else {
 
+            console.log("inside find all");
             if (isAdmin(req.user)) {
                 var users =[];
                 model.findAllUsers()
                     .then(
                         function (doc) {
 
+                            console.log("response"+doc);
                             for(var i in doc){
                                 if(doc[i].roles.indexOf("admin") == -1){
                                     users.push(doc[i]);
@@ -280,7 +282,7 @@ module.exports = function(app, model) {
     }
 
     function isAdmin(user) {
-        if(user.roles.indexOf("admin") > 0) {
+        if(user.roles.indexOf("admin") > -1) {
             return true
         }
         return false;

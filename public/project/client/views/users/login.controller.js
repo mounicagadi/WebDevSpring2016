@@ -37,7 +37,7 @@
                     if( user != null) {
                         $rootScope.user = user.data;
                         vm.user.username = $rootScope.user.username;
-                        $location.path("/profile");
+                        $location.url("/profile");
                     }
 
                     else {

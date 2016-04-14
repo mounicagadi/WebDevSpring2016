@@ -18,6 +18,13 @@
         vm.selectUser = selectUser;
         vm.updateUser = updateUser;
 
+        vm.predicate = 'age';
+        vm.reverse = true;
+        vm.order = function(predicate) {
+            vm.reverse = (vm.predicate === predicate) ? !vm.reverse : false;
+            vm.predicate = predicate;
+        };
+
         function init() {
 
             var newUsers =[];
@@ -25,6 +32,7 @@
             UserService.findAllUsers()
                 .then(
                     function(response){
+                        console.log(response);
                         var allUsers = response.data;
                         for(var i in allUsers){
                             if(allUsers[i].roles.indexOf("admin") == -1){

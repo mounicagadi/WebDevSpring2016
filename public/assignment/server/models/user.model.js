@@ -123,17 +123,7 @@ module.exports = function(db, mongoose) {
 
     function findAllUsers(){
 
-        var deferred = q.defer ();
-        UserModel.find (
-            function (err, users) {
-                if (!err) {
-                    deferred.resolve (users);
-                } else {
-                    deferred.reject (err);
-                }
-            }
-        );
-        return deferred.promise;
+        return UserModel.find();
     }
 
     function deleteUserById(userId){

@@ -7,27 +7,45 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
+                        <th ng-click="model.order('username')">
+
+                            <span ng-show="model.predicate === 'username' && model.reverse"
+                                  ng-class="{reverse:model.reverse}"
+                                  class=" sortorder glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+
+                            <span ng-show="model.predicate === 'username' && !model.reverse"
+                                  ng-class="{reverse:model.reverse}"
+                                  class=" sortorder glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                            &nbsp;Username
+                        </th>
+
                         <th>
-                            <a href="" role="button">
-                                <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true">
-                            </span>&nbsp;Username</a>
+                            Password
+                        </th>
+                        <th ng-click="model.order('firstName')">
+
+                            <span ng-show="model.predicate === 'firstName'&& model.reverse"
+                                  ng-class="{reverse:model.reverse}"
+                                  class="sortorder glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+
+                            <span ng-show="model.predicate === 'firstName' && !model.reverse"
+                                  ng-class="{reverse:model.reverse}"
+                                  class=" sortorder glyphicon glyphicon-triangle-top" aria-hidden="true"></span>&nbsp;FirstName
+                        </th>
+
+                        <th ng-click="model.order('lastName')">
+
+                            <span ng-show="model.predicate === 'lastName'&& model.reverse"
+                                  ng-class="{reverse:model.reverse}"
+                                  class="sortorder glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+
+                            <span ng-show="model.predicate === 'lastName' && !model.reverse"
+                                  ng-class="{reverse:model.reverse}"
+                                  class=" sortorder glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                                &nbsp;Last Name
                         </th>
                         <th>
-                            <a href="" role="button" style="visibility : hidden">
-                                <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true">
-                            </span>&nbsp;Password</a>
-                        </th>
-                        <th>
-                            <a href="#" role="button"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true">
-                            </span>&nbsp;FirstName</a>
-                        </th>
-                        <th>
-                            <a href="#" role="button"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true">
-                            </span>&nbsp;Last Name</a>
-                        </th>
-                        <th>
-                            <a href="#" role="button"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true">
-                            </span>&nbsp;Role</a>
+                           Role
                         </th>
                         <th>
                             Action
@@ -52,12 +70,12 @@
                             <input type="text" class="form-control" placeholder="role1,role2" ng-model="model.user.roles">
                         </td>
                         <td>
-                            <div class="btn-group" role="group">
-                                <a ng-click="model.addUser(model.user)" role="button" class="btn btn-default" aria-label="Add">
-                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            <div>
+                                <a ng-click="model.addUser(model.user)" role="button" class="btn btn-default btn-primary" aria-label="Add">
+                                    Add<!--<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>-->
                                 </a>
-                                <a ng-click = "model.updateUser(model.user)" role="button" class="btn btn-default" aria-label="done">
-                                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                <a ng-click = "model.updateUser(model.user)" role="button" class="btn btn-default btn-success" aria-label="done">
+                                    Update<!--<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>-->
                                 </a>
                             </div>
                         </td>
@@ -69,12 +87,12 @@
                         <td>{{user.lastName}}</td>
                         <td>{{user.roles}}</td>
                         <td>
-                            <div class="btn-group" role="group">
-                                <a ng-click="model.deleteUser($index)" role="button" class="btn btn-default" aria-label="Add">
-                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            <div>
+                                <a ng-click="model.deleteUser($index)" role="button" class="btn btn-default btn-danger" aria-label="Add">
+                                    Delete<!--<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>-->
                                 </a>
-                                <a ng-click="model.selectUser($index)" role="button" class="btn btn-default">
-                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                <a ng-click="model.selectUser($index)" role="button" class="btn btn-default btn-warning">
+                                    <!--<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>--> Edit
                                 </a>
                             </div>
                         </td>

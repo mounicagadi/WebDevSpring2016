@@ -8,7 +8,7 @@ var cookieParser  = require('cookie-parser');
 var session       = require('express-session');
 var mongoose = require("mongoose");
 
-//var db = mongoose.connect('mongodb://127.0.0.1:27017/assignment');
+
 var connectionString = 'mongodb://127.0.0.1:27017/assignment';
 
 
@@ -34,6 +34,7 @@ app.use(session({
     saveUninitialized: true,
     secret: 'my project'
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -41,6 +42,6 @@ var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
 require("./public/assignment/server/app.js")(app, uuid, db, mongoose);
-require("./public/project/server/app.js")(app,db,mongoose);
+//require("./public/project/server/app.js")(app,db,mongoose);
 
 app.listen(port, ipaddress);

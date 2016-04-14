@@ -10,6 +10,8 @@
 
             .when("/admin", {
                 templateUrl: "views/admin/admin.view.html",
+                controller:"AdminController",
+                controllerAs : "model",
                 resolve: {
                     checkLoggedIn: checkLoggedIn
                 }
@@ -71,7 +73,7 @@
 
         var deferred = $q.defer();
 
-        $http.get('/api/project/users/loggedin').success(function(user)
+        $http.get('/api/assignment/users/loggedin').success(function(user)
         {
             $rootScope.errorMessage = null;
             // User is Authenticated
@@ -89,7 +91,7 @@
 
         var deferred = $q.defer();
 
-        $http.get('/api/project/users/loggedin').success(function(user)
+        $http.get('/api/assignment/users/loggedin').success(function(user)
         {
             $rootScope.errorMessage = null;
             // User is Authenticated
