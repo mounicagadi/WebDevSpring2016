@@ -7,43 +7,39 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th ng-click="model.order('username')">
-
-                            <span ng-show="model.predicate === 'username' && model.reverse"
-                                  ng-class="{reverse:model.reverse}"
-                                  class=" sortorder glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
-
-                            <span ng-show="model.predicate === 'username' && !model.reverse"
-                                  ng-class="{reverse:model.reverse}"
-                                  class=" sortorder glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
-                            &nbsp;Username
+                        <th ng-click="model.order('username')" class="hover">
+                        <span class="sortorder glyphicon glyphicon-triangle-top hover"
+                              ng-show="model.predicate === 'username' && !model.reverse"
+                              ng-class="{reverse:!model.reverse}"></span>
+                        <span class="sortorder glyphicon glyphicon-triangle-bottom hover"
+                              ng-show="model.predicate === 'username' && model.reverse"
+                              ng-class="{reverse:model.reverse}"></span>
+                            Username
                         </th>
 
                         <th>
                             Password
                         </th>
-                        <th ng-click="model.order('firstName')">
-
-                            <span ng-show="model.predicate === 'firstName'&& model.reverse"
-                                  ng-class="{reverse:model.reverse}"
-                                  class="sortorder glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
-
-                            <span ng-show="model.predicate === 'firstName' && !model.reverse"
-                                  ng-class="{reverse:model.reverse}"
-                                  class=" sortorder glyphicon glyphicon-triangle-top" aria-hidden="true"></span>&nbsp;FirstName
+                        <th ng-click="model.order('firstName')" class="hover">
+                        <span class="sortorder glyphicon glyphicon-triangle-top hover"
+                              ng-show="model.predicate === 'firstName' && !model.reverse"
+                              ng-class="{reverse:!model.reverse}"></span>
+                        <span class="sortorder glyphicon glyphicon-triangle-bottom hover"
+                              ng-show="model.predicate === 'firstName' && model.reverse"
+                              ng-class="{reverse:model.reverse}"></span>
+                            First Name
                         </th>
 
-                        <th ng-click="model.order('lastName')">
-
-                            <span ng-show="model.predicate === 'lastName'&& model.reverse"
-                                  ng-class="{reverse:model.reverse}"
-                                  class="sortorder glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
-
-                            <span ng-show="model.predicate === 'lastName' && !model.reverse"
-                                  ng-class="{reverse:model.reverse}"
-                                  class=" sortorder glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
-                                &nbsp;Last Name
+                        <th ng-click="model.order('lastName')" class="hover">
+                        <span class="sortorder glyphicon glyphicon-triangle-top hover"
+                              ng-show="model.predicate === 'lastName' && !model.reverse"
+                              ng-class="{reverse:!model.reverse}"></span>
+                        <span class="sortorder glyphicon glyphicon-triangle-bottom hover"
+                              ng-show="model.predicate === 'lastName' && model.reverse"
+                              ng-class="{reverse:model.reverse}"></span>
+                            Last Name
                         </th>
+
                         <th>
                            Role
                         </th>

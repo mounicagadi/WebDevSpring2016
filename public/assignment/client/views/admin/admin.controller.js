@@ -10,7 +10,7 @@
         .module("FormBuilderApp")
         .controller("AdminController", AdminController);
 
-    function AdminController($rootScope, UserService){
+    function AdminController(UserService, $filter){
         var vm = this;
 
         vm.addUser = addUser;
@@ -18,11 +18,27 @@
         vm.selectUser = selectUser;
         vm.updateUser = updateUser;
 
+        //vm.sortType = 'username';
+        //vm.sortReverse = false;
+
+        //var orderBy = $filter('orderBy');
+        //vm.predicate = 'username';
+        //vm.reverse = false;
+        //vm.toggleSort = toggleSort;
+        //
+        //function toggleSort(predicate) {
+        //    vm.reverse = (vm.predicate === predicate) ? !vm.reverse : false;
+        //    vm.predicate = predicate;
+        //    vm.users = orderBy(vm.users, vm.predicate, vm.reverse);
+        //};
+
         vm.predicate = 'age';
+        var orderBy = $filter('orderBy');
         vm.reverse = true;
         vm.order = function(predicate) {
             vm.reverse = (vm.predicate === predicate) ? !vm.reverse : false;
             vm.predicate = predicate;
+            vm.users = orderBy(vm.users, vm.predicate, vm.reverse);
         };
 
         function init() {
@@ -81,7 +97,6 @@
 
         function updateUser(user){
             var userId = user._id;
-            var newUsers=[];
             UserService.updateUser(userId, user)
                 .then(
                     function(response){

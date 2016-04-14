@@ -62,9 +62,6 @@ module.exports = function(app, model) {
         var userId = req.params.id;
         var newUser = req.body;
 
-        if(!isAdmin(req.user)) {
-            delete newUser.roles;
-        }
         if(typeof newUser.roles == "string") {
             newUser.roles = newUser.roles.split(",");
         }
