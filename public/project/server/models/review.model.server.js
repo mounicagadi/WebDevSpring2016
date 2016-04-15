@@ -15,13 +15,10 @@ module.exports = function(db, mongoose) {
         findAllReviewsforHotel : findAllReviewsforHotel,
         addReview : addReview,
         deleteReview: deleteReview,
-        getMongooseModel : getMongooseModel
+        updateReview : updateReview
     };
     return api;
 
-    function getMongooseModel() {
-        return ReviewModel
-    }
 
     function findAllReviewsForUser(userId){
 
@@ -43,5 +40,15 @@ module.exports = function(db, mongoose) {
 
         return ReviewModel.remove({'_id':id});
 
+    }
+
+    function updateReview(review){
+
+        console.log("review model"+review._id);
+        return ReviewModel.update(
+
+            {'_id' : review._id,},
+            {'$set' : {'reviews' : review.reviews} }
+    );
     }
 }

@@ -13,10 +13,10 @@
     function ProfileController(UserService, $rootScope, $routeParams, ReviewService) {
 
         var vm = this;
-        vm.update = update;
         vm.deleteFavourite =deleteFavourite;
         vm.deleteReview = deleteReview;
         vm.selectReview = selectReview;
+        vm.updateReview = updateReview;
         var selectedIndex = null;
         var currentForms = [];
         var username = $routeParams.username;
@@ -82,22 +82,30 @@
         }
 
         function selectReview($index){
-            vm.i={};
+            console.log("inside select review");
 
-            var selectedIndex = vm.reviews[$index];
+            vm.title={};
+            selectedIndex = vm.reviews[$index];
+            vm.title = selectedIndex.reviews;
 
-            vm.title = selectedIndex.title;
 
         }
 
-        function update(user) {
+        function updateReview(review) {
 
-            console.log("inside update function in controller");
-
-            UserService.updateUser($rootScope.user._id,user)
+            var newReview = {
+                "_id" : selectedIndex._id,
+                "reviews" : review
+            }
+            ReviewService.updateReview($rootScope.user._id,newReview)
                 .then(  function(response){
                     console.log(response);
-                    $rootScope.user  = response.config.data;
+
+                    if(response.statusText === "OK") {
+                        init();
+                        vm.title = null;
+                        selectedIndex = null
+                    }
 
                 });
 

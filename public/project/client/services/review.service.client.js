@@ -18,8 +18,7 @@
             findAllReviews: findAllReviews,
             findAllReviewsForUser: findAllReviewsForUser,
             deleteReview: deleteReview,
-            updateReviewById: updateReviewById,
-            findAllReviewsforHotel : findAllReviewsforHotel
+            updateReview: updateReview
         };
 
         return api;
@@ -45,19 +44,10 @@
             return $http.delete("/api/project/user/"+userId+"/deleteReview/"+ id);
         }
 
-        function findAllReviewsforHotel(id){
-            return $http.get("/api/project/restaurant/"+id+"/reviews");
-        }
 
-        function updateReviewById(ratingId,rat,callback){
-            for(var i=0;i<reviewList.length;i++) {
-                if(reviewList[i]._id == ratingId) {
-                    reviewList[i].rating=rat.rating;
-                    reviewList[i].review=rat.review;
-                    break;
-                }
-            }
-            callback(reviewList);
+        function updateReview(userId,review){
+
+            return $http.put("/api/project/user/"+userId+"/reviews",review)
         }
 
 

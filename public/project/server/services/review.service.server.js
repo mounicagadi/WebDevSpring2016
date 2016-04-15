@@ -9,6 +9,7 @@ module.exports = function(app, reviewModel) {
     app.get("/api/project/user/:id/reviews",findAllReviewsForUser);
     app.post("/api/project/user/:userId/addReview",addReview);
     app.delete("/api/project/user/:userId/deleteReview/:id", deleteReview);
+    app.put("/api/project/user/:userId/reviews",updateReview)
 
 
     function findAllReviewsForUser(req, res){
@@ -68,5 +69,19 @@ module.exports = function(app, reviewModel) {
                 }
             );
 
+    }
+
+    function updateReview(req,res){
+        var newReview = req.body;
+        reviewModel.updateReview(newReview)
+            .then(
+                function ( stats ) {
+                    res.send(stats);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
 }
