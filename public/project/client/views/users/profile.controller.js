@@ -17,6 +17,7 @@
         vm.deleteReview = deleteReview;
         vm.selectReview = selectReview;
         vm.updateReview = updateReview;
+        vm.update = update;
         var selectedIndex = null;
         var currentForms = [];
         var username = $routeParams.username;
@@ -47,12 +48,18 @@
 
         init();
 
-        function displayReviews(){
-            ReviewService.findAllReviewsForUser($rootScope.user._id)
-                .then(function (response) {
-                    console.log(response.data);
-                    vm.reviews = response.data;
+        function update(user) {
+
+            console.log("inside update function in controller");
+
+            UserService.updateUser($rootScope.user._id,user)
+                .then(  function(response){
+                    console.log(response);
+                    $rootScope.user  = response.config.data;
+
                 });
+
+
         }
 
 

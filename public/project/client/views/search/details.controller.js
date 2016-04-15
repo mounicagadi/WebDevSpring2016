@@ -24,16 +24,20 @@
         function init() {
 
             RestaurantService.findAllReviewsforHotel(hotelId)
-                .then(function(response){
+                .then(function (response) {
                     console.log(response.data);
-                        vm.allReviews = response.data;
+                    vm.allReviews = response.data;
                 });
 
-            UserService.findUserById($rootScope.user._id)
-                .then(function(response){
-                    console.log(response.data);
-                    $rootScope.user = response.data;
-                });
+            if ($rootScope.user) {
+
+                UserService.findUserById($rootScope.user._id)
+                    .then(function (response) {
+                        console.log(response.data);
+                        $rootScope.user = response.data;
+                    });
+
+        }
 
             RestaurantService.findRestaurantById(hotelId)
                .then(function(response){
@@ -116,28 +120,21 @@
         FoursquareService.findRestaurantByID(vm.id)
             .then(function(response) {
 
-                console.log(response.data);
-
                 vm.info = response.data;
 
-                console.log("trying tips"+vm.info.response.venue.tips.groups[0].items[1].text);
-
-                var address = vm.info.response.venue.location.address + vm.info.response.venue.location.city + vm.info.response.venue.location.country;
+                var address = vm.info.response.venue.name;
 
                 var latitude = vm.info.response.venue.location.lat;
                 var longitude = vm.info.response.venue.location.lng;
 
-                console.log(latitude,longitude);
 
                 var myLatLng = {lat: latitude, lng: longitude};
 
-                // Create a map object and specify the DOM element for display.
                 var map = new google.maps.Map(document.getElementById('map'), {
                     center: myLatLng,
                     zoom: 12
                 });
 
-                // Create a marker and set its position.
                 var marker = new google.maps.Marker({
                     map: map,
                     position: myLatLng,
