@@ -1,7 +1,16 @@
+<div class="banner new-background elevation2">
+    <div class="container">
+        <div class="row profile-header">
+            <div class="inverted-color profile-details">
+                <h1 class="site-color"> Welcome Admin!!!</h1>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 <div class="container-fluid">
 <div class="row">
-    <h3>Admin Page</h3>
-    <hr>
     <div class="container-fluid col-lg-12 card elevation1">
         <h2>User data</h2>
         <hr>
@@ -58,10 +67,10 @@
                     <td>{{user.roles}}</td>
                     <td>
                         <div class="container-fluid">
-                            <button ng-click="model.removeUser(model.user)" type="button" class="btn btn-danger">
+                            <button ng-click="model.removeUser($index)" type="button" class="btn btn-danger">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </button>
-                            <button ng-click="model.selectUser(model.user)" type="button" class="btn btn-info">
+                            <button ng-click="model.selectUser($index)" type="button" class="btn btn-info">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </button>
                         </div>

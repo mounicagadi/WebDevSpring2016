@@ -20,48 +20,68 @@
         vm.selectUser = selectUser;
 
         function init() {
-            UserService
-                .findAllUsers()
-                .then(handleSuccess, handleError);
+
+            var newUsers =[];
+            UserService.findAllUsers()
+                .then(function(response){
+                    console.log(response);
+                    var allUsers = response.data;
+                    for(var i in allUsers){
+                        if(allUsers[i].roles.indexOf("admin") == -1){
+                            newUsers.push(allUsers[i]);
+                        }
+                    }
+
+                    vm.users = newUsers;
+                }
+        );
         }
         init();
 
-        function selectUser(user){
+        function selectUser($index){
 
-            vm.user = angular.copy(user);
+            var userId = vm.users[$index]._id;
+            UserService.findUserById(userId)
+                .then(
+                    function(response){
+                        var user = response.data;
+                        vm.user = user;
+                    }
+                );
         }
 
-        function removeUser(user)
+        function removeUser($index)
         {
-            UserService
-                .deleteUser(user._id)
-                .then(handleSuccess, handleError);
+            var userId = vm.users[$index]._id;
+            UserService.deleteUserById(userId)
+                .then(
+                    function(users){
+                        init();
+                    }
+                );
         }
 
         function updateUser(user)
         {
-            UserService
-                .updateUser(user._id, user)
-                .then(handleSuccess, handleError);
+            UserService.updateUser(user._id, user)
+                .then(
+                    function(response){
+                        init();
+                        vm.user = {};
+                    }
+            );
         }
 
         function addUser(user)
         {
-            UserService
-                .createUser(user)
-                .then(handleSuccess, handleError);
+            UserService.createUser(user)
+                .then(
+                    function(response){
+                        init();
+                    }
+                );
+            vm.user = {};
         }
-
-        function handleSuccess(response) {
-            console.log(response.data);
-            vm.users = response.data;
-        }
-
-        function handleError(error) {
-            vm.error = error;
-        }
-
-
 
     }
 })();

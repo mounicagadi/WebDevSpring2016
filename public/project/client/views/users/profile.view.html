@@ -125,37 +125,24 @@
                 <div class="form-header">
                     <h2 class="site-color">My Favourites</h2>
                     <hr>
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover" cellspacing="0">
-                            <thead>
-                            <tr>
-                                <th>
-                                    <a role="button"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true">
-                            </span>&nbsp;Restaurants</a>
-                                </th>
-                                <th>
-                                    <a role="button"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true">
-                            </span>&nbsp;Action</a>
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr ng-repeat="hotel in model.forms">
-                                <td>
-                                    <a href="#/details/{{hotel.restaurantId}}">{{hotel.restaurantName}}</a>
-                                </td>
-                                <td>
-                                    <div class="btn-group" role="group">
-                                        <a  ng-click = "model.deleteFavourite($index)" role="button" class="btn btn-default" aria-label="Add">
-                                            <span  class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                            <span class="hidden-xs"></span>
+                        <div class="container-fluid">
+                            <div ng-repeat="hotel in model.forms">
+                                <div class="row">
+                                <div class="col-lg-8">
+                                    <a href="#/details/{{hotel.restaurantId}}"><b>{{hotel.restaurantName}}</b></a>
+                                </div>
+                                <div class="col-lg-2">
+
+                                        <a  ng-click = "model.deleteFavourite($index)" role="button" class="btn btn-default btn-danger" aria-label="Add">
+                                            <span class="glyphicon glyphicon-remove favourites" aria-hidden="true"></span>
                                         </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+
+                                </div>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+
 
                 </div>
             </div>

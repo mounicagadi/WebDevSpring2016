@@ -18,9 +18,12 @@
                             <label class="control-label" for="password">Password :</label>
                             <input type="password" ng-model="model.user.password" id="password" class="form-control form-text-input center-block" placeholder="Password">
                         </div>
-                        <hr>
                         <div class="form-group">
                             <button value="Login" ng-click="model.login(model.user);" class="btn btn-info btn-block search-button center-block">Login</button>
+                        </div>
+                        <hr>
+                        <div class="text-center form-group">
+                            Not a User?                <a role="button" class="btn btn-danger register-button" href="#/register">Register</a>
                         </div>
                     </form>
                 </div>

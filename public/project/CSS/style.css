@@ -160,9 +160,26 @@ body {
     color: #eee;
 }
 
+.favourites {
+    content: "\e014";
+    color: white;
+}
+
+b, strong {
+    font-weight: 700;
+    font-size: large;
+}
+
 .site-color {
     color: #cb202d;
 }
+
+.register-button  {
+    background-color: #cb202d;
+    border-color: #cb202d;
+    color: white !important;
+}
+
 .elevation3 {
     box-shadow: 0 5px 7px #999;
 }
