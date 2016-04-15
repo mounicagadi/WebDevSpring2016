@@ -84,32 +84,62 @@
 
         }
 
+        function checkIfUserReviewed(id){
+
+            var flag = false;
+            console.log("inside check of review");
+            ReviewService.findAllReviewsForUser($rootScope.user._id)
+                .then(function(response){
+                    console.log(response.data);
+                    var result = response.data;
+
+                    for(var i in result){
+                        if(result[i].restaurantId === id){
+                            alert("You cannot review more than once!");
+                            flag = true;
+                            break;
+                        }
+                    }
+
+                    if(!flag){
+
+                        var newReview =
+                        {
+                            "userId": $rootScope.user._id,
+                            "username": $rootScope.user.username,
+                            "restaurantId": venue.id,
+                            "restaurantName": venue.name,
+                            "reviews": review
+
+                        };
+                        ReviewService.addReview($rootScope.user._id, newReview);
+                        vm.review = null;
+                        init();
+                    }
+                });
+
+
+        }
+
         function addReview(venue,review){
 
             if($rootScope.user) {
 
-                if( findres === null)
-                {
-                    var details = {
+                if (review != null) {
 
-                        "restaurantId": venue.id,
-                        "restaurantName": venue.name,
+                    if (findres === null) {
+                        var details = {
+
+                            "restaurantId": venue.id,
+                            "restaurantName": venue.name,
+                        }
                     }
+                    RestaurantService.addRestaurantById(details);
+
+                    checkIfUserReviewed(venue.id);
+
                 }
-                RestaurantService.addRestaurantById(details);
 
-                var newReview =
-                {
-                    "userId" : $rootScope.user._id,
-                    "username" : $rootScope.user.username,
-                    "restaurantId": venue.id,
-                    "restaurantName" : venue.name,
-                    "reviews": review
-
-                };
-                ReviewService.addReview($rootScope.user._id,newReview);
-                vm.review = null;
-                init();
             }else{
                 alert("Please login to write a review");
                 $location.url("/login");

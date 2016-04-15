@@ -37,14 +37,6 @@
     </div>
 
         <div class="row">
-            <div class="col-lg-7">
-                <h3>Reviews</h3>
-                <hr>
-                <ul ng-repeat="i in model.allReviews ">
-                    <li>{{i.reviews}}  &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;{{i.username}}
-                    </li>
-                </ul>
-            </div>
             <div class="col-lg-5">
                 <div class="card elevation1">
                     <div class="form-header">
@@ -57,6 +49,17 @@
                         </form>
                     </div>
                 </div>
+            </div>
+            <div class="col-lg-7 card elevation1">
+                <h3 class="site-color">Reviews</h3>
+                <hr>
+                <ul ng-repeat="i in model.allReviews ">
+                    <li class="site-color">
+                        <b>@{{i.username}}</b>
+                    </li>
+                    <p><b>{{i.reviews}}</b></p>
+
+                </ul>
             </div>
         </div>
     </div>
