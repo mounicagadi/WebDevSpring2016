@@ -15,6 +15,8 @@ module.exports = function(mongoose) {
                 restaurantName : String
             }
         ],
+        follows : [String],
+        followedBy : [String],
         email: String,
         roles: [String]
 

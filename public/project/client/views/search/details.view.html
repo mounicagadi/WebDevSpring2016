@@ -51,11 +51,11 @@
                 </div>
             </div>
             <div class="col-lg-7 card elevation1">
-                <h3 class="site-color">Reviews</h3>
+                <h3 class="site-color">User Reviews</h3>
                 <hr>
                 <ul ng-repeat="i in model.allReviews ">
                     <li class="site-color">
-                        <b>@{{i.username}}</b>
+                        <b>@{{i.username}}</b>       <button ng-click="model.follow(i.username)" class="btn btn-danger register-button">Follow</button>
                     </li>
                     <p><b>{{i.reviews}}</b></p>
 

@@ -16,6 +16,7 @@
         vm.addFavourite = addFavourite;
         vm.addReview = addReview;
         vm.isVenueInFavourites= isVenueInFavourites;
+        vm.follow = follow;
         var findres;
 
         vm.id = $routeParams.id;
@@ -84,6 +85,7 @@
 
         }
 
+
         function checkIfUserReviewed(id){
 
             var flag = false;
@@ -97,6 +99,7 @@
                         if(result[i].restaurantId === id){
                             alert("You cannot review more than once!");
                             flag = true;
+                            vm.review = null;
                             break;
                         }
                     }
@@ -146,6 +149,14 @@
             }
         }
 
+        function follow(username){
+            if($rootScope.user){
+                UserService.addfollowers(username)
+                    .then(function(response){
+
+                    });
+            }
+        }
 
         FoursquareService.findRestaurantByID(vm.id)
             .then(function(response) {
