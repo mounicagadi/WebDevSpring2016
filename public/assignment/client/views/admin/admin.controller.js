@@ -18,19 +18,7 @@
         vm.selectUser = selectUser;
         vm.updateUser = updateUser;
 
-        //vm.sortType = 'username';
-        //vm.sortReverse = false;
 
-        //var orderBy = $filter('orderBy');
-        //vm.predicate = 'username';
-        //vm.reverse = false;
-        //vm.toggleSort = toggleSort;
-        //
-        //function toggleSort(predicate) {
-        //    vm.reverse = (vm.predicate === predicate) ? !vm.reverse : false;
-        //    vm.predicate = predicate;
-        //    vm.users = orderBy(vm.users, vm.predicate, vm.reverse);
-        //};
 
         vm.predicate = 'age';
         var orderBy = $filter('orderBy');

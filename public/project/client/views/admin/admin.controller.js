@@ -10,7 +10,7 @@
         .module("EatOutApp")
         .controller("AdminController", AdminController);
 
-    function AdminController(UserService,$rootScope) {
+    function AdminController(UserService,$filter, ReviewService,$rootScope) {
 
         var vm = this;
 
@@ -18,8 +18,29 @@
         vm.updateUser = updateUser;
         vm.addUser    = addUser;
         vm.selectUser = selectUser;
+        vm.selectReview = selectReview;
+        vm.updateReview = updateReview;
+        vm.deleteReview = deleteReview;
+        var selectedIndex = null;
+
+        vm.predicate = 'age';
+        var orderBy = $filter('orderBy');
+        vm.reverse = true;
+        vm.order = function(predicate) {
+            vm.reverse = (vm.predicate === predicate) ? !vm.reverse : false;
+            vm.predicate = predicate;
+            vm.users = orderBy(vm.users, vm.predicate, vm.reverse);
+        };
 
         function init() {
+
+            ReviewService.findAllReviews()
+                .then(function(response){
+                    console.log(response);
+                    vm.reviews = response.data;
+
+                });
+
 
             var newUsers =[];
             UserService.findAllUsers()
@@ -35,6 +56,8 @@
                     vm.users = newUsers;
                 }
         );
+
+
         }
         init();
 
@@ -81,6 +104,49 @@
                     }
                 );
             vm.user = {};
+        }
+
+        function deleteReview($index){
+
+            var index = vm.reviews[$index]._id;
+            ReviewService.deleteReview(index)
+                .then(function(response){
+                    console.log(response);
+                    if(response.data == "OK"){
+                        vm.reviews.splice($index,1);
+                    }
+                });
+        }
+
+        function selectReview($index){
+            console.log("inside select review");
+
+            vm.title={};
+            selectedIndex = vm.reviews[$index];
+            vm.title = selectedIndex.reviews;
+
+
+        }
+
+        function updateReview(review) {
+
+            var newReview = {
+                "_id" : selectedIndex._id,
+                "reviews" : review
+            }
+            ReviewService.updateReview(newReview)
+                .then(  function(response){
+                    console.log(response);
+
+                    if(response.statusText === "OK") {
+                        init();
+                        vm.title = null;
+                        selectedIndex = null
+                    }
+
+                });
+
+
         }
 
     }

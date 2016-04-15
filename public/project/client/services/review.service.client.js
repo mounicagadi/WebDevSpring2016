@@ -23,8 +23,8 @@
 
         return api;
 
-        function findAllReviews(callback){
-            callback(reviewList);
+        function findAllReviews(){
+            return $http.get("/api/project/reviews");
         }
 
         function addReview(userId, review){
@@ -40,14 +40,15 @@
 
         }
 
-        function deleteReview(userId, id){
-            return $http.delete("/api/project/user/"+userId+"/deleteReview/"+ id);
+        function deleteReview(id){
+            return $http.delete("/api/project/review/"+id);
         }
 
 
-        function updateReview(userId,review){
+        function updateReview(review){
 
-            return $http.put("/api/project/user/"+userId+"/reviews",review)
+            console.log("inside update reev client");
+            return $http.put("/api/project/review",review)
         }
 
 

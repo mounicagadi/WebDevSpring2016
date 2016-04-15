@@ -79,7 +79,7 @@
 
             var index = vm.reviews[$index]._id;
             console.log(index);
-            ReviewService.deleteReview($rootScope.user._id, index)
+            ReviewService.deleteReview(index)
                 .then(function(response){
                     console.log(response);
                     if(response.data == "OK"){
@@ -100,11 +100,12 @@
 
         function updateReview(review) {
 
+
             var newReview = {
                 "_id" : selectedIndex._id,
                 "reviews" : review
-            }
-            ReviewService.updateReview($rootScope.user._id,newReview)
+        }
+            ReviewService.updateReview(newReview)
                 .then(  function(response){
                     console.log(response);
 

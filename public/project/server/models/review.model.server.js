@@ -15,10 +15,15 @@ module.exports = function(db, mongoose) {
         findAllReviewsforHotel : findAllReviewsforHotel,
         addReview : addReview,
         deleteReview: deleteReview,
-        updateReview : updateReview
+        updateReview : updateReview,
+        findAllReviews : findAllReviews
     };
     return api;
 
+    function findAllReviews(){
+
+        return ReviewModel.find();
+    }
 
     function findAllReviewsForUser(userId){
 
@@ -44,10 +49,9 @@ module.exports = function(db, mongoose) {
 
     function updateReview(review){
 
-
         return ReviewModel.update(
 
-            {'_id' : review._id,},
+            {'_id' : review._id},
             {'$set' : {'reviews' : review.reviews} }
     );
     }

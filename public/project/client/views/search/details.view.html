@@ -1,17 +1,16 @@
 <div class="container-fluid add-padding">
     <div class="col-lg-8 col-md-8">
 
-        <div class="row">
+        <div class="row card elevation1">
         <div class="col-lg-4 col-md-4 col-sm-4">
             <img class="img img-responsive image-thumbnail details-image" ng-src="{{model.info.response.venue.bestPhoto.prefix}}300x500{{model.info.response.venue.bestPhoto.suffix}}"/>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="col-lg-6 col-md-6 col-sm-6 modify-font">
 
             <h3>{{model.info.response.venue.name}}</h3>
-            <p>Address : {{model.info.response.venue.location.address}},{{model.info.response.venue.location.city}},{{model.info.response.venue.location.country}}. {{model.info.response.venue.contact.phone}}</p>
+            <p>{{model.info.response.venue.location.address}},{{model.info.response.venue.location.city}},{{model.info.response.venue.location.country}} - {{model.info.response.venue.contact.phone}}</p>
 
             <p>{{model.info.response.venue.url}}</p>
-            <p> Catgories:</p>
             <ul ng-repeat="i in model.info.response.venue.categories">
                 <li>
                     <i>
@@ -39,6 +38,14 @@
 
         <div class="row">
             <div class="col-lg-7">
+                <h3>Reviews</h3>
+                <hr>
+                <ul ng-repeat="i in model.allReviews ">
+                    <li>{{i.reviews}}  &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;{{i.username}}
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-5">
                 <div class="card elevation1">
                     <div class="form-header">
                         <h3 class="container-fluid site-color">
@@ -50,14 +57,6 @@
                         </form>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3">
-                <h3>Reviews</h3>
-                <hr>
-                <ul ng-repeat="i in model.allReviews ">
-                    <li>{{i.reviews}}  &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;{{i.username}}
-                    </li>
-                </ul>
             </div>
         </div>
     </div>

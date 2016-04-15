@@ -180,6 +180,10 @@ b, strong {
     color: white !important;
 }
 
+.modify-font{
+    font-weight: bold;
+}
+
 .elevation3 {
     box-shadow: 0 5px 7px #999;
 }

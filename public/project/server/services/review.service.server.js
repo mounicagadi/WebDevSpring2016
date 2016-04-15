@@ -6,11 +6,25 @@
 
 module.exports = function(app, reviewModel) {
 
+    app.get("/api/project/reviews",findAllReviews);
     app.get("/api/project/user/:id/reviews",findAllReviewsForUser);
     app.post("/api/project/user/:userId/addReview",addReview);
-    app.delete("/api/project/user/:userId/deleteReview/:id", deleteReview);
-    app.put("/api/project/user/:userId/reviews",updateReview)
+    app.put("/api/project/review",updateReview);
+    app.delete("/api/project/review/:id", deleteReview);
 
+
+
+    function findAllReviews(req,res){
+        reviewModel.findAllReviews()
+            .then(
+                function(response){
+                    res.json(response);
+                },
+                function (){
+                    res.status(400).send(err);
+                }
+            );
+    }
 
     function findAllReviewsForUser(req, res){
         var id = req.params.id;
@@ -42,7 +56,6 @@ module.exports = function(app, reviewModel) {
     }
 
     function deleteReview(req,res){
-        var userID  = req.params.userId;
         var ID = req.params.id;
         reviewModel.deleteReview(ID)
             .then(
@@ -72,6 +85,8 @@ module.exports = function(app, reviewModel) {
     }
 
     function updateReview(req,res){
+
+        console.log("inside update reev server");
         var newReview = req.body;
         reviewModel.updateReview(newReview)
             .then(
