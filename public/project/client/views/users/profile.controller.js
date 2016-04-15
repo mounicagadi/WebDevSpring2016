@@ -68,12 +68,15 @@
 
         }
 
-        function deleteReview(id){
-            ReviewService.deleteReview($rootScope.user._id, id)
+        function deleteReview($index){
+
+            var index = vm.reviews[$index]._id;
+            console.log(index);
+            ReviewService.deleteReview($rootScope.user._id, index)
                 .then(function(response){
                     console.log(response);
                     if(response.data == "OK"){
-                        displayReviews();
+                        vm.reviews.splice($index,1);
                     }
                 });
         }

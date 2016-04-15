@@ -2,7 +2,6 @@
  * Created by mounica on 3/25/2016.
  */
 
-var review_mock = require("./review.mock.json");
 
 module.exports = function(db, mongoose) {
 
@@ -10,14 +9,19 @@ module.exports = function(db, mongoose) {
 
     var ReviewModel = mongoose.model('review', ReviewSchema);
 
+
     var api = {
         findAllReviewsForUser: findAllReviewsForUser,
         findAllReviewsforHotel : findAllReviewsforHotel,
         addReview : addReview,
-        deleteReview: deleteReview
+        deleteReview: deleteReview,
+        getMongooseModel : getMongooseModel
     };
     return api;
 
+    function getMongooseModel() {
+        return ReviewModel
+    }
 
     function findAllReviewsForUser(userId){
 
@@ -35,8 +39,9 @@ module.exports = function(db, mongoose) {
         return ReviewModel.create(review);
     }
 
-    function deleteReview(userId, id){
+    function deleteReview(id){
 
+        return ReviewModel.remove({'_id':id});
 
     }
 }

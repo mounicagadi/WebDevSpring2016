@@ -10,30 +10,37 @@
         .module("EatOutApp")
         .controller("DetailsController", detailsController);
 
-    function detailsController($routeParams, FoursquareService, $rootScope, UserService, $location, ReviewService) {
+    function detailsController($routeParams, FoursquareService, $rootScope, UserService, $location, ReviewService,RestaurantService) {
 
         var vm = this;
         vm.addFavourite = addFavourite;
         vm.addReview = addReview;
         vm.isVenueInFavourites= isVenueInFavourites;
+        var findres;
 
         vm.id = $routeParams.id;
         var hotelId = $routeParams.id;
 
         function init() {
 
-            ReviewService.findAllReviewsforHotel(hotelId)
+            RestaurantService.findAllReviewsforHotel(hotelId)
                 .then(function(response){
                     console.log(response.data);
                         vm.allReviews = response.data;
                 });
 
+            UserService.findUserById($rootScope.user._id)
+                .then(function(response){
+                    console.log(response.data);
+                    $rootScope.user = response.data;
+                });
 
-            //UserService.findUserById($rootScope.user._id)
-            //    .then(function(response){
-            //        console.log(response.data);
-            //        $rootScope.user = response.data;
-            //    })
+            RestaurantService.findRestaurantById(hotelId)
+               .then(function(response){
+                   console.log(response.data);
+                   findres = response.data;
+                   console.log(findres);
+               });
 
         }
 
@@ -74,12 +81,25 @@
         }
 
         function addReview(venue,review){
+
             if($rootScope.user) {
+
+                if( findres === null)
+                {
+                    var details = {
+
+                        "restaurantId": venue.id,
+                        "restaurantName": venue.name,
+                    }
+                }
+                RestaurantService.addRestaurantById(details);
 
                 var newReview =
                 {
                     "userId" : $rootScope.user._id,
+                    "username" : $rootScope.user.username,
                     "restaurantId": venue.id,
+                    "restaurantName" : venue.name,
                     "reviews": review
 
                 };
