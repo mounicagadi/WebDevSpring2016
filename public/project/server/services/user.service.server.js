@@ -15,6 +15,7 @@ module.exports = function(app, userModel) {
     app.put("/api/project/profile/:id", auth, updateUser);
     app.delete("/api/project/user/:userId", auth, deleteUser);
     app.get("/api/project/users", auth, findAllUsers);
+    app.get("/api/project/userbyname/:username",findUserByUsername)
     app.get("/api/project/user/:userId",findUserById)
     app.get("/api/project/user/:userId/favourites",getFavourites)
     app.post("/api/project/user/:userId/favourites",addFavourites)
@@ -22,6 +23,9 @@ module.exports = function(app, userModel) {
     app.post("/api/project/user/:userId/follows/:username",addfollowers);
     app.get("/api/project/user/:userId/follows",getUsersIFollow);
     app.delete("/api/project/user/:userId/follows/:username",deleteUsersIFollow)
+    app.post("/api/project/user/:username/followedBy/:currUser",userFollowedby)
+    app.get("/api/project/user/:userId/followedBy",getMyFollowers)
+    app.delete("/api/project/user/:userId/followedBy/:username",deleteMyFollowers)
     app.get("/api/project/users/loggedin", loggedin);
     app.post("/api/project/user/logout", logout);
 
@@ -250,6 +254,25 @@ module.exports = function(app, userModel) {
             );
     }
 
+    function findUserByUsername(req,res){
+        var username = req.params.username;
+        console.log("INside finduserbyname")
+        console.log(username);
+        // use model to find user by id
+        var user = userModel.findUserByUsername(username)
+            .then(
+                // return user if promise resolved
+                function (doc) {
+                    console.log(doc)
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
     function isAdmin(user) {
         if(user.roles.indexOf("admin") > -1) {
 
@@ -341,6 +364,48 @@ module.exports = function(app, userModel) {
         var userid = req.params.userId;
         var username = req.params.username;
         userModel.deleteUsersIFollow(userid,username)
+            .then (
+                function (response) {
+                    res.json (response);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function userFollowedby(req, res){
+        var username = req.params.username;
+        var currUser = req.params.currUser;
+        userModel.userFollowedby(username,currUser)
+            .then (
+                function (response) {
+                    res.json (response);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+
+    }
+
+    function getMyFollowers(req, res){
+        var userId = req.params.userId;
+        userModel.getMyFollowers(userId)
+            .then (
+                function (response) {
+                    res.json (response);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function deleteMyFollowers(req,res){
+        var userid = req.params.userId;
+        var username = req.params.username;
+        userModel.deleteMyFollowers(userid,username)
             .then (
                 function (response) {
                     res.json (response);

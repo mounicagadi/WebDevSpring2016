@@ -22,47 +22,52 @@
         var default_place = "boston";
         var default_name = "restaurants"
 
-        function search(restaurant) {
+        function search(name,place) {
 
-            var name = restaurant.name;
-            var place = restaurant.place;
-
+            var finalName;
+            var finalPlace;
             console.log(name,place);
 
             if (name == null && place == null) {
                 console.log("empty fields");
-                FoursquareService
-                    .findByNameLocation("restaurants", "boston");
+                finalName = "restaurants";
+                finalPlace = "boston";
+                //FoursquareService
+                //    .findByNameLocation("restaurants", "boston");
             }
 
             else if (name == null && place !== null){
 
                 console.log("name null");
-                FoursquareService
-                    .findByNameLocation("restaurants", place);
+                finalName = "restaurants";
+                finalPlace = place;
+
             }
 
             else if (name !== null && place == null){
 
                 console.log("place null");
-                FoursquareService
-                    .findByNameLocation(name, "boston");
+                finalName = name;
+                finalPlace = "boston";
+
             }
 
             else {
 
-                //$location.path("/home/"+name);
-                console.log(name);
-                FoursquareService
-                    .findByNameLocation(name, place)
-                    .then(function(response){
-                        console.log(response.data.response.venues);
-                        $rootScope.info = response.data;
-                        $rootScope.name = name;
-                        $location.url("/search/"+name);
-                    });
+                finalName = name;
+                finalPlace = place;
+
 
             }
+
+            FoursquareService
+                .findByNameLocation(finalName, finalPlace)
+                .then(function(response){
+                    console.log(response.data.response.venues);
+                    $rootScope.info = response.data;
+                    $rootScope.name = name;
+                    $location.url("/search/"+name);
+                });
         }
 
         function getDrinks(){

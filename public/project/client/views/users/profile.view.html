@@ -149,7 +149,7 @@
                     <h2 class="site-color">I am Following!</h2>
                     <hr>
                     <div class="container-fluid">
-                        <div ng-repeat="username in model.follows">
+                        <div ng-repeat="username in model.follows track by $index">
                             <div class="row">
                                 <div class="col-lg-8">
                             <p><b>{{username}}</b></p>
@@ -157,6 +157,26 @@
                                 <div class="col-lg-2">
 
                                     <a  ng-click = "model.deleteUsersIFollow(username)" role="button" class="btn btn-default btn-danger" aria-label="Add">
+                                        <span class="glyphicon glyphicon-remove favourites" aria-hidden="true"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-header card elevation1">
+                    <h2 class="site-color">My Followers!</h2>
+                    <hr>
+                    <div class="container-fluid">
+                        <div ng-repeat="username in model.followedBy track by $index">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <p><b>{{username}}</b></p>
+                                </div>
+                                <div class="col-lg-2">
+
+                                    <a  ng-click = "model.deleteMyFollowers(username)" role="button" class="btn btn-default btn-danger" aria-label="Add">
                                         <span class="glyphicon glyphicon-remove favourites" aria-hidden="true"></span>
                                     </a>
                                 </div>

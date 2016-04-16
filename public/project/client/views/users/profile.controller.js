@@ -19,19 +19,16 @@
         vm.updateReview = updateReview;
         vm.update = update;
         vm.deleteUsersIFollow = deleteUsersIFollow;
+        vm.deleteMyFollowers = deleteMyFollowers;
         var selectedIndex = null;
-        var currentForms = [];
         var username = $routeParams.username;
 
         function init(){
 
             var currUser = $rootScope.user;
-            console.log(currUser);
             if (currUser != null) {
                 vm.user = currUser;
             }
-
-            console.log($rootScope.user._id);
 
             ReviewService.findAllReviewsForUser($rootScope.user._id)
                 .then(function (response) {
@@ -45,8 +42,12 @@
 
             UserService.getUsersIFollow($rootScope.user._id)
                 .then(function(response){
-                    console.log(response.data);
                     vm.follows = response.data.follows;
+                })
+
+            UserService.getMyFollowers($rootScope.user._id)
+                .then(function(response){
+                    vm.followedBy = response.data.followedBy;
                 })
 
         }
@@ -55,21 +56,16 @@
 
         function update(user) {
 
-            console.log("inside update function in controller");
-
             UserService.updateUser($rootScope.user._id,user)
                 .then(  function(response){
-                    console.log(response);
                     $rootScope.user  = response.config.data;
 
                 });
-
 
         }
 
 
         function deleteFavourite($index){
-
             selectedIndex = vm.forms[$index]._id;
             UserService.deleteFavourites($rootScope.user._id, selectedIndex)
                 .then(function(response){
@@ -83,10 +79,8 @@
         function deleteReview($index){
 
             var index = vm.reviews[$index]._id;
-            console.log(index);
             ReviewService.deleteReview(index)
                 .then(function(response){
-                    console.log(response);
                     if(response.data == "OK"){
                         vm.reviews.splice($index,1);
                     }
@@ -94,8 +88,6 @@
         }
 
         function selectReview($index){
-            console.log("inside select review");
-
             vm.title={};
             selectedIndex = vm.reviews[$index];
             vm.title = selectedIndex.reviews;
@@ -105,14 +97,12 @@
 
         function updateReview(review) {
 
-
             var newReview = {
                 "_id" : selectedIndex._id,
                 "reviews" : review
         }
             ReviewService.updateReview(newReview)
                 .then(  function(response){
-                    console.log(response);
 
                     if(response.statusText === "OK") {
                         init();
@@ -127,14 +117,39 @@
 
         function deleteUsersIFollow(username){
 
-            //var index = vm.reviews[$index];
-            //console.log(index);
             UserService.deleteUsersIFollow($rootScope.user._id,username)
                 .then(function(response){
-                    console.log(response);
                         init();
                 });
 
+            UserService.findUserByUsername(username)
+                .then(function(response){
+                    var userid = response.data._id;
+                    UserService.deleteMyFollowers(userid,$rootScope.user.username)
+                        .then(function(response){
+                            init();
+                        });
+                });
+
+
+        }
+
+        function deleteMyFollowers(username){
+
+            UserService.deleteMyFollowers($rootScope.user._id,username)
+                .then(function(response){
+                    init();
+                });
+
+
+            UserService.findUserByUsername(username)
+                .then(function(response){
+                    var userid = response.data._id;
+                    UserService.deleteUsersIFollow(userid,$rootScope.user.username)
+                        .then(function(response){
+                            init();
+                        });
+                });
         }
     }
 })();

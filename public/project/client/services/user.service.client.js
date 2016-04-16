@@ -17,12 +17,16 @@
             deleteUserById: deleteUserById,
             updateUser: updateUser,
             findUserById : findUserById,
+            findUserByUsername : findUserByUsername,
             addFavourite : addFavourite,
             getFavourites :getFavourites,
             deleteFavourites : deleteFavourites,
             addfollowers : addfollowers,
             getUsersIFollow : getUsersIFollow,
             deleteUsersIFollow : deleteUsersIFollow,
+            userFollowedby : userFollowedby,
+            getMyFollowers : getMyFollowers,
+            deleteMyFollowers : deleteMyFollowers,
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
             logout : logout
@@ -43,6 +47,19 @@
         function deleteUsersIFollow(userId,username){
 
             return $http.delete("/api/project/user/"+userId+"/follows/"+username)
+        }
+
+        function userFollowedby(username,currUser){
+
+            return $http.post("/api/project/user/"+username+"/followedBy/"+currUser);
+        }
+
+        function getMyFollowers(userId){
+            return $http.get("/api/project/user/"+userId+"/followedBy");
+        }
+
+        function deleteMyFollowers(userId,username){
+            return $http.delete("/api/project/user/"+userId+"/followedBy/"+username)
         }
 
         function getCurrentUser() {
@@ -86,6 +103,11 @@
         function findUserById(userId){
 
             return $http.get("/api/project/user/"+userId);
+        }
+
+        function findUserByUsername(username){
+            console.log(username);
+            return $http.get("/api/project/userbyname/"+username);
         }
 
 

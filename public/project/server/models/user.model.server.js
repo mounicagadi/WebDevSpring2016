@@ -26,7 +26,10 @@ module.exports = function(db, mongoose) {
         deleteFavourites : deleteFavourites,
         addfollowers : addfollowers,
         getUsersIFollow : getUsersIFollow,
-        deleteUsersIFollow : deleteUsersIFollow
+        deleteUsersIFollow : deleteUsersIFollow,
+        userFollowedby : userFollowedby,
+        getMyFollowers : getMyFollowers,
+        deleteMyFollowers : deleteMyFollowers
     };
     return api;
 
@@ -84,7 +87,7 @@ module.exports = function(db, mongoose) {
     }
 
     function findUserByUsername(username) {
-        return UserModel.findOne({username: username});
+        return UserModel.findOne({"username": username});
     }
 
 
@@ -129,11 +132,34 @@ module.exports = function(db, mongoose) {
 
     function deleteUsersIFollow(userId,username){
 
+        console.log(username);
         return UserModel.update(
             { '_id' : userId},
             { '$pull' : { 'follows': { '$in': [username] }}}
         );
 
+    }
+
+    function userFollowedby(username,currUser){
+
+        return UserModel.findOne(
+            {username: username})
+            .then(function (user) {
+                user.followedBy.push(currUser);
+                return user.save();
+            })
+    }
+
+    function getMyFollowers(userId){
+        return UserModel.findById(userId).select("followedBy");
+    }
+
+    function deleteMyFollowers(userId,username){
+
+        return UserModel.update(
+            { '_id' : userId},
+            { '$pull' : { 'followedBy': { '$in': [username] }}}
+        );
     }
 
 }

@@ -27,7 +27,6 @@
 
             RestaurantService.findAllReviewsforHotel(hotelId)
                 .then(function (response) {
-                    console.log(response.data);
                     vm.allReviews = response.data;
                 });
 
@@ -35,7 +34,6 @@
 
                 UserService.findUserById($rootScope.user._id)
                     .then(function (response) {
-                        console.log(response.data);
                         $rootScope.user = response.data;
                     });
 
@@ -43,9 +41,7 @@
 
             RestaurantService.findRestaurantById(hotelId)
                .then(function(response){
-                   console.log(response.data);
                    findres = response.data;
-                   console.log(findres);
                });
 
         }
@@ -90,10 +86,8 @@
         function checkIfUserReviewed(id){
 
             var flag = false;
-            console.log("inside check of review");
             ReviewService.findAllReviewsForUser($rootScope.user._id)
                 .then(function(response){
-                    console.log(response.data);
                     var result = response.data;
 
                     for(var i in result){
@@ -154,10 +148,10 @@
             if($rootScope.user){
                 UserService.addfollowers($rootScope.user._id,username)
                     .then(function(response){
-                        console.log(response);
                         init();
                     });
 
+                UserService.userFollowedby(username,$rootScope.user.username);
             }else{
                 alert("Please login to Follow a User");
                 $location.url("/login");
@@ -171,6 +165,17 @@
                     console.log(response);
                     init();
                 });
+
+            UserService.findUserByUsername(username)
+                .then(function(response){
+                    var userid = response.data._id;
+                    UserService.deleteMyFollowers(userid,$rootScope.user.username)
+                        .then(function(response){
+                            init();
+                        });
+                });
+
+
         }
 
         FoursquareService.findRestaurantByID(vm.id)
