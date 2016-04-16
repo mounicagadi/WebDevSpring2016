@@ -23,7 +23,10 @@ module.exports = function(db, mongoose) {
         findUserByUsername: findUserByUsername,
         getFavourites : getFavourites,
         addFavourites : addFavourites,
-        deleteFavourites : deleteFavourites
+        deleteFavourites : deleteFavourites,
+        addfollowers : addfollowers,
+        getUsersIFollow : getUsersIFollow,
+        deleteUsersIFollow : deleteUsersIFollow
     };
     return api;
 
@@ -110,5 +113,27 @@ module.exports = function(db, mongoose) {
         );
     }
 
+    function addfollowers(userid,username){
+
+        return UserModel.findById(userid)
+            .then(function(user){
+                user.follows.push(username);
+                return user.save();
+            });
+    }
+
+    function getUsersIFollow(userId){
+
+        return UserModel.findById(userId).select("follows");
+    }
+
+    function deleteUsersIFollow(userId,username){
+
+        return UserModel.update(
+            { '_id' : userId},
+            { '$pull' : { 'follows': { '$in': [username] }}}
+        );
+
+    }
 
 }

@@ -20,12 +20,30 @@
             addFavourite : addFavourite,
             getFavourites :getFavourites,
             deleteFavourites : deleteFavourites,
+            addfollowers : addfollowers,
+            getUsersIFollow : getUsersIFollow,
+            deleteUsersIFollow : deleteUsersIFollow,
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
             logout : logout
 
         };
         return api;
+
+        function addfollowers(userId,username){
+
+            return $http.post("/api/project/user/"+userId+"/follows/"+username);
+        }
+
+        function getUsersIFollow(userId){
+
+            return $http.get("/api/project/user/"+userId+"/follows");
+        }
+
+        function deleteUsersIFollow(userId,username){
+
+            return $http.delete("/api/project/user/"+userId+"/follows/"+username)
+        }
 
         function getCurrentUser() {
             console.log("calling loggedin function");

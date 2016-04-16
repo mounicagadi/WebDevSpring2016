@@ -18,6 +18,7 @@
         vm.selectReview = selectReview;
         vm.updateReview = updateReview;
         vm.update = update;
+        vm.deleteUsersIFollow = deleteUsersIFollow;
         var selectedIndex = null;
         var currentForms = [];
         var username = $routeParams.username;
@@ -34,15 +35,19 @@
 
             ReviewService.findAllReviewsForUser($rootScope.user._id)
                 .then(function (response) {
-                    console.log(response.data);
                     vm.reviews = response.data;
                 });
 
             UserService.getFavourites($rootScope.user._id)
                 .then(function (response) {
-                    console.log(response.data);
                     vm.forms = response.data;
                 });
+
+            UserService.getUsersIFollow($rootScope.user._id)
+                .then(function(response){
+                    console.log(response.data);
+                    vm.follows = response.data.follows;
+                })
 
         }
 
@@ -117,6 +122,18 @@
 
                 });
 
+
+        }
+
+        function deleteUsersIFollow(username){
+
+            //var index = vm.reviews[$index];
+            //console.log(index);
+            UserService.deleteUsersIFollow($rootScope.user._id,username)
+                .then(function(response){
+                    console.log(response);
+                        init();
+                });
 
         }
     }

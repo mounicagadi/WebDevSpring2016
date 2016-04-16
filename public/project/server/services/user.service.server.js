@@ -19,6 +19,9 @@ module.exports = function(app, userModel) {
     app.get("/api/project/user/:userId/favourites",getFavourites)
     app.post("/api/project/user/:userId/favourites",addFavourites)
     app.delete("/api/project/user/:userId/deletefavourite/:id", deleteFavourite);
+    app.post("/api/project/user/:userId/follows/:username",addfollowers);
+    app.get("/api/project/user/:userId/follows",getUsersIFollow);
+    app.delete("/api/project/user/:userId/follows/:username",deleteUsersIFollow)
     app.get("/api/project/users/loggedin", loggedin);
     app.post("/api/project/user/logout", logout);
 
@@ -300,6 +303,47 @@ module.exports = function(app, userModel) {
             .then(
                 function (stats) {
                     res.send(200);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function addfollowers(req,res){
+        var userid = req.params.userId;
+        var username = req.params.username;
+        userModel.addfollowers(userid,username)
+            .then (
+                function (response) {
+                    res.json (response);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function getUsersIFollow(req, res){
+        var userId = req.params.userId;
+        userModel.getUsersIFollow(userId)
+            .then (
+                function (response) {
+                    res.json (response);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function deleteUsersIFollow(req,res){
+        var userid = req.params.userId;
+        var username = req.params.username;
+        userModel.deleteUsersIFollow(userid,username)
+            .then (
+                function (response) {
+                    res.json (response);
                 },
                 function (err) {
                     res.status(400).send(err);

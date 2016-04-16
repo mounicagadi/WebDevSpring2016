@@ -17,6 +17,7 @@
         vm.addReview = addReview;
         vm.isVenueInFavourites= isVenueInFavourites;
         vm.follow = follow;
+        vm.removeFollow = removeFollow;
         var findres;
 
         vm.id = $routeParams.id;
@@ -151,11 +152,25 @@
 
         function follow(username){
             if($rootScope.user){
-                UserService.addfollowers(username)
+                UserService.addfollowers($rootScope.user._id,username)
                     .then(function(response){
-
+                        console.log(response);
+                        init();
                     });
+
+            }else{
+                alert("Please login to Follow a User");
+                $location.url("/login");
             }
+        }
+
+        function removeFollow(username){
+
+            UserService.deleteUsersIFollow($rootScope.user._id,username)
+                .then(function(response){
+                    console.log(response);
+                    init();
+                });
         }
 
         FoursquareService.findRestaurantByID(vm.id)
