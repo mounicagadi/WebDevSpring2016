@@ -16,12 +16,6 @@
 
         function init() {
 
-            UserService.findAllUsers()
-                .then(function (response) {
-                    console.log(response.data);
-
-                });
-
         }
 
         init();
@@ -34,6 +28,7 @@
 
                 if (user.username != null && user.password != null && user.verifypassword != null &&
                     user.password == user.verifypassword && user.email != null) {
+
 
                     UserService.registerUser(user)
                         .then(function (response) {

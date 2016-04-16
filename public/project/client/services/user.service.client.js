@@ -118,6 +118,7 @@
 
         function registerUser(user) {
 
+            console.log("inside register user");
             return $http.post("/api/project/register", user);
 
         }

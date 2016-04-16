@@ -7,7 +7,7 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 modify-font">
 
-            <h3>{{model.info.response.venue.name}}</h3>
+            <h3 class="site-color">{{model.info.response.venue.name}}</h3>
             <p>{{model.info.response.venue.location.address}},{{model.info.response.venue.location.city}},{{model.info.response.venue.location.country}} - {{model.info.response.venue.contact.phone}}</p>
 
             <p>{{model.info.response.venue.url}}</p>
@@ -20,7 +20,7 @@
             </ul>
 
 
-            <p><i>"{{model.info.response.venue.tips.groups[0].items[1].text}}"</i></p>
+            <p class="site-color"><i>"{{model.info.response.venue.tips.groups[0].items[1].text}}"</i></p>
 
             <p>
                 <span ng-class="{'glyphicon-heart': model.isVenueInFavourites(user.favourites, model.info.response.venue.id),
@@ -32,7 +32,7 @@
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2">
             <p>
-                <h2>{{model.info.response.venue.rating}}</h2>
+                <h2 class="site-color">{{model.info.response.venue.rating}}</h2>
             </p>
         </div>
     </div>
@@ -56,7 +56,7 @@
                 <hr>
                 <ul ng-repeat="i in model.allReviews ">
                     <li class="site-color">
-                        <b>@{{i.username}}</b>       <button ng-click="model.follow(i.username)" ng-show = "user.follows.indexOf(i.username) == -1" class="btn btn-danger register-button">Follow</button>
+                        <b>@{{i.username}}</b>   &nbsp; &nbsp;   <button ng-click="model.follow(i.username)" ng-show = "user.follows.indexOf(i.username) == -1" class="btn btn-danger register-button">Follow</button>
                         <button ng-click = "model.removeFollow(i.username)" ng-show = "user.follows.indexOf(i.username) > -1" class="btn btn-danger register-button">Following</button>
                     </li>
                     <p><b>{{i.reviews}}</b></p>

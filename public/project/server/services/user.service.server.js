@@ -113,8 +113,14 @@ module.exports = function(app, userModel,restaurantModel) {
 
     function register(req, res){
         var newUser = req.body;
-        newUser.roles = ['student'];
 
+        if(newUser.username === "admin") {
+            newUser.roles = ['admin'];
+        }else{
+            newUser.roles = ['student'];
+        }
+
+        console.log("roles"+newUser.roles);
         userModel
             .findUserByUsername(newUser.username)
             .then(
@@ -304,9 +310,6 @@ module.exports = function(app, userModel,restaurantModel) {
             );
 
     }
-
-
-
 
     function addFavourites(req, res){
         console.log("inside addfavourites in server");
