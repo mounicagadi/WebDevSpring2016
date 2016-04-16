@@ -7,12 +7,28 @@ module.exports = function(app, restaurantModel,reviewModel) {
     app.get("/api/project/restaurant/:id",findRestaurantById);
     app.post("/api/project/restaurant",addRestaurantById)
     app.get("/api/project/restaurant/:id/reviews", findAllReviewsforHotel);
+    app.get("/api/project/restaurant",findRestaurantsByIds);
 
     function findRestaurantById(req, res){
 
         var id = req.params.id;
 
         restaurantModel.findRestaurantById(id)
+            .then(
+                function ( response ) {
+                    res.json(response);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function findRestaurantsByIds(req,res){
+        var id = req.body;
+        console.log("rest service"+id);
+        restaurantModel.findRestaurantsByIds(id)
             .then(
                 function ( response ) {
                     res.json(response);

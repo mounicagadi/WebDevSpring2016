@@ -9,12 +9,12 @@ module.exports = function(mongoose) {
         password: String,
         firstName: String,
         lastName: String,
-        favourites : [
-            {
-                restaurantId : String,
-                restaurantName : String
-            }
-        ],
+        favourites : [{
+
+            restaurantId: String,
+            restaurantName: String
+
+        }],
         follows : [String],
         followedBy : [String],
         email: String,

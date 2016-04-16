@@ -25,8 +25,9 @@
             <p>
                 <span ng-class="{'glyphicon-heart': model.isVenueInFavourites(user.favourites, model.info.response.venue.id),
                 'glyphicon-heart-empty': ! model.isVenueInFavourites(user.favourites, model.info.response.venue)}"
-                      ng-click="model.addFavourite(model.info.response.venue.name,model.info.response.venue.id)"
+                      ng-click="model.addFavourite(model.info.response.venue)"
                       class="glyphicon"></span>
+
             </p>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2">

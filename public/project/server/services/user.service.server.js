@@ -5,7 +5,7 @@
 var passport         = require('passport');
 var LocalStrategy    = require('passport-local').Strategy;
 
-module.exports = function(app, userModel) {
+module.exports = function(app, userModel,restaurantModel) {
 
     var auth = authorized;
 
@@ -71,13 +71,11 @@ module.exports = function(app, userModel) {
     }
 
     function logout(req, res) {
-        console.log("inside logout");
         req.logOut();
         res.send(200);
     }
 
     function loggedin(req, res) {
-        console.log("inside loggedin func of server");
         res.send(req.isAuthenticated() ? req.user : '0');
     }
 
@@ -256,7 +254,6 @@ module.exports = function(app, userModel) {
 
     function findUserByUsername(req,res){
         var username = req.params.username;
-        console.log("INside finduserbyname")
         console.log(username);
         // use model to find user by id
         var user = userModel.findUserByUsername(username)
@@ -289,19 +286,26 @@ module.exports = function(app, userModel) {
         }
     };
 
+
+
     function getFavourites(req, res){
         var userId  = req.params.userId;
-        var favourites = userModel.getFavourites(userId)
+        userModel.getFavourites(userId)
             .then (
             function (response) {
-                res.json (response.favourites);
+
+                res.json(response.favourites);
+                //return restaurantModel.findRestaurantsByIds(response.favourites);
+
             },
             function (err) {
                 res.status(400).send(err);
             }
-        );
+            );
 
     }
+
+
 
 
     function addFavourites(req, res){
@@ -311,6 +315,7 @@ module.exports = function(app, userModel) {
         var favourites = userModel.addFavourites(userId, newdata)
             .then (
             function (favourites) {
+                console.log("receiving favs"+favourites);
                 res.json (favourites);
             },
             function (err) {
@@ -332,6 +337,7 @@ module.exports = function(app, userModel) {
                 }
             );
     }
+
 
     function addfollowers(req,res){
         var userid = req.params.userId;

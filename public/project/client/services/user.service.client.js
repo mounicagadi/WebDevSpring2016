@@ -78,13 +78,11 @@
 
         function addFavourite(userId,favourite){
 
-            console.log(favourite);
             return $http.post("/api/project/user/"+userId+"/favourites",favourite);
         }
 
         function getFavourites(userID){
 
-            console.log("inside client favourites");
             return $http.get("/api/project/user/"+userID+"/favourites");
 
         }
@@ -93,6 +91,7 @@
 
             return $http.delete("/api/project/user/"+userId+"/deletefavourite/"+ favId);
         }
+
 
 
         function login(credentials) {

@@ -10,7 +10,7 @@
         .controller("ProfileController", ProfileController);
 
     //Function to display the content on the homepage
-    function ProfileController(UserService, $rootScope, $routeParams, ReviewService) {
+    function ProfileController(UserService, $rootScope, $routeParams, ReviewService, RestaurantService) {
 
         var vm = this;
         vm.deleteFavourite =deleteFavourite;
@@ -22,8 +22,12 @@
         vm.deleteMyFollowers = deleteMyFollowers;
         var selectedIndex = null;
         var username = $routeParams.username;
+        var favid;
+        var rest = [];
 
         function init(){
+
+
 
             var currUser = $rootScope.user;
             if (currUser != null) {
@@ -37,7 +41,10 @@
 
             UserService.getFavourites($rootScope.user._id)
                 .then(function (response) {
+                    console.log(response);
                     vm.forms = response.data;
+
+
                 });
 
             UserService.getUsersIFollow($rootScope.user._id)

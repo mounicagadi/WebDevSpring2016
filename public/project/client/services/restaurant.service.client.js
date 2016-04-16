@@ -15,6 +15,7 @@
         var api = {
 
             findRestaurantById : findRestaurantById,
+            findRestaurantsByIds : findRestaurantsByIds,
             addRestaurantById : addRestaurantById,
             findAllReviewsforHotel : findAllReviewsforHotel
         };
@@ -25,6 +26,10 @@
 
             return $http.get("/api/project/restaurant/"+id);
 
+        }
+
+        function findRestaurantsByIds(ids){
+            return $http.get("/api/project/restaurant",ids);
         }
 
         function addRestaurantById(details){

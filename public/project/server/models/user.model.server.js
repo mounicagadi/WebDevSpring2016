@@ -35,7 +35,6 @@ module.exports = function(db, mongoose) {
 
     function findUserByCredentials(credentials) {
 
-        console.log("inside credentials part in model");
         var deferred = q.defer();
 
         UserModel.findOne(
@@ -97,12 +96,14 @@ module.exports = function(db, mongoose) {
 
     }
 
-    function addFavourites(userId, newFavourite) {
+    function addFavourites(userId,fav) {
+
+        console.log("inside fav model");
+
 
         return UserModel.findById(userId)
-            .then(
-                function(user) {
-                    user.favourites.push(newFavourite);
+            .then(function(user) {
+                    user.favourites.push(fav);
                     return user.save();
                 }
             );
@@ -115,6 +116,7 @@ module.exports = function(db, mongoose) {
             { $pull: { 'favourites': { _id : favId} } }
         );
     }
+
 
     function addfollowers(userid,username){
 

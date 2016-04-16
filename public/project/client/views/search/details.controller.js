@@ -14,8 +14,9 @@
 
         var vm = this;
         vm.addFavourite = addFavourite;
+        vm.deleteFavourite = deleteFavourite;
+        vm.isVenueInFavourites = isVenueInFavourites;
         vm.addReview = addReview;
-        vm.isVenueInFavourites= isVenueInFavourites;
         vm.follow = follow;
         vm.removeFollow = removeFollow;
         var findres;
@@ -41,7 +42,9 @@
 
             RestaurantService.findRestaurantById(hotelId)
                .then(function(response){
+                   console.log(response.data);
                    findres = response.data;
+
                });
 
         }
@@ -56,30 +59,53 @@
             return false;
         }
 
-        function addFavourite(name,id){
+
+        function addFavourite(venue){
             if($rootScope.user){
+
+                if (findres == "") {
+                    var details = {
+
+                        "restaurantId": venue.id,
+                        "restaurantName": venue.name,
+                    }
+
+                    RestaurantService.addRestaurantById(details);
+                }
 
                 var userFav = $rootScope.user.favourites;
                 for(var index in userFav){
-                    if(userFav[index].restaurantId === id){
+                    if(userFav[index].restaurantId === venue.id){
                         alert("Already added to favourites")
                         return;
                     }
                 }
 
+
                 var favourites = {
 
-                    "restaurantId" : id,
-                    "restaurantName": name
+                    "restaurantId": venue.id,
+                    "restaurantName": venue.name,
                 }
-                UserService.addFavourite($rootScope.user._id,favourites);
-                init();
+                UserService.addFavourite($rootScope.user._id,favourites)
+                    .then(function(response){
+                    init();
+                });
 
             }else {
                 alert("Please login to add favourites");
                 $location.url("/login");
             }
 
+        }
+
+        function deleteFavourite(venue){
+            if($rootScope.user) {
+                UserService.deleteFavourites($rootScope.user._id,venue.id)
+                    .then(function(response){
+                        init();
+                    });
+            }
         }
 
 
@@ -125,14 +151,16 @@
 
                 if (review != null) {
 
-                    if (findres === null) {
+                    if (findres == "") {
                         var details = {
 
                             "restaurantId": venue.id,
                             "restaurantName": venue.name,
                         }
+
+                        RestaurantService.addRestaurantById(details);
                     }
-                    RestaurantService.addRestaurantById(details);
+
 
                     checkIfUserReviewed(venue,review);
 
