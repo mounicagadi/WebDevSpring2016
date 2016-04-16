@@ -83,7 +83,7 @@
         }
 
 
-        function checkIfUserReviewed(id){
+        function checkIfUserReviewed(venue,review){
 
             var flag = false;
             ReviewService.findAllReviewsForUser($rootScope.user._id)
@@ -91,7 +91,7 @@
                     var result = response.data;
 
                     for(var i in result){
-                        if(result[i].restaurantId === id){
+                        if(result[i].restaurantId === venue.id){
                             alert("You cannot review more than once!");
                             flag = true;
                             vm.review = null;
@@ -134,7 +134,7 @@
                     }
                     RestaurantService.addRestaurantById(details);
 
-                    checkIfUserReviewed(venue.id);
+                    checkIfUserReviewed(venue,review);
 
                 }
 

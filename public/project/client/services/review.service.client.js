@@ -35,7 +35,6 @@
 
         function findAllReviewsForUser(userId){
 
-            console.log(userId);
             return $http.get("/api/project/user/"+userId+"/reviews");
 
         }
@@ -47,7 +46,6 @@
 
         function updateReview(review){
 
-            console.log("inside update reev client");
             return $http.put("/api/project/review",review)
         }
 
