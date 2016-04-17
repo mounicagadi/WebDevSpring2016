@@ -184,6 +184,26 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="form-header card elevation1">
+                    <h2 class="site-color">My likes!</h2>
+                    <hr>
+                    <div class="container-fluid">
+                        <div ng-repeat="username in model.likes track by $index">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <p><b>{{username}}</b></p>
+                                </div>
+                                <div class="col-lg-2">
+
+                                    <a  ng-click = "model.removelike(username)" role="button" class="btn btn-default btn-danger" aria-label="Add">
+                                        <span class="glyphicon glyphicon-remove favourites" aria-hidden="true"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

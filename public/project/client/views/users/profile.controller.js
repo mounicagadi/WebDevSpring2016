@@ -47,12 +47,12 @@
             UserService.getUsersIFollow($rootScope.user._id)
                 .then(function(response){
                     vm.follows = response.data.follows;
-                })
+                });
 
             UserService.getMyFollowers($rootScope.user._id)
                 .then(function(response){
                     vm.followedBy = response.data.followedBy;
-                })
+                });
 
         }
 

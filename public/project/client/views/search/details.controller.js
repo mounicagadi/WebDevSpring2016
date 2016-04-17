@@ -19,6 +19,8 @@
         vm.addReview = addReview;
         vm.follow = follow;
         vm.removeFollow = removeFollow;
+        vm.addlike = addlike;
+        //vm.removelike = removelike;
         var findres;
 
         vm.id = $routeParams.id;
@@ -46,6 +48,7 @@
                    findres = response.data;
 
                });
+
 
         }
 
@@ -203,6 +206,18 @@
                         });
                 });
 
+
+        }
+
+        function addlike(id){
+
+            if($rootScope.user){
+                UserService.addlike($rootScope.user._id,id)
+                    .then(function(response){
+                        init();
+                    });
+
+            }
 
         }
 

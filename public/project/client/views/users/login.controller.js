@@ -24,14 +24,10 @@
                 return;
             }
 
-            if(user.username == "admin" && user.password == "admin"){
-
-                $location.url("/admin");
-            }else{
-
                 UserService.login({username : user.username, password : user.password})
                     .then(function (user) {
                     if( user != null) {
+                        console.log(user);
                         $rootScope.user = user.data;
                         vm.user.username = $rootScope.user.username;
                         $location.url("/profile");
@@ -42,11 +38,12 @@
                     }
 
 
-                });
+                }
+                    );
 
         }
         }
 
 
-    }
+
 })();

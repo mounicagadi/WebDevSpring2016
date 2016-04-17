@@ -7,7 +7,7 @@ var LocalStrategy    = require('passport-local').Strategy;
 
 var bcrypt = require("bcrypt-nodejs");
 
-module.exports = function(app, userModel,restaurantModel) {
+module.exports = function(app, userModel) {
 
     var auth = authorized;
 
@@ -27,7 +27,7 @@ module.exports = function(app, userModel,restaurantModel) {
     app.delete("/api/project/user/:userId/follows/:username",deleteUsersIFollow)
     app.post("/api/project/user/:username/followedBy/:currUser",userFollowedby)
     app.get("/api/project/user/:userId/followedBy",getMyFollowers)
-    app.delete("/api/project/user/:userId/followedBy/:username",deleteMyFollowers)
+    app.delete("/api/project/user/:userId/followedBy/:username",deleteMyFollowers);
     app.get("/api/project/users/loggedin", loggedin);
     app.post("/api/project/user/logout", logout);
 
@@ -40,7 +40,9 @@ module.exports = function(app, userModel,restaurantModel) {
             .findUserByCredentials({username: username, password: password})
             .then(
                 function(user) {
-                    if (!user) { return done(null, false); }
+                    if (!user) {
+                        return done(null, false);
+                    }
                     return done(null, user);
                 },
                 function(err) {
@@ -415,4 +417,5 @@ module.exports = function(app, userModel,restaurantModel) {
                 }
             );
     }
+
 }

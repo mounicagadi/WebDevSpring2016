@@ -13,6 +13,8 @@ module.exports = function(db, mongoose) {
 
     var UserModel = mongoose.model('user', UserSchema);
 
+
+
     var api = {
         findUserByCredentials: findUserByCredentials,
         updateUser: updateUser,
@@ -29,7 +31,8 @@ module.exports = function(db, mongoose) {
         deleteUsersIFollow : deleteUsersIFollow,
         userFollowedby : userFollowedby,
         getMyFollowers : getMyFollowers,
-        deleteMyFollowers : deleteMyFollowers
+        deleteMyFollowers : deleteMyFollowers,
+
     };
     return api;
 
@@ -127,6 +130,7 @@ module.exports = function(db, mongoose) {
             });
     }
 
+
     function getUsersIFollow(userId){
 
         return UserModel.findById(userId).select("follows");
@@ -163,5 +167,7 @@ module.exports = function(db, mongoose) {
             { '$pull' : { 'followedBy': { '$in': [username] }}}
         );
     }
+
+
 
 }

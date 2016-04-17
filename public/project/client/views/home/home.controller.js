@@ -19,8 +19,7 @@
         vm.getDonuts = getDonuts;
         vm.getPizza = getPizza;
         vm.getFood = getFood;
-        var default_place = "boston";
-        var default_name = "restaurants"
+
 
         function search(name,place) {
 
