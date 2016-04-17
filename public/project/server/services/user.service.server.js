@@ -85,7 +85,7 @@ module.exports = function(app, userModel,restaurantModel) {
     }
 
     function updateUser(req, res) {
-        console.log("Inside server side updateUser");
+
         var userId = req.params.id;
         var newUser = req.body;
 
@@ -121,7 +121,7 @@ module.exports = function(app, userModel,restaurantModel) {
     function register(req, res){
         var newUser = req.body;
 
-        if(newUser.username === "admin" || newUser.username === "adminadmin") {
+        if(newUser.username === "admin" || newUser.username === "adminuser") {
             newUser.roles = ['admin'];
         }else{
             newUser.roles = ['student'];
