@@ -109,7 +109,7 @@ module.exports = function(app, userModel,restaurantModel) {
     function register(req, res){
         var newUser = req.body;
 
-        if(newUser.username === "admin") {
+        if(newUser.username === "mounica") {
             newUser.roles = ['admin'];
         }else{
             newUser.roles = ['student'];
