@@ -58,8 +58,7 @@ module.exports = function(db, mongoose) {
 
     function updateUser(userId, user){
 
-        console.log("inside update model");
-        console.log(user);
+        delete user._id;
         return UserModel.update({_id: userId}, {$set: user});
 
     }
