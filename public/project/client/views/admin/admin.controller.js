@@ -46,14 +46,14 @@
             UserService.findAllUsers()
                 .then(function(response){
                     console.log(response);
-                    //var allUsers = response.data;
-                    //for(var i in allUsers){
-                    //    if(allUsers[i].roles.indexOf("admin") == -1){
-                    //        newUsers.push(allUsers[i]);
-                    //    }
-                    //}
+                    var allUsers = response.data;
+                    for(var i in allUsers){
+                        if(allUsers[i].roles.indexOf("admin") == -1){
+                            newUsers.push(allUsers[i]);
+                        }
+                    }
 
-                    vm.users = response.data;
+                    vm.users = newUsers;
                 }
         );
 
