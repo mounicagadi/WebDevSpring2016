@@ -87,7 +87,8 @@ body {
     }
 
     .btn{
-        padding: 9px 9px;
+        padding: 7px 7px;
+        font-size: 12px;
     }
 }
 .centered-form{
@@ -353,7 +354,7 @@ b, strong {
 }
 
 .navbar-inverse .navbar-nav>li>a {
-    font-size: 16px;
+    /*font-size: 16px;*/
     color: white;
 }
 .navbar-inverse .navbar-brand {
