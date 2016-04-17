@@ -60,7 +60,7 @@ body {
 
 
 .users-image{
-    background: url('../images/linen-background-spoon-19599345.jpg')no-repeat center fixed;
+    background: url('../images/linen-background-spoon-19599345.jpg')no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
