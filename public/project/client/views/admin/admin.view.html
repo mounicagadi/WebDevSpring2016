@@ -70,7 +70,7 @@
                         <input class="form-control form-text-input" type="email" id="email" ng-model="model.user.email" placeholder="Email">
                     </td>
                     <td>
-                        <input class="form-control form-text-input" type="email" id="roles" ng-model="model.user.roles" placeholder="Roles">
+                        <input class="form-control form-text-input" type="text" id="roles" ng-model="model.user.roles" placeholder="Roles">
                     </td>
                     <td class="second-column">
                         <div class="container-fluid">
@@ -89,7 +89,7 @@
                     <td>{{user.username}}</td>
                     <td>&nbsp;</td>
                     <td>{{user.email}}</td>
-                    <td>{{user.roles}}</td>
+                    <td>{{user.roles.join(',')}}</td>
                     <td>
                         <div class="container-fluid">
                             <button ng-click="model.removeUser($index)" type="button" class="btn btn-danger">

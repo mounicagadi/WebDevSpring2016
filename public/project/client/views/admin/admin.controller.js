@@ -47,13 +47,14 @@
                 .then(function(response){
                     console.log(response);
                     var allUsers = response.data;
-                    //for(var i in allUsers){
-                    //    if(allUsers[i].roles.indexOf("admin") == -1){
-                    //        newUsers.push(allUsers[i]);
-                    //    }
-                    //}
+                    for(var i in allUsers){
+                        if(allUsers[i].roles.indexOf("admin") == -1){
+                            newUsers.push(allUsers[i]);
+                        }
+                    }
+                    vm.users = newUsers;
 
-                    vm.users = allUsers;
+
                 }
         );
 
@@ -84,26 +85,37 @@
                 );
         }
 
-        function updateUser(user)
-        {
-            UserService.updateUser(user._id, user)
-                .then(
-                    function(response){
-                        init();
-                        vm.user = {};
-                    }
-            );
+        function updateUser(user) {
+
+                if (typeof user.roles == "string") {
+                    user.roles = user.roles.split(",");
+                }
+                UserService.updateUser(user._id, user)
+                    .then(
+                        function (response) {
+                            init();
+                            vm.user = {};
+                        }
+                    );
+
         }
 
-        function addUser(user)
-        {
-            UserService.createUser(user)
-                .then(
-                    function(response){
-                        init();
-                    }
-                );
-            vm.user = {};
+        function addUser(user) {
+            if (user && user.username && user.password) {
+                if (user.roles && user.roles.length > 1) {
+                    user.roles = user.roles.split(",");
+                } else {
+                    user.roles = ["student"];
+                }
+
+                UserService.createUser(user)
+                    .then(
+                        function (response) {
+                            init();
+                        }
+                    );
+                vm.user = {};
+            }
         }
 
         function deleteReview($index){

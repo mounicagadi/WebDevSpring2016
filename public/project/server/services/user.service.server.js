@@ -37,14 +37,11 @@ module.exports = function(app, userModel,restaurantModel) {
 
     function localStrategy(username, password, done) {
         userModel
-            .findUserByUsername(username)
+            .findUserByCredentials({username: username, password: password})
             .then(
                 function(user) {
-                    if(user && bcrypt.compareSync(password, user.password)) {
-                        return done(null, user);
-                    } else {
-                        return done(null, false);
-                    }
+                    if (!user) { return done(null, false); }
+                    return done(null, user);
                 },
                 function(err) {
                     if (err) { return done(err); }
@@ -89,14 +86,6 @@ module.exports = function(app, userModel,restaurantModel) {
         var userId = req.params.id;
         var newUser = req.body;
 
-        if(!isAdmin(req.user)) {
-            delete newUser.roles;
-        }
-        if(typeof newUser.roles == "string") {
-            newUser.roles = newUser.roles.split(",");
-        }
-
-        newUser.password = bcrypt.hashSync(newUser.password);
         userModel
             .updateUser(userId, newUser)
             .then(
@@ -115,19 +104,17 @@ module.exports = function(app, userModel,restaurantModel) {
                     res.status(400).send(err);
                 }
             );
-
     }
 
     function register(req, res){
         var newUser = req.body;
 
-        if(newUser.username === "admin" || newUser.username === "adminuser") {
+        if(newUser.username === "admin") {
             newUser.roles = ['admin'];
         }else{
             newUser.roles = ['student'];
         }
 
-        console.log("roles"+newUser.roles);
         userModel
             .findUserByUsername(newUser.username)
             .then(
@@ -135,8 +122,6 @@ module.exports = function(app, userModel,restaurantModel) {
                     if(user) {
                         res.json(null);
                     } else {
-                        // encrypt the password when registering
-                        newUser.password = bcrypt.hashSync(newUser.password);
                         return userModel.createUser(newUser);
                     }
                 },
@@ -164,12 +149,9 @@ module.exports = function(app, userModel,restaurantModel) {
 
     function createUser(req, res) {
         var newUser = req.body;
-        if(newUser.roles && newUser.roles.length > 1) {
-            newUser.roles = newUser.roles.split(",");
-        } else {
-            newUser.roles = ["student"];
-        }
 
+        if(!newUser.roles || !newUser.roles.length > 0)
+            newUser.roles = ["student"];
         // first check if a user already exists with the username
         userModel
             .findUserByUsername(newUser.username)
@@ -178,7 +160,6 @@ module.exports = function(app, userModel,restaurantModel) {
                     // if the user does not already exist
                     if(user == null) {
                         // create a new user
-                        newUser.password = bcrypt.hashSync(newUser.password);
                         return userModel.createUser(newUser)
                             .then(
                                 // fetch all the users
