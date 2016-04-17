@@ -180,6 +180,10 @@ b, strong {
     color: white !important;
 }
 
+.navbar-inverse .navbar-toggle {
+    border-color: white;
+}
+
 .modify-font{
     font-weight: bold;
 }
@@ -192,6 +196,14 @@ b, strong {
     padding: 60px 0 20px 0;
 }
 
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border-color: white;
+}
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+    color: black;
+    background-color: #f0ad4e;
+}
 .elevation1 {
     box-shadow: 0 1px 3px #999;
 }
@@ -203,7 +215,7 @@ b, strong {
 
 .card-mainpage {
     background: #cb202d;
-    opacity: 0.9;
+    opacity: 0.95;
     /*padding-top: 20px;*/
     /*padding-right: 10px;*/
     z-index: 1;
@@ -349,8 +361,8 @@ b, strong {
     font-size: 22px;
 }
 
-.text-left{
-    text-align: left;
+.text-right{
+    text-align: right;
 }
 
 .inverted-color {
@@ -368,7 +380,7 @@ b, strong {
 
 .footer {
     background: #cb202d;
-    min-height: 50px;
+    min-height: 100px;
     padding: 75px 100px 50px 100px;
     z-index: -999;
 }

@@ -5,6 +5,8 @@
 var passport         = require('passport');
 var LocalStrategy    = require('passport-local').Strategy;
 
+var bcrypt = require("bcrypt-nodejs");
+
 module.exports = function(app, userModel,restaurantModel) {
 
     var auth = authorized;
@@ -35,11 +37,14 @@ module.exports = function(app, userModel,restaurantModel) {
 
     function localStrategy(username, password, done) {
         userModel
-            .findUserByCredentials({username: username, password: password})
+            .findUserByUsername(username)
             .then(
                 function(user) {
-                    if (!user) { return done(null, false); }
-                    return done(null, user);
+                    if(user && bcrypt.compareSync(password, user.password)) {
+                        return done(null, user);
+                    } else {
+                        return done(null, false);
+                    }
                 },
                 function(err) {
                     if (err) { return done(err); }
@@ -91,6 +96,7 @@ module.exports = function(app, userModel,restaurantModel) {
             newUser.roles = newUser.roles.split(",");
         }
 
+        newUser.password = bcrypt.hashSync(newUser.password);
         userModel
             .updateUser(userId, newUser)
             .then(
@@ -109,6 +115,7 @@ module.exports = function(app, userModel,restaurantModel) {
                     res.status(400).send(err);
                 }
             );
+
     }
 
     function register(req, res){
@@ -128,6 +135,8 @@ module.exports = function(app, userModel,restaurantModel) {
                     if(user) {
                         res.json(null);
                     } else {
+                        // encrypt the password when registering
+                        newUser.password = bcrypt.hashSync(newUser.password);
                         return userModel.createUser(newUser);
                     }
                 },
@@ -169,6 +178,7 @@ module.exports = function(app, userModel,restaurantModel) {
                     // if the user does not already exist
                     if(user == null) {
                         // create a new user
+                        newUser.password = bcrypt.hashSync(newUser.password);
                         return userModel.createUser(newUser)
                             .then(
                                 // fetch all the users

@@ -28,7 +28,7 @@
                 <li ng-class="{'active': $location.url() == '/admin'}" ng-show="user.roles.indexOf('admin') >= 0">
                     <a href="#/admin">Admin Page</a>
                 </li>
-                <li ng-class="{'active': $location.url() == '/home'}" ng-if = "user" ng-click="model.logout()">
+                <li ng-if = "user" ng-click="model.logout()">
                     <a href="#/home">Logout</a></li>
                 <li>
                     <a target="_blank" href="https://docs.google.com/document/d/1l-twmlL1q9aTH4SVBmtyKUWa_jmxAxCapLXJJ2D554Q/edit?usp=sharing">
