@@ -22,8 +22,6 @@
         vm.deleteMyFollowers = deleteMyFollowers;
         var selectedIndex = null;
         var username = $routeParams.username;
-        var favid;
-        var rest = [];
 
         function init(){
 
@@ -41,7 +39,6 @@
 
             UserService.getFavourites($rootScope.user._id)
                 .then(function (response) {
-                    console.log(response);
                     vm.forms = response.data;
 
 

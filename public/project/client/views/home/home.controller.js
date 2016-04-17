@@ -64,9 +64,17 @@
                 .findByNameLocation(finalName, finalPlace)
                 .then(function(response){
                     console.log(response.data.response.venues);
-                    $rootScope.info = response.data;
-                    $rootScope.name = name;
-                    $location.url("/search/"+name);
+                    var result = response.data.response.venues;
+
+                    if(result != "") {
+                        $rootScope.info = response.data;
+                        $rootScope.name = name;
+                        $location.url("/search/" + name);
+                    }else{
+
+                        alert(" No results found");
+                        return;
+                    }
                 });
         }
 

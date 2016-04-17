@@ -274,11 +274,17 @@ b, strong {
 .search-image {
     width: 80%;
     height: 80%;
+    border-radius: 10px;
+    border-color: #cb202d;
+    border-style: dotted;
 }
 
 .details-image {
     width: 300px;
     height: 350px;
+    border: #cb202d;
+    border-radius: 10px;
+    border-style: solid;
 }
 
 .form-header {
@@ -312,11 +318,21 @@ b, strong {
     opacity: 0.8;
 }
 
-.image-border{
-    border-radius: 5px;
-    border-style: solid;
-    border-color: red;
+
+img {
+    border: 4px;
 }
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #286090;
+    border-color: white;
+}
+
+.btn-primary {
+    border-color: white;
+}
+
 .banner {
     width: 100%;
     height: auto;

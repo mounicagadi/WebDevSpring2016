@@ -36,7 +36,6 @@
 
             ReviewService.findAllReviews()
                 .then(function(response){
-                    console.log(response);
                     vm.reviews = response.data;
 
                 });

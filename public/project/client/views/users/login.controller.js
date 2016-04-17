@@ -29,11 +29,8 @@
                 $location.url("/admin");
             }else{
 
-                UserService.login
-                ({
-                    username : user.username, password : user.password}).
-                then(function (user) {
-                    console.log(user.data);
+                UserService.login({username : user.username, password : user.password})
+                    .then(function (user) {
                     if( user != null) {
                         $rootScope.user = user.data;
                         vm.user.username = $rootScope.user.username;
