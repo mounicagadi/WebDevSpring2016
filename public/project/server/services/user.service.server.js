@@ -36,13 +36,13 @@ module.exports = function(app, userModel) {
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
             successRedirect: '/project/client/#/profile',
-            failureRedirect: '/#/login'
+            failureRedirect: '/project/client/#/login'
         }));
 
     var facebookConfig = {
         clientID        : '552059711635420',
         clientSecret    : '298543b856082d7d4791e35ed239a9ad',
-        callbackURL     : 'http://localhost:3000/auth/facebook/callback'
+        callbackURL     : 'http://webdev2016-gadimounica.rhcloud.com/auth/facebook/callback'
     };
 
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
