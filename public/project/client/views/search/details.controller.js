@@ -137,9 +137,12 @@
                             "reviews": review
 
                         };
-                        ReviewService.addReview($rootScope.user._id, newReview);
-                        vm.review = null;
-                        init();
+                        ReviewService.addReview($rootScope.user._id, newReview)
+                            .then(function(response){
+                                vm.review = null;
+                            init();
+                        });
+
                     }
                 });
 
