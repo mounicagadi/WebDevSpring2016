@@ -100,7 +100,7 @@
                         }
                     );
             }else{
-                alert("Please enter all valid details to update");
+                alert("Please select valid details to update");
             }
         }
 

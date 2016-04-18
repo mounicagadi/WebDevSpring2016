@@ -34,7 +34,7 @@
                     }
 
                     else{
-                                vm.message = "Invalid username/password";
+                            vm.message = "Invalid username/password";
                             }
                         },
                         function(err){

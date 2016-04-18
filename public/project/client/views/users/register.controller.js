@@ -22,30 +22,37 @@
 
         function register(user) {
 
-            console.log(user);
-
             if (user != null) {
 
                 if (user.username != null && user.password != null && user.verifypassword != null &&
-                    user.password == user.verifypassword && user.email != null) {
+                    user.password === user.verifypassword && user.email != null) {
 
 
                     UserService.registerUser(user)
                         .then(function (response) {
-                            console.log(response);
-                            $rootScope.user = response.data;
-                            $location.path("/profile");
-                        });
+                                var currentUser = response.data;
+                                if(currentUser){
+                                    $rootScope.user = currentUser;
+                                    $location.url("/profile");
+                                }else{
+                                    vm.message = "Username already exists";
+                                    vm.user.password = null;
+                                    vm.user.verifypassword = null;
+                                }
+                            },
+                            function(err){
+                                console.log(err);
+                            }
+                        );
 
-                    init();
 
                 } else {
 
-                    alert("Invalid entry");
+                    vm.message = "Invalid entry";
                 }
 
             } else {
-                alert("Please fill the required fields");
+                vm.message="Please fill the required fields";
             }
         }
     }
