@@ -85,7 +85,7 @@
         }
 
         function updateUser(user) {
-
+            if (user && user.username && user.password) {
                 if (typeof user.roles == "string") {
                     user.roles = user.roles.split(",");
                 }
@@ -99,7 +99,9 @@
                             vm.user = {};
                         }
                     );
-
+            }else{
+                alert("Please enter all valid details to update");
+            }
         }
 
         function addUser(user) {
@@ -117,6 +119,8 @@
                         }
                     );
                 vm.user = {};
+            }else{
+                alert("Please enter all valid details");
             }
         }
 

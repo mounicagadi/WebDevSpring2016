@@ -42,7 +42,7 @@ module.exports = function(app, userModel) {
     var facebookConfig = {
         clientID        : '552059711635420',
         clientSecret    : '298543b856082d7d4791e35ed239a9ad',
-        callbackURL     : 'http://webdev2016-gadimounica.rhcloud.com/auth/facebook/callback'
+        callbackURL     : 'http://localhost:3000/auth/facebook/callback'
     };
 
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
