@@ -76,14 +76,18 @@ body {
 
 .placing
 {
-    padding-top: 350px;
+    padding-top: 18%;
 }
 
 @media (max-width: 768px) {
+    /*.placing{*/
+
+        /*padding-top: 150px;*/
+
+    /*}*/
+
     .placing{
-
-        padding-top: 150px;
-
+        padding-top: 40%;
     }
 
     .btn{
@@ -93,13 +97,20 @@ body {
 
 }
 
-@media (max-width: 1000px) {
+@media (min-width: 991px) {
+    /*.placing{*/
 
-    .come-left{
-        float: left;
+        /*padding-top: 350px;*/
+
+    /*}*/
+
+    .btn{
+        padding: 9px 9px;
+        font-size: 14px;
     }
 
 }
+
 
 .centered-form{
     margin-top: 100px;
