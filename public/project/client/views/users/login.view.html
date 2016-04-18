@@ -31,6 +31,9 @@
                         <div class="text-center form-group">
                             New User?        &nbsp;        <a role="button" class="btn btn-danger register-button" href="#/register">Register</a>
                         </div>
+                        <div ng-show="model.message" class="validate alert alert-danger">
+                            <a class="close" data-dismiss="alert"><i class="fa fa-remove"></i></a>{{model.message}}
+                        </div>
                     </form>
                 </div>
             </div>

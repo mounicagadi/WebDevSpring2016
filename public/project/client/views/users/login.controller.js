@@ -25,21 +25,24 @@
             }
 
                 UserService.login({username : user.username, password : user.password})
-                    .then(function (user) {
-                    if( user != null) {
-                        console.log(user);
-                        $rootScope.user = user.data;
+                    .then(function (response) {
+                        var currentUser = response.data;
+                        if(currentUser) {
+                        $rootScope.user = response.data;
                         vm.user.username = $rootScope.user.username;
                         $location.url("/profile");
                     }
 
-                    else {
-                        alert("Invalid entry");
-                    }
-
-
-                }
+                    else{
+                                vm.message = "Invalid username/password";
+                            }
+                        },
+                        function(err){
+                            vm.message = "Invalid username/password";
+                        }
                     );
+
+
 
         }
         }

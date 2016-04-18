@@ -101,20 +101,22 @@
 
         function updateReview(review) {
 
+        if(review != null && selectedIndex != null) {
             var newReview = {
-                "_id" : selectedIndex._id,
-                "reviews" : review
-        }
+                "_id": selectedIndex._id,
+                "reviews": review
+            }
             ReviewService.updateReview(newReview)
-                .then(  function(response){
+                .then(function (response) {
 
-                    if(response.statusText === "OK") {
+                    if (response.statusText === "OK") {
                         init();
                         vm.title = null;
                         selectedIndex = null
                     }
 
                 });
+        }
 
 
         }
