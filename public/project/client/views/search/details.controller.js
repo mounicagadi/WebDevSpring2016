@@ -175,6 +175,7 @@
 
         function follow(username){
             if($rootScope.user){
+
                 UserService.addfollowers($rootScope.user._id,username)
                     .then(function(response){
                         init();

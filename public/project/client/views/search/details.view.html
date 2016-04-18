@@ -57,7 +57,8 @@
                 <hr>
                 <ul ng-repeat="i in model.allReviews ">
                     <li class="site-color">
-                        <b>@{{i.username}}</b>   &nbsp; &nbsp;   <button ng-click="model.follow(i.username)" ng-show = "user.follows.indexOf(i.username) == -1" class="btn btn-danger register-button">Follow</button>
+                        <b>@{{i.username}}</b>
+                          &nbsp; &nbsp;   <button ng-click="model.follow(i.username)" ng-show = "user.follows.indexOf(i.username) == -1 && user.username != i.username" class="btn btn-danger register-button">Follow</button>
                         <button ng-click = "model.removeFollow(i.username)" ng-show = "user.follows.indexOf(i.username) > -1" class="btn btn-danger register-button">Following</button>
                     </li>
                     <p><b>{{i.reviews}}</b></p>

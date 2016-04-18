@@ -90,7 +90,17 @@ body {
         padding: 9px 9px;
         font-size: 14px;
     }
+
 }
+
+@media (max-width: 1000px) {
+
+    .come-left{
+        float: left;
+    }
+
+}
+
 .centered-form{
     margin-top: 100px;
 }

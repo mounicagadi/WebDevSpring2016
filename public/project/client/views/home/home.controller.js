@@ -16,7 +16,7 @@
         vm.search = search;
         vm.getDrinks = getDrinks;
         vm.getCoffee = getCoffee;
-        vm.getDonuts = getDonuts;
+        vm.getPasta = getPasta;
         vm.getPizza = getPizza;
         vm.getFood = getFood;
 
@@ -103,9 +103,9 @@
                 });
         }
 
-        function getDonuts(){
+        function getPasta(){
 
-            var option = "donuts";
+            var option = "pasta";
             FoursquareService
                 .findRestaurantByOption(option)
                 .then(function(response){
