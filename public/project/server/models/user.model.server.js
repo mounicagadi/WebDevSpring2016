@@ -32,9 +32,14 @@ module.exports = function(db, mongoose) {
         userFollowedby : userFollowedby,
         getMyFollowers : getMyFollowers,
         deleteMyFollowers : deleteMyFollowers,
+        findUserByFacebookId: findUserByFacebookId
 
     };
     return api;
+
+    function findUserByFacebookId(facebookId) {
+        return UserModel.findOne({'facebook.id': facebookId});
+    }
 
     function findUserByCredentials(credentials) {
 

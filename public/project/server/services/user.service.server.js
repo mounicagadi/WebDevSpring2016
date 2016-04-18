@@ -4,6 +4,7 @@
 
 var passport         = require('passport');
 var LocalStrategy    = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 var bcrypt = require("bcrypt-nodejs");
 
@@ -31,9 +32,58 @@ module.exports = function(app, userModel) {
     app.get("/api/project/users/loggedin", loggedin);
     app.post("/api/project/user/logout", logout);
 
+    app.get   ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect: '/project/client/#/profile',
+            failureRedirect: '/#/login'
+        }));
+
+    var facebookConfig = {
+        clientID        : '552059711635420',
+        clientSecret    : '298543b856082d7d4791e35ed239a9ad',
+        callbackURL     : 'http://localhost:3000/auth/facebook/callback'
+    };
+
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
     passport.use('project',new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
+
+    function facebookStrategy(token, refreshToken, profile, done) {
+        userModel
+            .findUserByFacebookId(profile.id)
+            .then(
+                function(user) {
+                    if(user) {
+                        return done(null, user);
+                    } else {
+                        var names = profile.displayName.split(" ");
+                        var newFacebookUser = {
+                            lastName:  names[1],
+                            firstName: names[0],
+                            email:     profile.emails ? profile.emails[0].value:"",
+                            facebook: {
+                                id:    profile.id,
+                                token: token
+                            }
+                        };
+                        return userModel.createUser(newFacebookUser);
+                    }
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            )
+            .then(
+                function(user){
+                    return done(null, user);
+                },
+                function(err){
+                    if (err) { return done(err); }
+                }
+            );
+    }
 
     function localStrategy(username, password, done) {
         userModel
