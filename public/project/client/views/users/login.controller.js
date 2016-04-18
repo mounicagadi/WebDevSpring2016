@@ -20,7 +20,7 @@
 
             //Service to validate the user credentials
             if (user == null) {
-                alert("Please fill the required fields");
+                vm.message = "Please enter the required fields";
                 return;
             }
 
