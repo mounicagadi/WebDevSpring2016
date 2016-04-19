@@ -10,7 +10,7 @@
         .module("EatOutApp")
         .controller("AdminController", AdminController);
 
-    function AdminController(UserService,$filter, ReviewService,$rootScope) {
+    function AdminController(UserService,$filter, ReviewService) {
 
         var vm = this;
 
@@ -90,8 +90,6 @@
                     user.roles = user.roles.split(",");
                 }
 
-                console.log(user.roles);
-                console.log(user);
                 UserService.updateUser(user._id, user)
                     .then(
                         function (response) {
