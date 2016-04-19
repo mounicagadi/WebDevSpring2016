@@ -25,14 +25,12 @@
 
             var finalName;
             var finalPlace;
-            console.log(name,place);
 
             if (name == null && place == null) {
                 console.log("empty fields");
                 finalName = "restaurants";
                 finalPlace = "boston";
-                //FoursquareService
-                //    .findByNameLocation("restaurants", "boston");
+
             }
 
             else if (name == null && place !== null){
@@ -62,7 +60,6 @@
             FoursquareService
                 .findByNameLocation(finalName, finalPlace)
                 .then(function(response){
-                    console.log(response.data.response.venues);
                     var result = response.data.response.venues;
 
                     if(result != "") {
@@ -83,7 +80,6 @@
             FoursquareService
                 .findRestaurantByOption(option)
                 .then(function(response){
-                    console.log(response.data.response.venues);
                     $rootScope.info = response.data;
                     $rootScope.name = option;
                     $location.path("/search/"+option);
@@ -96,7 +92,6 @@
             FoursquareService
                 .findRestaurantByOption(option)
                 .then(function(response){
-                    console.log(response.data.response.venues);
                     $rootScope.info = response.data;
                     $rootScope.name = option;
                     $location.path("/search/"+option);
@@ -109,7 +104,6 @@
             FoursquareService
                 .findRestaurantByOption(option)
                 .then(function(response){
-                    console.log(response.data.response.venues);
                     $rootScope.info = response.data;
                     $rootScope.name = option;
                     $location.path("/search/"+option);
@@ -122,7 +116,6 @@
             FoursquareService
                 .findRestaurantByOption(option)
                 .then(function(response){
-                    console.log(response.data.response.venues);
                     $rootScope.info = response.data;
                     $rootScope.name = option;
                     $location.path("/search/"+option);
@@ -135,7 +128,6 @@
             FoursquareService
                 .findRestaurantByOption(option)
                 .then(function(response){
-                    console.log(response.data.response.venues);
                     $rootScope.info = response.data;
                     $rootScope.name = option;
                     $location.path("/search/"+option);

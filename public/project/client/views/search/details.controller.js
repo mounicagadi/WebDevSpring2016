@@ -42,7 +42,6 @@
 
             RestaurantService.findRestaurantById(hotelId)
                .then(function(response){
-                   console.log(response.data);
                    findres = response.data;
 
                });

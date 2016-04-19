@@ -13,7 +13,6 @@
     //Function to display the content on the homepage
     function ResultsController($location, $routeParams) {
 
-        console.log("in results controller");
         var vm = this;
         vm.$location = $location;
         vm.name = $routeParams.name;
