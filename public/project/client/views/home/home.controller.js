@@ -27,7 +27,6 @@
             var finalPlace;
 
             if (name == null && place == null) {
-                console.log("empty fields");
                 finalName = "restaurants";
                 finalPlace = "boston";
 
@@ -35,7 +34,6 @@
 
             else if (name == null && place !== null){
 
-                console.log("name null");
                 finalName = "restaurants";
                 finalPlace = place;
 
@@ -43,7 +41,6 @@
 
             else if (name !== null && place == null){
 
-                console.log("place null");
                 finalName = name;
                 finalPlace = "boston";
 
