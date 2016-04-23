@@ -10,7 +10,7 @@
         .module("FormBuilderApp")
         .controller("AdminController", AdminController);
 
-    function AdminController(UserService, $filter){
+    function AdminController(UserService, $filter) {
         var vm = this;
 
         vm.addUser = addUser;
@@ -19,11 +19,10 @@
         vm.updateUser = updateUser;
 
 
-
         vm.predicate = 'age';
         var orderBy = $filter('orderBy');
         vm.reverse = true;
-        vm.order = function(predicate) {
+        vm.order = function (predicate) {
             vm.reverse = (vm.predicate === predicate) ? !vm.reverse : false;
             vm.predicate = predicate;
             vm.users = orderBy(vm.users, vm.predicate, vm.reverse);
@@ -31,15 +30,15 @@
 
         function init() {
 
-            var newUsers =[];
+            var newUsers = [];
 
             UserService.findAllUsers()
                 .then(
-                    function(response){
+                    function (response) {
                         console.log(response);
                         var allUsers = response.data;
-                        for(var i in allUsers){
-                            if(allUsers[i].roles.indexOf("admin") == -1){
+                        for (var i in allUsers) {
+                            if (allUsers[i].roles.indexOf("admin") == -1) {
                                 newUsers.push(allUsers[i]);
                             }
                         }
@@ -49,50 +48,64 @@
                 );
 
         }
+
         init();
 
-        function addUser(user){
-            var newUsers = [];
-            UserService.createUser(user)
-                .then(
-                    function(response){
-                        init();
-                    }
-                );
-            vm.user = {};
+        function addUser(user) {
+            if (user && user.username && user.password) {
+                if (user.roles && user.roles.length > 1) {
+                    user.roles = user.roles.split(",");
+                } else {
+                    user.roles = ["student"];
+                }
+                UserService.createUser(user)
+                    .then(
+                        function (response) {
+                            init();
+                        }
+                    );
+                vm.user = {};
+            }
         }
 
-        function deleteUser($index){
+        function deleteUser($index) {
             var userId = vm.users[$index]._id;
             UserService.deleteUserById(userId)
                 .then(
-                    function(users){
+                    function (users) {
                         init();
                     }
                 );
         }
 
-        function selectUser($index){
+        function selectUser($index) {
             var userId = vm.users[$index]._id;
             UserService.findUserById(userId)
                 .then(
-                    function(response){
+                    function (response) {
                         var user = response.data;
                         vm.user = user;
                     }
                 );
         }
 
-        function updateUser(user){
-            var userId = user._id;
-            UserService.updateUser(userId, user)
-                .then(
-                    function(response){
-                        init();
-                        vm.user = {};
-                    }
-                );
-        }
+        function updateUser(user) {
+            if (user && user.username && user.password) {
 
+                if (typeof user.roles == "string") {
+                    user.roles = user.roles.split(",");
+                }
+
+                var userId = user._id;
+                UserService.updateUserById(userId, user)
+                    .then(
+                        function (response) {
+                            init();
+                            vm.user = {};
+                        }
+                    );
+            }
+
+        }
     }
 })();

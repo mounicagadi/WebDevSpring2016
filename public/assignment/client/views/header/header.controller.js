@@ -6,17 +6,11 @@
         .module("FormBuilderApp")
         .controller("HeaderController",HeaderController);
 
-    function HeaderController($location, UserService) {
+    function HeaderController($location, UserService,$rootScope) {
 
         var vm = this;
 
         vm.logout = logout;
-
-        function init(){
-
-            vm.$location = $location;
-
-        }
 
         // Function to implement the logout activity and return to homepage
         function logout() {
@@ -24,7 +18,7 @@
             UserService
                 .logout()
                 .then(function(user){
-                    UserService.setCurrentUser(null);
+                    $rootScope.user = null;
                     $location.url("/home");
                 });
         }

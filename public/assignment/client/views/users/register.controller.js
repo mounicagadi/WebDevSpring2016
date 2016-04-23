@@ -14,11 +14,6 @@
 
         function init(){
 
-            UserService.findAllUsers()
-                .then(function(user) {
-                    console.log(user);
-
-                });
         }
 
         init();

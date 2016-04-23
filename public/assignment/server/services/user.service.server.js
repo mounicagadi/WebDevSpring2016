@@ -11,13 +11,15 @@ module.exports = function(app, model) {
 
     var auth = authorized;
 
+    app.post("/api/assignment/admin/user", auth,createUser);
+    app.get("/api/assignment/admin/user", auth,findAllUsers);
+    app.put("/api/assignment/admin/user/:id", updateUserById);
+    app.get("/api/assignment/admin/user/:id", auth,findUserById);
+    app.delete("/api/assignment/admin/user/:id", auth,deleteUserById);
+
     app.post  ('/api/assignment/login', passport.authenticate('assignment'), login);
     app.post("/api/assignment/register", register);
     app.put("/api/assignment/user/:id", updateUser);
-    app.post("/api/assignment/user", auth,createUser);
-    app.get("/api/assignment/user", auth,findAllUsers);
-    app.delete("/api/assignment/user/:id", auth,deleteUserById);
-    app.get("/api/assignment/user/:id", findUserById);
     app.get("/api/assignment/users/loggedin", loggedin);
     app.post("/api/assignment/user/logout", logout);
 
@@ -62,10 +64,37 @@ module.exports = function(app, model) {
         var userId = req.params.id;
         var newUser = req.body;
 
-        if(typeof newUser.roles == "string") {
-            newUser.roles = newUser.roles.split(",");
+        if(newUser.password) {
+            newUser.password = bcrypt.hashSync(newUser.password);
         }
 
+        model
+            .updateUser(userId, newUser)
+            .then(
+                function(user){
+                    return model.findAllUsers();
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(users){
+                    res.json(users);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function updateUserById(req,res){
+        var userId = req.params.id;
+        var newUser = req.body;
+
+        if(newUser.password) {
+            newUser.password = bcrypt.hashSync(newUser.password);
+        }
         model
             .updateUser(userId, newUser)
             .then(
@@ -125,12 +154,9 @@ module.exports = function(app, model) {
 
     function createUser(req, res) {
         var newUser = req.body;
-        console.log(newUser);
-        if(newUser.roles && newUser.roles.length > 1) {
-            newUser.roles = newUser.roles.split(",");
-        } else {
+
+        if(!newUser.roles || !newUser.roles.length > 0)
             newUser.roles = ["student"];
-        }
 
         // first check if a user already exists with the username
         model
@@ -310,21 +336,23 @@ module.exports = function(app, model) {
 
     }
 
-    function findUserById(req, res){
+    function findUserById(req, res) {
         var userId = req.params.id;
 
         // use model to find user by id
-        var user = model.findUserById(userId)
-            .then(
-                // return user if promise resolved
-                function (doc) {
-                    res.json(doc);
-                },
-                // send error if promise rejected
-                function (err) {
-                    res.status(400).send(err);
-                }
-            );
+        if (isAdmin(req.user)) {
+            model.findUserById(userId)
+                .then(
+                    // return user if promise resolved
+                    function (doc) {
+                        res.json(doc);
+                    },
+                    // send error if promise rejected
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                );
+        }
     }
 
 }

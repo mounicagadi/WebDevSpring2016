@@ -60,7 +60,7 @@
                             <input type="text" class="form-control" placeholder="First Name" ng-model = "model.user.firstName">
                         </td>
                         <td>
-                            <input type="text" class="form-control" placeholder="Password" ng-model = "model.user.lastName">
+                            <input type="text" class="form-control" placeholder="Last Name" ng-model = "model.user.lastName">
                         </td>
                         <td>
                             <input type="text" class="form-control" placeholder="role1,role2" ng-model="model.user.roles">
@@ -81,7 +81,7 @@
                         <td>&nbsp;</td>
                         <td>{{user.firstName}}</td>
                         <td>{{user.lastName}}</td>
-                        <td>{{user.roles}}</td>
+                        <td>{{user.roles.join(',')}}</td>
                         <td>
                             <div>
                                 <a ng-click="model.deleteUser($index)" role="button" class="btn btn-default btn-danger" aria-label="Add">

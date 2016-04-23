@@ -12,11 +12,7 @@ module.exports = function(mongoose) {
         lastName: String,
         email: [String],
         phones: [String],
-        roles : [String],
-        facebook:   {
-            id:    String,
-            token: String
-        }
+        roles : [String]
         // collection property sets
         // collection name to 'user'
     }, {collection: 'assignment.user'});

@@ -15,14 +15,20 @@
 
         function init(){
 
-            UserService.findUserById($rootScope.user._id)
-                .then(function(response){
+            var currUser = $rootScope.user;
+            if (currUser != null) {
 
-                    vm.user = response.data;
-                    vm.user.email = joinValues(vm.user.email);
-                    vm.user.phones = joinValues(vm.user.phones);
-                    console.log(vm.user);
-                });
+                vm.user = {
+                    username: currUser.username,
+                    firstName: currUser.firstName,
+                    lastName: currUser.lastName,
+                    password: currUser.password,
+                    email: joinValues(currUser.email),
+                    phones: joinValues(currUser.phones),
+                    roles: currUser.roles
+                };
+            }
+
 
         }
 
@@ -36,9 +42,20 @@
 
         function update(user) {
 
-            user.email = user.email.trim().split(',');
-            user.phones = user.phones.trim().split(',');
-            UserService.updateUser($rootScope.user._id,user)
+            var updateduser = {
+
+                _id: $rootScope.user._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                username: user.username,
+                password: user.password,
+                roles: user.roles,
+                email : user.email.trim().split(","),
+                phones : user.phones.trim().split(",")
+
+            };
+
+            UserService.updateUser($rootScope.user._id,updateduser)
                 .then(  function(user){
                     console.log(user);
 

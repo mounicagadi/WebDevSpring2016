@@ -17,6 +17,7 @@
             createUser: createUser,
             deleteUserById: deleteUserById,
             updateUser: updateUser,
+            updateUserById: updateUserById,
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
             logout : logout,
@@ -50,7 +51,7 @@
 
         function findAllUsers() {
 
-            return $http.get("/api/assignment/user");
+            return $http.get("/api/assignment/admin/user");
         }
 
         function findUserByUsername(username){
@@ -66,7 +67,7 @@
 
         function createUser(user) {
 
-            return $http.post("/api/assignment/user", user);
+            return $http.post("/api/assignment/admin/user", user);
 
         }
 
@@ -76,7 +77,7 @@
 
         function deleteUserById(userId) {
 
-            return $http.delete("/api/assignment/user/" + userId);
+            return $http.delete("/api/assignment/admin/user/" + userId);
         }
 
         function updateUser(userId, newUser) {
@@ -85,9 +86,15 @@
 
         }
 
+        function updateUserById(userId, newUser) {
+
+            return $http.put("/api/assignment/admin/user/"+userId, newUser);
+
+        }
+
         function findUserById(userId){
 
-            return $http.get("/api/assignment/user/"+userId);
+            return $http.get("/api/assignment/admin/user/"+userId);
         }
 
 
