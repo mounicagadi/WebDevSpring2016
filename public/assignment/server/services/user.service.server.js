@@ -13,7 +13,7 @@ module.exports = function(app, model) {
 
     app.post("/api/assignment/admin/user", auth,createUser);
     app.get("/api/assignment/admin/user", auth,findAllUsers);
-    app.put("/api/assignment/admin/user/:id", updateUserById);
+    app.put("/api/assignment/admin/user/:id", auth,updateUserById);
     app.get("/api/assignment/admin/user/:id", auth,findUserById);
     app.delete("/api/assignment/admin/user/:id", auth,deleteUserById);
 
@@ -62,57 +62,74 @@ module.exports = function(app, model) {
 
     function updateUser(req,res){
         var userId = req.params.id;
-        var newUser = req.body;
-
-        if(newUser.password) {
-            newUser.password = bcrypt.hashSync(newUser.password);
-        }
+        var updatedUser = req.body;
 
         model
-            .updateUser(userId, newUser)
-            .then(
-                function(user){
-                    return model.findAllUsers();
+            .findUserByUsername(updatedUser.username)
+            .then(function(user){
+
+                    if(user){
+                        //check if the password was updated by user and handle accordingly
+                        if(user.password != updatedUser.password){
+                            updatedUser.password = bcrypt.hashSync(updatedUser.password);
+                        }
+
+                        model
+                            .updateUser(userId,updatedUser)
+                            .then(
+                                //login in promise resolved
+                                function( doc ){
+                                    res.json(doc);
+                                },
+                                //send error if promise rejected
+                                function( err ){
+                                    res.status(400).send(err);
+                                }
+                            )
+                    }else{
+                        res.send(400);
+                    }
                 },
                 function(err){
                     res.status(400).send(err);
-                }
-            )
-            .then(
-                function(users){
-                    res.json(users);
-                },
-                function(err){
-                    res.status(400).send(err);
-                }
-            );
+                });
+
     }
 
     function updateUserById(req,res){
         var userId = req.params.id;
-        var newUser = req.body;
+        var updatedUser = req.body;
 
-        if(newUser.password) {
-            newUser.password = bcrypt.hashSync(newUser.password);
-        }
         model
-            .updateUser(userId, newUser)
-            .then(
-                function(user){
-                    return model.findAllUsers();
+            .findUserByUsername(updatedUser.username)
+            .then(function(user){
+
+                    if(user){
+                        //check if the password was updated by user and handle accordingly
+                        if(user.password != updatedUser.password){
+                            updatedUser.password = bcrypt.hashSync(updatedUser.password);
+                        }
+
+                        model
+                            .updateUser(userId,updatedUser)
+                            .then(
+                                //login in promise resolved
+                                function( doc ){
+                                    res.json(doc);
+                                },
+                                //send error if promise rejected
+                                function( err ){
+                                    res.status(400).send(err);
+                                }
+                            )
+                    }else{
+                        res.send(400);
+                    }
                 },
                 function(err){
                     res.status(400).send(err);
-                }
-            )
-            .then(
-                function(users){
-                    res.json(users);
-                },
-                function(err){
-                    res.status(400).send(err);
-                }
-            );
+                });
+
     }
 
     function register(req,res){
